@@ -21,7 +21,8 @@
     "jsonwebtoken": "^9.0.2",
     "logger": "^0.0.1",
     "mongoose": "^7.5.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "zod": "^3.22.2"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.3",
