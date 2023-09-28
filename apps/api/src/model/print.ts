@@ -2,14 +2,14 @@ import mongoose, { Schema } from "mongoose";
 
 const PrintSchema = new Schema(
   {
-    name: String,
-    email: String,
-    password: String,
-    role: String,
+    brand: String,
+    model: String,
+    type: String,
+    status: Boolean,
   },
   {
     timestamps: true,
   }
 );
 
-export const User = mongoose.model("Print", PrintSchema);
+export const Print = mongoose.model("Print", PrintSchema);
