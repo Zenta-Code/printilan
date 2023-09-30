@@ -1,5 +1,5 @@
 import z from "zod";
-export const DcoumentTypes = z.object({
+export const DocumentTypes = z.object({
   name: z
     .string({
       required_error: "Name is required",
