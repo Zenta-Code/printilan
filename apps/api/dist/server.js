@@ -9,7 +9,9 @@ var cors_1 = __importDefault(require("cors"));
 var express_1 = __importDefault(require("express"));
 var express_route_grouping_1 = __importDefault(require("express-route-grouping"));
 var morgan_1 = __importDefault(require("morgan"));
-var UserController_1 = require("./controller/UserController");
+var user_1 = require("./controller/user");
+var toko_1 = require("./controller/toko");
+var print_1 = require("./controller/print");
 var createServer = function () {
     var app = (0, express_1["default"])();
     app
@@ -32,7 +34,13 @@ var createServer = function () {
             });
         });
         app.group("/user", function (app) {
-            (0, UserController_1.UserController)({ route: app });
+            (0, user_1.UserController)({ route: app });
+        });
+        app.group("/toko", function (app) {
+            (0, toko_1.TokoController)({ route: app });
+        });
+        app.group("/print", function (app) {
+            (0, print_1.PrintController)({ route: app });
         });
     });
     app.use("/api", root["export"]());

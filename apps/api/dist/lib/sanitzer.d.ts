@@ -1,2 +1,2 @@
-export declare function sanitize(key: string, data: any): any;
+export declare function sanitize(obj: any, exceptsNotation: string[]): any;
 //# sourceMappingURL=sanitzer.d.ts.map

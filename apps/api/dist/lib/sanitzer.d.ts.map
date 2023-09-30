@@ -1,1 +1,1 @@
-{"version":3,"file":"sanitzer.d.ts","sourceRoot":"","sources":["../../src/lib/sanitzer.ts"],"names":[],"mappings":"AAAA,wBAAgB,QAAQ,CAAC,GAAG,EAAE,MAAM,EAAE,IAAI,EAAE,GAAG,GAAG,GAAG,CAOpD"}
+{"version":3,"file":"sanitzer.d.ts","sourceRoot":"","sources":["../../src/lib/sanitzer.ts"],"names":[],"mappings":"AAAA,wBAAgB,QAAQ,CAAC,GAAG,EAAE,GAAG,EAAE,eAAe,EAAE,MAAM,EAAE,OAQ3D"}

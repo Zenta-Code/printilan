@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "tsc",
-    "clean": "rm -rf dist",
-    "dev": "nodemon --exec \"node -r esbuild-register ./src/index.ts\" -e .ts",
-    "lint": "tsc --noEmit && eslint \"src/**/*.ts*\"",
-    "start": "node -r esbuild-register ./src/index.ts"
+    "dev": "concurrently -k -p \"[{name}]\" -n \"TS,NODE\" -c \"yello.bold, cyan.bold\" \"yarn run tsc:watch\" \"yarn run start:hot\"",
+    "build": "npm run tsc",
+    "build:watch": "npm run tsc:watch",
+    "tsc": "tsc",
+    "tsc:watch": "tsc -w --preserveWatchOutput",
+    "start": "node dist/index.js",
+    "start:hot": "nodemon -e js,d.ts,js.map --watch dist/ \"dist/index.js\""
   },
   "dependencies": {
     "@prisma/client": "5.3.1",
@@ -15,6 +17,7 @@
     "@types/jsonwebtoken": "^9.0.3",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
+    "concurrently": "^8.2.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-route-grouping": "^1.1.1",

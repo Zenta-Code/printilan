@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,30 +46,38 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 exports.__esModule = true;
 exports.UserController = void 0;
-var client_1 = require("@prisma/client");
+var bcrypt_1 = __importDefault(require("bcrypt"));
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var sanitzer_1 = require("../lib/sanitzer");
+var user_1 = require("../model/user");
+var user_2 = require("../types/user");
 var UserController = function (_a) {
     var route = _a.route;
-    var db = new client_1.PrismaClient();
     route.post("/register", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var password, confirmPassword, find, user;
+        var body, password, confirmPassword, find, salt, hashedPassword, user, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    password = req.body.password || "";
+                    _a.trys.push([0, 5, , 6]);
+                    body = user_2.UserTypes.parse(req.body);
+                    console.log(body);
+                    if (!body) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "Body tidak boleh kosong"
+                            })];
+                    }
+                    password = body.password || "";
                     confirmPassword = req.body.confirmPassword || "";
                     if (password !== confirmPassword) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
                                 message: "Password tidak sesuai"
-                            })];
-                    }
-                    if (password === "") {
-                        return [2 /*return*/, res.status(400).json({
-                                success: false,
-                                message: "Password tidak boleh kosong"
                             })];
                     }
                     if (password.length < 8) {
@@ -67,10 +86,8 @@ var UserController = function (_a) {
                                 message: "Password minimal 8 karakter"
                             })];
                     }
-                    return [4 /*yield*/, db.user.findUnique({
-                            where: {
-                                email: req.body.email
-                            }
+                    return [4 /*yield*/, user_1.User.findOne({
+                            email: body.email
                         })];
                 case 1:
                     find = _a.sent();
@@ -80,20 +97,89 @@ var UserController = function (_a) {
                                 message: "Email sudah terdaftar"
                             })];
                     }
-                    return [4 /*yield*/, db.user.create({
-                            data: {
-                                email: req.body.email,
-                                password: req.body.password,
-                                name: req.body.name
-                            }
-                        })];
+                    return [4 /*yield*/, bcrypt_1["default"].genSalt(10)];
                 case 2:
+                    salt = _a.sent();
+                    return [4 /*yield*/, bcrypt_1["default"].hash(password, salt)];
+                case 3:
+                    hashedPassword = _a.sent();
+                    return [4 /*yield*/, user_1.User.create(__assign(__assign({}, body), { password: hashedPassword }))];
+                case 4:
                     user = _a.sent();
+                    console.log(user);
                     return [2 /*return*/, res.status(200).json({
                             success: true,
                             message: "Berhasil",
-                            data: (0, sanitzer_1.sanitize)("password", user)
+                            data: (0, sanitzer_1.sanitize)(user.toObject(), ["password"])
                         })];
+                case 5:
+                    error_1 = _a.sent();
+                    return [2 /*return*/, res.status(400).json({
+                            success: false,
+                            message: error_1
+                        })];
+                case 6: return [2 /*return*/];
+            }
+        });
+    }); });
+    route.post("/login", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var body, user, password, validPassword, jwtSecret, token, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    body = req.body;
+                    if (body.email === undefined || body.password === undefined) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "Body tidak boleh kosong"
+                            })];
+                    }
+                    if (body.email === "" || body.password === "") {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "Body tidak boleh kosong"
+                            })];
+                    }
+                    return [4 /*yield*/, user_1.User.findOne({
+                            email: body.email
+                        })];
+                case 1:
+                    user = _a.sent();
+                    if (!user) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "Email tidak ditemukan"
+                            })];
+                    }
+                    password = body.password || "";
+                    return [4 /*yield*/, bcrypt_1["default"].compare(password, user.password || "")];
+                case 2:
+                    validPassword = _a.sent();
+                    if (!validPassword) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "Password salah"
+                            })];
+                    }
+                    jwtSecret = process.env.JWT_SECRET || "JWT_SECRET";
+                    console.log(jwtSecret);
+                    token = jsonwebtoken_1["default"].sign({ id: user._id }, jwtSecret, {
+                        expiresIn: "1d"
+                    });
+                    return [2 /*return*/, res.status(200).json({
+                            success: true,
+                            message: "Berhasil",
+                            user: (0, sanitzer_1.sanitize)(user.toObject(), ["password"]),
+                            token: token
+                        })];
+                case 3:
+                    error_2 = _a.sent();
+                    return [2 /*return*/, res.status(400).json({
+                            success: false,
+                            message: error_2
+                        })];
+                case 4: return [2 /*return*/];
             }
         });
     }); });

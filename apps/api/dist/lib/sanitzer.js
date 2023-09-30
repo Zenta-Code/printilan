@@ -1,12 +1,13 @@
 "use strict";
 exports.__esModule = true;
 exports.sanitize = void 0;
-function sanitize(key, data) {
-    for (var k in data) {
-        if (k.startsWith(key)) {
-            delete data[k];
+function sanitize(obj, exceptsNotation) {
+    var result = {};
+    Object.keys(obj).forEach(function (key) {
+        if (!exceptsNotation.includes(key)) {
+            result[key] = obj[key];
         }
-    }
-    return data;
+    });
+    return result;
 }
 exports.sanitize = sanitize;
