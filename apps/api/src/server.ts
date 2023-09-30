@@ -5,6 +5,7 @@ import RouteGroup from "express-route-grouping";
 import morgan from "morgan";
 import { UserController } from "./controller/user";
 import { TokoController } from "./controller/toko";
+import { PrintController } from "./controller/print";
 export const createServer: () => Express = () => {
   const app: Express = express();
   app
@@ -31,6 +32,9 @@ export const createServer: () => Express = () => {
     });
     app.group("/toko", (app) => {
       TokoController({ route: app });
+    });
+    app.group("/print", (app) => {
+      PrintController({ route: app });
     })
   });
 
