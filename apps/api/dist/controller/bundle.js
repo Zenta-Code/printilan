@@ -47,19 +47,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.PrintController = void 0;
+exports.BundleController = void 0;
 var auth_1 = require("../middleware/auth");
-var print_1 = require("../model/print");
-var print_2 = require("../types/print");
-var PrintController = function (_a) {
+var bundle_1 = require("../model/bundle");
+var bundle_2 = require("../types/bundle");
+var BundleController = function (_a) {
     var route = _a.route;
     route.post("/register", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var body, find, print, error_1;
+        var body, find, bundle, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 3, , 4]);
-                    body = print_2.PrintTypes.parse(req.body);
+                    body = bundle_2.BundleTypes.parse(req.body);
                     console.log(body);
                     if (!body) {
                         return [2 /*return*/, res.status(400).json({
@@ -67,24 +67,24 @@ var PrintController = function (_a) {
                                 message: "Body tidak boleh kosong"
                             })];
                     }
-                    return [4 /*yield*/, print_1.Print.findOne({
-                            model: body.model
+                    return [4 /*yield*/, bundle_1.Bundle.findOne({
+                            name: body.name
                         })];
                 case 1:
                     find = _a.sent();
                     if (find) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
-                                message: "model sudah terdaftar"
+                                message: "Name sudah terdaftar"
                             })];
                     }
-                    return [4 /*yield*/, print_1.Print.create(__assign({}, body))];
+                    return [4 /*yield*/, bundle_1.Bundle.create(__assign({}, body))];
                 case 2:
-                    print = _a.sent();
+                    bundle = _a.sent();
                     return [2 /*return*/, res.status(200).json({
                             success: true,
                             message: "Berhasil",
-                            data: print
+                            data: bundle
                         })];
                 case 3:
                     error_1 = _a.sent();
@@ -96,26 +96,24 @@ var PrintController = function (_a) {
             }
         });
     }); });
-    route.get("/list/:brand", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var brand, find, error_2;
+    route.get("/list", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var find, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    brand = req.params;
-                    console.log("brand...: ", brand);
-                    return [4 /*yield*/, print_1.Print.find(brand)];
+                    return [4 /*yield*/, bundle_1.Bundle.find()];
                 case 1:
                     find = _a.sent();
                     if (!find) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
-                                message: "print tidak di temukan"
+                                message: "bundle tidak di temukan"
                             })];
                     }
                     return [2 /*return*/, res.status(200).json({
                             success: true,
-                            message: "print berhasil ditemukan",
+                            message: "bundle berhasil ditemukan",
                             data: find
                         })];
                 case 2:
@@ -128,24 +126,29 @@ var PrintController = function (_a) {
             }
         });
     }); });
-    route.get("/list", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var find, error_3;
+    route.get("/list/:desc", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var desc, params, find, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, print_1.Print.find()];
+                    desc = req.params;
+                    params = ".*" + desc.desc + ".*";
+                    console.log("desc...: ", params);
+                    return [4 /*yield*/, bundle_1.Bundle.find({
+                            desc: { $regex: params, $options: "i" }
+                        })];
                 case 1:
                     find = _a.sent();
                     if (!find) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
-                                message: "print tidak di temukan"
+                                message: "bundle tidak di temukan"
                             })];
                     }
                     return [2 /*return*/, res.status(200).json({
                             success: true,
-                            message: "print berhasil ditemukan",
+                            message: "bundle berhasil ditemukan",
                             data: find
                         })];
                 case 2:
@@ -159,4 +162,4 @@ var PrintController = function (_a) {
         });
     }); });
 };
-exports.PrintController = PrintController;
+exports.BundleController = BundleController;

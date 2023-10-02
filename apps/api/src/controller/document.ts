@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { authenticateJWT } from "../middleware/auth";
 import { Document } from "../model/document";
 import { DocumentTypes } from "../types/document";
 
@@ -15,17 +16,6 @@ export const DocumentController = ({ route }: { route: Router }) => {
           message: "Body tidak boleh kosong",
         });
       }
-
-      const find = await Document.findOne({
-        name: body.name,
-      });
-      if (find) {
-        return res.status(400).json({
-          success: false,
-          message: "Name sudah terdaftar",
-        });
-      }
-
       const document = await Document.create({
         ...body,
       });
@@ -34,6 +24,50 @@ export const DocumentController = ({ route }: { route: Router }) => {
         success: true,
         message: "Berhasil",
         data: document,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  });
+  route.get("/list", authenticateJWT, async (req, res) => {
+    try {
+      const find = await Document.find();
+      if (!find) {
+        return res.status(400).json({
+          success: false,
+          message: "document tidak di temukan",
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: "document berhasil ditemukan",
+        data: find,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  });
+  route.get("/list/:id", authenticateJWT, async (req, res) => {
+    try {
+      const id = req.params;
+      console.log("id...: ", id);
+      const find = await Document.find(id);
+      if (!find) {
+        return res.status(400).json({
+          success: false,
+          message: "print tidak di temukan",
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: "print berhasil ditemukan",
+        data: find,
       });
     } catch (error) {
       return res.status(400).json({

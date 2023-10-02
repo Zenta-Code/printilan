@@ -10,25 +10,23 @@ export const DocumentTypes = z.object({
       required_error: "Type is required",
     })
     .min(4, "Type must be at least 10 characters"),
-  count: z
-    .number({
-      required_error: "Count is required",
-    }),
+  count: z.number({
+    required_error: "Count is required",
+  }),
   size: z
     .string({
       required_error: "Size is required",
     })
     .min(1, "Size must be at least 1 characters"),
-  color: z
-    .boolean({
-      required_error: "Color is required",
-    }),
+  color: z.boolean({
+    required_error: "Color is required",
+  }),
   price: z
     .number({
       required_error: "Prize is required",
-    }),
-  copies: z
-    .number({
-      required_error: "Copies is required",
-    }),
+    })
+    .min(3, "Type must be at least 3 characters"),
+  copies: z.number({
+    required_error: "Copies is required",
+  }),
 });

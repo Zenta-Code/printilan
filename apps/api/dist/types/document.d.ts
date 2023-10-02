@@ -1,5 +1,5 @@
 import z from "zod";
-export declare const DcoumentTypes: z.ZodObject<{
+export declare const DocumentTypes: z.ZodObject<{
     name: z.ZodString;
     type: z.ZodString;
     count: z.ZodNumber;

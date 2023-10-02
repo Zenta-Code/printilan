@@ -6,9 +6,9 @@ export declare const Document: mongoose.Model<{
     name?: string | undefined;
     type?: string | undefined;
     count?: number | undefined;
+    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
-    price?: number | undefined;
     copies?: number | undefined;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
@@ -17,9 +17,9 @@ export declare const Document: mongoose.Model<{
     name?: string | undefined;
     type?: string | undefined;
     count?: number | undefined;
+    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
-    price?: number | undefined;
     copies?: number | undefined;
 }> & {
     createdAt: NativeDate;
@@ -28,9 +28,9 @@ export declare const Document: mongoose.Model<{
     name?: string | undefined;
     type?: string | undefined;
     count?: number | undefined;
+    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
-    price?: number | undefined;
     copies?: number | undefined;
 } & {
     _id: mongoose.Types.ObjectId;
@@ -43,9 +43,9 @@ export declare const Document: mongoose.Model<{
     name?: string | undefined;
     type?: string | undefined;
     count?: number | undefined;
+    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
-    price?: number | undefined;
     copies?: number | undefined;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
@@ -54,9 +54,9 @@ export declare const Document: mongoose.Model<{
     name?: string | undefined;
     type?: string | undefined;
     count?: number | undefined;
+    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
-    price?: number | undefined;
     copies?: number | undefined;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
@@ -65,9 +65,9 @@ export declare const Document: mongoose.Model<{
     name?: string | undefined;
     type?: string | undefined;
     count?: number | undefined;
+    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
-    price?: number | undefined;
     copies?: number | undefined;
 }> & {
     _id: mongoose.Types.ObjectId;

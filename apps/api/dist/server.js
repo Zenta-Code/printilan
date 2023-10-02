@@ -12,6 +12,9 @@ var morgan_1 = __importDefault(require("morgan"));
 var user_1 = require("./controller/user");
 var toko_1 = require("./controller/toko");
 var print_1 = require("./controller/print");
+var document_1 = require("./controller/document");
+var bundle_1 = require("./controller/bundle");
+;
 var createServer = function () {
     var app = (0, express_1["default"])();
     app
@@ -41,6 +44,12 @@ var createServer = function () {
         });
         app.group("/print", function (app) {
             (0, print_1.PrintController)({ route: app });
+        });
+        app.group("/document", function (app) {
+            (0, document_1.DocumentController)({ route: app });
+        });
+        app.group("/bundle", function (app) {
+            (0, bundle_1.BundleController)({ route: app });
         });
     });
     app.use("/api", root["export"]());

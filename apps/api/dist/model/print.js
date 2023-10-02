@@ -29,7 +29,8 @@ var PrintSchema = new mongoose_1.Schema({
     brand: String,
     model: String,
     type: String,
-    status: Boolean
+    status: Boolean,
+    price: Number
 }, {
     timestamps: true
 });

@@ -21,8 +21,12 @@ exports.PrintTypes = zod_1["default"].object({
         required_error: "Type is required"
     })
         .min(4, "Type must be at least 10 characters"),
-    status: zod_1["default"]
-        .boolean({
+    status: zod_1["default"].boolean({
         required_error: "Status is required"
+    }),
+    price: zod_1["default"]
+        .number({
+        required_error: "Price is required"
     })
+        .min(3, "Type must be at least 3 characters")
 });

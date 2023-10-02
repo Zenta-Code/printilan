@@ -6,7 +6,6 @@ import morgan from "morgan";
 import { UserController } from "./controller/user";
 import { TokoController } from "./controller/toko";
 import { PrintController } from "./controller/print";
-import { PriceController } from "./controller/price";
 import { DocumentController } from "./controller/document"
 import { BundleController } from "./controller/bundle";;
 export const createServer: () => Express = () => {
@@ -38,9 +37,6 @@ export const createServer: () => Express = () => {
     });
     app.group("/print", (app) => {
       PrintController({ route: app });
-    });
-    app.group("/price", (app) => {
-      PriceController({ route: app });
     });
     app.group("/document", (app) => {
       DocumentController({ route: app });

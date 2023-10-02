@@ -10,4 +10,9 @@ export const BundleTypes = z.object({
       required_error: "Desc is required",
     })
     .min(4, "Desc must be at least 4 characters"),
+  price: z
+    .number({
+      required_error: "Price is required",
+    })
+    .min(3, "Type must be at least 3 characters"),
 });

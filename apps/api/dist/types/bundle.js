@@ -15,5 +15,10 @@ exports.BundleTypes = zod_1["default"].object({
         .string({
         required_error: "Desc is required"
     })
-        .min(4, "Desc must be at least 4 characters")
+        .min(4, "Desc must be at least 4 characters"),
+    price: zod_1["default"]
+        .number({
+        required_error: "Price is required"
+    })
+        .min(3, "Type must be at least 3 characters")
 });

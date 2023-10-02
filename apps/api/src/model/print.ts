@@ -6,6 +6,7 @@ const PrintSchema = new Schema(
     model: String,
     type: String,
     status: Boolean,
+    price : Number,
   },
   {
     timestamps: true,

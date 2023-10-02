@@ -23,13 +23,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 exports.__esModule = true;
-exports.Bundle = void 0;
+exports.Order = void 0;
 var mongoose_1 = __importStar(require("mongoose"));
-var BundleSchema = new mongoose_1.Schema({
-    name: String,
-    desc: String,
-    price: Number
+var OrderSchema = new mongoose_1.Schema({
+    userId: String,
+    documentId: String,
+    totalPrice: Number
 }, {
     timestamps: true
 });
-exports.Bundle = mongoose_1["default"].model("Bundle", BundleSchema);
+exports.Order = mongoose_1["default"].model("Order", OrderSchema);

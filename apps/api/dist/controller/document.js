@@ -47,19 +47,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.PrintController = void 0;
+exports.DocumentController = void 0;
 var auth_1 = require("../middleware/auth");
-var print_1 = require("../model/print");
-var print_2 = require("../types/print");
-var PrintController = function (_a) {
+var document_1 = require("../model/document");
+var document_2 = require("../types/document");
+var DocumentController = function (_a) {
     var route = _a.route;
     route.post("/register", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var body, find, print, error_1;
+        var body, document, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    body = print_2.PrintTypes.parse(req.body);
+                    _a.trys.push([0, 2, , 3]);
+                    body = document_2.DocumentTypes.parse(req.body);
                     console.log(body);
                     if (!body) {
                         return [2 /*return*/, res.status(400).json({
@@ -67,55 +67,42 @@ var PrintController = function (_a) {
                                 message: "Body tidak boleh kosong"
                             })];
                     }
-                    return [4 /*yield*/, print_1.Print.findOne({
-                            model: body.model
-                        })];
+                    return [4 /*yield*/, document_1.Document.create(__assign({}, body))];
                 case 1:
-                    find = _a.sent();
-                    if (find) {
-                        return [2 /*return*/, res.status(400).json({
-                                success: false,
-                                message: "model sudah terdaftar"
-                            })];
-                    }
-                    return [4 /*yield*/, print_1.Print.create(__assign({}, body))];
-                case 2:
-                    print = _a.sent();
+                    document = _a.sent();
                     return [2 /*return*/, res.status(200).json({
                             success: true,
                             message: "Berhasil",
-                            data: print
+                            data: document
                         })];
-                case 3:
+                case 2:
                     error_1 = _a.sent();
                     return [2 /*return*/, res.status(400).json({
                             success: false,
                             message: error_1
                         })];
-                case 4: return [2 /*return*/];
+                case 3: return [2 /*return*/];
             }
         });
     }); });
-    route.get("/list/:brand", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var brand, find, error_2;
+    route.get("/list", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var find, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    brand = req.params;
-                    console.log("brand...: ", brand);
-                    return [4 /*yield*/, print_1.Print.find(brand)];
+                    return [4 /*yield*/, document_1.Document.find()];
                 case 1:
                     find = _a.sent();
                     if (!find) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
-                                message: "print tidak di temukan"
+                                message: "document tidak di temukan"
                             })];
                     }
                     return [2 /*return*/, res.status(200).json({
                             success: true,
-                            message: "print berhasil ditemukan",
+                            message: "document berhasil ditemukan",
                             data: find
                         })];
                 case 2:
@@ -128,13 +115,15 @@ var PrintController = function (_a) {
             }
         });
     }); });
-    route.get("/list", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var find, error_3;
+    route.get("/list/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var id, find, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, print_1.Print.find()];
+                    id = req.params;
+                    console.log("id...: ", id);
+                    return [4 /*yield*/, document_1.Document.find(id)];
                 case 1:
                     find = _a.sent();
                     if (!find) {
@@ -159,4 +148,4 @@ var PrintController = function (_a) {
         });
     }); });
 };
-exports.PrintController = PrintController;
+exports.DocumentController = DocumentController;
