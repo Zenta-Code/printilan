@@ -61,12 +61,12 @@ export const DocumentController = ({ route }: { route: Router }) => {
       if (!find) {
         return res.status(400).json({
           success: false,
-          message: "print tidak di temukan",
+          message: "document tidak di temukan",
         });
       }
       return res.status(200).json({
         success: true,
-        message: "print berhasil ditemukan",
+        message: "document berhasil ditemukan",
         data: find,
       });
     } catch (error) {

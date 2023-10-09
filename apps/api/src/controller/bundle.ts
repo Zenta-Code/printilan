@@ -90,4 +90,53 @@ export const BundleController = ({ route }: { route: Router }) => {
       });
     }
   });
+  route.put("/update", authenticateJWT, async (req, res) => {
+    try {
+      const updateData = BundleTypes.parse(req.body);
+      if (!updateData) {
+        return res.status(400).json({
+          success: false,
+          message: "data tidak valid",
+        });
+      }
+      const updateBundle = await Bundle.findOneAndUpdate({}, updateData);
+      if (!updateBundle) {
+        return res.status(400).json({
+          success: false,
+          message: "tidak bisa pembaruan",
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: "bundle berhasil diperbarui",
+        data: updateBundle,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  });
+  route.delete("/delete", authenticateJWT, async (req, res) => {
+    try {
+      const deleteData = await Bundle.deleteOne();
+      if (!deleteData) {
+        return res.status(400).json({
+          success: false,
+          message: "tidak ada yang di hapus",
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: "data berhasil di hapus",
+        data: deleteData,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  });
 };

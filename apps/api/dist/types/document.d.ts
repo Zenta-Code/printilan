@@ -11,17 +11,17 @@ export declare const DocumentTypes: z.ZodObject<{
     name: string;
     type: string;
     count: number;
+    price: number;
     size: string;
     color: boolean;
-    price: number;
     copies: number;
 }, {
     name: string;
     type: string;
     count: number;
+    price: number;
     size: string;
     color: boolean;
-    price: number;
     copies: number;
 }>;
 //# sourceMappingURL=document.d.ts.map

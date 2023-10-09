@@ -54,6 +54,7 @@ exports.UserController = void 0;
 var bcrypt_1 = __importDefault(require("bcrypt"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var sanitzer_1 = require("../lib/sanitzer");
+var auth_1 = require("../middleware/auth");
 var user_1 = require("../model/user");
 var user_2 = require("../types/user");
 var UserController = function (_a) {
@@ -180,6 +181,68 @@ var UserController = function (_a) {
                             message: error_2
                         })];
                 case 4: return [2 /*return*/];
+            }
+        });
+    }); });
+    route.get("/list/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var id, find, error_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    id = req.params;
+                    console.log("id...: ", id);
+                    return [4 /*yield*/, user_1.User.find(id)];
+                case 1:
+                    find = _a.sent();
+                    if (!find) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "user tidak di temukan"
+                            })];
+                    }
+                    return [2 /*return*/, res.status(200).json({
+                            success: true,
+                            message: "user berhasil ditemukan",
+                            data: find
+                        })];
+                case 2:
+                    error_3 = _a.sent();
+                    return [2 /*return*/, res.status(400).json({
+                            success: false,
+                            message: error_3
+                        })];
+                case 3: return [2 /*return*/];
+            }
+        });
+    }); });
+    route.get("/list", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var find, error_4;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, user_1.User.find()];
+                case 1:
+                    find = _a.sent();
+                    if (!find) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "user tidak di temukan"
+                            })];
+                    }
+                    return [2 /*return*/, res.status(200).json({
+                            success: true,
+                            message: "user berhasil ditemukan",
+                            data: find
+                        })];
+                case 2:
+                    error_4 = _a.sent();
+                    return [2 /*return*/, res.status(400).json({
+                            success: false,
+                            message: error_4
+                        })];
+                case 3: return [2 /*return*/];
             }
         });
     }); });

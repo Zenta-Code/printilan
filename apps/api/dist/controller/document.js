@@ -129,12 +129,12 @@ var DocumentController = function (_a) {
                     if (!find) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
-                                message: "print tidak di temukan"
+                                message: "document tidak di temukan"
                             })];
                     }
                     return [2 /*return*/, res.status(200).json({
                             success: true,
-                            message: "print berhasil ditemukan",
+                            message: "document berhasil ditemukan",
                             data: find
                         })];
                 case 2:

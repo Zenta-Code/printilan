@@ -158,5 +158,72 @@ var PrintController = function (_a) {
             }
         });
     }); });
+    route.put("/update", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var updateData, updatePrint, error_4;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    updateData = print_2.PrintTypes.parse(req.body);
+                    if (!updateData) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "data tidak valid"
+                            })];
+                    }
+                    return [4 /*yield*/, print_1.Print.findOneAndUpdate({}, updateData)];
+                case 1:
+                    updatePrint = _a.sent();
+                    if (!updatePrint) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "tidak bisa pembaruan"
+                            })];
+                    }
+                    return [2 /*return*/, res.status(200).json({
+                            success: true,
+                            message: "print berhasil diperbarui",
+                            data: updatePrint
+                        })];
+                case 2:
+                    error_4 = _a.sent();
+                    return [2 /*return*/, res.status(400).json({
+                            success: false,
+                            message: error_4
+                        })];
+                case 3: return [2 /*return*/];
+            }
+        });
+    }); });
+    route["delete"]("/delete", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var deleteData, error_5;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, print_1.Print.deleteOne()];
+                case 1:
+                    deleteData = _a.sent();
+                    if (!deleteData) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "tidak ada yang di hapus"
+                            })];
+                    }
+                    return [2 /*return*/, res.status(200).json({
+                            success: true,
+                            message: "data berhasil di hapus",
+                            data: deleteData
+                        })];
+                case 2:
+                    error_5 = _a.sent();
+                    return [2 /*return*/, res.status(400).json({
+                            success: false,
+                            message: error_5
+                        })];
+                case 3: return [2 /*return*/];
+            }
+        });
+    }); });
 };
 exports.PrintController = PrintController;

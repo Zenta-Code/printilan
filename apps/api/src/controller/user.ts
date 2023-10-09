@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 import { sanitize } from "../lib/sanitzer";
+import { authenticateJWT } from "../middleware/auth";
 import { User } from "../model/user";
 import { UserTypes } from "../types/user";
 
@@ -116,6 +117,50 @@ export const UserController = ({ route }: { route: Router }) => {
         message: "Berhasil",
         user: sanitize(user.toObject(), ["password"]),
         token,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  });
+  route.get("/list/:id", authenticateJWT, async (req, res) => {
+    try {
+      const id = req.params;
+      console.log("id...: ", id);
+      const find = await User.find(id);
+      if (!find) {
+        return res.status(400).json({
+          success: false,
+          message: "user tidak di temukan",
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: "user berhasil ditemukan",
+        data: find,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  });
+  route.get("/list", authenticateJWT, async (req, res) => {
+    try {
+      const find = await User.find();
+      if (!find) {
+        return res.status(400).json({
+          success: false,
+          message: "user tidak di temukan",
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: "user berhasil ditemukan",
+        data: find,
       });
     } catch (error) {
       return res.status(400).json({
