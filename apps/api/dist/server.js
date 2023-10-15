@@ -9,12 +9,12 @@ var cors_1 = __importDefault(require("cors"));
 var express_1 = __importDefault(require("express"));
 var express_route_grouping_1 = __importDefault(require("express-route-grouping"));
 var morgan_1 = __importDefault(require("morgan"));
-var user_1 = require("./controller/user");
-var toko_1 = require("./controller/toko");
-var print_1 = require("./controller/print");
-var document_1 = require("./controller/document");
 var bundle_1 = require("./controller/bundle");
-;
+var document_1 = require("./controller/document");
+var print_1 = require("./controller/print");
+var toko_1 = require("./controller/toko");
+var user_1 = require("./controller/user");
+var order_1 = require("./controller/order");
 var createServer = function () {
     var app = (0, express_1["default"])();
     app
@@ -50,6 +50,9 @@ var createServer = function () {
         });
         app.group("/bundle", function (app) {
             (0, bundle_1.BundleController)({ route: app });
+        });
+        app.group("/order", function (app) {
+            (0, order_1.OrderController)({ route: app });
         });
     });
     app.use("/api", root["export"]());

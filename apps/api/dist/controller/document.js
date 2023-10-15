@@ -54,11 +54,11 @@ var document_2 = require("../types/document");
 var DocumentController = function (_a) {
     var route = _a.route;
     route.post("/register", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var body, document, error_1;
+        var body, find, document, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _a.trys.push([0, 3, , 4]);
                     body = document_2.DocumentTypes.parse(req.body);
                     console.log(body);
                     if (!body) {
@@ -67,42 +67,55 @@ var DocumentController = function (_a) {
                                 message: "Body tidak boleh kosong"
                             })];
                     }
-                    return [4 /*yield*/, document_1.Document.create(__assign({}, body))];
+                    return [4 /*yield*/, document_1.Document.findOne({
+                            name: body.name
+                        })];
                 case 1:
+                    find = _a.sent();
+                    if (find) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "model sudah terdaftar"
+                            })];
+                    }
+                    return [4 /*yield*/, document_1.Document.create(__assign({}, body))];
+                case 2:
                     document = _a.sent();
                     return [2 /*return*/, res.status(200).json({
                             success: true,
                             message: "Berhasil",
                             data: document
                         })];
-                case 2:
+                case 3:
                     error_1 = _a.sent();
                     return [2 /*return*/, res.status(400).json({
                             success: false,
                             message: error_1
                         })];
-                case 3: return [2 /*return*/];
+                case 4: return [2 /*return*/];
             }
         });
     }); });
-    route.get("/list", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var find, error_2;
+    route.get("/list/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var id, find, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, document_1.Document.find()];
+                    id = req.params;
+                    console.log("id...: ", id);
+                    return [4 /*yield*/, document_1.Document.findById(id.id)];
                 case 1:
                     find = _a.sent();
                     if (!find) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
-                                message: "document tidak di temukan"
+                                message: "user tidak di temukan"
                             })];
                     }
                     return [2 /*return*/, res.status(200).json({
                             success: true,
-                            message: "document berhasil ditemukan",
+                            message: "user berhasil ditemukan",
                             data: find
                         })];
                 case 2:
@@ -115,33 +128,70 @@ var DocumentController = function (_a) {
             }
         });
     }); });
-    route.get("/list/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var id, find, error_3;
+    route["delete"]("/delete/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var id, deleteData, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     id = req.params;
                     console.log("id...: ", id);
-                    return [4 /*yield*/, document_1.Document.find(id)];
+                    return [4 /*yield*/, document_1.Document.findByIdAndDelete(id.id)];
                 case 1:
-                    find = _a.sent();
-                    if (!find) {
+                    deleteData = _a.sent();
+                    if (!deleteData) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
-                                message: "document tidak di temukan"
+                                message: "user tidak di temukan"
                             })];
                     }
                     return [2 /*return*/, res.status(200).json({
                             success: true,
-                            message: "document berhasil ditemukan",
-                            data: find
+                            message: "user berhasil dihapus",
+                            data: deleteData
                         })];
                 case 2:
                     error_3 = _a.sent();
                     return [2 /*return*/, res.status(400).json({
                             success: false,
                             message: error_3
+                        })];
+                case 3: return [2 /*return*/];
+            }
+        });
+    }); });
+    route.put("/update", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var updateData, updateDocument, error_4;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    updateData = document_2.DocumentTypes.parse(req.body);
+                    if (!updateData) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "data tidak valid"
+                            })];
+                    }
+                    return [4 /*yield*/, document_1.Document.findOneAndUpdate({ name: updateData.name }, updateData)];
+                case 1:
+                    updateDocument = _a.sent();
+                    if (!updateDocument) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "tidak bisa pembaruan"
+                            })];
+                    }
+                    return [2 /*return*/, res.status(200).json({
+                            success: true,
+                            message: "document berhasil diperbarui",
+                            data: updateDocument
+                        })];
+                case 2:
+                    error_4 = _a.sent();
+                    return [2 /*return*/, res.status(400).json({
+                            success: false,
+                            message: error_4
                         })];
                 case 3: return [2 /*return*/];
             }

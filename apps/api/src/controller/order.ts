@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { authenticateJWT } from "../middleware/auth";
-import { Document } from "../model/document";
-import { DocumentTypes } from "../types/document";
+import { Order } from "../model/order";
+import { OrderTypes } from "../types/order";
 
-export const DocumentController = ({ route }: { route: Router }) => {
+export const OrderController = ({ route }: { route: Router }) => {
   route.post("/register", async (req, res) => {
     try {
-      const body = DocumentTypes.parse(req.body);
+      const body = OrderTypes.parse(req.body);
 
       console.log(body);
 
@@ -17,24 +17,14 @@ export const DocumentController = ({ route }: { route: Router }) => {
         });
       }
 
-      const find = await Document.findOne({
-        name: body.name,
-      });
-      if (find) {
-        return res.status(400).json({
-          success: false,
-          message: "model sudah terdaftar",
-        });
-      }
-
-      const document = await Document.create({
+      const order = await Order.create({
         ...body,
       });
 
       return res.status(200).json({
         success: true,
         message: "Berhasil",
-        data: document,
+        data: order,
       });
     } catch (error) {
       return res.status(400).json({
@@ -47,40 +37,17 @@ export const DocumentController = ({ route }: { route: Router }) => {
     try {
       const id = req.params;
       console.log("id...: ", id);
-      const find = await Document.findById(id.id);
+      const find = await Order.findById(id.id);
       if (!find) {
         return res.status(400).json({
           success: false,
-          message: "user tidak di temukan",
+          message: "order tidak di temukan",
         });
       }
       return res.status(200).json({
         success: true,
-        message: "user berhasil ditemukan",
+        message: "order berhasil ditemukan",
         data: find,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error,
-      });
-    }
-  });
-  route.delete("/delete/:id", authenticateJWT, async (req, res) => {
-    try {
-      const id = req.params;
-      console.log("id...: ", id);
-      const deleteData = await Document.findByIdAndDelete(id.id);
-      if (!deleteData) {
-        return res.status(400).json({
-          success: false,
-          message: "user tidak di temukan",
-        });
-      }
-      return res.status(200).json({
-        success: true,
-        message: "user berhasil dihapus",
-        data: deleteData,
       });
     } catch (error) {
       return res.status(400).json({
@@ -91,15 +58,18 @@ export const DocumentController = ({ route }: { route: Router }) => {
   });
   route.put("/update", authenticateJWT, async (req, res) => {
     try {
-      const updateData = DocumentTypes.parse(req.body);
+      const updateData = OrderTypes.parse(req.body);
       if (!updateData) {
         return res.status(400).json({
           success: false,
           message: "data tidak valid",
         });
       }
-      const updateDocument = await Document.findOneAndUpdate({ name: updateData.name },updateData);
-      if (!updateDocument) {
+      const updateOrder = await Order.findOneAndUpdate(
+        { id: req.body.id },
+        updateData
+      );
+      if (!updateOrder) {
         return res.status(400).json({
           success: false,
           message: "tidak bisa pembaruan",
@@ -107,8 +77,8 @@ export const DocumentController = ({ route }: { route: Router }) => {
       }
       return res.status(200).json({
         success: true,
-        message: "document berhasil diperbarui",
-        data: updateDocument,
+        message: "order berhasil diperbarui",
+        data: updateOrder,
       });
     } catch (error) {
       return res.status(400).json({
@@ -117,4 +87,4 @@ export const DocumentController = ({ route }: { route: Router }) => {
       });
     }
   });
-};
+}

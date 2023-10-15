@@ -128,13 +128,15 @@ var PrintController = function (_a) {
             }
         });
     }); });
-    route.get("/list", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var find, error_3;
+    route.get("/list/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var id, find, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, print_1.Print.find()];
+                    id = req.params;
+                    console.log("id...: ", id);
+                    return [4 /*yield*/, print_1.Print.findById(id.id)];
                 case 1:
                     find = _a.sent();
                     if (!find) {
@@ -171,7 +173,7 @@ var PrintController = function (_a) {
                                 message: "data tidak valid"
                             })];
                     }
-                    return [4 /*yield*/, print_1.Print.findOneAndUpdate({}, updateData)];
+                    return [4 /*yield*/, print_1.Print.findOneAndUpdate({ model: updateData.model }, updateData)];
                 case 1:
                     updatePrint = _a.sent();
                     if (!updatePrint) {

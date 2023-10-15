@@ -47,19 +47,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.BundleController = void 0;
+exports.OrderController = void 0;
 var auth_1 = require("../middleware/auth");
-var bundle_1 = require("../model/bundle");
-var bundle_2 = require("../types/bundle");
-var BundleController = function (_a) {
+var order_1 = require("../model/order");
+var order_2 = require("../types/order");
+var OrderController = function (_a) {
     var route = _a.route;
     route.post("/register", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var body, find, bundle, error_1;
+        var body, order, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    body = bundle_2.BundleTypes.parse(req.body);
+                    _a.trys.push([0, 2, , 3]);
+                    body = order_2.OrderTypes.parse(req.body);
                     console.log(body);
                     if (!body) {
                         return [2 /*return*/, res.status(400).json({
@@ -67,32 +67,21 @@ var BundleController = function (_a) {
                                 message: "Body tidak boleh kosong"
                             })];
                     }
-                    return [4 /*yield*/, bundle_1.Bundle.findOne({
-                            name: body.name
-                        })];
+                    return [4 /*yield*/, order_1.Order.create(__assign({}, body))];
                 case 1:
-                    find = _a.sent();
-                    if (find) {
-                        return [2 /*return*/, res.status(400).json({
-                                success: false,
-                                message: "Name sudah terdaftar"
-                            })];
-                    }
-                    return [4 /*yield*/, bundle_1.Bundle.create(__assign({}, body))];
-                case 2:
-                    bundle = _a.sent();
+                    order = _a.sent();
                     return [2 /*return*/, res.status(200).json({
                             success: true,
                             message: "Berhasil",
-                            data: bundle
+                            data: order
                         })];
-                case 3:
+                case 2:
                     error_1 = _a.sent();
                     return [2 /*return*/, res.status(400).json({
                             success: false,
                             message: error_1
                         })];
-                case 4: return [2 /*return*/];
+                case 3: return [2 /*return*/];
             }
         });
     }); });
@@ -104,18 +93,18 @@ var BundleController = function (_a) {
                     _a.trys.push([0, 2, , 3]);
                     id = req.params;
                     console.log("id...: ", id);
-                    return [4 /*yield*/, bundle_1.Bundle.findById(id.id)];
+                    return [4 /*yield*/, order_1.Order.findById(id.id)];
                 case 1:
                     find = _a.sent();
                     if (!find) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
-                                message: "bundle tidak di temukan"
+                                message: "order tidak di temukan"
                             })];
                     }
                     return [2 /*return*/, res.status(200).json({
                             success: true,
-                            message: "bundle berhasil ditemukan",
+                            message: "order berhasil ditemukan",
                             data: find
                         })];
                 case 2:
@@ -128,30 +117,32 @@ var BundleController = function (_a) {
             }
         });
     }); });
-    route.get("/list/:desc", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var desc, params, find, error_3;
+    route.put("/update", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var updateData, updateOrder, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    desc = req.params;
-                    params = ".*" + desc.desc + ".*";
-                    console.log("desc...: ", params);
-                    return [4 /*yield*/, bundle_1.Bundle.find({
-                            desc: { $regex: params, $options: "i" }
-                        })];
-                case 1:
-                    find = _a.sent();
-                    if (!find) {
+                    updateData = order_2.OrderTypes.parse(req.body);
+                    if (!updateData) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
-                                message: "bundle tidak di temukan"
+                                message: "data tidak valid"
+                            })];
+                    }
+                    return [4 /*yield*/, order_1.Order.findOneAndUpdate({ id: req.body.id }, updateData)];
+                case 1:
+                    updateOrder = _a.sent();
+                    if (!updateOrder) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "tidak bisa pembaruan"
                             })];
                     }
                     return [2 /*return*/, res.status(200).json({
                             success: true,
-                            message: "bundle berhasil ditemukan",
-                            data: find
+                            message: "order berhasil diperbarui",
+                            data: updateOrder
                         })];
                 case 2:
                     error_3 = _a.sent();
@@ -163,74 +154,5 @@ var BundleController = function (_a) {
             }
         });
     }); });
-    route.put("/update", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var updateData, updateBundle, error_4;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    updateData = bundle_2.BundleTypes.parse(req.body);
-                    if (!updateData) {
-                        return [2 /*return*/, res.status(400).json({
-                                success: false,
-                                message: "data tidak valid"
-                            })];
-                    }
-                    return [4 /*yield*/, bundle_1.Bundle.findOneAndUpdate({ name: updateData.name }, updateData)];
-                case 1:
-                    updateBundle = _a.sent();
-                    if (!updateBundle) {
-                        return [2 /*return*/, res.status(400).json({
-                                success: false,
-                                message: "tidak bisa pembaruan"
-                            })];
-                    }
-                    return [2 /*return*/, res.status(200).json({
-                            success: true,
-                            message: "bundle berhasil diperbarui",
-                            data: updateBundle
-                        })];
-                case 2:
-                    error_4 = _a.sent();
-                    return [2 /*return*/, res.status(400).json({
-                            success: false,
-                            message: error_4
-                        })];
-                case 3: return [2 /*return*/];
-            }
-        });
-    }); });
-    route["delete"]("/delete/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var id, deleteData, error_5;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    id = req.params;
-                    console.log("id...: ", id);
-                    return [4 /*yield*/, bundle_1.Bundle.findByIdAndDelete(id.id)];
-                case 1:
-                    deleteData = _a.sent();
-                    if (!deleteData) {
-                        return [2 /*return*/, res.status(400).json({
-                                success: false,
-                                message: "tidak ada yang di hapus"
-                            })];
-                    }
-                    return [2 /*return*/, res.status(200).json({
-                            success: true,
-                            message: "data berhasil di hapus",
-                            data: deleteData
-                        })];
-                case 2:
-                    error_5 = _a.sent();
-                    return [2 /*return*/, res.status(400).json({
-                            success: false,
-                            message: error_5
-                        })];
-                case 3: return [2 /*return*/];
-            }
-        });
-    }); });
 };
-exports.BundleController = BundleController;
+exports.OrderController = OrderController;

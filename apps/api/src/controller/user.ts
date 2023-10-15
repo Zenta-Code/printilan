@@ -129,8 +129,8 @@ export const UserController = ({ route }: { route: Router }) => {
     try {
       const id = req.params;
       console.log("id...: ", id);
-      const find = await User.find(id);
-      if (!find) {
+      const user = await User.findById(id.id);
+      if (!user) {
         return res.status(400).json({
           success: false,
           message: "user tidak di temukan",
@@ -139,7 +139,7 @@ export const UserController = ({ route }: { route: Router }) => {
       return res.status(200).json({
         success: true,
         message: "user berhasil ditemukan",
-        data: find,
+        data: sanitize(user.toObject(), ["password"]),
       });
     } catch (error) {
       return res.status(400).json({
@@ -148,10 +148,12 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/list", authenticateJWT, async (req, res) => {
+  route.delete("/delete/:id", authenticateJWT, async (req, res) => {
     try {
-      const find = await User.find();
-      if (!find) {
+      const id = req.params;
+      console.log("id...: ", id);
+      const user = await User.findByIdAndDelete(id.id);
+      if (!user) {
         return res.status(400).json({
           success: false,
           message: "user tidak di temukan",
@@ -159,8 +161,36 @@ export const UserController = ({ route }: { route: Router }) => {
       }
       return res.status(200).json({
         success: true,
-        message: "user berhasil ditemukan",
-        data: find,
+        message: "user berhasil dihapus",
+        data: sanitize(user.toObject(), ["password"]),
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  });
+  route.put("/update", authenticateJWT, async (req, res) => {
+    try {
+      const updateData = UserTypes.parse(req.body);
+      if (!updateData) {
+        return res.status(400).json({
+          success: false,
+          message: "data tidak valid",
+        });
+      }
+      const updateUser = await User.findOneAndUpdate({email:updateData.email}, updateData);
+      if (!updateUser) {
+        return res.status(400).json({
+          success: false,
+          message: "tidak bisa pembaruan",
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: "user berhasil diperbarui",
+        data: updateUser,
       });
     } catch (error) {
       return res.status(400).json({

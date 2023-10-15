@@ -185,17 +185,17 @@ var UserController = function (_a) {
         });
     }); });
     route.get("/list/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var id, find, error_3;
+        var id, user, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
                     id = req.params;
                     console.log("id...: ", id);
-                    return [4 /*yield*/, user_1.User.find(id)];
+                    return [4 /*yield*/, user_1.User.findById(id.id)];
                 case 1:
-                    find = _a.sent();
-                    if (!find) {
+                    user = _a.sent();
+                    if (!user) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
                                 message: "user tidak di temukan"
@@ -204,7 +204,7 @@ var UserController = function (_a) {
                     return [2 /*return*/, res.status(200).json({
                             success: true,
                             message: "user berhasil ditemukan",
-                            data: find
+                            data: (0, sanitzer_1.sanitize)(user.toObject(), ["password"])
                         })];
                 case 2:
                     error_3 = _a.sent();
@@ -216,16 +216,18 @@ var UserController = function (_a) {
             }
         });
     }); });
-    route.get("/list", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var find, error_4;
+    route["delete"]("/delete/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var id, user, error_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, user_1.User.find()];
+                    id = req.params;
+                    console.log("id...: ", id);
+                    return [4 /*yield*/, user_1.User.findByIdAndDelete(id.id)];
                 case 1:
-                    find = _a.sent();
-                    if (!find) {
+                    user = _a.sent();
+                    if (!user) {
                         return [2 /*return*/, res.status(400).json({
                                 success: false,
                                 message: "user tidak di temukan"
@@ -233,14 +235,51 @@ var UserController = function (_a) {
                     }
                     return [2 /*return*/, res.status(200).json({
                             success: true,
-                            message: "user berhasil ditemukan",
-                            data: find
+                            message: "user berhasil dihapus",
+                            data: (0, sanitzer_1.sanitize)(user.toObject(), ["password"])
                         })];
                 case 2:
                     error_4 = _a.sent();
                     return [2 /*return*/, res.status(400).json({
                             success: false,
                             message: error_4
+                        })];
+                case 3: return [2 /*return*/];
+            }
+        });
+    }); });
+    route.put("/update", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var updateData, updateUser, error_5;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    updateData = user_2.UserTypes.parse(req.body);
+                    if (!updateData) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "data tidak valid"
+                            })];
+                    }
+                    return [4 /*yield*/, user_1.User.findOneAndUpdate({ email: updateData.email }, updateData)];
+                case 1:
+                    updateUser = _a.sent();
+                    if (!updateUser) {
+                        return [2 /*return*/, res.status(400).json({
+                                success: false,
+                                message: "tidak bisa pembaruan"
+                            })];
+                    }
+                    return [2 /*return*/, res.status(200).json({
+                            success: true,
+                            message: "user berhasil diperbarui",
+                            data: updateUser
+                        })];
+                case 2:
+                    error_5 = _a.sent();
+                    return [2 /*return*/, res.status(400).json({
+                            success: false,
+                            message: error_5
                         })];
                 case 3: return [2 /*return*/];
             }

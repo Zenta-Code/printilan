@@ -67,9 +67,11 @@ export const PrintController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/list", authenticateJWT, async (req, res) => {
+  route.get("/list/:id", authenticateJWT, async (req, res) => {
     try {
-      const find = await Print.find();
+      const id = req.params;
+      console.log("id...: ", id);
+      const find = await Print.findById(id.id);
       if (!find) {
         return res.status(400).json({
           success: false,
@@ -98,9 +100,7 @@ export const PrintController = ({ route }: { route: Router }) => {
           message: "data tidak valid",
         });
       }
-      const updatePrint = await Print.findOneAndUpdate({
-        model : updateData.model
-      }, updateData);
+      const updatePrint = await Print.findOneAndUpdate({model: updateData.model},updateData);
       if (!updatePrint) {
         return res.status(400).json({
           success: false,
