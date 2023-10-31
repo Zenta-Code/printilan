@@ -9,17 +9,17 @@ export declare const DocumentTypes: z.ZodObject<{
     copies: z.ZodNumber;
 }, "strip", z.ZodTypeAny, {
     name: string;
+    price: number;
     type: string;
     count: number;
-    price: number;
     size: string;
     color: boolean;
     copies: number;
 }, {
     name: string;
+    price: number;
     type: string;
     count: number;
-    price: number;
     size: string;
     color: boolean;
     copies: number;

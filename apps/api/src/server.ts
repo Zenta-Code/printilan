@@ -1,14 +1,16 @@
 import { json, urlencoded } from "body-parser";
 import cors from "cors";
 import express, { Express } from "express";
+import listEndpoint from "express-list-endpoints";
 import RouteGroup from "express-route-grouping";
 import morgan from "morgan";
 import { BundleController } from "./controller/bundle";
 import { DocumentController } from "./controller/document";
+import { OrderController } from "./controller/order";
 import { PrintController } from "./controller/print";
 import { TokoController } from "./controller/toko";
 import { UserController } from "./controller/user";
-import { OrderController } from "./controller/order";
+
 export const createServer: () => Express = () => {
   const app: Express = express();
   app
@@ -16,13 +18,7 @@ export const createServer: () => Express = () => {
     .use(morgan("dev"))
     .use(urlencoded({ extended: true }))
     .use(json())
-    .use(cors())
-    .get("/message/:name", (req, res) => {
-      res.json({ message: `hello ${req.params.name}` });
-    })
-    .get("/healthz", (req, res) => {
-      res.json({ ok: true });
-    });
+    .use(cors());
   const root = new RouteGroup("/", express.Router());
   root.group("/", (app) => {
     app.get("/", (req, res) => {
@@ -47,10 +43,18 @@ export const createServer: () => Express = () => {
     });
     app.group("/order", (app) => {
       OrderController({ route: app });
-    })
+    });
   });
 
   app.use("/api", root.export());
+  try {
+    console.log("====== API ENDPOINTS ======\n");
+    console.log(listEndpoint(app));
+    console.log("\n============================\n");
+  } catch (e) {
+    console.log("Error listing endpoints\n");
+    console.log(e);
+  }
 
   return app;
 };

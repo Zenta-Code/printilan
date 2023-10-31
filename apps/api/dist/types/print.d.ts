@@ -6,16 +6,16 @@ export declare const PrintTypes: z.ZodObject<{
     status: z.ZodBoolean;
     price: z.ZodNumber;
 }, "strip", z.ZodTypeAny, {
+    price: number;
     type: string;
     status: boolean;
     brand: string;
     model: string;
-    price: number;
 }, {
+    price: number;
     type: string;
     status: boolean;
     brand: string;
     model: string;
-    price: number;
 }>;
 //# sourceMappingURL=print.d.ts.map

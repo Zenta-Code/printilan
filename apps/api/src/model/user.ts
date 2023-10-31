@@ -5,7 +5,13 @@ const UserSchema = new Schema(
     name: String,
     email: String,
     password: String,
-    address: String,
+    address: {
+      street: String,
+      city: String,
+      state: String,
+      country: String,
+      zipCode: String,
+    },
     phone: String,
     role: {
       type: String,

@@ -4,9 +4,9 @@ export declare const Document: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    price?: number | undefined;
     type?: string | undefined;
     count?: number | undefined;
-    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
     copies?: number | undefined;
@@ -15,9 +15,9 @@ export declare const Document: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    price?: number | undefined;
     type?: string | undefined;
     count?: number | undefined;
-    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
     copies?: number | undefined;
@@ -26,9 +26,9 @@ export declare const Document: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    price?: number | undefined;
     type?: string | undefined;
     count?: number | undefined;
-    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
     copies?: number | undefined;
@@ -41,9 +41,9 @@ export declare const Document: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    price?: number | undefined;
     type?: string | undefined;
     count?: number | undefined;
-    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
     copies?: number | undefined;
@@ -52,9 +52,9 @@ export declare const Document: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    price?: number | undefined;
     type?: string | undefined;
     count?: number | undefined;
-    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
     copies?: number | undefined;
@@ -63,9 +63,9 @@ export declare const Document: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    price?: number | undefined;
     type?: string | undefined;
     count?: number | undefined;
-    price?: number | undefined;
     size?: string | undefined;
     color?: boolean | undefined;
     copies?: number | undefined;

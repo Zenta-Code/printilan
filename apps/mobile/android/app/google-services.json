@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "507269758985",
+    "project_id": "sky-printing",
+    "storage_bucket": "sky-printing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507269758985:android:f2d9ae8dc6566e3041f8d8",
+        "android_client_info": {
+          "package_name": "dev.zenta.sky_printing"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyCj3u8Z4SneBwoSMcPwumbEvLa1VM8Fk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

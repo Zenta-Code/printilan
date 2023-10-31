@@ -4,30 +4,48 @@ export declare const User: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    address?: {
+        street?: string | undefined;
+        city?: string | undefined;
+        state?: string | undefined;
+        country?: string | undefined;
+        zipCode?: string | undefined;
+    } | undefined;
+    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    address?: string | undefined;
-    phone?: string | undefined;
     role?: "maintainer" | "seller" | "user" | undefined;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    address?: {
+        street?: string | undefined;
+        city?: string | undefined;
+        state?: string | undefined;
+        country?: string | undefined;
+        zipCode?: string | undefined;
+    } | undefined;
+    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    address?: string | undefined;
-    phone?: string | undefined;
     role?: "maintainer" | "seller" | "user" | undefined;
 }> & {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    address?: {
+        street?: string | undefined;
+        city?: string | undefined;
+        state?: string | undefined;
+        country?: string | undefined;
+        zipCode?: string | undefined;
+    } | undefined;
+    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    address?: string | undefined;
-    phone?: string | undefined;
     role?: "maintainer" | "seller" | "user" | undefined;
 } & {
     _id: mongoose.Types.ObjectId;
@@ -38,30 +56,48 @@ export declare const User: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    address?: {
+        street?: string | undefined;
+        city?: string | undefined;
+        state?: string | undefined;
+        country?: string | undefined;
+        zipCode?: string | undefined;
+    } | undefined;
+    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    address?: string | undefined;
-    phone?: string | undefined;
     role?: "maintainer" | "seller" | "user" | undefined;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    address?: {
+        street?: string | undefined;
+        city?: string | undefined;
+        state?: string | undefined;
+        country?: string | undefined;
+        zipCode?: string | undefined;
+    } | undefined;
+    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    address?: string | undefined;
-    phone?: string | undefined;
     role?: "maintainer" | "seller" | "user" | undefined;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    address?: {
+        street?: string | undefined;
+        city?: string | undefined;
+        state?: string | undefined;
+        country?: string | undefined;
+        zipCode?: string | undefined;
+    } | undefined;
+    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    address?: string | undefined;
-    phone?: string | undefined;
     role?: "maintainer" | "seller" | "user" | undefined;
 }> & {
     _id: mongoose.Types.ObjectId;

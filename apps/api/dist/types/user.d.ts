@@ -8,17 +8,17 @@ export declare const UserTypes: z.ZodObject<{
     role: z.ZodEnum<["maintainer", "seller", "user"]>;
 }, "strip", z.ZodTypeAny, {
     name: string;
-    email: string;
-    password: string;
     address: string;
     phone: string;
+    email: string;
+    password: string;
     role: "maintainer" | "seller" | "user";
 }, {
     name: string;
-    email: string;
-    password: string;
     address: string;
     phone: string;
+    email: string;
+    password: string;
     role: "maintainer" | "seller" | "user";
 }>;
 //# sourceMappingURL=user.d.ts.map
