@@ -9,16 +9,17 @@ try {
   mongoose.connect(
     process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/sky_print"
   );
-  mongoose.connection.on("error", (err) => {
-    console.error(err);
-  });
-
-  mongoose.connection.on("connecting", () => {
-    console.log("Connected to MongoDB");
-  });
 } catch (error) {
   console.error("Error connecting to database: \n", error);
 }
+mongoose.connection.on("error", (err) => {
+  console.error(err);
+});
+
+mongoose.connection.on("connecting", () => {
+  console.log("Connected to MongoDB");
+});
+
 server.listen(port, () => {
   console.log(`API Ready at http://localhost:${port} 🚀`);
 });

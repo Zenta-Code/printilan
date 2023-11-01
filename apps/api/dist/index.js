@@ -12,16 +12,16 @@ var server = (0, server_1.createServer)();
 try {
     console.log("DATABASE_URL", process.env.DATABASE_URL);
     mongoose_1["default"].connect(process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/sky_print");
-    mongoose_1["default"].connection.on("error", function (err) {
-        console.error(err);
-    });
-    mongoose_1["default"].connection.on("connecting", function () {
-        console.log("Connected to MongoDB");
-    });
 }
 catch (error) {
     console.error("Error connecting to database: \n", error);
 }
+mongoose_1["default"].connection.on("error", function (err) {
+    console.error(err);
+});
+mongoose_1["default"].connection.on("connecting", function () {
+    console.log("Connected to MongoDB");
+});
 server.listen(port, function () {
     console.log("API Ready at http://localhost:".concat(port, " \uD83D\uDE80"));
 });

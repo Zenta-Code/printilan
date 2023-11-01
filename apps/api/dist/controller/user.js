@@ -181,27 +181,31 @@ var UserController = function (_a) {
             }
         });
     }); });
-    route.get("/me/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var id, user, error_3;
+    route.get("/me", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var token, jwtSecret, found, user, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    id = req.params;
-                    console.log("id...: ", id);
-                    return [4 /*yield*/, user_1.User.findById(id.id)];
-                case 1:
-                    user = _a.sent();
-                    if (!user) {
+                    token = req.headers.authorization.split(' ')[1];
+                    if (!token) {
+                        return [2 /*return*/, res.status(400).json({ error: "Unathorized" })];
+                    }
+                    jwtSecret = process.env.JWT_SECRET || "JWT_SECRET";
+                    found = jsonwebtoken_1["default"].verify(token, jwtSecret);
+                    if (!found) {
                         return [2 /*return*/, res.status(400).json({
-                                success: false,
-                                message: "user tidak di temukan"
+                                error: "Unathorized"
                             })];
                     }
+                    return [4 /*yield*/, user_1.User.findById(found.id)];
+                case 1:
+                    user = _a.sent();
+                    console.log(user);
                     return [2 /*return*/, res.status(200).json({
                             success: true,
                             message: "user berhasil ditemukan",
-                            data: (0, sanitzer_1.sanitize)(user.toObject(), ["password"])
+                            data: (0, sanitzer_1.sanitize)(user.toObject(), ['password'])
                         })];
                 case 2:
                     error_3 = _a.sent();
