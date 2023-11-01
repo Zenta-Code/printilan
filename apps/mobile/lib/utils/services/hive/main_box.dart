@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sky_printing/utils/services/firebase/firebase_crashlogger.dart';
+
 enum ActiveTheme {
   light(ThemeMode.light),
   dark(ThemeMode.dark),
@@ -22,7 +23,7 @@ enum MainBoxKeys {
 
 mixin class MainBoxMixin {
   static late Box? mainBox;
-  static const _boxName = 'flutter_auth_app';
+  static const _boxName = 'sky_printing';
 
   static Future<void> initHive(String prefixBox) async {
     // Initialize hive (persistent database)

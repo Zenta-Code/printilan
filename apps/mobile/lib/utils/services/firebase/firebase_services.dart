@@ -6,15 +6,11 @@ import 'package:sky_printing/utils/services/firebase/firebase_options.dart';
 
 mixin FirebaseServices {
   static Future<void> init() async {
-    /// Initialize Firebase
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
-    // Pass all uncaught errors from the framework to Crashlytics.
-    // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
-    /// Catch errors that happen outside of the Flutter context,
     Isolate.current.addErrorListener(
       RawReceivePort((List<dynamic> pair) async {
         final List<dynamic> errorAndStacktrace = pair;

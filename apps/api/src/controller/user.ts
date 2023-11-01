@@ -9,6 +9,7 @@ import { UserTypes } from "../types/user";
 export const UserController = ({ route }: { route: Router }) => {
   route.post("/register", async (req, res) => {
     try {
+      req.body.role = "user";
       const body = UserTypes.parse(req.body);
 
       console.log(body);
@@ -73,15 +74,13 @@ export const UserController = ({ route }: { route: Router }) => {
 
       if (body.email === undefined || body.password === undefined) {
         return res.status(400).json({
-          success: false,
-          message: "Body tidak boleh kosong",
+          error: "Body tidak boleh kosong",
         });
       }
 
       if (body.email === "" || body.password === "") {
         return res.status(400).json({
-          success: false,
-          message: "Body tidak boleh kosong",
+          error: "Body tidak boleh kosong",
         });
       }
 
@@ -91,8 +90,7 @@ export const UserController = ({ route }: { route: Router }) => {
 
       if (!user) {
         return res.status(400).json({
-          success: false,
-          message: "Email tidak ditemukan",
+          error: "Email tidak ditemukan",
         });
       }
 
@@ -102,8 +100,7 @@ export const UserController = ({ route }: { route: Router }) => {
 
       if (!validPassword) {
         return res.status(400).json({
-          success: false,
-          message: "Password salah",
+          error: "Password salah",
         });
       }
 
@@ -125,7 +122,7 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/list/:id", authenticateJWT, async (req, res) => {
+  route.get("/me/:id", authenticateJWT, async (req, res) => {
     try {
       const id = req.params;
       console.log("id...: ", id);
@@ -180,7 +177,10 @@ export const UserController = ({ route }: { route: Router }) => {
           message: "data tidak valid",
         });
       }
-      const updateUser = await User.findOneAndUpdate({email:updateData.email}, updateData);
+      const updateUser = await User.findOneAndUpdate(
+        { email: updateData.email },
+        updateData
+      );
       if (!updateUser) {
         return res.status(400).json({
           success: false,

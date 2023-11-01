@@ -65,6 +65,7 @@ var UserController = function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 5, , 6]);
+                    req.body.role = "user";
                     body = user_2.UserTypes.parse(req.body);
                     console.log(body);
                     if (!body) {
@@ -132,14 +133,12 @@ var UserController = function (_a) {
                     body = req.body;
                     if (body.email === undefined || body.password === undefined) {
                         return [2 /*return*/, res.status(400).json({
-                                success: false,
-                                message: "Body tidak boleh kosong"
+                                error: "Body tidak boleh kosong"
                             })];
                     }
                     if (body.email === "" || body.password === "") {
                         return [2 /*return*/, res.status(400).json({
-                                success: false,
-                                message: "Body tidak boleh kosong"
+                                error: "Body tidak boleh kosong"
                             })];
                     }
                     return [4 /*yield*/, user_1.User.findOne({
@@ -149,8 +148,7 @@ var UserController = function (_a) {
                     user = _a.sent();
                     if (!user) {
                         return [2 /*return*/, res.status(400).json({
-                                success: false,
-                                message: "Email tidak ditemukan"
+                                error: "Email tidak ditemukan"
                             })];
                     }
                     password = body.password || "";
@@ -159,8 +157,7 @@ var UserController = function (_a) {
                     validPassword = _a.sent();
                     if (!validPassword) {
                         return [2 /*return*/, res.status(400).json({
-                                success: false,
-                                message: "Password salah"
+                                error: "Password salah"
                             })];
                     }
                     jwtSecret = process.env.JWT_SECRET || "JWT_SECRET";
@@ -184,7 +181,7 @@ var UserController = function (_a) {
             }
         });
     }); });
-    route.get("/list/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    route.get("/me/:id", auth_1.authenticateJWT, function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var id, user, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
