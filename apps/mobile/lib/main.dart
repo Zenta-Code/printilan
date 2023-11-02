@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sky_printing/dependencies_injection.dart';
 import 'package:sky_printing/lzyct_app.dart';
-import 'package:sky_printing/utils/utils.dart';
+import 'package:sky_printing/utils/utils.dart'; 
 
 void main() {
   runZonedGuarded(
@@ -13,8 +13,7 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
 
       await serviceLocator();
-      await FirebaseServices.init();
-
+      await FirebaseServices.init(); 
       return SystemChrome.setPreferredOrientations(
         [
           DeviceOrientation.portraitUp,
