@@ -41,7 +41,7 @@ class AppRoute {
       GoRoute(
         path: Routes.root.path,
         name: Routes.root.name,
-        redirect: (_, __) => Routes.dashboard.path,
+        redirect: (_, __) => Routes.splashScreen.path,
       ),
       GoRoute(
         path: Routes.login.path,
@@ -78,7 +78,7 @@ class AppRoute {
         ],
       ),
     ],
-    initialLocation: Routes.splashScreen.path,
+    initialLocation: Routes.root.path,
     routerNeglect: true,
     debugLogDiagnostics: kDebugMode,
     refreshListenable: GoRouterRefreshStream(context.read<AuthCubit>().stream),
@@ -89,9 +89,12 @@ class AppRoute {
       ///  Check if not login
       ///  if current page is login page we don't need to direct user
       ///  but if not we must direct user to login page
+
       if (!((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
           false)) {
-        return isLoginPage ? null : Routes.login.path;
+        return isLoginPage ? null : Routes.splashScreen.path;
+      } else if (state.matchedLocation == Routes.splashScreen.path) {
+        return Routes.dashboard.path;
       }
 
       /// Check if already login and in login page
@@ -100,7 +103,7 @@ class AppRoute {
       if (isLoginPage &&
           ((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
               false)) {
-        return Routes.root.path;
+        return Routes.dashboard.path;
       }
 
       /// No direct

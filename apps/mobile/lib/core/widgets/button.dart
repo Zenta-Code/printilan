@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/utils/ext/ext.dart';
 
-///*********************************************
-/// Created by ukieTux on 23/04/2020 with ♥
-/// (>’_’)> email : hey.mudassir@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
 class Button extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
@@ -35,14 +30,16 @@ class Button extends StatelessWidget {
           BoxConstraints(minWidth: width ?? context.widthInPercent(100)),
       margin: EdgeInsets.symmetric(vertical: Dimens.space8),
       height: Dimens.buttonH,
+      width: width ?? double.infinity,
       decoration: BoxDecorations(context).button.copyWith(
-            color: color ?? Theme.of(context).extension<LzyctColors>()!.pink,
+            color: color ?? Theme.of(context).extension<LzyctColors>()!.blue,
+            borderRadius: const BorderRadius.all(Radius.circular(8)).w,
           ),
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
           backgroundColor:
-              color ?? Theme.of(context).extension<LzyctColors>()!.pink,
+              color ?? Theme.of(context).extension<LzyctColors>()!.blue,
           foregroundColor:
               Theme.of(context).extension<LzyctColors>()!.buttonText,
           padding: EdgeInsets.symmetric(horizontal: Dimens.space24),

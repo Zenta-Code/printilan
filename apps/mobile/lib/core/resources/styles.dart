@@ -4,15 +4,14 @@ import 'package:sky_printing/core/core.dart';
 
 /// Light theme
 ThemeData themeLight(BuildContext context) => ThemeData(
-      fontFamily: 'Poppins',
       useMaterial3: true,
-      primaryColor: Palette.pinkLatte,
+      primaryColor: Palette.blueLatte,
       disabledColor: Palette.shadowDark,
       hintColor: Palette.subText,
-      cardColor: Palette.background,
+      cardColor: Palette.card,
       scaffoldBackgroundColor: Palette.background,
       colorScheme: const ColorScheme.light().copyWith(
-        primary: Palette.primary,
+        primary: Palette.blueLatte,
         background: Palette.background,
       ),
       textTheme: TextTheme(
@@ -29,10 +28,14 @@ ThemeData themeLight(BuildContext context) => ThemeData(
               color: Palette.text,
             ),
         headlineMedium: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
               fontSize: Dimens.headlineMedium,
               color: Palette.text,
             ),
         headlineSmall: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
               fontSize: Dimens.headlineSmall,
               color: Palette.text,
             ),
@@ -61,6 +64,7 @@ ThemeData themeLight(BuildContext context) => ThemeData(
               color: Palette.text,
             ),
         labelLarge: Theme.of(context).textTheme.labelLarge?.copyWith(
+              fontFamily: 'Poppins',
               fontSize: Dimens.labelLarge,
               color: Palette.text,
             ),
@@ -73,7 +77,7 @@ ThemeData themeLight(BuildContext context) => ThemeData(
       appBarTheme: const AppBarTheme().copyWith(
         titleTextStyle: Theme.of(context).textTheme.bodyLarge,
         color: Palette.background,
-        iconTheme: const IconThemeData(color: Palette.pinkLatte),
+        iconTheme: const IconThemeData(color: Palette.blueLatte),
         systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
           statusBarColor: Colors.transparent,
         ),
@@ -108,7 +112,6 @@ ThemeData themeLight(BuildContext context) => ThemeData(
           green: Palette.greenLatte,
           roseWater: Palette.roseWaterLatte,
           flamingo: Palette.flamingoLatte,
-          pink: Palette.pinkLatte,
           mauve: Palette.mauveLatte,
           maroon: Palette.maroonLatte,
           peach: Palette.peachLatte,
@@ -127,12 +130,13 @@ ThemeData themeLight(BuildContext context) => ThemeData(
 ThemeData themeDark(BuildContext context) => ThemeData(
       fontFamily: 'Poppins',
       useMaterial3: true,
-      primaryColor: Palette.pinkMocha,
+      primaryColor: Palette.blueMocha,
       disabledColor: Palette.shadowDark,
       hintColor: Palette.subTextDark,
       cardColor: Palette.backgroundDark,
       scaffoldBackgroundColor: Palette.backgroundDark,
-      colorScheme: const ColorScheme.dark().copyWith(primary: Palette.primary),
+      colorScheme:
+          const ColorScheme.dark().copyWith(primary: Palette.blueMocha),
       textTheme: TextTheme(
         displayLarge: Theme.of(context).textTheme.displayLarge?.copyWith(
               fontSize: Dimens.displayLarge,
@@ -190,7 +194,7 @@ ThemeData themeDark(BuildContext context) => ThemeData(
       ),
       appBarTheme: const AppBarTheme().copyWith(
         titleTextStyle: Theme.of(context).textTheme.bodyLarge,
-        iconTheme: const IconThemeData(color: Palette.pinkMocha),
+        iconTheme: const IconThemeData(color: Palette.blueMocha),
         color: Palette.backgroundDark,
         systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
           statusBarColor: Colors.transparent,
@@ -227,7 +231,6 @@ ThemeData themeDark(BuildContext context) => ThemeData(
           green: Palette.greenMocha,
           roseWater: Palette.roseWaterMocha,
           flamingo: Palette.flamingoMocha,
-          pink: Palette.pinkMocha,
           mauve: Palette.mauveMocha,
           maroon: Palette.maroonMocha,
           peach: Palette.peachMocha,
@@ -251,7 +254,6 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
   final Color? green;
   final Color? roseWater;
   final Color? flamingo;
-  final Color? pink;
   final Color? mauve;
   final Color? maroon;
   final Color? peach;
@@ -272,7 +274,6 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
     this.green,
     this.roseWater,
     this.flamingo,
-    this.pink,
     this.mauve,
     this.maroon,
     this.peach,
@@ -295,7 +296,6 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
     Color? green,
     Color? roseWater,
     Color? flamingo,
-    Color? pink,
     Color? mauve,
     Color? maroon,
     Color? peach,
@@ -316,7 +316,6 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
       green: green ?? this.green,
       roseWater: roseWater ?? this.roseWater,
       flamingo: flamingo ?? this.flamingo,
-      pink: pink ?? this.pink,
       mauve: mauve ?? this.mauve,
       maroon: maroon ?? this.maroon,
       peach: peach ?? this.peach,
@@ -347,7 +346,6 @@ class LzyctColors extends ThemeExtension<LzyctColors> {
       green: Color.lerp(green, other.green, t),
       roseWater: Color.lerp(roseWater, other.roseWater, t),
       flamingo: Color.lerp(flamingo, other.flamingo, t),
-      pink: Color.lerp(pink, other.pink, t),
       mauve: Color.lerp(mauve, other.mauve, t),
       maroon: Color.lerp(maroon, other.maroon, t),
       peach: Color.lerp(peach, other.peach, t),

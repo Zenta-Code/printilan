@@ -104,7 +104,7 @@ class _DropDownState<T> extends State<DropDown<T>> {
                   gapPadding: 0,
                   borderRadius: BorderRadius.circular(Dimens.space4),
                   borderSide: BorderSide(
-                    color: Theme.of(context).extension<LzyctColors>()!.pink!,
+                    color: Theme.of(context).extension<LzyctColors>()!.blue!,
                   ),
                 ),
               ),

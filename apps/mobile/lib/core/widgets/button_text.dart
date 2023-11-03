@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sky_printing/core/core.dart';
+import 'package:sky_printing/utils/ext/ext.dart';
 
-///*********************************************
-/// Created by ukieTux on 23/04/2020 with ♥
-/// (>’_’)> email : ukie.tux@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
 class ButtonText extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
@@ -30,15 +26,36 @@ class ButtonText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: Dimens.space8),
+      constraints:
+          BoxConstraints(minWidth: width ?? context.widthInPercent(100)),
+      height: Dimens.buttonH,
+      width: width ?? double.infinity,
+      decoration: BoxDecorations(context).button.copyWith(
+            color: color ?? Theme.of(context).extension<LzyctColors>()!.blue,
+            borderRadius: const BorderRadius.all(Radius.circular(8)).w,
+          ),
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          foregroundColor: Theme.of(context).extension<LzyctColors>()!.pink,
+          backgroundColor:
+              color ?? Theme.of(context).extension<LzyctColors>()!.blue,
+          foregroundColor:
+              Theme.of(context).extension<LzyctColors>()!.buttonText,
+          padding: EdgeInsets.symmetric(horizontal: Dimens.space24),
+          shape: const BeveledRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(Dimens.cornerRadius),
+            ),
+          ),
         ),
         child: Text(
-          title.toUpperCase(),
-          style: Theme.of(context).textTheme.labelLarge,
+          title,
+          style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                color: titleColor ??
+                    Theme.of(context).extension<LzyctColors>()!.background,
+                fontSize: fontSize,
+                fontWeight: FontWeight.w700,
+              ),
           textAlign: TextAlign.center,
         ),
       ),

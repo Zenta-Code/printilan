@@ -1,17 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sky_printing/core/core.dart';
-
-///*********************************************
-///  sky_printing |
-///  button_notification.dart
-/// --------------------------------------------
-/// Created by Mudassir 🧑🏻‍💻 @ lazycatlabs.com
-/// on 📅 03/01/22 🕰 11:13 with ❤️
-/// ✉️ : hey.mudassir@gmail.com
-/// 🚀 : https://www.github.com/Lzyct
-/// 🌐 : https://www.lazycatlabs.com
-///*********************************************
-/// © 2022 | All Right Reserved
+ 
 class ButtonNotification extends StatelessWidget {
   const ButtonNotification({super.key});
 
@@ -30,7 +19,7 @@ class ButtonNotification extends StatelessWidget {
               child: Icon(
                 Icons.notifications_outlined,
                 size: Dimens.space30,
-                color: Theme.of(context).extension<LzyctColors>()!.pink,
+                color: Theme.of(context).extension<LzyctColors>()!.blue,
               ),
             ),
             Positioned(

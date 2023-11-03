@@ -6,7 +6,8 @@ import 'package:sky_printing/utils/utils.dart';
 typedef ResponseConverter<T> = T Function(dynamic response);
 
 class DioClient with MainBoxMixin, FirebaseCrashLogger {
-  final String _baseUrl = 'http://192.168.34.169:3001';
+  // final String _baseUrl = 'http://192.168.34.169:3001';
+  final String _baseUrl = "https://reqres.in";
 
   String? _auth;
   bool _isUnitTest = false;
@@ -26,10 +27,8 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
 
   Dio get dio {
     if (_isUnitTest) {
-      /// Return static dio if is unit test
       return _dio;
     } else {
-      /// We need to recreate dio to avoid token issue after login
       try {
         _auth = getData(MainBoxKeys.token);
       } catch (_) {}

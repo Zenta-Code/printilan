@@ -1,42 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/core/core.dart';
+import 'package:sky_printing/utils/helper/constant.dart';
 
-///*********************************************
-/// Created by ukietux on 24/08/20 with ♥
-/// (>’_’)> email : hey.mudassir@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
-class SplashScreenPage extends StatefulWidget {
-  @override
-  _SplashScreenPageState createState() => _SplashScreenPageState();
-}
-
-class _SplashScreenPageState extends State<SplashScreenPage> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 2), () {
-      context.goNamed(Routes.root.name);
-    });
-  }
+class SplashScreenPage extends StatelessWidget {
+  const SplashScreenPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Parent(
-      child: ColoredBox(
-        color: Theme.of(context).extension<LzyctColors>()!.background!,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 32.h,
+          horizontal: 24.w,
+        ),
+        color: Color.fromARGB(255, 235, 244, 253),
         child: Center(
-            // child: CircleAvatar(
-            //   backgroundColor: Theme.of(context).hintColor,
-            //   radius: Dimens.menu + Dimens.space6,
-            //   child: CircleAvatar(
-            //     backgroundImage: AssetImage(Images.icLogo),
-            //     radius: Dimens.menu,
-            //   ),
-            // ),
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  SizedBox(height: Dimens.space30),
+                  Text(
+                    Strings.of(context)!.welcomeTo,
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  Text(
+                    Constants.get.appName,
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ],
+              ),
+              Image.asset(
+                'assets/images/greeting.png',
+                width: 320,
+              ),
+              ButtonText(
+                onPressed: () => context.pushNamed(Routes.login.name),
+                title: Strings.of(context)!.getStarted,
+                color: Colors.black,
+                fontSize: Dimens.titleLarge,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

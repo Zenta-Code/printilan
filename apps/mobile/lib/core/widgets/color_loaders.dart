@@ -167,7 +167,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Theme.of(context).extension<LzyctColors>()!.pink,
+                    color: Theme.of(context).extension<LzyctColors>()!.blue,
                   ),
                 ),
               ],

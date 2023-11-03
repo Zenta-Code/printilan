@@ -93,17 +93,155 @@ abstract class Strings {
     Locale('id')
   ];
 
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @askRegister.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an Account?'**
+  String get askRegister;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @chooseLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Language'**
+  String get chooseLanguage;
+
+  /// No description provided for @chooseTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Theme'**
+  String get chooseTheme;
+
+  /// No description provided for @confirmPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat Password'**
+  String get confirmPassword;
+
   /// No description provided for @dashboard.
   ///
   /// In en, this message translates to:
   /// **'Dashboard'**
   String get dashboard;
 
-  /// No description provided for @about.
+  /// No description provided for @email.
   ///
   /// In en, this message translates to:
-  /// **'About'**
-  String get about;
+  /// **'Email'**
+  String get email;
+
+  /// No description provided for @errorEmptyField.
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t be empty'**
+  String get errorEmptyField;
+
+  /// No description provided for @errorInvalidEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is not valid'**
+  String get errorInvalidEmail;
+
+  /// No description provided for @errorNoData.
+  ///
+  /// In en, this message translates to:
+  /// **'No data'**
+  String get errorNoData;
+
+  /// No description provided for @errorPasswordLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get errorPasswordLength;
+
+  /// No description provided for @errorPasswordNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Password doesn\'t match'**
+  String get errorPasswordNotMatch;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In en, this message translates to:
+  /// **'Get Started'**
+  String get getStarted;
+
+  /// No description provided for @login.
+  ///
+  /// In en, this message translates to:
+  /// **'Login'**
+  String get login;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @logoutDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to logout from the app?'**
+  String get logoutDesc;
+
+  /// No description provided for @name.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get name;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phone;
+
+  /// No description provided for @pleaseWait.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Wait...'**
+  String get pleaseWait;
+
+  /// No description provided for @register.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get register;
+
+  /// No description provided for @select.
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get select;
 
   /// No description provided for @selectDate.
   ///
@@ -117,113 +255,11 @@ abstract class Strings {
   /// **'Choose Time'**
   String get selectTime;
 
-  /// No description provided for @select.
-  ///
-  /// In en, this message translates to:
-  /// **'Select'**
-  String get select;
-
-  /// No description provided for @cancel.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get cancel;
-
-  /// No description provided for @pleaseWait.
-  ///
-  /// In en, this message translates to:
-  /// **'Please Wait...'**
-  String get pleaseWait;
-
-  /// No description provided for @login.
-  ///
-  /// In en, this message translates to:
-  /// **'Login'**
-  String get login;
-
-  /// No description provided for @name.
-  ///
-  /// In en, this message translates to:
-  /// **'Name'**
-  String get name;
-
-  /// No description provided for @address.
-  ///
-  /// In en, this message translates to:
-  /// **'Address'**
-  String get address;
-
-  /// No description provided for @phone.
-  ///
-  /// In en, this message translates to:
-  /// **'Phone'**
-  String get phone;
-
-  /// No description provided for @email.
-  ///
-  /// In en, this message translates to:
-  /// **'Email'**
-  String get email;
-
-  /// No description provided for @password.
-  ///
-  /// In en, this message translates to:
-  /// **'Password'**
-  String get password;
-
-  /// No description provided for @register.
-  ///
-  /// In en, this message translates to:
-  /// **'Register'**
-  String get register;
-
-  /// No description provided for @askRegister.
-  ///
-  /// In en, this message translates to:
-  /// **'Don\'t have an Account?'**
-  String get askRegister;
-
-  /// No description provided for @errorInvalidEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Email is not valid'**
-  String get errorInvalidEmail;
-
-  /// No description provided for @errorEmptyField.
-  ///
-  /// In en, this message translates to:
-  /// **'Can\'t be empty'**
-  String get errorEmptyField;
-
-  /// No description provided for @errorPasswordLength.
-  ///
-  /// In en, this message translates to:
-  /// **'Password must be at least 6 characters'**
-  String get errorPasswordLength;
-
-  /// No description provided for @confirmPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Repeat Password'**
-  String get confirmPassword;
-
-  /// No description provided for @errorPasswordNotMatch.
-  ///
-  /// In en, this message translates to:
-  /// **'Password doesn\'t match'**
-  String get errorPasswordNotMatch;
-
   /// No description provided for @settings.
   ///
   /// In en, this message translates to:
   /// **'Settings'**
   String get settings;
-
-  /// No description provided for @themeLight.
-  ///
-  /// In en, this message translates to:
-  /// **'Theme Light'**
-  String get themeLight;
 
   /// No description provided for @themeDark.
   ///
@@ -231,41 +267,23 @@ abstract class Strings {
   /// **'Theme Dark'**
   String get themeDark;
 
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme Light'**
+  String get themeLight;
+
   /// No description provided for @themeSystem.
   ///
   /// In en, this message translates to:
   /// **'Theme System'**
   String get themeSystem;
 
-  /// No description provided for @chooseTheme.
+  /// No description provided for @welcomeTo.
   ///
   /// In en, this message translates to:
-  /// **'Choose Theme'**
-  String get chooseTheme;
-
-  /// No description provided for @chooseLanguage.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose Language'**
-  String get chooseLanguage;
-
-  /// No description provided for @errorNoData.
-  ///
-  /// In en, this message translates to:
-  /// **'No data'**
-  String get errorNoData;
-
-  /// No description provided for @logout.
-  ///
-  /// In en, this message translates to:
-  /// **'Logout'**
-  String get logout;
-
-  /// No description provided for @logoutDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Do you want to logout from the app?'**
-  String get logoutDesc;
+  /// **'Welcome to'**
+  String get welcomeTo;
 
   /// No description provided for @yes.
   ///

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +47,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Parent(
       child: RefreshIndicator(
-        color: Theme.of(context).extension<LzyctColors>()!.pink,
+        color: Theme.of(context).extension<LzyctColors>()!.blue,
         backgroundColor: Theme.of(context).extension<LzyctColors>()!.background,
         onRefresh: () {
           _currentPage = 1;
@@ -81,18 +82,18 @@ class _DashboardPageState extends State<DashboardPage> {
                             ),
                             child: Row(
                               children: [
-                                // ClipRRect(
-                                //   borderRadius: BorderRadius.only(
-                                //     topLeft: Radius.circular(Dimens.space8),
-                                //     bottomLeft: Radius.circular(Dimens.space8),
-                                //   ),
-                                //   child: CachedNetworkImage(
-                                //     imageUrl: _users[index].avatar ?? "",
-                                //     width: Dimens.profilePicture,
-                                //     height: Dimens.profilePicture,
-                                //     fit: BoxFit.cover,
-                                //   ),
-                                // ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(Dimens.space8),
+                                    bottomLeft: Radius.circular(Dimens.space8),
+                                  ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: _users[index].avatar ?? "",
+                                    width: Dimens.profilePicture,
+                                    height: Dimens.profilePicture,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                                 SpacerH(value: Dimens.space16),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

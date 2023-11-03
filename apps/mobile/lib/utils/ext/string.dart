@@ -67,7 +67,7 @@ extension StringExtension on String {
 
       showToastWidget(
         Toast(
-          bgColor: Theme.of(context).extension<LzyctColors>()!.pink,
+          bgColor: Theme.of(context).extension<LzyctColors>()!.blue,
           icon: Icons.info,
           message: message,
           textColor: Colors.white,

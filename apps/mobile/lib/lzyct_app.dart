@@ -18,7 +18,6 @@ class LzyctApp extends StatelessWidget {
       ),
     );
 
-    log.d(const String.fromEnvironment('ENV'));
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<SettingsCubit>()..getActiveTheme()),
@@ -29,7 +28,7 @@ class LzyctApp extends StatelessWidget {
           /// Set screen size to make responsive
           /// Almost all device
 
-          designSize: const Size(375, 667),
+          designSize: const Size(360, 756),
           minTextAdapt: true,
           splitScreenMode: true,
           builder: (context, __) {
@@ -62,7 +61,8 @@ class LzyctApp extends StatelessWidget {
                 darkTheme: themeDark(context),
                 locale: Locale(data.type ?? "en"),
                 supportedLocales: L10n.all,
-                themeMode: data.activeTheme.mode,
+                // themeMode: data.activeTheme.mode,
+                themeMode: ThemeMode.light,
               ),
             );
           },
