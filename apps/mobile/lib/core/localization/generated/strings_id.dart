@@ -102,4 +102,13 @@ class StringsId extends Strings {
 
   @override
   String get yes => 'Ya';
+
+  @override
+  String get history => 'Riwayat';
+
+  @override
+  String get wallet => 'Dompet';
+
+  @override
+  String get profile => 'Profil';
 }

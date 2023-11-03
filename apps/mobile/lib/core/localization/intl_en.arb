@@ -31,5 +31,8 @@
   "themeLight": "Theme Light",
   "themeSystem": "Theme System",
   "welcomeTo": "Welcome to",
-  "yes": "Yes"
+  "yes": "Yes",
+  "history": "History",
+  "wallet": "Wallet",
+  "profile": "Profile"
 }

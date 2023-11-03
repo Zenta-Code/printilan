@@ -6,13 +6,6 @@ import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/features/users/users.dart';
 import 'package:sky_printing/utils/ext/text_theme.dart';
 
-///*********************************************
-/// Created by ukietux on 25/08/20 with ♥
-/// (>’_’)> email : hey.mudassir@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
-
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 

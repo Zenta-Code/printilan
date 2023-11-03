@@ -102,4 +102,13 @@ class StringsEn extends Strings {
 
   @override
   String get yes => 'Yes';
+
+  @override
+  String get history => 'History';
+
+  @override
+  String get wallet => 'Wallet';
+
+  @override
+  String get profile => 'Profile';
 }

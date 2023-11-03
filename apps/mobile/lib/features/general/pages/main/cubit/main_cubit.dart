@@ -27,34 +27,21 @@ class MainCubit extends Cubit<MainState> {
       DataHelper(
         title: Strings.of(context)!.dashboard,
         isSelected: true,
+        icon: Icons.home,
       ),
       DataHelper(
-        title: Strings.of(context)!.settings,
+        title: Strings.of(context)!.history,
+        icon: Icons.history,
       ),
       DataHelper(
-        title: Strings.of(context)!.logout,
+        title: Strings.of(context)!.wallet,
+        icon: Icons.wallet,
+      ),
+      DataHelper(
+        title: Strings.of(context)!.profile,
+        icon: Icons.person_2_outlined,
       ),
     ];
     updateIndex(_currentIndex);
-  }
-
-  bool onBackPressed(
-    BuildContext context,
-    GlobalKey<ScaffoldState> scaffoldState,
-  ) {
-    if (dataMenus[_currentIndex].title == Strings.of(context)!.dashboard) {
-      return true;
-    } else {
-      if (scaffoldState.currentState!.isEndDrawerOpen) {
-        //hide navigation drawer
-        scaffoldState.currentState!.openDrawer();
-      } else {
-        for (final menu in dataMenus) {
-          menu.isSelected = menu.title == Strings.of(context)!.dashboard;
-        }
-      }
-
-      return false;
-    }
   }
 }
