@@ -74,7 +74,7 @@ class _TextFState extends State<TextF> {
       child: Container(
         decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
-            side: BorderSide(width: 1, color: Color(0xFFD9D9D9)),
+            side: const BorderSide(width: 1, color: Color(0xFFD9D9D9)),
             borderRadius: BorderRadius.circular(8),
           ),
         ),
@@ -135,22 +135,22 @@ class _TextFState extends State<TextF> {
               focusedErrorBorder: OutlineInputBorder(
                 gapPadding: 0,
                 borderRadius: BorderRadius.circular(Dimens.space4),
-                borderSide: BorderSide(
-                  color: Colors.red!,
+                borderSide: const BorderSide(
+                  color: Colors.red,
                 ),
               ),
               errorBorder: OutlineInputBorder(
                 gapPadding: 0,
                 borderRadius: BorderRadius.circular(Dimens.space4),
-                borderSide: BorderSide(
-                  color: Colors.red!,
+                borderSide: const BorderSide(
+                  color: Colors.red,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 gapPadding: 0,
                 borderRadius: BorderRadius.circular(Dimens.space4),
-                borderSide: BorderSide(
-                  color: Colors.blue!,
+                borderSide: const BorderSide(
+                  color: Colors.blue,
                 ),
               ),
             ),

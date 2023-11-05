@@ -15,7 +15,7 @@ class SplashScreenPage extends StatelessWidget {
           vertical: 32.h,
           horizontal: 24.w,
         ),
-        color: Color.fromARGB(255, 235, 244, 253),
+        color: const Color.fromARGB(255, 235, 244, 253),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

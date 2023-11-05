@@ -19,7 +19,7 @@ void main() {
           DeviceOrientation.portraitUp,
           DeviceOrientation.portraitDown,
         ],
-      ).then((_) => runApp(LzyctApp()));
+      ).then((_) => runApp(const LzyctApp()));
     },
     (error, stackTrace) async {
       FirebaseCrashlytics.instance.recordError(error, stackTrace);

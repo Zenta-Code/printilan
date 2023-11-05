@@ -11,7 +11,7 @@ void main() {
       WidgetsFlutterBinding.ensureInitialized();
 
       await serviceLocator();
-      runApp(LzyctApp());
+      runApp(const LzyctApp());
     },
     (error, stackTrace) async {
       log.e('Main Error $error', stackTrace: stackTrace);

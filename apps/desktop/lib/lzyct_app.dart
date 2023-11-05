@@ -9,6 +9,8 @@ import 'package:sky_printing_admin/module/settings/cubit/settings_cubit.dart';
 import 'package:sky_printing_admin/utils/helper/helper.dart';
 
 class LzyctApp extends StatelessWidget {
+  const LzyctApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

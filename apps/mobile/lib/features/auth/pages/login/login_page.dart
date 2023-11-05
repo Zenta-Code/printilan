@@ -197,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           context.pushNamed(Routes.register.name);
                         },
-                        child: Text("Register"),
+                        child: const Text("Register"),
                       ),
                     ],
                   ),

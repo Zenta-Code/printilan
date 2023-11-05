@@ -10,6 +10,8 @@ import 'package:sky_printing/features/features.dart';
 import 'package:sky_printing/utils/helper/helper.dart';
 
 class LzyctApp extends StatelessWidget {
+  const LzyctApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(

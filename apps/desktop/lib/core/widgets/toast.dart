@@ -17,7 +17,7 @@ class Toast extends StatelessWidget {
             color: bgColor,
             borderRadius: BorderRadius.circular(15),
           ),
-          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -25,11 +25,11 @@ class Toast extends StatelessWidget {
                 icon,
                 color: textColor,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 4 ,
               ),
               Container(
-                constraints: BoxConstraints(maxWidth: 250),
+                constraints: const BoxConstraints(maxWidth: 250),
                 child: Text(
                   message!,
                   style: Theme.of(context)

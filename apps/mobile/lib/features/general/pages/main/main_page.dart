@@ -42,13 +42,13 @@ class _MainPageState extends State<MainPage>
             canvasColor: Colors.black,
           ),
           child: BottomNavBar(
-            child: widget.child,
             dataMenu: context.read<MainCubit>().dataMenus,
             currentIndex: (int index) {
               if (index != 2) {
                 context.read<MainCubit>().updateIndex(index);
               }
             },
+            child: widget.child,
           ),
         ),
       ),

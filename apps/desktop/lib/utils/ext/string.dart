@@ -28,7 +28,7 @@ extension StringExtension on String {
         position: ToastPosition.top,
         duration: const Duration(seconds: 3),
       );
-    } catch (e, stackTrace) {
+    } catch (e) {
       log.e("error $e");
     }
   }
@@ -52,7 +52,7 @@ extension StringExtension on String {
         position: ToastPosition.top,
         duration: const Duration(seconds: 3),
       );
-    } catch (e, stackTrace) {
+    } catch (e) {
       log.e("$e");
     }
   }
@@ -74,7 +74,7 @@ extension StringExtension on String {
         position: ToastPosition.top,
         duration: const Duration(seconds: 3),
       );
-    } catch (e, stackTrace) {
+    } catch (e) {
       log.e("$e");
     }
   }
