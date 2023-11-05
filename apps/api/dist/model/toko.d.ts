@@ -4,24 +4,24 @@ export declare const Toko: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
-    address?: string | undefined;
     phone?: string | undefined;
+    address?: string | undefined;
     ownerId?: string | undefined;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
-    address?: string | undefined;
     phone?: string | undefined;
+    address?: string | undefined;
     ownerId?: string | undefined;
 }> & {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
-    address?: string | undefined;
     phone?: string | undefined;
+    address?: string | undefined;
     ownerId?: string | undefined;
 } & {
     _id: mongoose.Types.ObjectId;
@@ -32,24 +32,24 @@ export declare const Toko: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
-    address?: string | undefined;
     phone?: string | undefined;
+    address?: string | undefined;
     ownerId?: string | undefined;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
-    address?: string | undefined;
     phone?: string | undefined;
+    address?: string | undefined;
     ownerId?: string | undefined;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
-    address?: string | undefined;
     phone?: string | undefined;
+    address?: string | undefined;
     ownerId?: string | undefined;
 }> & {
     _id: mongoose.Types.ObjectId;

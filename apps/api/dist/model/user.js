@@ -39,7 +39,7 @@ var UserSchema = new mongoose_1.Schema({
     phone: String,
     role: {
         type: String,
-        "enum": ["maintainer", "seller", "user"]
+        "enum": ["maintainer", "seller", "customer"]
     }
 }, {
     timestamps: true

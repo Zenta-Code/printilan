@@ -6,13 +6,13 @@ export declare const TokoTypes: z.ZodObject<{
     ownerId: z.ZodString;
 }, "strip", z.ZodTypeAny, {
     name: string;
-    address: string;
     phone: string;
+    address: string;
     ownerId: string;
 }, {
     name: string;
-    address: string;
     phone: string;
+    address: string;
     ownerId: string;
 }>;
 //# sourceMappingURL=toko.d.ts.map

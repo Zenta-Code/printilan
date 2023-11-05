@@ -4,6 +4,7 @@ export declare const User: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    phone?: string | undefined;
     address?: {
         street?: string | undefined;
         city?: string | undefined;
@@ -11,15 +12,15 @@ export declare const User: mongoose.Model<{
         country?: string | undefined;
         zipCode?: string | undefined;
     } | undefined;
-    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    role?: "maintainer" | "seller" | "user" | undefined;
+    role?: "maintainer" | "seller" | "customer" | undefined;
 }, {}, {}, {}, mongoose.Document<unknown, {}, {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    phone?: string | undefined;
     address?: {
         street?: string | undefined;
         city?: string | undefined;
@@ -27,15 +28,15 @@ export declare const User: mongoose.Model<{
         country?: string | undefined;
         zipCode?: string | undefined;
     } | undefined;
-    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    role?: "maintainer" | "seller" | "user" | undefined;
+    role?: "maintainer" | "seller" | "customer" | undefined;
 }> & {
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    phone?: string | undefined;
     address?: {
         street?: string | undefined;
         city?: string | undefined;
@@ -43,10 +44,9 @@ export declare const User: mongoose.Model<{
         country?: string | undefined;
         zipCode?: string | undefined;
     } | undefined;
-    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    role?: "maintainer" | "seller" | "user" | undefined;
+    role?: "maintainer" | "seller" | "customer" | undefined;
 } & {
     _id: mongoose.Types.ObjectId;
 }, mongoose.Schema<any, mongoose.Model<any, any, any, any, any, any>, {}, {}, {}, {}, {
@@ -56,6 +56,7 @@ export declare const User: mongoose.Model<{
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    phone?: string | undefined;
     address?: {
         street?: string | undefined;
         city?: string | undefined;
@@ -63,15 +64,15 @@ export declare const User: mongoose.Model<{
         country?: string | undefined;
         zipCode?: string | undefined;
     } | undefined;
-    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    role?: "maintainer" | "seller" | "user" | undefined;
+    role?: "maintainer" | "seller" | "customer" | undefined;
 }, mongoose.Document<unknown, {}, mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    phone?: string | undefined;
     address?: {
         street?: string | undefined;
         city?: string | undefined;
@@ -79,15 +80,15 @@ export declare const User: mongoose.Model<{
         country?: string | undefined;
         zipCode?: string | undefined;
     } | undefined;
-    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    role?: "maintainer" | "seller" | "user" | undefined;
+    role?: "maintainer" | "seller" | "customer" | undefined;
 }>> & mongoose.FlatRecord<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
     name?: string | undefined;
+    phone?: string | undefined;
     address?: {
         street?: string | undefined;
         city?: string | undefined;
@@ -95,10 +96,9 @@ export declare const User: mongoose.Model<{
         country?: string | undefined;
         zipCode?: string | undefined;
     } | undefined;
-    phone?: string | undefined;
     email?: string | undefined;
     password?: string | undefined;
-    role?: "maintainer" | "seller" | "user" | undefined;
+    role?: "maintainer" | "seller" | "customer" | undefined;
 }> & {
     _id: mongoose.Types.ObjectId;
 }>>;
