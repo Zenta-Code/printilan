@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:sky_printing_admin/core/core.dart';
+import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/dependencies_injection.dart';
-import 'package:sky_printing_admin/features/features.dart';
+import 'package:sky_printing_admin/module/login/cubit/auth_cubit.dart';
 import 'package:sky_printing_admin/module/settings/cubit/settings_cubit.dart';
 import 'package:sky_printing_admin/utils/helper/helper.dart';
 
@@ -17,39 +19,58 @@ class LzyctApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => sl<SettingsCubit>()..getActiveTheme()),
         BlocProvider(create: (_) => sl<AuthCubit>()),
+        BlocProvider(create: (_) => sl<ThemeBloc>()),
       ],
       child: OKToast(
-        child: BlocBuilder<SettingsCubit, DataHelper>(
-          builder: (context, data) {
+        child: BlocBuilder<ThemeBloc, ThemeState>(
+          builder: (context, state) {
             AppRoute.setStream(context);
             context.read<AuthCubit>().logout();
-            return MaterialApp.router(
-              routerConfig: AppRoute.router,
+            final router = AppRoute.router;
+            return FluentApp.router(
+              title: Constants.get.appName,
+              themeMode: state.mode,
+              debugShowCheckedModeBanner: false,
+              color: Colors.blue,
+              darkTheme: FluentThemeData(
+                brightness: Brightness.dark,
+                accentColor: Colors.blue,
+                visualDensity: VisualDensity.standard,
+                focusTheme: FocusThemeData(
+                  glowFactor: is10footScreen(context) ? 2.0 : 0.0,
+                ),
+              ),
+              theme: FluentThemeData(
+                accentColor: Colors.blue,
+                visualDensity: VisualDensity.standard,
+                focusTheme: FocusThemeData(
+                  glowFactor: is10footScreen(context) ? 2.0 : 0.0,
+                ),
+              ),
+              locale: state.locale,
+              builder: (context, child) {
+                return Directionality(
+                  textDirection: state.textDirection,
+                  child: NavigationPaneTheme(
+                    data: NavigationPaneThemeData(
+                      backgroundColor: state.windowEffect !=
+                              flutter_acrylic.WindowEffect.disabled
+                          ? Colors.transparent
+                          : null,
+                    ),
+                    child: child!,
+                  ),
+                );
+              },
+              routeInformationParser: router.routeInformationParser,
+              routerDelegate: router.routerDelegate,
+              routeInformationProvider: router.routeInformationProvider,
               localizationsDelegates: const [
                 Strings.delegate,
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
-              debugShowCheckedModeBanner: false,
-              builder: (BuildContext context, Widget? child) {
-                final MediaQueryData data = MediaQuery.of(context);
-
-                return MediaQuery(
-                  data: data.copyWith(
-                    textScaleFactor: 1,
-                    alwaysUse24HourFormat: true,
-                  ),
-                  child: child!,
-                );
-              },
-              title: Constants.get.appName,
-              theme: ThemeData.light(),
-              darkTheme: ThemeData.dark(),
-              locale: Locale(data.type ?? "en"),
-              supportedLocales: L10n.all,
-              themeMode: data.activeTheme.mode,
-              // themeMode: ThemeMode.light,
             );
           },
         ),

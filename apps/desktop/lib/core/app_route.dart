@@ -2,10 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sky_printing_admin/dependencies_injection.dart';
-import 'package:sky_printing_admin/features/features.dart';
+import 'package:sky_printing_admin/dependencies_injection.dart'; 
+import 'package:sky_printing_admin/module/login/cubit/auth_cubit.dart';
+import 'package:sky_printing_admin/module/login/login_page.dart';
 import 'package:sky_printing_admin/module/main/cubit/main_cubit.dart';
 import 'package:sky_printing_admin/module/main/main_page.dart';
+import 'package:sky_printing_admin/module/register/cubit/register_cubit.dart';
+import 'package:sky_printing_admin/module/register/register_page.dart';
 import 'package:sky_printing_admin/utils/utils.dart';
 
 import '../module/dashboard/dashboard_page.dart';

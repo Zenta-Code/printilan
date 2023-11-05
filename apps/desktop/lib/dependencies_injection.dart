@@ -1,8 +1,14 @@
 import 'package:get_it/get_it.dart';
 import 'package:sky_printing_admin/core/core.dart';
-import 'package:sky_printing_admin/features/features.dart';
+import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
+import 'package:sky_printing_admin/module/login/cubit/auth_cubit.dart';
+import 'package:sky_printing_admin/module/login/usecase/post_login.dart';
 import 'package:sky_printing_admin/module/main/cubit/main_cubit.dart';
+import 'package:sky_printing_admin/module/register/cubit/register_cubit.dart';
+import 'package:sky_printing_admin/module/register/usecase/post_register.dart';
 import 'package:sky_printing_admin/module/settings/cubit/settings_cubit.dart';
+import 'package:sky_printing_admin/repos/auth_repository.dart';
+import 'package:sky_printing_admin/repos/src/auth_remote_datasources.dart';
 import 'package:sky_printing_admin/utils/utils.dart';
 
 GetIt sl = GetIt.instance;
@@ -21,6 +27,7 @@ Future<void> serviceLocator({
   _repositories();
   _useCase();
   _cubit();
+  _bloc();
   if (isHiveEnable) {
     await _initHiveBoxes(
       isUnitTest: isUnitTest,
@@ -90,5 +97,11 @@ void _cubit() {
   );
   sl.registerFactory(
     () => MainCubit(),
+  );
+}
+
+void _bloc() {
+  sl.registerFactory<ThemeBloc>(
+    () => ThemeBloc(),
   );
 }

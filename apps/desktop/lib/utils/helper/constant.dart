@@ -3,7 +3,7 @@ class Constants {
 
   static Constants get = Constants._();
 
-  String appName = "Sky Printing";
+  String appName = "Sky Printing Admin Dashboard";
   String english = "English";
   String bahasa = "Bahasa";
 
