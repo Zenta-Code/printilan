@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 var dotenv_1 = __importDefault(require("dotenv"));
 var mongoose_1 = __importDefault(require("mongoose"));
+var seeder_1 = require("./seeders/seeder");
 var server_1 = require("./server");
 dotenv_1["default"].config();
 var port = process.env.PORT || 3001;
@@ -19,9 +20,10 @@ catch (error) {
 mongoose_1["default"].connection.on("error", function (err) {
     console.error(err);
 });
-mongoose_1["default"].connection.on("connecting", function () {
-    console.log("Connected to MongoDB");
-});
-server.listen(port, function () {
-    console.log("API Ready at http://localhost:".concat(port, " \uD83D\uDE80"));
+mongoose_1["default"].connection.on("connected", function () {
+    console.log("Connected to MongoDB 🚀");
+    server.listen(port, function () {
+        console.log("API Ready at http://localhost:".concat(port, " \uD83D\uDE80"));
+    });
+    (0, seeder_1.Seeder)();
 });

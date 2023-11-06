@@ -8,7 +8,7 @@ import { BundleController } from "./controller/bundle";
 import { DocumentController } from "./controller/document";
 import { OrderController } from "./controller/order";
 import { PrintController } from "./controller/print";
-import { TokoController } from "./controller/toko";
+import { StoreController } from "./controller/store";
 import { UserController } from "./controller/user";
 
 export const createServer: () => Express = () => {
@@ -20,17 +20,12 @@ export const createServer: () => Express = () => {
     .use(json())
     .use(cors());
   const root = new RouteGroup("/", express.Router());
-  root.group("/", (app) => {
-    app.get("/", (req, res) => {
-      res.json({
-        message: "🚀",
-      });
-    });
+  root.group("/", (app) => { 
     app.group("/user", (app) => {
       UserController({ route: app });
     });
-    app.group("/toko", (app) => {
-      TokoController({ route: app });
+    app.group("/store", (app) => {
+      StoreController({ route: app });
     });
     app.group("/print", (app) => {
       PrintController({ route: app });

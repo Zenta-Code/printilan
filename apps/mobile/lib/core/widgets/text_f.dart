@@ -75,7 +75,7 @@ class _TextFState extends State<TextF> {
         decoration: ShapeDecoration(
           color: Theme.of(context).extension<LzyctColors>()!.background!,
           shape: RoundedRectangleBorder(
-            side: BorderSide(width: 1, color: Color(0xFFD9D9D9)),
+            side: const BorderSide(width: 1, color: Color(0xFFD9D9D9)),
             borderRadius: BorderRadius.circular(8),
           ),
         ),

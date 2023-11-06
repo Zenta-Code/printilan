@@ -40,7 +40,9 @@ void _repositories() {
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(sl(), sl()),
   );
-  sl.registerLazySingleton<UsersRepository>(() => UsersRepositoryImpl(sl()));
+  sl.registerLazySingleton<UsersRepository>(
+    () => UsersRepositoryImpl(sl()),
+  );
 }
 
 /// Register dataSources
@@ -55,20 +57,36 @@ void _dataSources() {
 
 void _useCase() {
   /// Auth
-  sl.registerLazySingleton(() => PostLogin(sl()));
-  sl.registerLazySingleton(() => PostRegister(sl()));
+  sl.registerLazySingleton(
+    () => PostLogin(sl()),
+  );
+  sl.registerLazySingleton(
+    () => PostRegister(sl()),
+  );
 
   /// Users
-  sl.registerLazySingleton(() => GetUsers(sl()));
+  sl.registerLazySingleton(
+    () => GetUsers(sl()),
+  );
 }
 
 void _cubit() {
   /// Auth
-  sl.registerFactory(() => RegisterCubit(sl()));
-  sl.registerFactory(() => AuthCubit(sl()));
+  sl.registerFactory(
+    () => RegisterCubit(sl()),
+  );
+  sl.registerFactory(
+    () => AuthCubit(sl()),
+  );
 
   /// Users
-  sl.registerFactory(() => UsersCubit(sl()));
-  sl.registerFactory(() => SettingsCubit());
-  sl.registerFactory(() => MainCubit());
+  sl.registerFactory(
+    () => UsersCubit(sl()),
+  );
+  sl.registerFactory(
+    () => SettingsCubit(),
+  );
+  sl.registerFactory(
+    () => MainCubit(),
+  );
 }

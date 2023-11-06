@@ -6,14 +6,14 @@ export declare const PrintTypes: z.ZodObject<{
     status: z.ZodBoolean;
     price: z.ZodNumber;
 }, "strip", z.ZodTypeAny, {
-    price: number;
     type: string;
+    price: number;
     status: boolean;
     brand: string;
     model: string;
 }, {
-    price: number;
     type: string;
+    price: number;
     status: boolean;
     brand: string;
     model: string;

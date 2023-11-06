@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { Seeder } from "./seeders/seeder";
 import { createServer } from "./server";
 dotenv.config();
 const port = process.env.PORT || 3001;
@@ -16,10 +17,12 @@ mongoose.connection.on("error", (err) => {
   console.error(err);
 });
 
-mongoose.connection.on("connecting", () => {
-  console.log("Connected to MongoDB");
-});
+mongoose.connection.on("connected", () => {
+  console.log("Connected to MongoDB 🚀");
 
-server.listen(port, () => {
-  console.log(`API Ready at http://localhost:${port} 🚀`);
+  server.listen(port, () => {
+    console.log(`API Ready at http://localhost:${port} 🚀`);
+  });
+
+  Seeder();
 });

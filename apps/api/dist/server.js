@@ -14,7 +14,7 @@ var bundle_1 = require("./controller/bundle");
 var document_1 = require("./controller/document");
 var order_1 = require("./controller/order");
 var print_1 = require("./controller/print");
-var toko_1 = require("./controller/toko");
+var store_1 = require("./controller/store");
 var user_1 = require("./controller/user");
 var createServer = function () {
     var app = (0, express_1["default"])();
@@ -26,16 +26,11 @@ var createServer = function () {
         .use((0, cors_1["default"])());
     var root = new express_route_grouping_1["default"]("/", express_1["default"].Router());
     root.group("/", function (app) {
-        app.get("/", function (req, res) {
-            res.json({
-                message: "🚀"
-            });
-        });
         app.group("/user", function (app) {
             (0, user_1.UserController)({ route: app });
         });
-        app.group("/toko", function (app) {
-            (0, toko_1.TokoController)({ route: app });
+        app.group("/store", function (app) {
+            (0, store_1.StoreController)({ route: app });
         });
         app.group("/print", function (app) {
             (0, print_1.PrintController)({ route: app });

@@ -3,8 +3,8 @@ export declare const Print: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    price?: number | undefined;
     type?: string | undefined;
+    price?: number | undefined;
     status?: boolean | undefined;
     brand?: string | undefined;
     model?: string | undefined;
@@ -12,8 +12,8 @@ export declare const Print: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    price?: number | undefined;
     type?: string | undefined;
+    price?: number | undefined;
     status?: boolean | undefined;
     brand?: string | undefined;
     model?: string | undefined;
@@ -21,8 +21,8 @@ export declare const Print: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    price?: number | undefined;
     type?: string | undefined;
+    price?: number | undefined;
     status?: boolean | undefined;
     brand?: string | undefined;
     model?: string | undefined;
@@ -34,8 +34,8 @@ export declare const Print: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    price?: number | undefined;
     type?: string | undefined;
+    price?: number | undefined;
     status?: boolean | undefined;
     brand?: string | undefined;
     model?: string | undefined;
@@ -43,8 +43,8 @@ export declare const Print: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    price?: number | undefined;
     type?: string | undefined;
+    price?: number | undefined;
     status?: boolean | undefined;
     brand?: string | undefined;
     model?: string | undefined;
@@ -52,8 +52,8 @@ export declare const Print: mongoose.Model<{
     createdAt: NativeDate;
     updatedAt: NativeDate;
 } & {
-    price?: number | undefined;
     type?: string | undefined;
+    price?: number | undefined;
     status?: boolean | undefined;
     brand?: string | undefined;
     model?: string | undefined;

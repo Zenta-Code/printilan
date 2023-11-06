@@ -8,15 +8,15 @@ export declare const UserTypes: z.ZodObject<{
     role: z.ZodEnum<["maintainer", "seller", "user"]>;
 }, "strip", z.ZodTypeAny, {
     name: string;
-    address: string;
     phone: string;
+    address: string;
     email: string;
     password: string;
     role: "maintainer" | "seller" | "user";
 }, {
     name: string;
-    address: string;
     phone: string;
+    address: string;
     email: string;
     password: string;
     role: "maintainer" | "seller" | "user";
