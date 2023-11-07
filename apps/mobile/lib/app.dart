@@ -27,14 +27,10 @@ class MyApp extends StatelessWidget {
       ],
       child: OKToast(
         child: ScreenUtilInit(
-          /// Set screen size to make responsive
-          /// Almost all device
-
           designSize: const Size(360, 756),
           minTextAdapt: true,
           splitScreenMode: true,
           builder: (context, __) {
-            /// Pass context to appRoute
             AppRoute.setStream(context);
 
             return BlocBuilder<SettingsCubit, DataHelper>(
@@ -63,7 +59,6 @@ class MyApp extends StatelessWidget {
                 darkTheme: themeDark(context),
                 locale: Locale(data.type ?? "en"),
                 supportedLocales: L10n.all,
-                // themeMode: data.activeTheme.mode,
                 themeMode: ThemeMode.light,
               ),
             );

@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/features/features.dart';
 
 part 'users_cubit.freezed.dart';
@@ -23,17 +22,19 @@ class UsersCubit extends Cubit<UsersState> {
     if (usersParams.page == 1) {
       emit(const _Loading());
     }
+    final Users dummy = Users();
+    emit(_Success(dummy));
 
-    final data = await _getUser.call(usersParams);
-    data.fold(
-      (l) {
-        if (l is ServerFailure) {
-          emit(_Failure(l.message ?? ""));
-        } else if (l is NoDataFailure) {
-          emit(const _Empty());
-        }
-      },
-      (r) => emit(_Success(r)),
-    );
+    // final data = await _getUser.call(usersParams);
+    // data.fold(
+    //   (l) {
+    //     if (l is ServerFailure) {
+    //       emit(_Failure(l.message ?? ""));
+    //     } else if (l is NoDataFailure) {
+    //       emit(const _Empty());
+    //     }
+    //   },
+    //   (r) => emit(_Success(r)),
+    // );
   }
 }
