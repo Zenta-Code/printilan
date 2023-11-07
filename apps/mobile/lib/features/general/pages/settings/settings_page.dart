@@ -4,13 +4,7 @@ import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/dependencies_injection.dart';
 import 'package:sky_printing/features/features.dart';
 import 'package:sky_printing/utils/utils.dart';
-
-///*********************************************
-/// Created by ukietux on 25/08/20 with ♥
-/// (>’_’)> email : hey.mudassir@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
+ 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 

@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/dependencies_injection.dart';
 import 'package:sky_printing/features/features.dart';
+import 'package:sky_printing/features/users/pages/dashboard/cubit/users_cubit.dart';
+import 'package:sky_printing/features/users/pages/dashboard/dashboard_page.dart';
 import 'package:sky_printing/utils/utils.dart';
 
 enum Routes {
@@ -86,19 +88,12 @@ class AppRoute {
       final bool isLoginPage = state.matchedLocation == Routes.login.path ||
           state.matchedLocation == Routes.register.path;
 
-      ///  Check if not login
-      ///  if current page is login page we don't need to direct user
-      ///  but if not we must direct user to login page
-
       if (!((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
           false)) {
         return isLoginPage ? null : Routes.splashScreen.path;
       } else if (state.matchedLocation == Routes.splashScreen.path) {
         return Routes.dashboard.path;
       }
-
-      /// Check if already login and in login page
-      /// we should direct user to main page
 
       if (isLoginPage &&
           ((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??

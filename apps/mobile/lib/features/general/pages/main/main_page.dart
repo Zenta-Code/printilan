@@ -4,12 +4,6 @@ import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/features/features.dart';
 import 'package:sky_printing/features/general/pages/main/bottom_nav_bar.dart';
 
-///*********************************************
-/// Created by ukietux on 25/08/20 with ♥
-/// (>’_’)> email : hey.mudassir@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
 class MainPage extends StatefulWidget {
   const MainPage({super.key, required this.child});
 

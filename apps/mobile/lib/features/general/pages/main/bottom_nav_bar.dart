@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sky_printing/features/general/pages/main/cubit/main_cubit.dart';
-import 'package:sky_printing/utils/helper/data_helper.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sky_printing/core/core.dart';
+import 'package:sky_printing/utils/utils.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -24,7 +24,12 @@ class BottomNavBar extends StatelessWidget {
         showUnselectedLabels: false,
         currentIndex: dataMenu.indexWhere((element) => element.isSelected),
         onTap: (int index) {
-          context.read<MainCubit>().updateIndex(index);
+          log.e("Current Index Bottom Nav Bar: $index");
+          currentIndex(index);
+          _selectPage(dataMenu[index].title!, index, context);
+          log.f('Selected ${dataMenu[index].title!}');
+          log.e(
+              "New Index Bottom Nav Bar: ${dataMenu.indexWhere((element) => element.isSelected)}");
         },
         items: dataMenu
             .map((e) => BottomNavigationBarItem(
@@ -34,5 +39,14 @@ class BottomNavBar extends StatelessWidget {
             .toList(),
       ),
     );
+  }
+
+  void _selectPage(String title, int index, BuildContext context) {
+    currentIndex(index);
+    if (title == Strings.of(context)!.dashboard) {
+      context.goNamed(Routes.dashboard.name);
+    } else if (title == Strings.of(context)!.settings) {
+      context.goNamed(Routes.settings.name);
+    }
   }
 }
