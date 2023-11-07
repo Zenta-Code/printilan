@@ -4,7 +4,7 @@
 
 This concept we've design early.
 
-![Alt text](https://raw.githubusercontent.com/Zenta-Code/printilan/main/images/base-concepts.png "Base Concepts")
+![Alt text](https://raw.githubusercontent.com/Zenta-Code/printilan/main/images/base-concepts.svg "Base Concepts")
 
 ### Build
 

@@ -19,20 +19,20 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     final appTheme = context.watch<ThemeBloc>();
     return ScaffoldPage.scrollable(
-      header: PageHeader(
+      header: const PageHeader(
         title: Text('Dashboard'),
       ),
       children: [
-        Card(
+        const Card(
           child: Text('Dashboard Page'),
         ),
-        Card(
+        const Card(
           child: Text('Dashboard Page'),
         ),
-        Card(
+        const Card(
           child: Text('Dashboard Page'),
         ),
-        Card(
+        const Card(
           child: Text('Dashboard Page'),
         ),
         GridView.builder(
@@ -44,7 +44,7 @@ class _DashboardPageState extends State<DashboardPage> {
             mainAxisSpacing: 4,
           ),
           itemBuilder: (context, index) {
-            return Card(
+            return const Card(
               child: Text('Dashboard Page'),
             );
           },

@@ -12,7 +12,7 @@ extension StringExtension on String {
     try {
       final message = isEmpty ? "error" : this;
       InfoBar(
-        title: Text('Error'),
+        title: const Text('Error'),
         content: Text(message),
         severity: InfoBarSeverity.error,
       );
@@ -25,7 +25,7 @@ extension StringExtension on String {
     try {
       final message = isEmpty ? "success" : this;
       InfoBar(
-        title: Text('Success'),
+        title: const Text('Success'),
         content: Text(message),
         severity: InfoBarSeverity.success,
       );
@@ -38,7 +38,7 @@ extension StringExtension on String {
     try {
       final message = isEmpty ? "loading" : this;
       InfoBar(
-        title: Text('Loading'),
+        title: const Text('Loading'),
         content: Text(message),
         severity: InfoBarSeverity.warning,
       );

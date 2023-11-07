@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
       ),
       content: Row(
         children: [
-          Container(
+          SizedBox(
             width: leftPanelWidth,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
                   'Welcome to',
                   style: theme.typography.subtitle,
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   Constants.get.appName,
                   style: theme.typography.title,
@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
               ],
             ),
           ),
-          Container(
+          SizedBox(
             width: rightPanelWidth,
             child: Card(
               child: Padding(
@@ -130,7 +130,7 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
                           style: theme.typography.body,
                         ),
                         SizedBox(height: height * 0.01),
-                        Divider(),
+                        const Divider(),
                         SizedBox(height: height * 0.01),
                         InfoLabel(
                           label: 'Email',
@@ -194,7 +194,7 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
                                     );
                               }
                             },
-                            child: Text('Sign In'),
+                            child: const Text('Sign In'),
                           ),
                         ),
                       ],

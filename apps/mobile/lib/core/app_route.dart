@@ -13,7 +13,7 @@ import 'package:sky_printing/modules/settings/ui/pages/settings_page.dart';
 import 'package:sky_printing/modules/splashscreen/ui/pages/splash_screen_page.dart';
 import 'package:sky_printing/modules/users/domain/usecases/get_users.dart';
 import 'package:sky_printing/modules/users/pages/dashboard/cubit/users_cubit.dart';
-import 'package:sky_printing/modules/users/pages/dashboard/dashboard_page.dart';
+import 'package:sky_printing/modules/users/pages/dashboard/dashboard1_page.dart';
 import 'package:sky_printing/utils/utils.dart';
 
 enum Routes {

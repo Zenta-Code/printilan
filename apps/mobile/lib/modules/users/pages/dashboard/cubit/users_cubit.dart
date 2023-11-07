@@ -23,8 +23,8 @@ class UsersCubit extends Cubit<UsersState> {
     if (usersParams.page == 1) {
       emit(const _Loading());
     }
-    final Users dummy = Users();
-    emit(_Success(dummy));
+    const Users dummy = Users();
+    emit(const _Success(dummy));
 
     // final data = await _getUser.call(usersParams);
     // data.fold(
