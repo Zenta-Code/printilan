@@ -6,7 +6,7 @@ import 'package:sky_printing/utils/utils.dart';
 typedef ResponseConverter<T> = T Function(dynamic response);
 
 class DioClient with MainBoxMixin, FirebaseCrashLogger {
-  final String _baseUrl = 'http://192.168.247.129:3000';
+  final String _baseUrl = 'http://192.168.247.169:3000';
   // final String _baseUrl = "https://reqres.in";
 
   String? _auth;

@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/dependencies_injection.dart';
-import 'package:sky_printing/features/login/ui/cubit/auth_cubit.dart'; 
-import 'package:sky_printing/features/login/ui/pages/login_page.dart'; 
-import 'package:sky_printing/features/register/ui/cubit/register_cubit.dart';
-import 'package:sky_printing/features/register/ui/pages/register_page.dart';
-import 'package:sky_printing/features/main/ui/cubit/main_cubit.dart';
-import 'package:sky_printing/features/main/ui/pages/main_page.dart';
-import 'package:sky_printing/features/settings/ui/pages/settings_page.dart';
-import 'package:sky_printing/features/splashscreen/ui/pages/splash_screen_page.dart';
-import 'package:sky_printing/features/users/domain/usecases/get_users.dart';
-import 'package:sky_printing/features/users/pages/dashboard/cubit/users_cubit.dart';
-import 'package:sky_printing/features/users/pages/dashboard/dashboard_page.dart';
+import 'package:sky_printing/modules/login/ui/cubit/auth_cubit.dart';
+import 'package:sky_printing/modules/login/ui/pages/login_page.dart';
+import 'package:sky_printing/modules/main/ui/cubit/main_cubit.dart';
+import 'package:sky_printing/modules/main/ui/pages/main_page.dart';
+import 'package:sky_printing/modules/register/ui/cubit/register_cubit.dart';
+import 'package:sky_printing/modules/register/ui/pages/register_page.dart';
+import 'package:sky_printing/modules/settings/ui/pages/settings_page.dart';
+import 'package:sky_printing/modules/splashscreen/ui/pages/splash_screen_page.dart';
+import 'package:sky_printing/modules/users/domain/usecases/get_users.dart';
+import 'package:sky_printing/modules/users/pages/dashboard/cubit/users_cubit.dart';
+import 'package:sky_printing/modules/users/pages/dashboard/dashboard_page.dart';
 import 'package:sky_printing/utils/utils.dart';
 
 enum Routes {

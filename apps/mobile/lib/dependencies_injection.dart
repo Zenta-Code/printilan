@@ -1,19 +1,22 @@
 import 'package:get_it/get_it.dart';
 import 'package:sky_printing/core/core.dart';
-import 'package:sky_printing/features/auth/data/datasources/auth_remote_datasources.dart';
-import 'package:sky_printing/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:sky_printing/features/auth/domain/repositories/auth_repository.dart';
-import 'package:sky_printing/features/login/domain/usecases/post_login.dart';
-import 'package:sky_printing/features/login/ui/cubit/auth_cubit.dart';
-import 'package:sky_printing/features/main/ui/cubit/main_cubit.dart';
-import 'package:sky_printing/features/register/domain/usecases/post_register.dart';
-import 'package:sky_printing/features/register/ui/cubit/register_cubit.dart';
-import 'package:sky_printing/features/settings/ui/cubit/settings_cubit.dart';
-import 'package:sky_printing/features/users/data/datasources/user_remote_datasources.dart';
-import 'package:sky_printing/features/users/data/repositories/users_repository_impl.dart';
-import 'package:sky_printing/features/users/domain/repositories/users_repository.dart';
-import 'package:sky_printing/features/users/domain/usecases/get_users.dart';
-import 'package:sky_printing/features/users/pages/dashboard/cubit/users_cubit.dart';
+import 'package:sky_printing/modules/login/data/repos/login_repository_impl.dart';
+import 'package:sky_printing/modules/login/data/sources/login_remote_datasource.dart';
+import 'package:sky_printing/modules/login/domain/repos/login_repository.dart';
+import 'package:sky_printing/modules/login/domain/usecases/post_login.dart';
+import 'package:sky_printing/modules/login/ui/cubit/auth_cubit.dart';
+import 'package:sky_printing/modules/main/ui/cubit/main_cubit.dart';
+import 'package:sky_printing/modules/register/data/repos/register_repository_impl.dart';
+import 'package:sky_printing/modules/register/data/sources/register_remote_datasource.dart';
+import 'package:sky_printing/modules/register/domain/repos/register_repository.dart';
+import 'package:sky_printing/modules/register/domain/usecases/post_register.dart';
+import 'package:sky_printing/modules/register/ui/cubit/register_cubit.dart';
+import 'package:sky_printing/modules/settings/ui/cubit/settings_cubit.dart';
+import 'package:sky_printing/modules/users/data/datasources/user_remote_datasources.dart';
+import 'package:sky_printing/modules/users/data/repositories/users_repository_impl.dart';
+import 'package:sky_printing/modules/users/domain/repositories/users_repository.dart';
+import 'package:sky_printing/modules/users/domain/usecases/get_users.dart';
+import 'package:sky_printing/modules/users/pages/dashboard/cubit/users_cubit.dart';
 import 'package:sky_printing/utils/utils.dart';
 
 GetIt sl = GetIt.instance;
@@ -50,9 +53,18 @@ Future<void> _initHiveBoxes({
 
 /// Register repositories
 void _repositories() {
-  sl.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(sl(), sl()),
+  // sl.registerLazySingleton<AuthRepository>(
+  //   () => AuthRepositoryImpl(sl(), sl()),
+  // );
+
+  sl.registerLazySingleton<LoginRepository>(
+    () => LoginRepositoryImpl(sl(), sl()),
   );
+
+  sl.registerLazySingleton<RegisterRepository>(
+    () => RegisterRepositoryImpl(sl(), sl()),
+  );
+
   sl.registerLazySingleton<UsersRepository>(
     () => UsersRepositoryImpl(sl()),
   );
@@ -60,8 +72,11 @@ void _repositories() {
 
 /// Register dataSources
 void _dataSources() {
-  sl.registerLazySingleton<AuthRemoteDatasource>(
-    () => AuthRemoteDatasourceImpl(sl()),
+  sl.registerLazySingleton<LoginRemoteDatasource>(
+    () => LoginRemoteDatasourceImpl(sl()),
+  );
+  sl.registerLazySingleton<RegisterRemoteDataSource>(
+    () => RegisterRemoteDataSourceImpl(sl()),
   );
   sl.registerLazySingleton<UsersRemoteDatasource>(
     () => UsersRemoteDatasourceImpl(sl()),
