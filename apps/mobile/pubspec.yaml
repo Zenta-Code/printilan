@@ -18,6 +18,21 @@ dependencies:
   # State Management
   flutter_bloc: ^8.1.3
 
+  # dateFormat
+  intl: ^0.18.1
+
+  # Database
+  floor: ^1.4.2
+
+  # Make Request to API
+  retrofit: ^3.0.1
+
+  # Hooks
+  flutter_hooks: ^0.18.3
+
+  # Cached Image
+  cached_network_image: ^3.2.0
+
   # Functional Programming
   dartz: ^0.10.1
 
