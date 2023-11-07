@@ -6,11 +6,28 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Parent(
-      child: Center(
-        child: Text("Dashboard Page"),
+    return Parent(
+      child: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: Text('Dashboard'),
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                ListTile(
+                  title: Text('Print'),
+                  onTap: () => Navigator.pushNamed(context, '/print'),
+                ),
+                ListTile(
+                  title: Text('Settings'),
+                  onTap: () => Navigator.pushNamed(context, '/settings'),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 }
-  

@@ -20,15 +20,16 @@ flutter build apk
 
 ### Develop
 
-To develop all apps and packages, run the following command:
+To develop all apps and packages, read readme.md in each folder.
 
-```
-git clone https://github.com/Zenta-Code/printilan.git
-cd my-turborepo
-pnpm i
-cd apps/mobile
-flutter pub get
-flutter run $device
-new terminal
-pnpm dev
-```
+#### API
+
+[API](https://github.com/Zenta-Code/sky_printing/blob/main/apps/desktop/README.md)
+
+#### Desktop
+
+[Desktop](https://github.com/Zenta-Code/sky_printing/blob/main/apps/desktop/README.md)
+
+#### Mobile
+
+[Mobile](https://github.com/Zenta-Code/sky_printing/blob/main/apps/mobile/README.md)
