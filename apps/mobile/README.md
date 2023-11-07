@@ -1,3 +1,3 @@
 # Sky Printing Mobile
 
-Client Side for customer
+Client side for customer 
