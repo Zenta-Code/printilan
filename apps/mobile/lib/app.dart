@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/dependencies_injection.dart';
-import 'package:sky_printing/features/features.dart';
+import 'package:sky_printing/features/login/ui/cubit/auth_cubit.dart'; 
+import 'package:sky_printing/features/settings/ui/cubit/settings_cubit.dart';
 import 'package:sky_printing/utils/helper/helper.dart';
 
 class MyApp extends StatelessWidget {

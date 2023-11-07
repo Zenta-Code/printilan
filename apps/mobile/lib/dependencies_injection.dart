@@ -1,6 +1,18 @@
 import 'package:get_it/get_it.dart';
 import 'package:sky_printing/core/core.dart';
-import 'package:sky_printing/features/features.dart';
+import 'package:sky_printing/features/auth/data/datasources/auth_remote_datasources.dart';
+import 'package:sky_printing/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:sky_printing/features/auth/domain/repositories/auth_repository.dart';
+import 'package:sky_printing/features/login/domain/usecases/post_login.dart';
+import 'package:sky_printing/features/login/ui/cubit/auth_cubit.dart';
+import 'package:sky_printing/features/main/ui/cubit/main_cubit.dart';
+import 'package:sky_printing/features/register/domain/usecases/post_register.dart';
+import 'package:sky_printing/features/register/ui/cubit/register_cubit.dart';
+import 'package:sky_printing/features/settings/ui/cubit/settings_cubit.dart';
+import 'package:sky_printing/features/users/data/datasources/user_remote_datasources.dart';
+import 'package:sky_printing/features/users/data/repositories/users_repository_impl.dart';
+import 'package:sky_printing/features/users/domain/repositories/users_repository.dart';
+import 'package:sky_printing/features/users/domain/usecases/get_users.dart';
 import 'package:sky_printing/features/users/pages/dashboard/cubit/users_cubit.dart';
 import 'package:sky_printing/utils/utils.dart';
 

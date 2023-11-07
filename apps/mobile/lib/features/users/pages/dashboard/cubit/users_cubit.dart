@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sky_printing/features/features.dart';
+import 'package:sky_printing/features/users/domain/entities/users.dart';
+import 'package:sky_printing/features/users/domain/usecases/get_users.dart';
 
 part 'users_cubit.freezed.dart';
 part 'users_state.dart';
