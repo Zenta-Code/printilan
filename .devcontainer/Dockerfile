@@ -11,7 +11,4 @@ ENV PUB_CACHE=/home/codespace/.pub-cache
 ENV PATH=$PATH:/home/codespace/.pub-cache/bin
 
 RUN git clone https://github.com/flutter/flutte && \
-    /home/codespace/flutter/bin/flutter config --enable-web && \
-    /home/codespace/flutter/bin/flutter doctor -v && \
-    /home/codespace/flutter/bin/flutter precache
-    
+    /home/codespace/flutter/bin/flutter config --enable-web &&  
