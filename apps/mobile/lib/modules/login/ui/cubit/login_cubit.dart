@@ -4,11 +4,11 @@ import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/modules/login/domain/usecases/post_login.dart';
 import 'package:sky_printing/utils/utils.dart';
 
-part 'auth_cubit.freezed.dart';
-part 'auth_state.dart';
+part 'login_cubit.freezed.dart';
+part 'login_state.dart';
 
-class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this._postLogin) : super(const _Loading());
+class LoginCubit extends Cubit<LoginState> {
+  LoginCubit(this._postLogin) : super(const _Loading());
 
   final PostLogin _postLogin;
 

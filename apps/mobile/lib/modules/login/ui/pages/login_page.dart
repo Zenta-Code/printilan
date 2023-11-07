@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/modules/login/domain/usecases/post_login.dart';
-import 'package:sky_printing/modules/login/ui/cubit/auth_cubit.dart';
+import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
 import 'package:sky_printing/utils/ext/ext.dart';
 
 class LoginPage extends StatefulWidget {
@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Parent(
-      child: BlocListener<AuthCubit, AuthState>(
+      child: BlocListener<LoginCubit, LoginState>(
         listener: (_, state) {
           state.whenOrNull(
             loading: () => context.show(),
@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                                         : null)
                                     : null,
                               ),
-                              BlocBuilder<AuthCubit, AuthState>(
+                              BlocBuilder<LoginCubit, LoginState>(
                                 builder: (_, state) {
                                   return TextF(
                                     autofillHints: const [
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                                           ?.color,
                                     ),
                                     obscureText: context
-                                            .read<AuthCubit>()
+                                            .read<LoginCubit>()
                                             .isPasswordHide ??
                                         false,
                                     hintText: '••••••••••••',
@@ -143,11 +143,11 @@ class _LoginPageState extends State<LoginPage> {
                                       padding: EdgeInsets.zero,
                                       constraints: const BoxConstraints(),
                                       onPressed: () => context
-                                          .read<AuthCubit>()
+                                          .read<LoginCubit>()
                                           .showHidePassword(),
                                       icon: Icon(
                                         (context
-                                                    .read<AuthCubit>()
+                                                    .read<LoginCubit>()
                                                     .isPasswordHide ??
                                                 false)
                                             ? Icons.visibility_off
@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   if (_keyForm.currentState?.validate() ??
                                       false) {
-                                    context.read<AuthCubit>().login(
+                                    context.read<LoginCubit>().login(
                                           LoginParams(
                                             email: _conEmail.text,
                                             password: _conPassword.text,
