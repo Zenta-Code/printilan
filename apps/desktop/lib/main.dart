@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
 import 'package:sky_printing_admin/dependencies_injection.dart';
-import 'package:sky_printing_admin/lzyct_app.dart';
+import 'package:sky_printing_admin/app.dart';
 import 'package:sky_printing_admin/utils/utils.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:window_manager/window_manager.dart';
@@ -34,7 +34,7 @@ void main() {
         await windowManager.setSkipTaskbar(false);
       });
       await serviceLocator();
-      runApp(const LzyctApp());
+      runApp(const MyApp());
     },
     (error, stackTrace) async {
       log.e('Main Error $error', stackTrace: stackTrace);

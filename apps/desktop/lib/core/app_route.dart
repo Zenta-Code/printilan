@@ -2,13 +2,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sky_printing_admin/dependencies_injection.dart'; 
+import 'package:sky_printing_admin/dependencies_injection.dart';
 import 'package:sky_printing_admin/module/login/cubit/auth_cubit.dart';
 import 'package:sky_printing_admin/module/login/login_page.dart';
 import 'package:sky_printing_admin/module/main/cubit/main_cubit.dart';
 import 'package:sky_printing_admin/module/main/main_page.dart';
+import 'package:sky_printing_admin/module/order/order_page.dart';
 import 'package:sky_printing_admin/module/register/cubit/register_cubit.dart';
 import 'package:sky_printing_admin/module/register/register_page.dart';
+import 'package:sky_printing_admin/module/settings/settings.dart';
 import 'package:sky_printing_admin/utils/utils.dart';
 
 import '../module/dashboard/dashboard_page.dart';
@@ -18,12 +20,12 @@ enum Routes {
 
   /// Home Page
   dashboard("/dashboard"),
+  order("/order"),
   settings("/settings"),
 
   // Auth Page
   login("/auth/login"),
-  register("/auth/register"),
-  ;
+  register("/auth/register");
 
   const Routes(this.path);
 
@@ -64,9 +66,20 @@ class AppRoute {
         ),
         routes: [
           GoRoute(
-              path: Routes.dashboard.path,
-              name: Routes.dashboard.name,
-              builder: (_, __) => const DashboardPage()),
+            path: Routes.dashboard.path,
+            name: Routes.dashboard.name,
+            builder: (_, __) => DashboardPage(),
+          ),
+          GoRoute(
+            path: Routes.order.path,
+            name: Routes.order.name,
+            builder: (_, __) => OrderPage(),
+          ),
+          GoRoute(
+            path: Routes.settings.path,
+            name: Routes.settings.name,
+            builder: (_, __) => SettingsPage(),
+          ),
         ],
       ),
     ],

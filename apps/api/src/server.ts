@@ -3,14 +3,15 @@ import cors from "cors";
 import express, { Express } from "express";
 import listEndpoint from "express-list-endpoints";
 import RouteGroup from "express-route-grouping";
+import { createServer as http } from "http";
 import morgan from "morgan";
+import { Server } from "socket.io";
 import { BundleController } from "./controller/bundle";
 import { DocumentController } from "./controller/document";
 import { OrderController } from "./controller/order";
 import { PrintController } from "./controller/print";
 import { StoreController } from "./controller/store";
 import { UserController } from "./controller/user";
-
 export const createServer: () => Express = () => {
   const app: Express = express();
   app
@@ -19,8 +20,13 @@ export const createServer: () => Express = () => {
     .use(urlencoded({ extended: true }))
     .use(json())
     .use(cors());
+
   const root = new RouteGroup("/", express.Router());
-  root.group("/", (app) => { 
+
+  root.group("/", (app) => {
+    app.get("/ping", (req, res) => {
+      res.send("pong 💣");
+    });
     app.group("/user", (app) => {
       UserController({ route: app });
     });
@@ -42,14 +48,8 @@ export const createServer: () => Express = () => {
   });
 
   app.use("/api", root.export());
-  try {
-    console.log("====== API ENDPOINTS ======\n");
-    console.log(listEndpoint(app));
-    console.log("\n============================\n");
-  } catch (e) {
-    console.log("Error listing endpoints\n");
-    console.log(e);
-  }
+
+
 
   return app;
 };

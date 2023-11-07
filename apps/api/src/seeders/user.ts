@@ -57,7 +57,7 @@ export const UserSeeder = async () => {
       { $set: customer },
       { upsert: true, new: true }
     );
-    console.log("Customer: 🚀", user, "\n");
+    // console.log("Customer: 🚀", user, "\n");
   }
 
   for (const store of storeRole) {
@@ -67,8 +67,7 @@ export const UserSeeder = async () => {
       { $set: store },
       { upsert: true, new: true }
     );
-    console.log("Store: 🚀", user, "\n");
+    // console.log("Store: 🚀", user, "\n");
   }
-
   console.log("User seed done! ✅");
 };

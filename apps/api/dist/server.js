@@ -7,7 +7,6 @@ exports.createServer = void 0;
 var body_parser_1 = require("body-parser");
 var cors_1 = __importDefault(require("cors"));
 var express_1 = __importDefault(require("express"));
-var express_list_endpoints_1 = __importDefault(require("express-list-endpoints"));
 var express_route_grouping_1 = __importDefault(require("express-route-grouping"));
 var morgan_1 = __importDefault(require("morgan"));
 var bundle_1 = require("./controller/bundle");
@@ -26,6 +25,9 @@ var createServer = function () {
         .use((0, cors_1["default"])());
     var root = new express_route_grouping_1["default"]("/", express_1["default"].Router());
     root.group("/", function (app) {
+        app.get("/ping", function (req, res) {
+            res.send("pong 💣");
+        });
         app.group("/user", function (app) {
             (0, user_1.UserController)({ route: app });
         });
@@ -46,15 +48,6 @@ var createServer = function () {
         });
     });
     app.use("/api", root["export"]());
-    try {
-        console.log("====== API ENDPOINTS ======\n");
-        console.log((0, express_list_endpoints_1["default"])(app));
-        console.log("\n============================\n");
-    }
-    catch (e) {
-        console.log("Error listing endpoints\n");
-        console.log(e);
-    }
     return app;
 };
 exports.createServer = createServer;

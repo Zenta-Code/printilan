@@ -3,7 +3,6 @@ import { User } from "../model/user";
 
 export const StoreSeeder = async () => {
   const user = await User.findOne({ email: "rahmat@gmail.com" });
-  console.log(user);
   const store = await Store.findOneAndUpdate(
     { name: "Matt's Store" },
     {
@@ -22,6 +21,6 @@ export const StoreSeeder = async () => {
     },
     { upsert: true, new: true }
   );
-  console.log("Store: 🚀", store, "\n");
+  // console.log("Store: 🚀", store, "\n");
   console.log("Store seed done! ✅");
 };

@@ -46,7 +46,6 @@ var StoreSeeder = function () { return __awaiter(void 0, void 0, void 0, functio
             case 0: return [4 /*yield*/, user_1.User.findOne({ email: "rahmat@gmail.com" })];
             case 1:
                 user = _a.sent();
-                console.log(user);
                 return [4 /*yield*/, store_1.Store.findOneAndUpdate({ name: "Matt's Store" }, {
                         $set: {
                             name: "Matt's Store",
@@ -63,7 +62,7 @@ var StoreSeeder = function () { return __awaiter(void 0, void 0, void 0, functio
                     }, { upsert: true, "new": true })];
             case 2:
                 store = _a.sent();
-                console.log("Store: 🚀", store, "\n");
+                // console.log("Store: 🚀", store, "\n");
                 console.log("Store seed done! ✅");
                 return [2 /*return*/];
         }

@@ -1,12 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing_admin/core/core.dart';
+import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/dependencies_injection.dart';
 import 'package:sky_printing_admin/module/settings/cubit/settings_cubit.dart';
 import 'package:sky_printing_admin/utils/utils.dart';
- 
+
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+  const SettingsPage({
+    super.key,
+  });
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
@@ -26,67 +29,39 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Parent(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(Dimens.space16),
-          child: Column(
-            children: [
-              DropDown<ActiveTheme>(
-                key: const Key("dropdown_theme"),
-                hint: Strings.of(context)!.chooseTheme,
-                value: _selectedTheme,
-                prefixIcon: const Icon(Icons.light),
-                items: ActiveTheme.values
-                    .map(
-                      (data) => DropdownMenuItem(
-                        value: data,
-                        child: Text(
-                          _getThemeName(data, context),
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  /// Reload theme
-                  context
-                      .read<SettingsCubit>()
-                      .updateTheme(value ?? ActiveTheme.system);
-                },
-              ),
-
-              /// Language
-              DropDown<DataHelper>(
-                key: const Key("dropdown_language"),
-                hint: Strings.of(context)!.chooseLanguage,
-                value: _selectedLanguage,
-                prefixIcon: const Icon(Icons.language_outlined),
-                items: _listLanguage
-                    .map(
-                      (data) => DropdownMenuItem(
-                        value: data,
-                        child: Text(
-                          data.title ?? "-",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (DataHelper? value) async {
-                  _selectedLanguage = value ?? _listLanguage[0];
-
-                  /// Reload theme
-                  if (!mounted) return;
-                  context
-                      .read<SettingsCubit>()
-                      .updateLanguage(value?.type ?? "en");
-                },
-              ),
-            ],
-          ),
-        ),
+    final appTheme = context.watch<ThemeBloc>();
+    return ScaffoldPage.scrollable(
+      header: PageHeader(
+        title: Text('Settings'),
       ),
+      children: [
+        Card(
+          child: Text('Settings Page'),
+        ),
+        Card(
+          child: Text('Settings Page'),
+        ),
+        Card(
+          child: Text('Settings Page'),
+        ),
+        Card(
+          child: Text('Settings Page'),
+        ),
+        GridView.builder(
+          shrinkWrap: true,
+          itemCount: 100,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4,
+            crossAxisSpacing: 4,
+            mainAxisSpacing: 4,
+          ),
+          itemBuilder: (context, index) {
+            return Card(
+              child: Text('Settings Page'),
+            );
+          },
+        ),
+      ],
     );
   }
 

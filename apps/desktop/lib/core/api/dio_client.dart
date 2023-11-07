@@ -8,7 +8,7 @@ typedef ResponseConverter<T> = T Function(dynamic response);
 class DioClient with MainBoxMixin {
   // final String _baseUrl = 'http://192.168.34.169:3001';
   // final String _baseUrl = "https://reqres.in";
-  final String _baseUrl = "http://localhost:3001";
+  final String _baseUrl = "http://localhost:3000";
 
   String? _auth;
   bool _isUnitTest = false;

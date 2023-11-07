@@ -12,7 +12,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       : super(ThemeState(
           color: systemAccentColor,
           mode: ThemeMode.system,
-          displayMode: PaneDisplayMode.auto,
+          displayMode: PaneDisplayMode.compact,
           indicator: NavigationIndicators.sticky,
           windowEffect: WindowEffect.disabled,
           textDirection: TextDirection.ltr,

@@ -104,7 +104,6 @@ var UserSeeder = function () { return __awaiter(void 0, void 0, void 0, function
                 return [4 /*yield*/, user_1.User.findOneAndUpdate({ email: customer.email }, { $set: customer }, { upsert: true, "new": true })];
             case 2:
                 user = _b.sent();
-                console.log("Customer: 🚀", user, "\n");
                 _b.label = 3;
             case 3:
                 _i++;
@@ -119,7 +118,6 @@ var UserSeeder = function () { return __awaiter(void 0, void 0, void 0, function
                 return [4 /*yield*/, user_1.User.findOneAndUpdate({ email: store.email }, { $set: store }, { upsert: true, "new": true })];
             case 6:
                 user = _b.sent();
-                console.log("Store: 🚀", user, "\n");
                 _b.label = 7;
             case 7:
                 _a++;
