@@ -3,8 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing/core/core.dart';
-import 'package:sky_printing/modules/users/pages/dashboard/cubit/users_cubit.dart';
-import 'package:sky_printing/modules/users/users.dart';
+import 'package:sky_printing/modules/users/domain/entities/users.dart';
+import 'package:sky_printing/modules/users/domain/usecases/get_users.dart';
+import 'package:sky_printing/modules/users/pages/dashboard/cubit/users_cubit.dart'; 
 import 'package:sky_printing/utils/ext/text_theme.dart';
 
 class Dashboard1Page extends StatefulWidget {

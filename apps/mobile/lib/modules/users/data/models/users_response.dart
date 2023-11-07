@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sky_printing/modules/users/users.dart';
+import 'package:sky_printing/modules/users/domain/entities/users.dart'; 
 
 part 'users_response.freezed.dart';
 part 'users_response.g.dart';
