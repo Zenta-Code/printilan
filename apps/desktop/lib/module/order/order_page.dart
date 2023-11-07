@@ -41,7 +41,7 @@ class _OrderPageState extends State<OrderPage> {
   }
 
   void joinRoom() {
-    final String room = 'room1';
+    const String room = 'room1';
     socket.emit('join', room);
   }
 
@@ -82,7 +82,7 @@ class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldPage.scrollable(
-      header: PageHeader(
+      header: const PageHeader(
         title: Text('Order'),
       ),
       children: [
@@ -90,10 +90,10 @@ class _OrderPageState extends State<OrderPage> {
           child: Text(msgList.toString()),
         ),
         Center(
-          child: FilledButton(child: Text('Join'), onPressed: joinRoom),
+          child: FilledButton(onPressed: joinRoom, child: const Text('Join')),
         ),
         Center(
-          child: FilledButton(child: Text('Connect'), onPressed: connect),
+          child: FilledButton(onPressed: connect, child: const Text('Connect')),
         ),
         Center(
           child: TextFormBox(
@@ -102,10 +102,10 @@ class _OrderPageState extends State<OrderPage> {
         ),
         Center(
           child: FilledButton(
-              child: Text('Send'), onPressed: () => sendMsg(_controller.text)),
+              child: const Text('Send'), onPressed: () => sendMsg(_controller.text)),
         ),
         Center(
-          child: FilledButton(child: Text('Disconnect'), onPressed: disconnect),
+          child: FilledButton(onPressed: disconnect, child: const Text('Disconnect')),
         ),
       ],
     );

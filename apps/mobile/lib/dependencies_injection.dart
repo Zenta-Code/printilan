@@ -4,7 +4,7 @@ import 'package:sky_printing/modules/login/data/repos/login_repository_impl.dart
 import 'package:sky_printing/modules/login/data/sources/login_remote_datasource.dart';
 import 'package:sky_printing/modules/login/domain/repos/login_repository.dart';
 import 'package:sky_printing/modules/login/domain/usecases/post_login.dart';
-import 'package:sky_printing/modules/login/ui/cubit/auth_cubit.dart';
+import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
 import 'package:sky_printing/modules/main/ui/cubit/main_cubit.dart';
 import 'package:sky_printing/modules/register/data/repos/register_repository_impl.dart';
 import 'package:sky_printing/modules/register/data/sources/register_remote_datasource.dart';
@@ -52,11 +52,7 @@ Future<void> _initHiveBoxes({
 }
 
 /// Register repositories
-void _repositories() {
-  // sl.registerLazySingleton<AuthRepository>(
-  //   () => AuthRepositoryImpl(sl(), sl()),
-  // );
-
+void _repositories() { 
   sl.registerLazySingleton<LoginRepository>(
     () => LoginRepositoryImpl(sl(), sl()),
   );
@@ -104,7 +100,7 @@ void _cubit() {
     () => RegisterCubit(sl()),
   );
   sl.registerFactory(
-    () => AuthCubit(sl()),
+    () => LoginCubit(sl()),
   );
 
   /// Users

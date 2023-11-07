@@ -4,7 +4,7 @@
 
 This concept we've design early.
 
-![Alt text](https://raw.githubusercontent.com/Zenta-Code/printilan/main/images/base-concepts.png "Base Concepts")
+![Alt text](https://raw.githubusercontent.com/Zenta-Code/sky_printing/dc5499dfc3426b2e39b4501d9a05bda69157d479/images/base-concepts.svg "Base Concepts")
 
 ### Build
 
@@ -20,15 +20,16 @@ flutter build apk
 
 ### Develop
 
-To develop all apps and packages, run the following command:
+To develop all apps and packages, read readme.md in each folder.
 
-```
-git clone https://github.com/Zenta-Code/printilan.git
-cd my-turborepo
-pnpm i
-cd apps/mobile
-flutter pub get
-flutter run $device
-new terminal
-pnpm dev
-```
+#### API
+
+[API](https://github.com/Zenta-Code/sky_printing/blob/main/apps/desktop/README.md)
+
+#### Desktop
+
+[Desktop](https://github.com/Zenta-Code/sky_printing/blob/main/apps/desktop/README.md)
+
+#### Mobile
+
+[Mobile](https://github.com/Zenta-Code/sky_printing/blob/main/apps/mobile/README.md)

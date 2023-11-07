@@ -7,14 +7,14 @@ import 'package:sky_printing/modules/users/pages/dashboard/cubit/users_cubit.dar
 import 'package:sky_printing/modules/users/users.dart';
 import 'package:sky_printing/utils/ext/text_theme.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+class Dashboard1Page extends StatefulWidget {
+  const Dashboard1Page({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  State<Dashboard1Page> createState() => _Dashboard1PageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _Dashboard1PageState extends State<Dashboard1Page> {
   final ScrollController _scrollController = ScrollController();
   int _currentPage = 1;
   int _lastPage = 1;

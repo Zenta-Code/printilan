@@ -22,7 +22,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
     DataHelper(title: Constants.get.english, type: "en"),
     DataHelper(title: Constants.get.bahasa, type: "id"),
   ];
-  late DataHelper _selectedLanguage =
+  late final DataHelper _selectedLanguage =
       (getData(MainBoxKeys.locale) ?? "en") == "en"
           ? _listLanguage[0]
           : _listLanguage[1];
@@ -31,20 +31,20 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
   Widget build(BuildContext context) {
     final appTheme = context.watch<ThemeBloc>();
     return ScaffoldPage.scrollable(
-      header: PageHeader(
+      header: const PageHeader(
         title: Text('Settings'),
       ),
       children: [
-        Card(
+        const Card(
           child: Text('Settings Page'),
         ),
-        Card(
+        const Card(
           child: Text('Settings Page'),
         ),
-        Card(
+        const Card(
           child: Text('Settings Page'),
         ),
-        Card(
+        const Card(
           child: Text('Settings Page'),
         ),
         GridView.builder(
@@ -56,7 +56,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
             mainAxisSpacing: 4,
           ),
           itemBuilder: (context, index) {
-            return Card(
+            return const Card(
               child: Text('Settings Page'),
             );
           },

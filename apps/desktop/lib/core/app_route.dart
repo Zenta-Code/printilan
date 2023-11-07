@@ -68,17 +68,17 @@ class AppRoute {
           GoRoute(
             path: Routes.dashboard.path,
             name: Routes.dashboard.name,
-            builder: (_, __) => DashboardPage(),
+            builder: (_, __) => const DashboardPage(),
           ),
           GoRoute(
             path: Routes.order.path,
             name: Routes.order.name,
-            builder: (_, __) => OrderPage(),
+            builder: (_, __) => const OrderPage(),
           ),
           GoRoute(
             path: Routes.settings.path,
             name: Routes.settings.name,
-            builder: (_, __) => SettingsPage(),
+            builder: (_, __) => const SettingsPage(),
           ),
         ],
       ),

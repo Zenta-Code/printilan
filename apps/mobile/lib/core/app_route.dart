@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/dependencies_injection.dart';
-import 'package:sky_printing/modules/login/ui/cubit/auth_cubit.dart';
+import 'package:sky_printing/modules/dashboard/ui/pages/dashboard_page.dart';
+import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
 import 'package:sky_printing/modules/login/ui/pages/login_page.dart';
 import 'package:sky_printing/modules/main/ui/cubit/main_cubit.dart';
 import 'package:sky_printing/modules/main/ui/pages/main_page.dart';
@@ -13,7 +14,6 @@ import 'package:sky_printing/modules/settings/ui/pages/settings_page.dart';
 import 'package:sky_printing/modules/splashscreen/ui/pages/splash_screen_page.dart';
 import 'package:sky_printing/modules/users/domain/usecases/get_users.dart';
 import 'package:sky_printing/modules/users/pages/dashboard/cubit/users_cubit.dart';
-import 'package:sky_printing/modules/users/pages/dashboard/dashboard_page.dart';
 import 'package:sky_printing/utils/utils.dart';
 
 enum Routes {
@@ -24,9 +24,9 @@ enum Routes {
   dashboard("/dashboard"),
   settings("/settings"),
 
-  // Auth Page
-  login("/auth/login"),
-  register("/auth/register"),
+  // Login Page
+  login("/login/login"),
+  register("/login/register"),
   ;
 
   const Routes(this.path);
@@ -91,7 +91,7 @@ class AppRoute {
     initialLocation: Routes.root.path,
     routerNeglect: true,
     debugLogDiagnostics: kDebugMode,
-    refreshListenable: GoRouterRefreshStream(context.read<AuthCubit>().stream),
+    refreshListenable: GoRouterRefreshStream(context.read<LoginCubit>().stream),
     redirect: (_, GoRouterState state) {
       final bool isLoginPage = state.matchedLocation == Routes.login.path ||
           state.matchedLocation == Routes.register.path;

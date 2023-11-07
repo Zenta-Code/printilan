@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/dependencies_injection.dart';
-import 'package:sky_printing/modules/login/ui/cubit/auth_cubit.dart';
+import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
 import 'package:sky_printing/modules/settings/ui/cubit/settings_cubit.dart';
 import 'package:sky_printing/utils/helper/helper.dart';
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<SettingsCubit>()..getActiveTheme()),
-        BlocProvider(create: (_) => sl<AuthCubit>()),
+        BlocProvider(create: (_) => sl<LoginCubit>()),
       ],
       child: OKToast(
         child: ScreenUtilInit(
