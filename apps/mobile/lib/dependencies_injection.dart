@@ -1,5 +1,11 @@
 import 'package:get_it/get_it.dart';
 import 'package:sky_printing/core/core.dart';
+import 'package:sky_printing/core/services/local/location/location_client.dart';
+import 'package:sky_printing/modules/dashboard/data/repos/location_repository_impl.dart';
+import 'package:sky_printing/modules/dashboard/data/sources/location_local_datasources.dart';
+import 'package:sky_printing/modules/dashboard/domain/repositories/location_repositories.dart';
+import 'package:sky_printing/modules/dashboard/domain/usecases/get_location.dart';
+import 'package:sky_printing/modules/dashboard/ui/cubit/dashboard_cubit.dart';
 import 'package:sky_printing/modules/login/data/repos/login_repository_impl.dart';
 import 'package:sky_printing/modules/login/data/sources/login_remote_datasource.dart';
 import 'package:sky_printing/modules/login/domain/repos/login_repository.dart';
@@ -12,11 +18,6 @@ import 'package:sky_printing/modules/register/domain/repos/register_repository.d
 import 'package:sky_printing/modules/register/domain/usecases/post_register.dart';
 import 'package:sky_printing/modules/register/ui/cubit/register_cubit.dart';
 import 'package:sky_printing/modules/settings/ui/cubit/settings_cubit.dart';
-import 'package:sky_printing/modules/users/data/datasources/user_remote_datasources.dart';
-import 'package:sky_printing/modules/users/data/repositories/users_repository_impl.dart';
-import 'package:sky_printing/modules/users/domain/repositories/users_repository.dart';
-import 'package:sky_printing/modules/users/domain/usecases/get_users.dart';
-import 'package:sky_printing/modules/users/pages/dashboard/cubit/users_cubit.dart';
 import 'package:sky_printing/utils/utils.dart';
 
 GetIt sl = GetIt.instance;
@@ -26,11 +27,11 @@ Future<void> serviceLocator({
   bool isHiveEnable = true,
   String prefixBox = '',
 }) async {
-  /// For unit testing only
   if (isUnitTest) {
     await sl.reset();
   }
   sl.registerSingleton<DioClient>(DioClient(isUnitTest: isUnitTest));
+  sl.registerSingleton<LocationClient>(LocationClient(isUnitTest: isUnitTest));
   _dataSources();
   _repositories();
   _useCase();
@@ -52,30 +53,34 @@ Future<void> _initHiveBoxes({
 }
 
 /// Register repositories
-void _repositories() { 
+void _repositories() {
+  /// Auth
   sl.registerLazySingleton<LoginRepository>(
     () => LoginRepositoryImpl(sl(), sl()),
   );
-
   sl.registerLazySingleton<RegisterRepository>(
     () => RegisterRepositoryImpl(sl(), sl()),
   );
 
-  sl.registerLazySingleton<UsersRepository>(
-    () => UsersRepositoryImpl(sl()),
+  /// Location
+  sl.registerLazySingleton<LocationRepository>(
+    () => LocationRepositoryImpl(sl()),
   );
 }
 
 /// Register dataSources
 void _dataSources() {
+  /// Auth
   sl.registerLazySingleton<LoginRemoteDatasource>(
     () => LoginRemoteDatasourceImpl(sl()),
   );
   sl.registerLazySingleton<RegisterRemoteDataSource>(
     () => RegisterRemoteDataSourceImpl(sl()),
   );
-  sl.registerLazySingleton<UsersRemoteDatasource>(
-    () => UsersRemoteDatasourceImpl(sl()),
+
+  /// Location
+  sl.registerLazySingleton<LocationLocalDatasource>(
+    () => LocationLocalDatasourceImpl(sl()),
   );
 }
 
@@ -88,9 +93,9 @@ void _useCase() {
     () => PostRegister(sl()),
   );
 
-  /// Users
+  /// Location
   sl.registerLazySingleton(
-    () => GetUsers(sl()),
+    () => GetLocation(sl()),
   );
 }
 
@@ -103,14 +108,15 @@ void _cubit() {
     () => LoginCubit(sl()),
   );
 
-  /// Users
-  sl.registerFactory(
-    () => UsersCubit(sl()),
-  );
   sl.registerFactory(
     () => SettingsCubit(),
   );
   sl.registerFactory(
     () => MainCubit(),
+  );
+
+  /// Location
+  sl.registerFactory(
+    () => DashboardCubit(sl()),
   );
 }

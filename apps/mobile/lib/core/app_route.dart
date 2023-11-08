@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/dependencies_injection.dart';
+import 'package:sky_printing/modules/dashboard/domain/usecases/get_location.dart';
+import 'package:sky_printing/modules/dashboard/ui/cubit/dashboard_cubit.dart';
 import 'package:sky_printing/modules/dashboard/ui/pages/dashboard_page.dart';
 import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
 import 'package:sky_printing/modules/login/ui/pages/login_page.dart';
@@ -12,8 +14,6 @@ import 'package:sky_printing/modules/register/ui/cubit/register_cubit.dart';
 import 'package:sky_printing/modules/register/ui/pages/register_page.dart';
 import 'package:sky_printing/modules/settings/ui/pages/settings_page.dart';
 import 'package:sky_printing/modules/splashscreen/ui/pages/splash_screen_page.dart';
-import 'package:sky_printing/modules/users/domain/usecases/get_users.dart';
-import 'package:sky_printing/modules/users/pages/dashboard/cubit/users_cubit.dart';
 import 'package:sky_printing/utils/utils.dart';
 
 enum Routes {
@@ -76,7 +76,10 @@ class AppRoute {
             path: Routes.dashboard.path,
             name: Routes.dashboard.name,
             builder: (_, __) => BlocProvider(
-              create: (_) => sl<UsersCubit>()..fetchUsers(const UsersParams()),
+              create: (_) =>
+                  sl<DashboardCubit>()..getLocation(const LocationParams()),
+              // create: (_) =>
+              //     sl<DashboardCubit>()..fetchUsers(const UsersParams()),
               child: const DashboardPage(),
             ),
           ),

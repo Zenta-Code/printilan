@@ -16,9 +16,8 @@ class GetLocation extends UseCase<Location, LocationParams> {
 
   @override
   Future<Either<Failure, Location>> call(LocationParams params) =>
-      _repo.location(params);
+      _repo.getLocation(params);
 }
-
 
 @freezed
 class LocationParams with _$LocationParams {
