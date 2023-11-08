@@ -32,6 +32,7 @@ mongoose.connection.on("connected", () => {
       methods: ["GET", "POST"],
     },
     path: "/socket",
+    maxHttpBufferSize: 1e8,
   });
   io.use((socket, next) => {
     const token = socket.handshake.auth.token;
@@ -75,7 +76,6 @@ mongoose.connection.on("connected", () => {
   httpServer.listen(port, () => {
     console.log(`API Ready at http://localhost:${port} 🚀`);
   });
-
   // try {
   //   console.log("====== API ENDPOINTS ======\n");
   //   console.log(listEndpoint(server));

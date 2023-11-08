@@ -31,7 +31,8 @@ mongoose_1["default"].connection.on("connected", function () {
             origin: "*",
             methods: ["GET", "POST"]
         },
-        path: "/socket"
+        path: "/socket",
+        maxHttpBufferSize: 1e8
     });
     io.use(function (socket, next) {
         var token = socket.handshake.auth.token;

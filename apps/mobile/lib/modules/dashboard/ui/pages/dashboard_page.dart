@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart' hide Location;
@@ -8,6 +9,8 @@ import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/modules/dashboard/domain/entities/location.dart';
 import 'package:sky_printing/modules/dashboard/domain/usecases/get_location.dart';
 import 'package:sky_printing/modules/dashboard/ui/cubit/dashboard_cubit.dart';
+import 'package:sky_printing/utils/utils.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -25,6 +28,29 @@ class _DashboardPageState extends State<DashboardPage> {
   Marker? marker;
   Location? location;
   List<Placemark>? placemarks;
+  late IO.Socket socket;
+  final MainBoxMixin mainBoxMixin = MainBoxMixin();
+  final String _baseUrl = const String.fromEnvironment('SERVER_URL');
+  @override
+  void initState() {
+    super.initState();
+    log.e(_baseUrl);
+    log.i('initState ${mainBoxMixin.getData(MainBoxKeys.token)}');
+    socket = IO.io(
+      _baseUrl,
+      IO.OptionBuilder()
+          .setAuth({
+            "token": mainBoxMixin.getData(MainBoxKeys.token),
+          })
+          .setTransports(['websocket'])
+          .disableAutoConnect()
+          .enableForceNew()
+          .setPath('/socket')
+          .build(),
+    );
+    log.i('STATUS\n${socket.connected}');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Parent(
@@ -80,10 +106,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 child: GoogleMap(
                                   mapType: MapType.normal,
                                   initialCameraPosition: _kGooglePlex,
-                                  onMapCreated:
-                                      (GoogleMapController controller) {
-                                    _controller.complete(controller);
-                                  },
+                                  onMapCreated: _onMapCreated,
                                   markers: {marker!},
                                 ),
                               ),
@@ -134,8 +157,21 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                         ),
                         Card(
-                          child: Column(
-                            children: [],
+                          child: Container(
+                            width: 300,
+                            padding: EdgeInsets.all(Dimens.space16),
+                            child: Column(
+                              children: [
+                                Text('TEST WEBSOCKET'),
+                                SizedBox(height: Dimens.space12),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    makeOrder();
+                                  },
+                                  child: Text('Make Order'),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -150,8 +186,58 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
+  void _onMapCreated(GoogleMapController controller) {
+    if (!_controller.isCompleted) {
+      _controller.complete(controller);
+    }
+  }
+
   void _setPlacemark(double latitude, double longitude) async {
     placemarks = await placemarkFromCoordinates(latitude, longitude);
     setState(() {});
+  }
+
+  void connect() {
+    print('connecting...');
+    if (!socket.connected) {
+      socket.connect();
+    }
+    socket.onConnect((_) {
+      print("Connection established");
+    });
+    print('STATUS\n${socket.connected}');
+  }
+
+  void joinRoom() {
+    const String room = 'room1';
+    socket.emit('join', room);
+  }
+
+  Future<FilePickerResult?> pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'doc'],
+      withData: true,
+    );
+    return result;
+  }
+
+  void makeOrder() async {
+    connect();
+    joinRoom();
+    final file = await pickFile();
+    if (file != null) {
+      log.i(file.files.first.bytes);
+      socket.emit('message', {
+        'room': 'room1',
+        'message': {
+          'type': "print",
+          'data': {
+            'printer': "printer1",
+            'file': file.files.first.bytes,
+          },
+        },
+      });
+    }
   }
 }
