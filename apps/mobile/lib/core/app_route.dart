@@ -6,6 +6,7 @@ import 'package:sky_printing/dependencies_injection.dart';
 import 'package:sky_printing/modules/dashboard/domain/usecases/get_location.dart';
 import 'package:sky_printing/modules/dashboard/ui/cubit/dashboard_cubit.dart';
 import 'package:sky_printing/modules/dashboard/ui/pages/dashboard_page.dart';
+import 'package:sky_printing/modules/history/ui/pages/history_page.dart';
 import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
 import 'package:sky_printing/modules/login/ui/pages/login_page.dart';
 import 'package:sky_printing/modules/main/ui/cubit/main_cubit.dart';
@@ -14,20 +15,22 @@ import 'package:sky_printing/modules/register/ui/cubit/register_cubit.dart';
 import 'package:sky_printing/modules/register/ui/pages/register_page.dart';
 import 'package:sky_printing/modules/settings/ui/pages/settings_page.dart';
 import 'package:sky_printing/modules/splashscreen/ui/pages/splash_screen_page.dart';
+import 'package:sky_printing/modules/wallet/ui/pages/wallet_page.dart';
 import 'package:sky_printing/utils/utils.dart';
 
 enum Routes {
   root("/"),
   splashScreen("/splashscreen"),
 
-  /// Home Page
+  /// Main Page
   dashboard("/dashboard"),
+  history("/history"),
+  wallet("/wallet"),
   settings("/settings"),
 
   // Login Page
   login("/login/login"),
-  register("/login/register"),
-  ;
+  register("/login/register");
 
   const Routes(this.path);
 
@@ -78,10 +81,18 @@ class AppRoute {
             builder: (_, __) => BlocProvider(
               create: (_) =>
                   sl<DashboardCubit>()..getLocation(const LocationParams()),
-              // create: (_) =>
-              //     sl<DashboardCubit>()..fetchUsers(const UsersParams()),
               child: const DashboardPage(),
             ),
+          ),
+          GoRoute(
+            path: Routes.history.path,
+            name: Routes.history.name,
+            builder: (context, state) => HistoryPage(),
+          ),
+          GoRoute(
+            path: Routes.wallet.path,
+            name: Routes.wallet.name,
+            builder: (context, state) => WalletPage(),
           ),
           GoRoute(
             path: Routes.settings.path,
