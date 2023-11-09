@@ -99,6 +99,12 @@ abstract class Strings {
   /// **'About'**
   String get about;
 
+  /// No description provided for @activity.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get activity;
+
   /// No description provided for @address.
   ///
   /// In en, this message translates to:
@@ -183,6 +189,24 @@ abstract class Strings {
   /// **'Get Started'**
   String get getStarted;
 
+  /// No description provided for @history.
+  ///
+  /// In en, this message translates to:
+  /// **'History'**
+  String get history;
+
+  /// No description provided for @last_activity.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Activity'**
+  String get last_activity;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get location;
+
   /// No description provided for @login.
   ///
   /// In en, this message translates to:
@@ -213,6 +237,18 @@ abstract class Strings {
   /// **'No'**
   String get no;
 
+  /// No description provided for @our_services.
+  ///
+  /// In en, this message translates to:
+  /// **'Our Services'**
+  String get our_services;
+
+  /// No description provided for @paper.
+  ///
+  /// In en, this message translates to:
+  /// **'Paper'**
+  String get paper;
+
   /// No description provided for @password.
   ///
   /// In en, this message translates to:
@@ -230,6 +266,12 @@ abstract class Strings {
   /// In en, this message translates to:
   /// **'Please Wait...'**
   String get pleaseWait;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
 
   /// No description provided for @register.
   ///
@@ -279,6 +321,12 @@ abstract class Strings {
   /// **'Theme System'**
   String get themeSystem;
 
+  /// No description provided for @wallet.
+  ///
+  /// In en, this message translates to:
+  /// **'Wallet'**
+  String get wallet;
+
   /// No description provided for @welcomeTo.
   ///
   /// In en, this message translates to:
@@ -290,24 +338,6 @@ abstract class Strings {
   /// In en, this message translates to:
   /// **'Yes'**
   String get yes;
-
-  /// No description provided for @history.
-  ///
-  /// In en, this message translates to:
-  /// **'History'**
-  String get history;
-
-  /// No description provided for @wallet.
-  ///
-  /// In en, this message translates to:
-  /// **'Wallet'**
-  String get wallet;
-
-  /// No description provided for @profile.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile'**
-  String get profile;
 }
 
 class _StringsDelegate extends LocalizationsDelegate<Strings> {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/dependencies_injection.dart';
+import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
 import 'package:sky_printing/modules/settings/ui/cubit/settings_cubit.dart';
 import 'package:sky_printing/utils/utils.dart';
 
@@ -82,6 +83,12 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
                       .read<SettingsCubit>()
                       .updateLanguage(value?.type ?? "en");
                 },
+              ),
+              TextButton(
+                onPressed: () {
+                  context.read<LoginCubit>().logout();
+                },
+                child: Text('Logout'),
               ),
             ],
           ),

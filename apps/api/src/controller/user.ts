@@ -122,26 +122,25 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/me", authenticateJWT, async (req, res) => {
+  route.post("/me", async (req, res) => {
     try {
-      const token = req.headers.authorization!.split(' ')[1]
+      const token = req.body.token;
       if (!token) {
         return res.status(400).json({ error: "Unathorized" });
       }
       const jwtSecret = process.env.JWT_SECRET || "JWT_SECRET";
       const found = jwt.verify(token, jwtSecret) as any;
-       
+
       if (!found) {
         return res.status(400).json({
-          error: "Unathorized"
+          error: "Unathorized",
         });
-      } 
-      const user =await User.findById(found.id);
-      console.log(user);
+      }
+      const user = await User.findById(found.id);
       return res.status(200).json({
         success: true,
-        message: "user berhasil ditemukan", 
-        data: sanitize(user!.toObject(), ['password'])
+        message: "user berhasil ditemukan",
+        data: sanitize(user!.toObject(), ["password"]),
       });
     } catch (error) {
       return res.status(400).json({

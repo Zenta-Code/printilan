@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
           splitScreenMode: true,
           builder: (context, __) {
             AppRoute.setStream(context);
-
             return BlocBuilder<SettingsCubit, DataHelper>(
               builder: (_, data) => MaterialApp.router(
                 routerConfig: AppRoute.router,

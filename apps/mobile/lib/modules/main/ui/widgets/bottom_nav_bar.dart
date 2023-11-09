@@ -45,6 +45,10 @@ class BottomNavBar extends StatelessWidget {
     currentIndex(index);
     if (title == Strings.of(context)!.dashboard) {
       context.goNamed(Routes.dashboard.name);
+    } else if (title == Strings.of(context)!.history) {
+      context.goNamed(Routes.history.name);
+    } else if (title == Strings.of(context)!.wallet) {
+      context.goNamed(Routes.wallet.name);
     } else if (title == Strings.of(context)!.settings) {
       context.goNamed(Routes.settings.name);
     }

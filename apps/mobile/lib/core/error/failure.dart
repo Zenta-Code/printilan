@@ -31,3 +31,27 @@ class CacheFailure extends Failure {
   @override
   int get hashCode => 0;
 }
+
+class PermissionFailure extends Failure {
+  final String? message;
+
+  const PermissionFailure({this.message});
+
+  @override
+  bool operator ==(Object other) => other is PermissionFailure;
+
+  @override
+  int get hashCode => 0;
+}
+
+class LocationFailure extends Failure {
+  final String? message;
+
+  const LocationFailure({this.message});
+
+  @override
+  bool operator ==(Object other) => other is LocationFailure;
+
+  @override
+  int get hashCode => 0;
+}

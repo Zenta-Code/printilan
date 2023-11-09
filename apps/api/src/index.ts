@@ -31,7 +31,8 @@ mongoose.connection.on("connected", () => {
       origin: "*",
       methods: ["GET", "POST"],
     },
-    path: "/socket",
+    path: "/sky-printing",
+    maxHttpBufferSize: 1e8,
   });
   io.use((socket, next) => {
     const token = socket.handshake.auth.token;
@@ -47,35 +48,58 @@ mongoose.connection.on("connected", () => {
     } else {
       next(new Error("unauthorized"));
     }
-  }).on("connection", (socket) => {
-    socket.on("disconnect", () => {
-      console.log("user disconnected");
-      socket.disconnect();
-    });
-    socket.on("join", (room) => {
-      console.log("join", room);
-      socket.join(room);
-    });
+  })
+    .on("connection", (socket) => {
+      // const roomId: string = socket.handshake.query.roomId as string;
 
-    socket.on("leave", (room) => {
-      console.log("leave", room);
-      socket.leave(room);
-    });
+      // socket.join(roomId);
 
-    socket.on("message", (message) => {
-      console.log("message", message);
-      io.to(message.room).emit("message", message);
-    });
+      // socket.on("disconnect", () => {
+      //   socket.leave(roomId);
+      // });
 
-    socket.on("typing", (message) => {
-      console.log("typing", message);
-      io.to(message.room).emit("typing", message);
+      // socket.on("message", (message) => {
+      //   const receiver = message.receiver;
+      //   const sender = message.sender;
+      //   const roomId = message.roomId;
+      //   const content = message.content;
+
+      //   io.to(roomId).emit("message", {
+      //     receiver,
+      //     sender,
+      //     content,
+      //   });
+      // });
+      socket.on("join", (roomId: string) => {
+        console.log("join", roomId);
+        socket.join(roomId);
+      });
+
+      socket.on("leave", (roomId: string) => {
+        console.log("leave", roomId);
+        socket.leave(roomId);
+      });
+
+      socket.on("message", (message) => {
+        console.log("message", message);
+        const receiver = message.receiver;
+        const sender = message.sender;
+        const roomId = message.roomId;
+        const content = message.content;
+
+        io.to(roomId).emit("message", {
+          receiver,
+          sender,
+          content,
+        });
+      });
+    })
+    .on("error", (err) => {
+      console.log("Socket error", err);
     });
-  });
   httpServer.listen(port, () => {
     console.log(`API Ready at http://localhost:${port} 🚀`);
   });
-
   // try {
   //   console.log("====== API ENDPOINTS ======\n");
   //   console.log(listEndpoint(server));

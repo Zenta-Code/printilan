@@ -25,4 +25,14 @@ class LoginRepositoryImpl implements LoginRepository {
       },
     );
   }
+
+  @override
+  Future<Either<Failure, bool>> me(String token) async {
+    final response = await loginRemoteDatasource.me(token);
+
+    return response.fold(
+      (failure) => Left(failure),
+      (meResponse) => Right(true),
+    );
+  }
 }

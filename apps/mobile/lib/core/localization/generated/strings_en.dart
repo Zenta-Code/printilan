@@ -8,6 +8,9 @@ class StringsEn extends Strings {
   String get about => 'About';
 
   @override
+  String get activity => 'Activity';
+
+  @override
   String get address => 'Address';
 
   @override
@@ -50,6 +53,15 @@ class StringsEn extends Strings {
   String get getStarted => 'Get Started';
 
   @override
+  String get history => 'History';
+
+  @override
+  String get last_activity => 'Last Activity';
+
+  @override
+  String get location => 'Location';
+
+  @override
   String get login => 'Login';
 
   @override
@@ -65,6 +77,12 @@ class StringsEn extends Strings {
   String get no => 'No';
 
   @override
+  String get our_services => 'Our Services';
+
+  @override
+  String get paper => 'Paper';
+
+  @override
   String get password => 'Password';
 
   @override
@@ -72,6 +90,9 @@ class StringsEn extends Strings {
 
   @override
   String get pleaseWait => 'Please Wait...';
+
+  @override
+  String get profile => 'Profile';
 
   @override
   String get register => 'Register';
@@ -98,17 +119,11 @@ class StringsEn extends Strings {
   String get themeSystem => 'Theme System';
 
   @override
+  String get wallet => 'Wallet';
+
+  @override
   String get welcomeTo => 'Welcome to';
 
   @override
   String get yes => 'Yes';
-
-  @override
-  String get history => 'History';
-
-  @override
-  String get wallet => 'Wallet';
-
-  @override
-  String get profile => 'Profile';
 }
