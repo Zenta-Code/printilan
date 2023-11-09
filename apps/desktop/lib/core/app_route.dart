@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing_admin/dependencies_injection.dart';
+import 'package:sky_printing_admin/module/dashboard/cubit/dashboard_cubit.dart';
 import 'package:sky_printing_admin/module/login/cubit/auth_cubit.dart';
 import 'package:sky_printing_admin/module/login/login_page.dart';
 import 'package:sky_printing_admin/module/main/cubit/main_cubit.dart';
@@ -68,7 +69,10 @@ class AppRoute {
           GoRoute(
             path: Routes.dashboard.path,
             name: Routes.dashboard.name,
-            builder: (_, __) => const DashboardPage(),
+            builder: (_, __) => BlocProvider(
+              create: (_) => sl<DashboardCubit>()..fetchData(),
+              child: const DashboardPage(),
+            ),
           ),
           GoRoute(
             path: Routes.order.path,

@@ -1,6 +1,8 @@
 import { Router } from "express";
+import { Types } from "mongoose";
 import { authenticateJWT } from "../middleware/auth";
 import { Bundle } from "../model/bundle";
+import { Store } from "../model/store";
 import { BundleTypes } from "../types/bundle";
 
 export const BundleController = ({ route }: { route: Router }) => {
@@ -43,11 +45,20 @@ export const BundleController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/list/:id", authenticateJWT, async (req, res) => {
+  route.get("/list/:userId", authenticateJWT, async (req, res) => {
     try {
-      const id = req.params;
-      console.log("id...: ", id);
-      const find = await Bundle.findById(id.id);
+      const userId = new Types.ObjectId(req.params.userId);
+      const store = await Store.findOne({
+        ownerId: userId,
+      });
+      console.log("store...: ", store);
+      if (!store) {
+        return res.status(400).json({
+          success: false,
+          message: "store tidak di temukan",
+        });
+      }
+      const find = await Bundle.find({ storeId: store._id });
       if (!find) {
         return res.status(400).json({
           success: false,
@@ -101,7 +112,10 @@ export const BundleController = ({ route }: { route: Router }) => {
           message: "data tidak valid",
         });
       }
-      const updateBundle = await Bundle.findOneAndUpdate({name:updateData.name}, updateData);
+      const updateBundle = await Bundle.findOneAndUpdate(
+        { name: updateData.name },
+        updateData
+      );
       if (!updateBundle) {
         return res.status(400).json({
           success: false,

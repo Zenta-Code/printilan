@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const OrderSchema = new Schema(
   {
     userId: String,
-    sellerId: String,
+    storeId: String,
     documentId: String,
     totalPrice: Number,
   },

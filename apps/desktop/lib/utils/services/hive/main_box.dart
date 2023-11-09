@@ -19,6 +19,7 @@ enum MainBoxKeys {
   theme,
   locale,
   isLogin,
+  user,
 }
 
 mixin class MainBoxMixin {

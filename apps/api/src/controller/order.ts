@@ -33,11 +33,10 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/list/:id", authenticateJWT, async (req, res) => {
+  route.get("/list/:storeId", authenticateJWT, async (req, res) => {
     try {
-      const id = req.params;
-      console.log("id...: ", id);
-      const find = await Order.findById(id.id);
+      const storeId = req.params;
+      const find = await Order.find(storeId);
       if (!find) {
         return res.status(400).json({
           success: false,
@@ -87,4 +86,4 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     }
   });
-}
+};

@@ -1,11 +1,8 @@
 import { json, urlencoded } from "body-parser";
 import cors from "cors";
 import express, { Express } from "express";
-import listEndpoint from "express-list-endpoints";
 import RouteGroup from "express-route-grouping";
-import { createServer as http } from "http";
 import morgan from "morgan";
-import { Server } from "socket.io";
 import { BundleController } from "./controller/bundle";
 import { DocumentController } from "./controller/document";
 import { OrderController } from "./controller/order";
@@ -48,8 +45,5 @@ export const createServer: () => Express = () => {
   });
 
   app.use("/api", root.export());
-
-
-
   return app;
 };

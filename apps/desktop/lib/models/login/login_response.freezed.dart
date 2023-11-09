@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of '../login/login_response.dart';
+part of 'login_response.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -23,6 +23,7 @@ mixin _$LoginResponse {
   int? get id => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
+  dynamic? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $LoginResponseCopyWith<$Res> {
           LoginResponse value, $Res Function(LoginResponse) then) =
       _$LoginResponseCopyWithImpl<$Res, LoginResponse>;
   @useResult
-  $Res call({int? id, String? token, String? error});
+  $Res call({int? id, String? token, String? error, dynamic? user});
 }
 
 /// @nodoc
@@ -55,6 +56,7 @@ class _$LoginResponseCopyWithImpl<$Res, $Val extends LoginResponse>
     Object? id = freezed,
     Object? token = freezed,
     Object? error = freezed,
+    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -69,6 +71,10 @@ class _$LoginResponseCopyWithImpl<$Res, $Val extends LoginResponse>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as dynamic?,
     ) as $Val);
   }
 }
@@ -81,7 +87,7 @@ abstract class _$$LoginResponseImplCopyWith<$Res>
       __$$LoginResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? token, String? error});
+  $Res call({int? id, String? token, String? error, dynamic? user});
 }
 
 /// @nodoc
@@ -98,6 +104,7 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? token = freezed,
     Object? error = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$LoginResponseImpl(
       id: freezed == id
@@ -112,6 +119,10 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as String?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as dynamic?,
     ));
   }
 }
@@ -119,7 +130,8 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$LoginResponseImpl extends _LoginResponse {
-  const _$LoginResponseImpl({this.id, this.token, this.error}) : super._();
+  const _$LoginResponseImpl({this.id, this.token, this.error, this.user})
+      : super._();
 
   factory _$LoginResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginResponseImplFromJson(json);
@@ -130,10 +142,12 @@ class _$LoginResponseImpl extends _LoginResponse {
   final String? token;
   @override
   final String? error;
+  @override
+  final dynamic? user;
 
   @override
   String toString() {
-    return 'LoginResponse(id: $id, token: $token, error: $error)';
+    return 'LoginResponse(id: $id, token: $token, error: $error, user: $user)';
   }
 
   @override
@@ -143,12 +157,14 @@ class _$LoginResponseImpl extends _LoginResponse {
             other is _$LoginResponseImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.error, error) || other.error == error) &&
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, token, error);
+  int get hashCode => Object.hash(
+      runtimeType, id, token, error, const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +184,8 @@ abstract class _LoginResponse extends LoginResponse {
   const factory _LoginResponse(
       {final int? id,
       final String? token,
-      final String? error}) = _$LoginResponseImpl;
+      final String? error,
+      final dynamic? user}) = _$LoginResponseImpl;
   const _LoginResponse._() : super._();
 
   factory _LoginResponse.fromJson(Map<String, dynamic> json) =
@@ -180,6 +197,8 @@ abstract class _LoginResponse extends LoginResponse {
   String? get token;
   @override
   String? get error;
+  @override
+  dynamic? get user;
   @override
   @JsonKey(ignore: true)
   _$$LoginResponseImplCopyWith<_$LoginResponseImpl> get copyWith =>

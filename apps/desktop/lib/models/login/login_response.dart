@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing_admin/models/login/login.dart'; 
+
 part 'login_response.freezed.dart';
 part 'login_response.g.dart';
 
@@ -9,6 +10,7 @@ class LoginResponse with _$LoginResponse {
     int? id,
     String? token,
     String? error,
+    dynamic user,
   }) = _LoginResponse;
 
   const LoginResponse._();
@@ -18,3 +20,4 @@ class LoginResponse with _$LoginResponse {
 
   Login toEntity() => Login(token: token);
 }
+ 

@@ -2,6 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const StoreSchema = new Schema(
   {
+    // _id: Schema.Types.ObjectId,
     name: String,
     address: {
       street: String,
@@ -9,7 +10,7 @@ const StoreSchema = new Schema(
       state: String,
       country: String,
       zipCode: String,
-    }, 
+    },
     phone: String,
     ownerId: Object,
   },

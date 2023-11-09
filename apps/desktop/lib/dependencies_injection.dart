@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:sky_printing_admin/core/core.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
+import 'package:sky_printing_admin/module/dashboard/cubit/dashboard_cubit.dart';
 import 'package:sky_printing_admin/module/login/cubit/auth_cubit.dart';
 import 'package:sky_printing_admin/module/login/usecase/post_login.dart';
 import 'package:sky_printing_admin/module/main/cubit/main_cubit.dart';
@@ -97,6 +98,9 @@ void _cubit() {
   );
   sl.registerFactory(
     () => MainCubit(),
+  );
+  sl.registerFactory(
+    () => DashboardCubit(sl()),
   );
 }
 

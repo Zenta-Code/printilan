@@ -3,7 +3,7 @@ import { User } from "../model/user";
 
 export const StoreSeeder = async () => {
   const user = await User.findOne({ email: "rahmat@gmail.com" });
-  const store = await Store.findOneAndUpdate(
+  await Store.findOneAndUpdate(
     { name: "Matt's Store" },
     {
       $set: {

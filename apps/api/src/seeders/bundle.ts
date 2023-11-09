@@ -1,29 +1,68 @@
 import { Bundle } from "../model/bundle";
+import { Store } from "../model/store";
 
 type Bundle = {
+  storeId?: string;
   name: string;
   desc: string;
-  prices: Color[];
+  prices: Option[];
 };
-type Color = {
-  color: string;
+type Option = {
+  option: string;
   price: number;
 };
 
 const bundles: Bundle[] = [
   {
-    name: "Printing",
+    name: "Papper Printing",
     desc: "Common printing services",
     prices: [
       {
-        color: "black",
-        price: 0.1,
+        option: "black",
+        price: 500,
       },
       {
-        color: "color",
-        price: 0.2,
+        option: "color",
+        price: 1000,
+      },
+    ],
+  },
+  {
+    name: "Photo Printing",
+    desc: "Common printing services",
+    prices: [
+      {
+        option: "4R",
+        price: 2000,
+      },
+      {
+        option: "5R",
+        price: 3000,
+      },
+      {
+        option: "6R",
+        price: 4000,
+      },
+      {
+        option: "8R",
+        price: 5000,
       },
     ],
   },
 ];
-const BundleSeeder = async () => {};
+export const BundleSeeder = async () => {
+  const store = await Store.findOne({ name: "Matt's Store" });
+  for (const bundle of bundles) {
+    await Bundle.findOneAndUpdate(
+      { name: bundle.name },
+      {
+        $set: {
+          storeId: store!._id,
+          ...bundle,
+        },
+      },
+      { upsert: true, new: true }
+    );
+  }
+  console.log("Bundle seed done! ✅");
+};

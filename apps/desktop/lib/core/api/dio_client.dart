@@ -49,7 +49,7 @@ class DioClient with MainBoxMixin {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             if (_auth != null) ...{
-              'Authorization': _auth,
+              'authorization': 'Bearer $_auth',
             },
           },
           receiveTimeout: const Duration(minutes: 1),
