@@ -24,7 +24,7 @@ class SplashScreenPage extends StatelessWidget {
                 children: [
                   SizedBox(height: Dimens.space30),
                   Text(
-                    Strings.of(context)!.welcomeTo,
+                    Strings.of(context)!.welcome_to,
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -43,7 +43,7 @@ class SplashScreenPage extends StatelessWidget {
               ),
               ButtonText(
                 onPressed: () => context.pushNamed(Routes.login.name),
-                title: Strings.of(context)!.getStarted,
+                title: Strings.of(context)!.get_started,
                 color: Colors.black,
                 fontSize: Dimens.titleLarge,
               ),

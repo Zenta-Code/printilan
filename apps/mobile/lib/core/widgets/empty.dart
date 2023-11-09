@@ -22,7 +22,7 @@ class Empty extends StatelessWidget {
         //   width: context.widthInPercent(45),
         // ),
         Text(
-          errorMessage ?? Strings.of(context)!.errorNoData,
+          errorMessage ?? Strings.of(context)!.error_no_data,
         ),
       ],
     );

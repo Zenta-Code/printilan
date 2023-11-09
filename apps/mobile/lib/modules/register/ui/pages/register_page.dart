@@ -98,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hint: Strings.of(context)!.name,
                       validator: (String? value) => value != null
                           ? (value.isEmpty
-                              ? Strings.of(context)?.errorEmptyField
+                              ? Strings.of(context)?.error_empty_field
                               : null)
                           : null,
                     ),
@@ -117,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hint: Strings.of(context)!.email,
                       validator: (String? value) => value != null
                           ? (!value.isValidEmail()
-                              ? Strings.of(context)?.errorInvalidEmail
+                              ? Strings.of(context)?.error_invalid_email
                               : null)
                           : null,
                     ),
@@ -163,7 +163,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               validator: (String? value) => value != null
                                   ? (value.length < 6
-                                      ? Strings.of(context)!.errorPasswordLength
+                                      ? Strings.of(context)!
+                                          .error_password_length
                                       : null)
                                   : null,
                               semantic: "password",
@@ -187,7 +188,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   false,
                               hintText: '••••••••••••',
                               maxLine: 1,
-                              hint: Strings.of(context)!.confirmPassword,
+                              hint: Strings.of(context)!.confirm_password,
                               suffixIcon: IconButton(
                                 padding: EdgeInsets.zero,
                                 constraints: const BoxConstraints(),
@@ -206,7 +207,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               validator: (String? value) => value != null
                                   ? (value != _conPassword.text
                                       ? Strings.of(context)
-                                          ?.errorPasswordNotMatch
+                                          ?.error_password_not_match
                                       : null)
                                   : null,
                               semantic: "confirm_password",
@@ -231,7 +232,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hint: Strings.of(context)!.address,
                       validator: (String? value) => value != null
                           ? (value.isEmpty
-                              ? Strings.of(context)?.errorEmptyField
+                              ? Strings.of(context)?.error_empty_field
                               : null)
                           : null,
                     ),
@@ -249,7 +250,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hint: Strings.of(context)!.phone,
                       validator: (String? value) => value != null
                           ? (value.isEmpty
-                              ? Strings.of(context)?.errorEmptyField
+                              ? Strings.of(context)?.error_empty_field
                               : null)
                           : null,
                     ),

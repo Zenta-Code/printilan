@@ -22,7 +22,7 @@ class Loading extends StatelessWidget {
           Visibility(
             visible: showMessage,
             child: Text(
-              Strings.of(context)!.pleaseWait,
+              Strings.of(context)!.please_wait,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),

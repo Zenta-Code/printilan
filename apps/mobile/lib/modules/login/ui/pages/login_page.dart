@@ -110,7 +110,8 @@ class _LoginPageState extends State<LoginPage> {
                                 hint: Strings.of(context)!.email,
                                 validator: (String? value) => value != null
                                     ? (!value.isValidEmail()
-                                        ? Strings.of(context)?.errorInvalidEmail
+                                        ? Strings.of(context)
+                                            ?.error_invalid_email
                                         : null)
                                     : null,
                               ),
@@ -157,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                                     validator: (String? value) => value != null
                                         ? (value.length < 6
                                             ? Strings.of(context)!
-                                                .errorPasswordLength
+                                                .error_password_length
                                             : null)
                                         : null,
                                   );
@@ -191,14 +192,14 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        Strings.of(context)!.askRegister,
+                        Strings.of(context)!.ask_register,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       TextButton(
                         onPressed: () {
                           context.pushNamed(Routes.register.name);
                         },
-                        child: const Text("Register"),
+                        child: Text(Strings.of(context)!.register),
                       ),
                     ],
                   ),

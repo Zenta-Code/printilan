@@ -35,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
             children: [
               DropDown<ActiveTheme>(
                 key: const Key("dropdown_theme"),
-                hint: Strings.of(context)!.chooseTheme,
+                hint: Strings.of(context)!.choose_theme,
                 value: _selectedTheme,
                 prefixIcon: const Icon(Icons.light),
                 items: ActiveTheme.values
@@ -60,7 +60,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
               /// Language
               DropDown<DataHelper>(
                 key: const Key("dropdown_language"),
-                hint: Strings.of(context)!.chooseLanguage,
+                hint: Strings.of(context)!.choose_language,
                 value: _selectedLanguage,
                 prefixIcon: const Icon(Icons.language_outlined),
                 items: _listLanguage
@@ -88,7 +88,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
                 onPressed: () {
                   context.read<LoginCubit>().logout();
                 },
-                child: Text('Logout'),
+                child: Text(Strings.of(context)!.logout),
               ),
             ],
           ),
@@ -99,11 +99,11 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
 
   String _getThemeName(ActiveTheme activeTheme, BuildContext context) {
     if (activeTheme == ActiveTheme.system) {
-      return Strings.of(context)!.themeSystem;
+      return Strings.of(context)!.theme_system;
     } else if (activeTheme == ActiveTheme.dark) {
-      return Strings.of(context)!.themeDark;
+      return Strings.of(context)!.theme_dark;
     } else {
-      return Strings.of(context)!.themeLight;
+      return Strings.of(context)!.theme_light;
     }
   }
 }

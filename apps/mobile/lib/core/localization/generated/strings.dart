@@ -99,6 +99,12 @@ abstract class Strings {
   /// **'About'**
   String get about;
 
+  /// No description provided for @account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
   /// No description provided for @activity.
   ///
   /// In en, this message translates to:
@@ -111,11 +117,11 @@ abstract class Strings {
   /// **'Address'**
   String get address;
 
-  /// No description provided for @askRegister.
+  /// No description provided for @ask_register.
   ///
   /// In en, this message translates to:
-  /// **'Don\'t have an Account?'**
-  String get askRegister;
+  /// **'Don\'t Have an Account?'**
+  String get ask_register;
 
   /// No description provided for @cancel.
   ///
@@ -123,23 +129,35 @@ abstract class Strings {
   /// **'Cancel'**
   String get cancel;
 
-  /// No description provided for @chooseLanguage.
+  /// No description provided for @choose_language.
   ///
   /// In en, this message translates to:
   /// **'Choose Language'**
-  String get chooseLanguage;
+  String get choose_language;
 
-  /// No description provided for @chooseTheme.
+  /// No description provided for @choose_theme.
   ///
   /// In en, this message translates to:
   /// **'Choose Theme'**
-  String get chooseTheme;
+  String get choose_theme;
 
-  /// No description provided for @confirmPassword.
+  /// No description provided for @colors.
+  ///
+  /// In en, this message translates to:
+  /// **'Colors'**
+  String get colors;
+
+  /// No description provided for @confirm_password.
   ///
   /// In en, this message translates to:
   /// **'Repeat Password'**
-  String get confirmPassword;
+  String get confirm_password;
+
+  /// No description provided for @copies.
+  ///
+  /// In en, this message translates to:
+  /// **'Copies'**
+  String get copies;
 
   /// No description provided for @dashboard.
   ///
@@ -153,41 +171,53 @@ abstract class Strings {
   /// **'Email'**
   String get email;
 
-  /// No description provided for @errorEmptyField.
+  /// No description provided for @enter.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter'**
+  String get enter;
+
+  /// No description provided for @error_empty_field.
   ///
   /// In en, this message translates to:
   /// **'Can\'t be empty'**
-  String get errorEmptyField;
+  String get error_empty_field;
 
-  /// No description provided for @errorInvalidEmail.
+  /// No description provided for @error_invalid_email.
   ///
   /// In en, this message translates to:
   /// **'Email is not valid'**
-  String get errorInvalidEmail;
+  String get error_invalid_email;
 
-  /// No description provided for @errorNoData.
+  /// No description provided for @error_no_data.
   ///
   /// In en, this message translates to:
   /// **'No data'**
-  String get errorNoData;
+  String get error_no_data;
 
-  /// No description provided for @errorPasswordLength.
+  /// No description provided for @error_password_length.
   ///
   /// In en, this message translates to:
   /// **'Password must be at least 6 characters'**
-  String get errorPasswordLength;
+  String get error_password_length;
 
-  /// No description provided for @errorPasswordNotMatch.
+  /// No description provided for @error_password_not_match.
   ///
   /// In en, this message translates to:
   /// **'Password doesn\'t match'**
-  String get errorPasswordNotMatch;
+  String get error_password_not_match;
 
-  /// No description provided for @getStarted.
+  /// No description provided for @file_name.
+  ///
+  /// In en, this message translates to:
+  /// **'File Name'**
+  String get file_name;
+
+  /// No description provided for @get_started.
   ///
   /// In en, this message translates to:
   /// **'Get Started'**
-  String get getStarted;
+  String get get_started;
 
   /// No description provided for @history.
   ///
@@ -219,11 +249,11 @@ abstract class Strings {
   /// **'Logout'**
   String get logout;
 
-  /// No description provided for @logoutDesc.
+  /// No description provided for @logout_desc.
   ///
   /// In en, this message translates to:
   /// **'Do you want to logout from the app?'**
-  String get logoutDesc;
+  String get logout_desc;
 
   /// No description provided for @name.
   ///
@@ -237,11 +267,35 @@ abstract class Strings {
   /// **'No'**
   String get no;
 
+  /// No description provided for @order_has_picked_up.
+  ///
+  /// In en, this message translates to:
+  /// **'Order has picked up'**
+  String get order_has_picked_up;
+
+  /// No description provided for @order_has_printed.
+  ///
+  /// In en, this message translates to:
+  /// **'Order has printed'**
+  String get order_has_printed;
+
+  /// No description provided for @order_payment.
+  ///
+  /// In en, this message translates to:
+  /// **'Order payment'**
+  String get order_payment;
+
   /// No description provided for @our_services.
   ///
   /// In en, this message translates to:
   /// **'Our Services'**
   String get our_services;
+
+  /// No description provided for @pages.
+  ///
+  /// In en, this message translates to:
+  /// **'Pages'**
+  String get pages;
 
   /// No description provided for @paper.
   ///
@@ -261,11 +315,29 @@ abstract class Strings {
   /// **'Phone'**
   String get phone;
 
-  /// No description provided for @pleaseWait.
+  /// No description provided for @photo_print.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo Print'**
+  String get photo_print;
+
+  /// No description provided for @please_wait.
   ///
   /// In en, this message translates to:
   /// **'Please Wait...'**
-  String get pleaseWait;
+  String get please_wait;
+
+  /// No description provided for @print.
+  ///
+  /// In en, this message translates to:
+  /// **'Print'**
+  String get print;
+
+  /// No description provided for @printing_binding.
+  ///
+  /// In en, this message translates to:
+  /// **'Printing and Binding'**
+  String get printing_binding;
 
   /// No description provided for @profile.
   ///
@@ -273,11 +345,41 @@ abstract class Strings {
   /// **'Profile'**
   String get profile;
 
+  /// No description provided for @recent_transactions.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Transactions'**
+  String get recent_transactions;
+
   /// No description provided for @register.
   ///
   /// In en, this message translates to:
   /// **'Register'**
   String get register;
+
+  /// No description provided for @regular_printing.
+  ///
+  /// In en, this message translates to:
+  /// **'Regular Printing'**
+  String get regular_printing;
+
+  /// No description provided for @scan.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan'**
+  String get scan;
+
+  /// No description provided for @scan_desc.
+  ///
+  /// In en, this message translates to:
+  /// **'Please move your camera over another device screen!'**
+  String get scan_desc;
+
+  /// No description provided for @scan_qr_code_here.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan QR Code Here'**
+  String get scan_qr_code_here;
 
   /// No description provided for @select.
   ///
@@ -285,17 +387,17 @@ abstract class Strings {
   /// **'Select'**
   String get select;
 
-  /// No description provided for @selectDate.
+  /// No description provided for @select_date.
   ///
   /// In en, this message translates to:
   /// **'Choose Date'**
-  String get selectDate;
+  String get select_date;
 
-  /// No description provided for @selectTime.
+  /// No description provided for @select_time.
   ///
   /// In en, this message translates to:
   /// **'Choose Time'**
-  String get selectTime;
+  String get select_time;
 
   /// No description provided for @settings.
   ///
@@ -303,23 +405,41 @@ abstract class Strings {
   /// **'Settings'**
   String get settings;
 
-  /// No description provided for @themeDark.
+  /// No description provided for @start_from.
+  ///
+  /// In en, this message translates to:
+  /// **'Strat from'**
+  String get start_from;
+
+  /// No description provided for @theme_dark.
   ///
   /// In en, this message translates to:
   /// **'Theme Dark'**
-  String get themeDark;
+  String get theme_dark;
 
-  /// No description provided for @themeLight.
+  /// No description provided for @theme_light.
   ///
   /// In en, this message translates to:
   /// **'Theme Light'**
-  String get themeLight;
+  String get theme_light;
 
-  /// No description provided for @themeSystem.
+  /// No description provided for @theme_system.
   ///
   /// In en, this message translates to:
   /// **'Theme System'**
-  String get themeSystem;
+  String get theme_system;
+
+  /// No description provided for @top_up.
+  ///
+  /// In en, this message translates to:
+  /// **'Top up'**
+  String get top_up;
+
+  /// No description provided for @transfer.
+  ///
+  /// In en, this message translates to:
+  /// **'Transfer'**
+  String get transfer;
 
   /// No description provided for @wallet.
   ///
@@ -327,11 +447,11 @@ abstract class Strings {
   /// **'Wallet'**
   String get wallet;
 
-  /// No description provided for @welcomeTo.
+  /// No description provided for @welcome_to.
   ///
   /// In en, this message translates to:
   /// **'Welcome to'**
-  String get welcomeTo;
+  String get welcome_to;
 
   /// No description provided for @yes.
   ///

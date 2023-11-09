@@ -8,25 +8,34 @@ class StringsEn extends Strings {
   String get about => 'About';
 
   @override
+  String get account => 'Account';
+
+  @override
   String get activity => 'Activity';
 
   @override
   String get address => 'Address';
 
   @override
-  String get askRegister => 'Don\'t have an Account?';
+  String get ask_register => 'Don\'t Have an Account?';
 
   @override
   String get cancel => 'Cancel';
 
   @override
-  String get chooseLanguage => 'Choose Language';
+  String get choose_language => 'Choose Language';
 
   @override
-  String get chooseTheme => 'Choose Theme';
+  String get choose_theme => 'Choose Theme';
 
   @override
-  String get confirmPassword => 'Repeat Password';
+  String get colors => 'Colors';
+
+  @override
+  String get confirm_password => 'Repeat Password';
+
+  @override
+  String get copies => 'Copies';
 
   @override
   String get dashboard => 'Dashboard';
@@ -35,22 +44,28 @@ class StringsEn extends Strings {
   String get email => 'Email';
 
   @override
-  String get errorEmptyField => 'Can\'t be empty';
+  String get enter => 'Enter';
 
   @override
-  String get errorInvalidEmail => 'Email is not valid';
+  String get error_empty_field => 'Can\'t be empty';
 
   @override
-  String get errorNoData => 'No data';
+  String get error_invalid_email => 'Email is not valid';
 
   @override
-  String get errorPasswordLength => 'Password must be at least 6 characters';
+  String get error_no_data => 'No data';
 
   @override
-  String get errorPasswordNotMatch => 'Password doesn\'t match';
+  String get error_password_length => 'Password must be at least 6 characters';
 
   @override
-  String get getStarted => 'Get Started';
+  String get error_password_not_match => 'Password doesn\'t match';
+
+  @override
+  String get file_name => 'File Name';
+
+  @override
+  String get get_started => 'Get Started';
 
   @override
   String get history => 'History';
@@ -68,7 +83,7 @@ class StringsEn extends Strings {
   String get logout => 'Logout';
 
   @override
-  String get logoutDesc => 'Do you want to logout from the app?';
+  String get logout_desc => 'Do you want to logout from the app?';
 
   @override
   String get name => 'Name';
@@ -77,7 +92,19 @@ class StringsEn extends Strings {
   String get no => 'No';
 
   @override
+  String get order_has_picked_up => 'Order has picked up';
+
+  @override
+  String get order_has_printed => 'Order has printed';
+
+  @override
+  String get order_payment => 'Order payment';
+
+  @override
   String get our_services => 'Our Services';
+
+  @override
+  String get pages => 'Pages';
 
   @override
   String get paper => 'Paper';
@@ -89,40 +116,73 @@ class StringsEn extends Strings {
   String get phone => 'Phone';
 
   @override
-  String get pleaseWait => 'Please Wait...';
+  String get photo_print => 'Photo Print';
+
+  @override
+  String get please_wait => 'Please Wait...';
+
+  @override
+  String get print => 'Print';
+
+  @override
+  String get printing_binding => 'Printing and Binding';
 
   @override
   String get profile => 'Profile';
 
   @override
+  String get recent_transactions => 'Recent Transactions';
+
+  @override
   String get register => 'Register';
+
+  @override
+  String get regular_printing => 'Regular Printing';
+
+  @override
+  String get scan => 'Scan';
+
+  @override
+  String get scan_desc => 'Please move your camera over another device screen!';
+
+  @override
+  String get scan_qr_code_here => 'Scan QR Code Here';
 
   @override
   String get select => 'Select';
 
   @override
-  String get selectDate => 'Choose Date';
+  String get select_date => 'Choose Date';
 
   @override
-  String get selectTime => 'Choose Time';
+  String get select_time => 'Choose Time';
 
   @override
   String get settings => 'Settings';
 
   @override
-  String get themeDark => 'Theme Dark';
+  String get start_from => 'Strat from';
 
   @override
-  String get themeLight => 'Theme Light';
+  String get theme_dark => 'Theme Dark';
 
   @override
-  String get themeSystem => 'Theme System';
+  String get theme_light => 'Theme Light';
+
+  @override
+  String get theme_system => 'Theme System';
+
+  @override
+  String get top_up => 'Top up';
+
+  @override
+  String get transfer => 'Transfer';
 
   @override
   String get wallet => 'Wallet';
 
   @override
-  String get welcomeTo => 'Welcome to';
+  String get welcome_to => 'Welcome to';
 
   @override
   String get yes => 'Yes';
