@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing/core/resources/dimens.dart';
+import 'package:sky_printing/core/services/remote/socket/socket_client.dart';
 import 'package:sky_printing/core/widgets/button_notification.dart';
 import 'package:sky_printing/core/widgets/parent.dart';
+import 'package:sky_printing/dependencies_injection.dart';
 import 'package:sky_printing/modules/main/ui/cubit/main_cubit.dart';
 import 'package:sky_printing/modules/main/ui/widgets/bottom_nav_bar.dart';
 
@@ -26,10 +28,18 @@ class _MainPageState extends State<MainPage>
   }
 
   @override
+  void initState() {
+    super.initState();
+    sl.registerSingleton<SocketClient>(SocketClient(
+      isUnitTest: false,
+    ));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Parent(
       scaffoldKey: _scaffoldKey,
-      appBar: _appBar(),
+      // appBar: _appBar(),
       extendBody: true,
       bottomNavigation: Container(
         margin: EdgeInsets.all(Dimens.space16),

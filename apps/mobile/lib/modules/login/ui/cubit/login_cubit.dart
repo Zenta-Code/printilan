@@ -2,16 +2,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/modules/login/domain/usecases/post_login.dart';
+import 'package:sky_printing/modules/login/domain/usecases/post_me.dart';
 import 'package:sky_printing/utils/utils.dart';
 
 part 'login_cubit.freezed.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._postLogin) : super(const _Loading());
+  LoginCubit(this._postLogin, this._postMe) : super(const _Loading());
 
   final PostLogin _postLogin;
-
+  final PostMe _postMe;
   bool? isPasswordHide = true;
 
   void showHidePassword() {
@@ -32,6 +33,20 @@ class LoginCubit extends Cubit<LoginState> {
         }
       },
       (r) => emit(_Success(r.token)),
+    );
+  }
+
+  Future<bool> me(MeParams params) async {
+    emit(const _Loading());
+    final data = await _postMe.call(params);
+
+    return data.fold(
+      (l) {
+        return false;
+      },
+      (r) {
+        return true;
+      },
     );
   }
 

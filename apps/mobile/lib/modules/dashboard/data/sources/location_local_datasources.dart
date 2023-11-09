@@ -5,7 +5,7 @@ import 'package:sky_printing/modules/dashboard/data/models/location_response.dar
 import 'package:sky_printing/modules/dashboard/domain/usecases/get_location.dart';
 
 abstract class LocationLocalDatasource {
-  Future<Either<Failure, LocationResponse>> getLocations(
+  Future<Either<Failure, LocationResponse>> getLocation(
       LocationParams locationParams);
 }
 
@@ -15,7 +15,7 @@ class LocationLocalDatasourceImpl implements LocationLocalDatasource {
   LocationLocalDatasourceImpl(this._client);
 
   @override
-  Future<Either<Failure, LocationResponse>> getLocations(
+  Future<Either<Failure, LocationResponse>> getLocation(
       LocationParams locationParams) async {
     final response = await _client.getLocation();
     return response;

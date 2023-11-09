@@ -1,6 +1,6 @@
 import 'dart:isolate';
 
-import 'package:sky_printing/core/core.dart';
+import 'package:sky_printing/core/services/remote/api/dio_client.dart';
 
 class IsolateParser<T> {
   final Map<String, dynamic> json;

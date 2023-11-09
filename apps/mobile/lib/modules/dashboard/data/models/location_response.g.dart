@@ -25,6 +25,7 @@ _$LocationResponseImpl _$$LocationResponseImplFromJson(
           (json['elapsedRealtimeUncertaintyNanos'] as num?)?.toDouble(),
       satelliteNumber: json['satelliteNumber'] as int?,
       provider: json['provider'] as String?,
+      placemarks: _placemarksFromJson(json['placemarks'] as List),
     );
 
 Map<String, dynamic> _$$LocationResponseImplToJson(
@@ -46,4 +47,5 @@ Map<String, dynamic> _$$LocationResponseImplToJson(
           instance.elapsedRealtimeUncertaintyNanos,
       'satelliteNumber': instance.satelliteNumber,
       'provider': instance.provider,
+      'placemarks': _placemarksToJson(instance.placemarks),
     };

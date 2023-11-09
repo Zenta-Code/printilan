@@ -36,6 +36,8 @@ mixin _$LocationResponse {
       throw _privateConstructorUsedError;
   int? get satelliteNumber => throw _privateConstructorUsedError;
   String? get provider => throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _placemarksFromJson, toJson: _placemarksToJson)
+  List<Placemark>? get placemarks => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -64,7 +66,9 @@ abstract class $LocationResponseCopyWith<$Res> {
       double? elapsedRealtimeNanos,
       double? elapsedRealtimeUncertaintyNanos,
       int? satelliteNumber,
-      String? provider});
+      String? provider,
+      @JsonKey(fromJson: _placemarksFromJson, toJson: _placemarksToJson)
+      List<Placemark>? placemarks});
 }
 
 /// @nodoc
@@ -95,6 +99,7 @@ class _$LocationResponseCopyWithImpl<$Res, $Val extends LocationResponse>
     Object? elapsedRealtimeUncertaintyNanos = freezed,
     Object? satelliteNumber = freezed,
     Object? provider = freezed,
+    Object? placemarks = freezed,
   }) {
     return _then(_value.copyWith(
       latitude: freezed == latitude
@@ -158,6 +163,10 @@ class _$LocationResponseCopyWithImpl<$Res, $Val extends LocationResponse>
           ? _value.provider
           : provider // ignore: cast_nullable_to_non_nullable
               as String?,
+      placemarks: freezed == placemarks
+          ? _value.placemarks
+          : placemarks // ignore: cast_nullable_to_non_nullable
+              as List<Placemark>?,
     ) as $Val);
   }
 }
@@ -185,7 +194,9 @@ abstract class _$$LocationResponseImplCopyWith<$Res>
       double? elapsedRealtimeNanos,
       double? elapsedRealtimeUncertaintyNanos,
       int? satelliteNumber,
-      String? provider});
+      String? provider,
+      @JsonKey(fromJson: _placemarksFromJson, toJson: _placemarksToJson)
+      List<Placemark>? placemarks});
 }
 
 /// @nodoc
@@ -214,6 +225,7 @@ class __$$LocationResponseImplCopyWithImpl<$Res>
     Object? elapsedRealtimeUncertaintyNanos = freezed,
     Object? satelliteNumber = freezed,
     Object? provider = freezed,
+    Object? placemarks = freezed,
   }) {
     return _then(_$LocationResponseImpl(
       latitude: freezed == latitude
@@ -277,6 +289,10 @@ class __$$LocationResponseImplCopyWithImpl<$Res>
           ? _value.provider
           : provider // ignore: cast_nullable_to_non_nullable
               as String?,
+      placemarks: freezed == placemarks
+          ? _value._placemarks
+          : placemarks // ignore: cast_nullable_to_non_nullable
+              as List<Placemark>?,
     ));
   }
 }
@@ -299,8 +315,11 @@ class _$LocationResponseImpl extends _LocationResponse {
       this.elapsedRealtimeNanos,
       this.elapsedRealtimeUncertaintyNanos,
       this.satelliteNumber,
-      this.provider})
-      : super._();
+      this.provider,
+      @JsonKey(fromJson: _placemarksFromJson, toJson: _placemarksToJson)
+      final List<Placemark>? placemarks})
+      : _placemarks = placemarks,
+        super._();
 
   factory _$LocationResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$LocationResponseImplFromJson(json);
@@ -335,10 +354,20 @@ class _$LocationResponseImpl extends _LocationResponse {
   final int? satelliteNumber;
   @override
   final String? provider;
+  final List<Placemark>? _placemarks;
+  @override
+  @JsonKey(fromJson: _placemarksFromJson, toJson: _placemarksToJson)
+  List<Placemark>? get placemarks {
+    final value = _placemarks;
+    if (value == null) return null;
+    if (_placemarks is EqualUnmodifiableListView) return _placemarks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'LocationResponse(latitude: $latitude, longitude: $longitude, accuracy: $accuracy, verticalAccuracy: $verticalAccuracy, altitude: $altitude, speed: $speed, speedAccuracy: $speedAccuracy, heading: $heading, time: $time, isMock: $isMock, headingAccuracy: $headingAccuracy, elapsedRealtimeNanos: $elapsedRealtimeNanos, elapsedRealtimeUncertaintyNanos: $elapsedRealtimeUncertaintyNanos, satelliteNumber: $satelliteNumber, provider: $provider)';
+    return 'LocationResponse(latitude: $latitude, longitude: $longitude, accuracy: $accuracy, verticalAccuracy: $verticalAccuracy, altitude: $altitude, speed: $speed, speedAccuracy: $speedAccuracy, heading: $heading, time: $time, isMock: $isMock, headingAccuracy: $headingAccuracy, elapsedRealtimeNanos: $elapsedRealtimeNanos, elapsedRealtimeUncertaintyNanos: $elapsedRealtimeUncertaintyNanos, satelliteNumber: $satelliteNumber, provider: $provider, placemarks: $placemarks)';
   }
 
   @override
@@ -373,7 +402,9 @@ class _$LocationResponseImpl extends _LocationResponse {
             (identical(other.satelliteNumber, satelliteNumber) ||
                 other.satelliteNumber == satelliteNumber) &&
             (identical(other.provider, provider) ||
-                other.provider == provider));
+                other.provider == provider) &&
+            const DeepCollectionEquality()
+                .equals(other._placemarks, _placemarks));
   }
 
   @JsonKey(ignore: true)
@@ -394,7 +425,8 @@ class _$LocationResponseImpl extends _LocationResponse {
       elapsedRealtimeNanos,
       elapsedRealtimeUncertaintyNanos,
       satelliteNumber,
-      provider);
+      provider,
+      const DeepCollectionEquality().hash(_placemarks));
 
   @JsonKey(ignore: true)
   @override
@@ -427,7 +459,9 @@ abstract class _LocationResponse extends LocationResponse {
       final double? elapsedRealtimeNanos,
       final double? elapsedRealtimeUncertaintyNanos,
       final int? satelliteNumber,
-      final String? provider}) = _$LocationResponseImpl;
+      final String? provider,
+      @JsonKey(fromJson: _placemarksFromJson, toJson: _placemarksToJson)
+      final List<Placemark>? placemarks}) = _$LocationResponseImpl;
   const _LocationResponse._() : super._();
 
   factory _LocationResponse.fromJson(Map<String, dynamic> json) =
@@ -463,6 +497,9 @@ abstract class _LocationResponse extends LocationResponse {
   int? get satelliteNumber;
   @override
   String? get provider;
+  @override
+  @JsonKey(fromJson: _placemarksFromJson, toJson: _placemarksToJson)
+  List<Placemark>? get placemarks;
   @override
   @JsonKey(ignore: true)
   _$$LocationResponseImplCopyWith<_$LocationResponseImpl> get copyWith =>

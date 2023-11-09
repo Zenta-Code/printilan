@@ -7,6 +7,7 @@ import 'package:sky_printing/modules/dashboard/domain/usecases/get_location.dart
 import 'package:sky_printing/modules/dashboard/ui/cubit/dashboard_cubit.dart';
 import 'package:sky_printing/modules/dashboard/ui/pages/dashboard_page.dart';
 import 'package:sky_printing/modules/history/ui/pages/history_page.dart';
+import 'package:sky_printing/modules/login/domain/usecases/post_me.dart';
 import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
 import 'package:sky_printing/modules/login/ui/pages/login_page.dart';
 import 'package:sky_printing/modules/main/ui/cubit/main_cubit.dart';
@@ -106,9 +107,14 @@ class AppRoute {
     routerNeglect: true,
     debugLogDiagnostics: kDebugMode,
     refreshListenable: GoRouterRefreshStream(context.read<LoginCubit>().stream),
-    redirect: (_, GoRouterState state) {
+    redirect: (_, GoRouterState state) async {
       final bool isLoginPage = state.matchedLocation == Routes.login.path ||
           state.matchedLocation == Routes.register.path;
+      final token =
+          MainBoxMixin.mainBox?.get(MainBoxKeys.token.name) as String?;
+      final me =
+          await context.read<LoginCubit>().me(MeParams(token: token ?? ''));
+      log.e('IS AUTH: ${me}');
 
       if (!((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
           false)) {

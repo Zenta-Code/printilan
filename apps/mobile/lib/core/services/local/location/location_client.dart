@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:geocoding/geocoding.dart' hide Location;
 import 'package:location/location.dart';
 import 'package:sky_printing/core/error/failure.dart';
 import 'package:sky_printing/modules/dashboard/data/models/location_response.dart';
@@ -7,7 +8,12 @@ import 'package:sky_printing/utils/utils.dart';
 class LocationClient {
   bool _isUnitTest = false;
   late Location _location;
-
+  List<Placemark> placemark = [
+    Placemark(
+      subAdministrativeArea: '',
+      locality: '',
+    )
+  ];
   LocationClient({bool isUnitTest = false}) {
     _isUnitTest = isUnitTest;
     _location = _createLocation();
@@ -39,6 +45,8 @@ class LocationClient {
       await requestPermission();
       try {
         final locationData = await location.getLocation();
+        placemark = await placemarkFromCoordinates(
+            locationData.latitude!, locationData.longitude!);
         return Right(LocationResponse(
           latitude: locationData.latitude,
           longitude: locationData.longitude,
@@ -56,6 +64,7 @@ class LocationClient {
               locationData.elapsedRealtimeUncertaintyNanos,
           satelliteNumber: locationData.satelliteNumber,
           provider: locationData.provider,
+          placemarks: placemark,
         ));
       } catch (e) {
         return Left(LocationFailure(message: e.toString()));

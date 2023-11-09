@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:geocoding/geocoding.dart';
 
 part 'location.freezed.dart';
 
@@ -20,5 +21,6 @@ class Location with _$Location {
     double? elapsedRealtimeUncertaintyNanos,
     int? satelliteNumber,
     String? provider,
+    List<Placemark>? placemarks,
   }) = _Location;
 }

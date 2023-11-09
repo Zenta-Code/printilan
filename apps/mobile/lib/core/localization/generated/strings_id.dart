@@ -8,6 +8,9 @@ class StringsId extends Strings {
   String get about => 'Tentang';
 
   @override
+  String get activity => 'Aktvitas';
+
+  @override
   String get address => 'Alamat';
 
   @override
@@ -50,6 +53,15 @@ class StringsId extends Strings {
   String get getStarted => 'Mulai';
 
   @override
+  String get history => 'Riwayat';
+
+  @override
+  String get last_activity => 'Aktivitas Terakhir';
+
+  @override
+  String get location => 'Lokasi';
+
+  @override
   String get login => 'Masuk';
 
   @override
@@ -65,6 +77,12 @@ class StringsId extends Strings {
   String get no => 'Tidak';
 
   @override
+  String get our_services => 'Layanan Kami';
+
+  @override
+  String get paper => 'Kertas';
+
+  @override
   String get password => 'Kata Sandi';
 
   @override
@@ -72,6 +90,9 @@ class StringsId extends Strings {
 
   @override
   String get pleaseWait => 'Harap tunggu...';
+
+  @override
+  String get profile => 'Profil';
 
   @override
   String get register => 'Daftar';
@@ -98,17 +119,11 @@ class StringsId extends Strings {
   String get themeSystem => 'Tema Sistem';
 
   @override
+  String get wallet => 'Dompet';
+
+  @override
   String get welcomeTo => 'Selamat datang di';
 
   @override
   String get yes => 'Ya';
-
-  @override
-  String get history => 'Riwayat';
-
-  @override
-  String get wallet => 'Dompet';
-
-  @override
-  String get profile => 'Profil';
 }
