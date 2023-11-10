@@ -34,6 +34,6 @@ export const createSocket = (server: Express) => {
       });
     });
   });
-  console.log(`Socket Ready at http://localhost:3001 🚀`);
+  console.log(`Socket Ready Launched 🚀`);
   return httpServer;
 };
