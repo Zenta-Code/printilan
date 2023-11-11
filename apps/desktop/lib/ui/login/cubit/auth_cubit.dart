@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing_admin/core/core.dart';
-import 'package:sky_printing_admin/module/login/usecase/post_login.dart';
+import 'package:sky_printing_admin/ui/login/usecase/post_login.dart';
 import 'package:sky_printing_admin/utils/utils.dart';
 
 part 'auth_cubit.freezed.dart';

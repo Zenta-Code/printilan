@@ -23,11 +23,14 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.on("connected", () => {
   console.log("Connected to MongoDB 🚀");
 
-  const socketServer = createSocket(server);
-  socketServer.listen(port, () => {
-    console.log(`API Ready at http://localhost:${port} 🚀`);
-  });
-
+  try {
+    const socketServer = createSocket(server);
+    socketServer.listen(port, () => {
+      console.log(`API Ready at http://localhost:${port} 🚀`);
+    });
+  } catch (err) {
+    console.log(err);
+  }
   // try {
   //   console.log("====== API ENDPOINTS ======\n");
   //   console.log(listEndpoint(server));

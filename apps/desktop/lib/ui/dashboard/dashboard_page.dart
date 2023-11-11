@@ -1,21 +1,13 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing_admin/core/core.dart';
-import 'package:sky_printing_admin/module/dashboard/cubit/dashboard_cubit.dart';
+import 'package:sky_printing_admin/core/widgets/empty.dart';
+import 'package:sky_printing_admin/core/widgets/loading.dart';
+import 'package:sky_printing_admin/ui/dashboard/cubit/dashboard_cubit.dart';
 import 'package:sky_printing_admin/utils/utils.dart';
 
-class DashboardPage extends StatefulWidget {
+class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
-
-  @override
-  State<DashboardPage> createState() => _DashboardPageState();
-}
-
-class _DashboardPageState extends State<DashboardPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

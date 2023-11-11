@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/core/widgets/window_button.dart';
+import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
 import 'package:sky_printing_admin/utils/helper/constant.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -147,7 +148,13 @@ class _MainPageState extends State<MainPage>
       title: const Text('Order'),
       body: const SizedBox.shrink(),
     ),
-    PaneItemHeader(header: const Text('Inputs')),
+    PaneItem(
+      key: const ValueKey('/printer'),
+      icon: const Icon(FluentIcons.print),
+      title: const Text('Printer'),
+      body: const SizedBox.shrink(),
+    ),
+    PaneItemHeader(header: const Text('')),
   ].map((e) {
     if (e is PaneItem) {
       return PaneItem(
@@ -167,6 +174,15 @@ class _MainPageState extends State<MainPage>
     return e;
   }).toList();
   late final List<NavigationPaneItem> footerItems = [
+    PaneItem(
+      key: const ValueKey('/signout'),
+      icon: Icon(FluentIcons.sign_out),
+      title: const Text('Sign out'),
+      body: const SizedBox.shrink(),
+      onTap: () {
+        context.read<AuthCubit>().logout();
+      },
+    ),
     PaneItemSeparator(),
     PaneItem(
       key: const ValueKey('/settings'),

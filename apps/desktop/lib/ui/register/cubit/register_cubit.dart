@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing_admin/core/core.dart';
-import 'package:sky_printing_admin/models/register/register.dart'; 
-import 'package:sky_printing_admin/module/register/usecase/post_register.dart';
+import 'package:sky_printing_admin/models/register/register.dart';
+import 'package:sky_printing_admin/ui/register/usecase/post_register.dart';
 import 'package:sky_printing_admin/utils/utils.dart';
 
 part 'register_cubit.freezed.dart';

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/core/widgets/window_button.dart';
-import 'package:sky_printing_admin/module/login/cubit/auth_cubit.dart';
-import 'package:sky_printing_admin/module/login/usecase/post_login.dart';
+import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
+import 'package:sky_printing_admin/ui/login/usecase/post_login.dart';
 import 'package:sky_printing_admin/utils/helper/constant.dart';
 import 'package:window_manager/window_manager.dart';
 

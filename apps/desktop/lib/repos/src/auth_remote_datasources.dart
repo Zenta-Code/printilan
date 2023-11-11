@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:sky_printing_admin/core/core.dart'; 
-import 'package:sky_printing_admin/models/login/login_response.dart'; 
+import 'package:sky_printing_admin/core/core.dart';
+import 'package:sky_printing_admin/models/login/login_response.dart';
 import 'package:sky_printing_admin/models/register/register_response.dart';
-import 'package:sky_printing_admin/module/login/usecase/post_login.dart';
-import 'package:sky_printing_admin/module/register/usecase/post_register.dart';
+import 'package:sky_printing_admin/ui/login/usecase/post_login.dart';
+import 'package:sky_printing_admin/ui/register/usecase/post_register.dart';
 
 abstract class AuthRemoteDatasource {
   Future<Either<Failure, RegisterResponse>> register(

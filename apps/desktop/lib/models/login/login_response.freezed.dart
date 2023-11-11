@@ -23,7 +23,7 @@ mixin _$LoginResponse {
   int? get id => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
-  dynamic? get user => throw _privateConstructorUsedError;
+  dynamic get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $LoginResponseCopyWith<$Res> {
           LoginResponse value, $Res Function(LoginResponse) then) =
       _$LoginResponseCopyWithImpl<$Res, LoginResponse>;
   @useResult
-  $Res call({int? id, String? token, String? error, dynamic? user});
+  $Res call({int? id, String? token, String? error, dynamic user});
 }
 
 /// @nodoc
@@ -74,7 +74,7 @@ class _$LoginResponseCopyWithImpl<$Res, $Val extends LoginResponse>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as dynamic,
     ) as $Val);
   }
 }
@@ -87,7 +87,7 @@ abstract class _$$LoginResponseImplCopyWith<$Res>
       __$$LoginResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? token, String? error, dynamic? user});
+  $Res call({int? id, String? token, String? error, dynamic user});
 }
 
 /// @nodoc
@@ -122,7 +122,7 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as dynamic?,
+              as dynamic,
     ));
   }
 }
@@ -143,7 +143,7 @@ class _$LoginResponseImpl extends _LoginResponse {
   @override
   final String? error;
   @override
-  final dynamic? user;
+  final dynamic user;
 
   @override
   String toString() {
@@ -185,7 +185,7 @@ abstract class _LoginResponse extends LoginResponse {
       {final int? id,
       final String? token,
       final String? error,
-      final dynamic? user}) = _$LoginResponseImpl;
+      final dynamic user}) = _$LoginResponseImpl;
   const _LoginResponse._() : super._();
 
   factory _LoginResponse.fromJson(Map<String, dynamic> json) =
@@ -198,7 +198,7 @@ abstract class _LoginResponse extends LoginResponse {
   @override
   String? get error;
   @override
-  dynamic? get user;
+  dynamic get user;
   @override
   @JsonKey(ignore: true)
   _$$LoginResponseImplCopyWith<_$LoginResponseImpl> get copyWith =>

@@ -4,11 +4,11 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   flutter_acrylic
-  printing
   screen_retriever
   system_theme
   url_launcher_windows
   window_manager
+  windows_printing
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

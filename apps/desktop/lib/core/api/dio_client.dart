@@ -6,9 +6,7 @@ import 'package:sky_printing_admin/utils/utils.dart';
 typedef ResponseConverter<T> = T Function(dynamic response);
 
 class DioClient with MainBoxMixin {
-  // final String _baseUrl = 'http://192.168.34.169:3001';
-  // final String _baseUrl = "https://reqres.in";
-  final String _baseUrl = "http://localhost:3000";
+  final String _baseUrl = const String.fromEnvironment("SERVER_URL");
 
   String? _auth;
   bool _isUnitTest = false;

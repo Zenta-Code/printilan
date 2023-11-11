@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:sky_printing_admin/core/core.dart';
-import 'package:sky_printing_admin/models/login/login.dart'; 
-import 'package:sky_printing_admin/models/register/register.dart'; 
-import 'package:sky_printing_admin/module/login/usecase/post_login.dart';
-import 'package:sky_printing_admin/module/register/usecase/post_register.dart';
+import 'package:sky_printing_admin/models/login/login.dart';
+import 'package:sky_printing_admin/models/register/register.dart';
 import 'package:sky_printing_admin/repos/src/auth_remote_datasources.dart';
+import 'package:sky_printing_admin/ui/login/usecase/post_login.dart';
+import 'package:sky_printing_admin/ui/register/usecase/post_register.dart';
 import 'package:sky_printing_admin/utils/services/hive/hive.dart';
 
 abstract class AuthRepository {

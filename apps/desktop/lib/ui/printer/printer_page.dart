@@ -1,0 +1,88 @@
+import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sky_printing_admin/core/resources/resources.dart';
+import 'package:sky_printing_admin/core/widgets/empty.dart';
+import 'package:sky_printing_admin/core/widgets/loading.dart';
+import 'package:sky_printing_admin/ui/printer/bloc/printer_bloc.dart';
+import 'package:windows_printing_models/windows_printing_models.dart';
+
+class PrinterPage extends StatefulWidget {
+  const PrinterPage({super.key});
+
+  @override
+  State<PrinterPage> createState() => _PrinterPageState();
+}
+
+class _PrinterPageState extends State<PrinterPage> {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PrinterBloc, PrinterState>(
+      builder: (context, state) => state.when(
+        loading: () => Center(
+          child: Loading(),
+        ),
+        empty: () => Center(
+          child: Empty(),
+        ),
+        failure: (message) => Center(
+          child: Empty(
+            errorMessage: message,
+          ),
+        ),
+        success: (data) {
+          final List<Printer> printers = data;
+          return ScaffoldPage.scrollable(
+            header: const PageHeader(
+              title: Text('Printer'),
+            ),
+            children: [
+              Row(
+                children: [
+                  Container(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          for (var printer in printers) ...[
+                            Container(
+                              margin: EdgeInsets.all(Dimens.space8),
+                              child: Card(
+                                child: Column(
+                                  children: [
+                                    Text(printer.printerName ?? ''),
+                                    SizedBox(
+                                      height: Dimens.space8,
+                                    ),
+                                    Text(printer.portName ?? ''),
+                                    SizedBox(
+                                      height: Dimens.space8,
+                                    ),
+                                    Text(printer.printProcessor ?? ''),
+                                    SizedBox(
+                                      height: Dimens.space8,
+                                    ),
+                                    Text(printer.cJobs.toString()),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ]
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    color: Colors.blue,
+                    width: 100,
+                    child: Center(
+                      child: Text('data'),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}

@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing_admin/dependencies_injection.dart';
-import 'package:sky_printing_admin/module/dashboard/cubit/dashboard_cubit.dart';
-import 'package:sky_printing_admin/module/login/cubit/auth_cubit.dart';
-import 'package:sky_printing_admin/module/login/login_page.dart';
-import 'package:sky_printing_admin/module/main/cubit/main_cubit.dart';
-import 'package:sky_printing_admin/module/main/main_page.dart';
-import 'package:sky_printing_admin/module/order/order_page.dart';
-import 'package:sky_printing_admin/module/register/cubit/register_cubit.dart';
-import 'package:sky_printing_admin/module/register/register_page.dart';
-import 'package:sky_printing_admin/module/settings/settings.dart';
+import 'package:sky_printing_admin/ui/dashboard/cubit/dashboard_cubit.dart';
+import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
+import 'package:sky_printing_admin/ui/login/login_page.dart';
+import 'package:sky_printing_admin/ui/main/cubit/main_cubit.dart';
+import 'package:sky_printing_admin/ui/main/main_page.dart';
+import 'package:sky_printing_admin/ui/order/order_page.dart';
+import 'package:sky_printing_admin/ui/printer/bloc/printer_bloc.dart';
+import 'package:sky_printing_admin/ui/printer/printer_page.dart';
+import 'package:sky_printing_admin/ui/register/cubit/register_cubit.dart';
+import 'package:sky_printing_admin/ui/register/register_page.dart';
+import 'package:sky_printing_admin/ui/settings/settings.dart';
 import 'package:sky_printing_admin/utils/utils.dart';
 
-import '../module/dashboard/dashboard_page.dart';
+import '../ui/dashboard/dashboard_page.dart';
 
 enum Routes {
   root("/"),
@@ -22,6 +24,7 @@ enum Routes {
   /// Home Page
   dashboard("/dashboard"),
   order("/order"),
+  printer("/printer"),
   settings("/settings"),
 
   // Auth Page
@@ -78,6 +81,14 @@ class AppRoute {
             path: Routes.order.path,
             name: Routes.order.name,
             builder: (_, __) => const OrderPage(),
+          ),
+          GoRoute(
+            path: Routes.printer.path,
+            name: Routes.printer.name,
+            builder: (_, __) => BlocProvider(
+              create: (_) => sl<PrinterBloc>()..fetchPrinters(),
+              child: const PrinterPage(),
+            ),
           ),
           GoRoute(
             path: Routes.settings.path,

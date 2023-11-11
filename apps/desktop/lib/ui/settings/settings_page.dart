@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing_admin/core/core.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/dependencies_injection.dart';
-import 'package:sky_printing_admin/module/settings/cubit/settings_cubit.dart';
+import 'package:sky_printing_admin/ui/settings/cubit/settings_cubit.dart';
 import 'package:sky_printing_admin/utils/utils.dart';
 
 class SettingsPage extends StatefulWidget {
