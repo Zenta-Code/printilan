@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'location.dart';
+part of 'location_entity.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$Location {
+mixin _$LocationEntity {
   double? get latitude => throw _privateConstructorUsedError;
   double? get longitude => throw _privateConstructorUsedError;
   double? get accuracy => throw _privateConstructorUsedError;
@@ -35,14 +35,15 @@ mixin _$Location {
   List<Placemark>? get placemarks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $LocationCopyWith<Location> get copyWith =>
+  $LocationEntityCopyWith<LocationEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LocationCopyWith<$Res> {
-  factory $LocationCopyWith(Location value, $Res Function(Location) then) =
-      _$LocationCopyWithImpl<$Res, Location>;
+abstract class $LocationEntityCopyWith<$Res> {
+  factory $LocationEntityCopyWith(
+          LocationEntity value, $Res Function(LocationEntity) then) =
+      _$LocationEntityCopyWithImpl<$Res, LocationEntity>;
   @useResult
   $Res call(
       {double? latitude,
@@ -64,9 +65,9 @@ abstract class $LocationCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LocationCopyWithImpl<$Res, $Val extends Location>
-    implements $LocationCopyWith<$Res> {
-  _$LocationCopyWithImpl(this._value, this._then);
+class _$LocationEntityCopyWithImpl<$Res, $Val extends LocationEntity>
+    implements $LocationEntityCopyWith<$Res> {
+  _$LocationEntityCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -164,11 +165,11 @@ class _$LocationCopyWithImpl<$Res, $Val extends Location>
 }
 
 /// @nodoc
-abstract class _$$LocationImplCopyWith<$Res>
-    implements $LocationCopyWith<$Res> {
-  factory _$$LocationImplCopyWith(
-          _$LocationImpl value, $Res Function(_$LocationImpl) then) =
-      __$$LocationImplCopyWithImpl<$Res>;
+abstract class _$$LocationEntityImplCopyWith<$Res>
+    implements $LocationEntityCopyWith<$Res> {
+  factory _$$LocationEntityImplCopyWith(_$LocationEntityImpl value,
+          $Res Function(_$LocationEntityImpl) then) =
+      __$$LocationEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -191,11 +192,11 @@ abstract class _$$LocationImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$LocationImplCopyWithImpl<$Res>
-    extends _$LocationCopyWithImpl<$Res, _$LocationImpl>
-    implements _$$LocationImplCopyWith<$Res> {
-  __$$LocationImplCopyWithImpl(
-      _$LocationImpl _value, $Res Function(_$LocationImpl) _then)
+class __$$LocationEntityImplCopyWithImpl<$Res>
+    extends _$LocationEntityCopyWithImpl<$Res, _$LocationEntityImpl>
+    implements _$$LocationEntityImplCopyWith<$Res> {
+  __$$LocationEntityImplCopyWithImpl(
+      _$LocationEntityImpl _value, $Res Function(_$LocationEntityImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -218,7 +219,7 @@ class __$$LocationImplCopyWithImpl<$Res>
     Object? provider = freezed,
     Object? placemarks = freezed,
   }) {
-    return _then(_$LocationImpl(
+    return _then(_$LocationEntityImpl(
       latitude: freezed == latitude
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
@@ -290,8 +291,8 @@ class __$$LocationImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LocationImpl implements _Location {
-  const _$LocationImpl(
+class _$LocationEntityImpl implements _LocationEntity {
+  const _$LocationEntityImpl(
       {this.latitude,
       this.longitude,
       this.accuracy,
@@ -352,14 +353,14 @@ class _$LocationImpl implements _Location {
 
   @override
   String toString() {
-    return 'Location(latitude: $latitude, longitude: $longitude, accuracy: $accuracy, verticalAccuracy: $verticalAccuracy, altitude: $altitude, speed: $speed, speedAccuracy: $speedAccuracy, heading: $heading, time: $time, isMock: $isMock, headingAccuracy: $headingAccuracy, elapsedRealtimeNanos: $elapsedRealtimeNanos, elapsedRealtimeUncertaintyNanos: $elapsedRealtimeUncertaintyNanos, satelliteNumber: $satelliteNumber, provider: $provider, placemarks: $placemarks)';
+    return 'LocationEntity(latitude: $latitude, longitude: $longitude, accuracy: $accuracy, verticalAccuracy: $verticalAccuracy, altitude: $altitude, speed: $speed, speedAccuracy: $speedAccuracy, heading: $heading, time: $time, isMock: $isMock, headingAccuracy: $headingAccuracy, elapsedRealtimeNanos: $elapsedRealtimeNanos, elapsedRealtimeUncertaintyNanos: $elapsedRealtimeUncertaintyNanos, satelliteNumber: $satelliteNumber, provider: $provider, placemarks: $placemarks)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LocationImpl &&
+            other is _$LocationEntityImpl &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude) &&
             (identical(other.longitude, longitude) ||
@@ -415,12 +416,13 @@ class _$LocationImpl implements _Location {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>
-      __$$LocationImplCopyWithImpl<_$LocationImpl>(this, _$identity);
+  _$$LocationEntityImplCopyWith<_$LocationEntityImpl> get copyWith =>
+      __$$LocationEntityImplCopyWithImpl<_$LocationEntityImpl>(
+          this, _$identity);
 }
 
-abstract class _Location implements Location {
-  const factory _Location(
+abstract class _LocationEntity implements LocationEntity {
+  const factory _LocationEntity(
       {final double? latitude,
       final double? longitude,
       final double? accuracy,
@@ -436,7 +438,7 @@ abstract class _Location implements Location {
       final double? elapsedRealtimeUncertaintyNanos,
       final int? satelliteNumber,
       final String? provider,
-      final List<Placemark>? placemarks}) = _$LocationImpl;
+      final List<Placemark>? placemarks}) = _$LocationEntityImpl;
 
   @override
   double? get latitude;
@@ -472,6 +474,6 @@ abstract class _Location implements Location {
   List<Placemark>? get placemarks;
   @override
   @JsonKey(ignore: true)
-  _$$LocationImplCopyWith<_$LocationImpl> get copyWith =>
+  _$$LocationEntityImplCopyWith<_$LocationEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

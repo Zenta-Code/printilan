@@ -1,11 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geocoding/geocoding.dart';
 
-part 'location.freezed.dart';
+part 'location_entity.freezed.dart';
 
 @freezed
-class Location with _$Location {
-  const factory Location({
+class LocationEntity with _$LocationEntity {
+  const factory LocationEntity({
     double? latitude,
     double? longitude,
     double? accuracy,
@@ -22,5 +22,5 @@ class Location with _$Location {
     int? satelliteNumber,
     String? provider,
     List<Placemark>? placemarks,
-  }) = _Location;
+  }) = _LocationEntity;
 }
