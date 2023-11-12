@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geocoding/geocoding.dart' hide Location;
-import 'package:sky_printing_domain/enitities/location.dart';
+import 'package:sky_printing_domain/enitities/location_entity.dart'; 
 
 part 'location_response.freezed.dart';
 part 'location_response.g.dart';
@@ -32,8 +32,8 @@ class LocationResponse with _$LocationResponse {
   factory LocationResponse.fromJson(Map<String, dynamic> json) =>
       _$LocationResponseFromJson(json);
 
-  Location toEntity() {
-    return Location(
+  LocationEntity toEntity() {
+    return LocationEntity(
       latitude: latitude,
       longitude: longitude,
       accuracy: accuracy,

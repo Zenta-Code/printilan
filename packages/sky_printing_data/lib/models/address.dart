@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sky_printing_domain/enitities/address_entity.dart';
 
 part 'address.freezed.dart';
 part 'address.g.dart';
@@ -11,13 +12,17 @@ class Address with _$Address {
     String? state,
     String? country,
     String? zipcode,
-  }) =_Address;
+  }) = _Address;
 
   const Address._();
 
-  factory Address.fromJson(Map<String, dynamic>json) =>
-   _$AddressFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
 
-  Address toEntity() => Address(street: street, city: city, state: state, country: country, zipcode: zipcode);
-  
+  AddressEntity toEntity() => AddressEntity(
+      street: street,
+      city: city,
+      state: state,
+      country: country,
+      zipcode: zipcode);
 }
