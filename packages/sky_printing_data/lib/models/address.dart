@@ -18,6 +18,6 @@ class Address with _$Address {
   factory Address.fromJson(Map<String, dynamic>json) =>
    _$AddressFromJson(json);
 
-  Address toEntity() => Address(street: street);
+  Address toEntity() => Address(street: street, city: city, state: state, country: country, zipcode: zipcode);
   
 }

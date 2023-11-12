@@ -11,12 +11,12 @@ class Store with _$Store {
     Address? address,
     String? phone,
     String? ownerId,
-  })=_Store;
-  
+  }) = _Store;
+
   const Store._();
 
-  factory Store.fromJson(Map<String, dynamic>json) =>
-   _$StoreFromJson(json);
+  factory Store.fromJson(Map<String, dynamic> json) => _$StoreFromJson(json);
 
-  Store toEntity() => Store(name: name);
+  Store toEntity() =>
+      Store(name: name, address: address, phone: phone, ownerId: ownerId);
 }

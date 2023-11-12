@@ -13,13 +13,19 @@ class Document with _$Document {
     bool? color,
     int? price,
     int? copies,
-  }) =_Document;
+  }) = _Document;
 
   const Document._();
 
-  factory Document.fromJson(Map<String, dynamic>json) =>
-   _$DocumentFromJson(json);
+  factory Document.fromJson(Map<String, dynamic> json) =>
+      _$DocumentFromJson(json);
 
-  Document toEntity() => Document(name: name);
-  
+  Document toEntity() => Document(
+      name: name,
+      type: type,
+      count: count,
+      size: size,
+      color: color,
+      price: price,
+      copies: copies);
 }
