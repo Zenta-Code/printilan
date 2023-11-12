@@ -6,7 +6,7 @@ part 'store_entity.freezed.dart';
 
 @freezed
 class StoreEntity with _$StoreEntity {
-  const factory Store({
+  const factory StoreEntity({
     String? name,
     Address? address,
     String? phone,
