@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import { Express } from "express";
+import { Server } from "http";
 import mongoose from "mongoose";
 import { createServer } from "./server";
 import { createSocket } from "./socket";
@@ -23,8 +24,8 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.on("connected", () => {
   console.log("Connected to MongoDB 🚀");
 
+  const socketServer = createSocket(server) as Server;
   try {
-    const socketServer = createSocket(server);
     socketServer.listen(port, () => {
       console.log(`API Ready at http://localhost:${port} 🚀`);
     });

@@ -75,6 +75,10 @@ dependencies:
   file_picker: ^6.1.1
   meta: ^1.9.1
 
+  # Sky Printing Monolith packages modules
+  sky_printing_data:
+    path: ../../packages/sky_printing_data
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

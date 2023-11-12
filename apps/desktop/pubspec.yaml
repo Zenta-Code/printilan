@@ -48,6 +48,10 @@ dependencies:
   windows_printing_models:
     path: ../../packages/windows_printing_models
 
+    # Sky Printing packages modules
+  sky_printing_data:
+    path: ../../packages/sky_printing_data
+
 dev_dependencies:
   bloc_test: ^9.1.5
   build_runner: ^2.4.6

@@ -963,6 +963,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sky_printing_data:
+    dependency: "direct main"
+    description:
+      path: "../../packages/sky_printing_data"
+      relative: true
+    source: path
+    version: "0.0.1"
   socket_io_client:
     dependency: "direct main"
     description:

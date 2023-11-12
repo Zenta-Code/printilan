@@ -36,52 +36,42 @@ class _PrinterPageState extends State<PrinterPage> {
               title: Text('Printer'),
             ),
             children: [
-              Row(
-                children: [
-                  Container(
-                    child: Center(
-                      child: Column(
-                        children: [
-                          for (var printer in printers) ...[
-                            Container(
-                              margin: EdgeInsets.all(Dimens.space8),
-                              child: Card(
-                                child: Column(
-                                  children: [
-                                    Text(printer.printerName ?? ''),
-                                    SizedBox(
-                                      height: Dimens.space8,
-                                    ),
-                                    Text(printer.portName ?? ''),
-                                    SizedBox(
-                                      height: Dimens.space8,
-                                    ),
-                                    Text(printer.printProcessor ?? ''),
-                                    SizedBox(
-                                      height: Dimens.space8,
-                                    ),
-                                    Text(printer.cJobs.toString()),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ]
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    color: Colors.blue,
-                    width: 100,
-                    child: Center(
-                      child: Text('data'),
-                    ),
-                  )
-                ],
+              GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: Dimens.space8,
+                  crossAxisSpacing: Dimens.space8,
+                ),
+                itemCount: printers.length,
+                itemBuilder: (context, index) {
+                  final Printer printer = printers[index];
+                  return buildPrinterCard(
+                    name: printer.printerName ?? '',
+                    countJobs: printer.cJobs.toString() ?? '',
+                  );
+                },
               ),
             ],
           );
         },
+      ),
+    );
+  }
+
+  Widget buildPrinterCard({required String name, required String countJobs}) {
+    return Container(
+      margin: EdgeInsets.all(Dimens.space8),
+      width: MediaQuery.of(context).size.width / 2 - Dimens.space16,
+      child: Card(
+        child: Column(
+          children: [
+            Text(name),
+            SizedBox(
+              height: Dimens.space8,
+            ),
+            Text(countJobs),
+          ],
+        ),
       ),
     );
   }
