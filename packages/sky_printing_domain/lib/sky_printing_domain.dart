@@ -1,7 +1,5 @@
 library sky_printing_domain;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'repositories/a_repositories.dart';
+export 'usecases/a_usecases.dart';
+export 'entities/a_entities.dart';

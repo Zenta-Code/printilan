@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geocoding/geocoding.dart' hide Location;
-import 'package:sky_printing_domain/enitities/location_entity.dart'; 
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'location_response.freezed.dart';
 part 'location_response.g.dart';

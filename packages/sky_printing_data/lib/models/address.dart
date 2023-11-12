@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sky_printing_domain/enitities/address_entity.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'address.freezed.dart';
 part 'address.g.dart';
