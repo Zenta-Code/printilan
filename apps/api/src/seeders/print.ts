@@ -1,4 +1,4 @@
-type Print = {
+export type Print = {
   brand: string;
   model: string;
   type: string;
