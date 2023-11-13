@@ -5,3 +5,4 @@ export 'location_entity.dart';
 export 'order_entity.dart';
 export 'store_entity.dart';
 export 'user_entity.dart';
+export 'register_entity.dart';

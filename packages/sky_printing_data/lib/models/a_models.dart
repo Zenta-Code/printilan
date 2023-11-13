@@ -7,3 +7,4 @@ export 'login_response.dart';
 export 'order.dart';
 export 'store.dart';
 export 'user.dart';
+export 'register_response.dart';
