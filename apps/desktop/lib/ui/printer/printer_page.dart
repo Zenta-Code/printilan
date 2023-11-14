@@ -18,10 +18,10 @@ class _PrinterPageState extends State<PrinterPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<PrinterBloc, PrinterState>(
       builder: (context, state) => state.when(
-        loading: () => Center(
+        loading: () => const Center(
           child: Loading(),
         ),
-        empty: () => Center(
+        empty: () => const Center(
           child: Empty(),
         ),
         failure: (message) => Center(

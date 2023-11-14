@@ -1,6 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sky_printing_admin/core/core.dart';
 import 'package:sky_printing_admin/core/widgets/empty.dart';
 import 'package:sky_printing_admin/core/widgets/loading.dart';
 import 'package:sky_printing_admin/ui/dashboard/cubit/dashboard_cubit.dart';
@@ -16,10 +15,10 @@ class DashboardPage extends StatelessWidget {
     return BlocBuilder<DashboardCubit, DashboardState>(
         builder: (context, state) {
       return state.when(
-        loading: () => Center(
+        loading: () => const Center(
           child: Loading(),
         ),
-        empty: () => Center(
+        empty: () => const Center(
           child: Empty(),
         ),
         failure: (message) => Center(

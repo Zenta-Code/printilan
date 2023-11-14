@@ -11,6 +11,6 @@ class ConnectSocket extends UseCase<void, void> {
   @override
   Future<Either<Failure, void>> call(void params) {
     _client.connect();
-    return Future.value(Right(null));
+    return Future.value(const Right(null));
   }
 }

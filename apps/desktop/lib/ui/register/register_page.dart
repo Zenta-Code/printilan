@@ -61,7 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
           },
         );
       },
-      child: Center(
+      child: const Center(
         child: SingleChildScrollView(
           child: Text('Setting'),
         ),

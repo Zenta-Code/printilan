@@ -11,7 +11,7 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   @override
   Widget build(BuildContext context) {
-    return Parent(
+    return const Parent(
       child: Text('HistoryPage'),
     );
   }

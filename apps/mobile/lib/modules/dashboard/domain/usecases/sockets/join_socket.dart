@@ -10,6 +10,6 @@ class JoinSocket extends UseCase<void, String> {
   @override
   Future<Either<Failure, void>> call(String room) {
     _client.join(room);
-    return Future.value(Right(null));
+    return Future.value(const Right(null));
   }
 }

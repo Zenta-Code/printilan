@@ -3,10 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/modules/dashboard/domain/usecases/get_location.dart';
 import 'package:sky_printing/modules/dashboard/ui/cubit/dashboard_cubit.dart';
-import 'package:sky_printing/utils/ext/ext.dart';
 
 class DashboardPage extends StatefulWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  const DashboardPage({super.key});
 
   @override
   State<DashboardPage> createState() => _DashboardPageState();
@@ -25,15 +24,15 @@ class _DashboardPageState extends State<DashboardPage> {
     return Parent(
       child: RefreshIndicator(
         onRefresh: () async {
-          context.read<DashboardCubit>().getLocation(LocationParams());
+          context.read<DashboardCubit>().getLocation(const LocationParams());
         },
         child: BlocBuilder<DashboardCubit, DashboardState>(
           builder: (context, state) {
             return state.when(
-              loading: () => Center(
+              loading: () => const Center(
                 child: Loading(),
               ),
-              empty: () => Center(
+              empty: () => const Center(
                 child: Empty(),
               ),
               failure: (message) => Center(
@@ -61,15 +60,15 @@ class _DashboardPageState extends State<DashboardPage> {
                                       .space36), // Add some space at the top
                               Row(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 16.0),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 16.0),
                                     child: Icon(
                                       Icons.location_on,
                                       color: Colors
                                           .black, // Change color as needed
                                     ),
                                   ),
-                                  SizedBox(width: 8.0),
+                                  const SizedBox(width: 8.0),
                                   Text(
                                     Strings.of(context)!.location,
                                     style:
@@ -100,11 +99,10 @@ class _DashboardPageState extends State<DashboardPage> {
                               children: [
                                 Row(
                                   children: [
-                                    SizedBox(width: 8.0),
+                                    const SizedBox(width: 8.0),
                                     Text(
                                       "Last Activity",
-                                      style: Theme.of(context)!
-                                          .textTheme
+                                      style: Theme.of(context).textTheme
                                           .bodyLarge,
                                     ),
                                   ],
@@ -119,20 +117,19 @@ class _DashboardPageState extends State<DashboardPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
+                                      const Padding(
                                         padding:
-                                            const EdgeInsets.only(left: 15.0),
+                                            EdgeInsets.only(left: 15.0),
                                         child: Icon(
                                           Icons.print,
                                           color: Colors
                                               .black, // Change color as needed
                                         ),
                                       ),
-                                      SizedBox(width: 8.0),
+                                      const SizedBox(width: 8.0),
                                       Text(
                                         "Print",
-                                        style: Theme.of(context)!
-                                            .textTheme
+                                        style: Theme.of(context).textTheme
                                             .bodySmall,
                                       ),
                                     ],

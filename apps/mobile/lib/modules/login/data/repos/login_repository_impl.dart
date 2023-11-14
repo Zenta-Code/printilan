@@ -32,7 +32,7 @@ class LoginRepositoryImpl implements LoginRepository {
 
     return response.fold(
       (failure) => Left(failure),
-      (meResponse) => Right(true),
+      (meResponse) => const Right(true),
     );
   }
 }

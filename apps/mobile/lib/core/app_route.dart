@@ -88,12 +88,12 @@ class AppRoute {
           GoRoute(
             path: Routes.history.path,
             name: Routes.history.name,
-            builder: (context, state) => HistoryPage(),
+            builder: (context, state) => const HistoryPage(),
           ),
           GoRoute(
             path: Routes.wallet.path,
             name: Routes.wallet.name,
-            builder: (context, state) => WalletPage(),
+            builder: (context, state) => const WalletPage(),
           ),
           GoRoute(
             path: Routes.settings.path,
@@ -114,7 +114,7 @@ class AppRoute {
           MainBoxMixin.mainBox?.get(MainBoxKeys.token.name) as String?;
       final me =
           await context.read<LoginCubit>().me(MeParams(token: token ?? ''));
-      log.e('IS AUTH: ${me}');
+      log.e('IS AUTH: $me');
 
       if (!((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
           false)) {

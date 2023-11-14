@@ -176,7 +176,7 @@ class _MainPageState extends State<MainPage>
   late final List<NavigationPaneItem> footerItems = [
     PaneItem(
       key: const ValueKey('/signout'),
-      icon: Icon(FluentIcons.sign_out),
+      icon: const Icon(FluentIcons.sign_out),
       title: const Text('Sign out'),
       body: const SizedBox.shrink(),
       onTap: () {

@@ -15,7 +15,7 @@ class DashboardCubit extends Cubit<DashboardState> {
   final user = sl<MainBoxMixin>().getData(MainBoxKeys.user);
 
   Future<void> fetchData() async {
-    Map<String, dynamic> data = {
+    Map<String, dynamic>? data = {
       "order": [],
       "bundle": [],
     };
@@ -40,7 +40,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     );
     bundle.fold(
       (l) => null,
-      (r) => data!['bundle'] = r,
+      (r) => data['bundle'] = r,
     );
     emit(data != null
         ? DashboardState.success(data)

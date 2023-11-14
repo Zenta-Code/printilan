@@ -12,6 +12,6 @@ class SendSocket extends UseCase<void, SocketParams> {
   @override
   Future<Either<Failure, dynamic>> call(SocketParams params) {
     _client.send(params.receiver, params.sender, params.roomId, params.content);
-    return Future.value(Right(null));
+    return Future.value(const Right(null));
   }
 }
