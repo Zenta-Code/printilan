@@ -19,7 +19,7 @@ mixin _$RegisterState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Register? data) success,
+    required TResult Function(RegisterEntity? data) success,
     required TResult Function(String message) failure,
     required TResult Function() init,
     required TResult Function() showHidePassword,
@@ -28,7 +28,7 @@ mixin _$RegisterState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Register? data)? success,
+    TResult? Function(RegisterEntity? data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? init,
     TResult? Function()? showHidePassword,
@@ -37,7 +37,7 @@ mixin _$RegisterState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Register? data)? success,
+    TResult Function(RegisterEntity? data)? success,
     TResult Function(String message)? failure,
     TResult Function()? init,
     TResult Function()? showHidePassword,
@@ -131,7 +131,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Register? data) success,
+    required TResult Function(RegisterEntity? data) success,
     required TResult Function(String message) failure,
     required TResult Function() init,
     required TResult Function() showHidePassword,
@@ -143,7 +143,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Register? data)? success,
+    TResult? Function(RegisterEntity? data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? init,
     TResult? Function()? showHidePassword,
@@ -155,7 +155,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Register? data)? success,
+    TResult Function(RegisterEntity? data)? success,
     TResult Function(String message)? failure,
     TResult Function()? init,
     TResult Function()? showHidePassword,
@@ -218,9 +218,9 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Register? data});
+  $Res call({RegisterEntity? data});
 
-  $RegisterCopyWith<$Res>? get data;
+  $RegisterEntityCopyWith<$Res>? get data;
 }
 
 /// @nodoc
@@ -240,18 +240,18 @@ class __$$SuccessImplCopyWithImpl<$Res>
       freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Register?,
+              as RegisterEntity?,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $RegisterCopyWith<$Res>? get data {
+  $RegisterEntityCopyWith<$Res>? get data {
     if (_value.data == null) {
       return null;
     }
 
-    return $RegisterCopyWith<$Res>(_value.data!, (value) {
+    return $RegisterEntityCopyWith<$Res>(_value.data!, (value) {
       return _then(_value.copyWith(data: value));
     });
   }
@@ -263,7 +263,7 @@ class _$SuccessImpl implements _Success {
   const _$SuccessImpl(this.data);
 
   @override
-  final Register? data;
+  final RegisterEntity? data;
 
   @override
   String toString() {
@@ -291,7 +291,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Register? data) success,
+    required TResult Function(RegisterEntity? data) success,
     required TResult Function(String message) failure,
     required TResult Function() init,
     required TResult Function() showHidePassword,
@@ -303,7 +303,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Register? data)? success,
+    TResult? Function(RegisterEntity? data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? init,
     TResult? Function()? showHidePassword,
@@ -315,7 +315,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Register? data)? success,
+    TResult Function(RegisterEntity? data)? success,
     TResult Function(String message)? failure,
     TResult Function()? init,
     TResult Function()? showHidePassword,
@@ -369,9 +369,9 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements RegisterState {
-  const factory _Success(final Register? data) = _$SuccessImpl;
+  const factory _Success(final RegisterEntity? data) = _$SuccessImpl;
 
-  Register? get data;
+  RegisterEntity? get data;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -442,7 +442,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Register? data) success,
+    required TResult Function(RegisterEntity? data) success,
     required TResult Function(String message) failure,
     required TResult Function() init,
     required TResult Function() showHidePassword,
@@ -454,7 +454,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Register? data)? success,
+    TResult? Function(RegisterEntity? data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? init,
     TResult? Function()? showHidePassword,
@@ -466,7 +466,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Register? data)? success,
+    TResult Function(RegisterEntity? data)? success,
     TResult Function(String message)? failure,
     TResult Function()? init,
     TResult Function()? showHidePassword,
@@ -566,7 +566,7 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Register? data) success,
+    required TResult Function(RegisterEntity? data) success,
     required TResult Function(String message) failure,
     required TResult Function() init,
     required TResult Function() showHidePassword,
@@ -578,7 +578,7 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Register? data)? success,
+    TResult? Function(RegisterEntity? data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? init,
     TResult? Function()? showHidePassword,
@@ -590,7 +590,7 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Register? data)? success,
+    TResult Function(RegisterEntity? data)? success,
     TResult Function(String message)? failure,
     TResult Function()? init,
     TResult Function()? showHidePassword,
@@ -686,7 +686,7 @@ class _$ShowHidePasswordImpl implements _ShowHidePassword {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Register? data) success,
+    required TResult Function(RegisterEntity? data) success,
     required TResult Function(String message) failure,
     required TResult Function() init,
     required TResult Function() showHidePassword,
@@ -698,7 +698,7 @@ class _$ShowHidePasswordImpl implements _ShowHidePassword {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Register? data)? success,
+    TResult? Function(RegisterEntity? data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? init,
     TResult? Function()? showHidePassword,
@@ -710,7 +710,7 @@ class _$ShowHidePasswordImpl implements _ShowHidePassword {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Register? data)? success,
+    TResult Function(RegisterEntity? data)? success,
     TResult Function(String message)? failure,
     TResult Function()? init,
     TResult Function()? showHidePassword,

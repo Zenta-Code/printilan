@@ -5,12 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
 import 'package:sky_printing_admin/app.dart';
 import 'package:sky_printing_admin/dependencies_injection.dart';
-import 'package:sky_printing_admin/utils/utils.dart';
-import 'package:sky_printing_data/models/login_response.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:window_manager/window_manager.dart';
-
-LoginResponse? loginResponse;
 
 void main() {
   runZonedGuarded(

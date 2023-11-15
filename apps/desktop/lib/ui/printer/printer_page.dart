@@ -1,9 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sky_printing_admin/core/resources/resources.dart';
-import 'package:sky_printing_admin/core/widgets/empty.dart';
-import 'package:sky_printing_admin/core/widgets/loading.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'; 
 import 'package:sky_printing_admin/ui/printer/bloc/printer_bloc.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:windows_printing_models/windows_printing_models.dart';
 
 class PrinterPage extends StatefulWidget {

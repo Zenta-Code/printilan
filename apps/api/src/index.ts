@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import { Express } from "express";
 import { Server } from "http";
 import mongoose from "mongoose";
+import { Seeder } from "./seeders/seeder";
 import { createServer } from "./server";
 import { createSocket } from "./socket";
 

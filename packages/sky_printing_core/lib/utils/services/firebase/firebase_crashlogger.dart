@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 mixin class FirebaseCrashLogger {
@@ -5,6 +7,8 @@ mixin class FirebaseCrashLogger {
     required dynamic error,
     required StackTrace stackTrace,
   }) async {
-    await FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    if (Platform.isAndroid) {
+      await FirebaseCrashlytics.instance.recordError(error, stackTrace);
+    }
   }
 }

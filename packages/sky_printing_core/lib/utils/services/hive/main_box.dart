@@ -19,11 +19,12 @@ enum MainBoxKeys {
   theme,
   locale,
   isLogin,
+  user,
 }
 
 mixin class MainBoxMixin {
   static late Box? mainBox;
-  static const _boxName = 'sky_printing_core';
+  static const _boxName = 'sky_printing_admin';
 
   static Future<void> initHive(String prefixBox) async {
     // Initialize hive (persistent database)
@@ -55,7 +56,7 @@ mixin class MainBoxMixin {
       }
     } catch (e, stackTrace) {
       if (!isUnitTest) {
-        FirebaseCrashLogger().nonFatalError(error: e, stackTrace: stackTrace);
+        log.e('Error closeBox $e', stackTrace: stackTrace);
       }
     }
   }

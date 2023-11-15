@@ -1,10 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sky_printing_admin/core/core.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/dependencies_injection.dart';
 import 'package:sky_printing_admin/ui/settings/cubit/settings_cubit.dart';
-import 'package:sky_printing_admin/utils/utils.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({
@@ -67,11 +66,11 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
 
   String _getThemeName(ActiveTheme activeTheme, BuildContext context) {
     if (activeTheme == ActiveTheme.system) {
-      return Strings.of(context)!.themeSystem;
+      return Strings.of(context)!.theme_system;
     } else if (activeTheme == ActiveTheme.dark) {
-      return Strings.of(context)!.themeDark;
+      return Strings.of(context)!.theme_dark;
     } else {
-      return Strings.of(context)!.themeLight;
+      return Strings.of(context)!.theme_light;
     }
   }
 }

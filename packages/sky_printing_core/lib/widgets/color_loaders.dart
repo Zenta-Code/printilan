@@ -117,7 +117,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Theme.of(context).extension<LzyctColors>()!.red,
+                    color: Colors.red,
                   ),
                 ),
                 Transform.translate(
@@ -127,7 +127,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Theme.of(context).extension<LzyctColors>()!.yellow,
+                    color: Colors.yellow,
                   ),
                 ),
                 Transform.translate(
@@ -137,7 +137,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Theme.of(context).extension<LzyctColors>()!.green,
+                    color: Colors.green,
                   ),
                 ),
                 Transform.translate(
@@ -147,7 +147,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Theme.of(context).extension<LzyctColors>()!.flamingo,
+                    color: Colors.pinkAccent,
                   ),
                 ),
                 Transform.translate(
@@ -157,7 +157,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Theme.of(context).extension<LzyctColors>()!.lavender,
+                    color: Colors.purpleAccent,
                   ),
                 ),
                 Transform.translate(
@@ -167,7 +167,7 @@ class _ColorLoaderState extends State<ColorLoader>
                   ),
                   child: Dot(
                     radius: dotRadius,
-                    color: Theme.of(context).extension<LzyctColors>()!.blue,
+                    color: Colors.blue,
                   ),
                 ),
               ],

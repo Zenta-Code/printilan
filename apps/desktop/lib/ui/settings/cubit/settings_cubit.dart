@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sky_printing_admin/utils/utils.dart';
+import 'package:sky_printing_core/sky_printing_core.dart'; 
 
 class SettingsCubit extends Cubit<DataHelper> with MainBoxMixin {
   SettingsCubit() : super(DataHelper(type: "en"));

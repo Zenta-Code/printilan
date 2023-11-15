@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { Types } from "mongoose";
 import { authenticateJWT } from "../middleware/auth";
 import { Bundle } from "../model/bundle";
 import { Store } from "../model/store";
@@ -45,24 +44,18 @@ export const BundleController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/list/:userId", authenticateJWT, async (req, res) => {
+  route.get("/list/:ownerId", authenticateJWT, async (req, res) => {
     try {
-      const userId = new Types.ObjectId(req.params.userId);
-      const store = await Store.findOne({
-        ownerId: userId,
-      });
-      console.log("store...: ", store);
+      const store = await Store.findOne({ ownerId: req.params.ownerId });
       if (!store) {
         return res.status(400).json({
-          success: false,
-          message: "store tidak di temukan",
+          error: "store tidak di temukan",
         });
       }
       const find = await Bundle.find({ storeId: store._id });
       if (!find) {
         return res.status(400).json({
-          success: false,
-          message: "bundle tidak di temukan",
+          error: "bundle tidak di temukan",
         });
       }
       return res.status(200).json({
@@ -72,8 +65,7 @@ export const BundleController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });

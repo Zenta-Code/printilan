@@ -1,17 +1,14 @@
 import 'package:get_it/get_it.dart';
-import 'package:sky_printing_admin/core/core.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
-import 'package:sky_printing_admin/repos/auth_repository.dart';
-import 'package:sky_printing_admin/repos/src/auth_remote_datasources.dart';
 import 'package:sky_printing_admin/ui/dashboard/cubit/dashboard_cubit.dart';
 import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
-import 'package:sky_printing_admin/ui/login/usecase/post_login.dart';
 import 'package:sky_printing_admin/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing_admin/ui/printer/bloc/printer_bloc.dart';
 import 'package:sky_printing_admin/ui/register/cubit/register_cubit.dart';
-import 'package:sky_printing_admin/ui/register/usecase/post_register.dart';
 import 'package:sky_printing_admin/ui/settings/cubit/settings_cubit.dart';
-import 'package:sky_printing_admin/utils/utils.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_data/sky_printing_data.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 GetIt sl = GetIt.instance;
 
@@ -47,22 +44,24 @@ Future<void> _initHiveBoxes({
 
 /// Register repositories
 void _repositories() {
-  sl.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(sl(), sl()),
+  /// Auth
+  sl.registerLazySingleton<LoginRepository>(
+    () => LoginRepositoryImpl(sl(), sl()),
   );
-  // sl.registerLazySingleton<UsersRepository>(
-  //   () => UsersRepositoryImpl(sl()),
-  // );
+  sl.registerLazySingleton<RegisterRepository>(
+    () => RegisterRepositoryImpl(sl(), sl()),
+  );
 }
 
 /// Register dataSources
 void _dataSources() {
-  sl.registerLazySingleton<AuthRemoteDatasource>(
-    () => AuthRemoteDatasourceImpl(sl()),
+  /// Auth
+  sl.registerLazySingleton<LoginRemoteDatasource>(
+    () => LoginRemoteDatasourceImpl(sl()),
   );
-  // sl.registerLazySingleton<UsersRemoteDatasource>(
-  //   () => UsersRemoteDatasourceImpl(sl()),
-  // );
+  sl.registerLazySingleton<RegisterRemoteDataSource>(
+    () => RegisterRemoteDataSourceImpl(sl()),
+  );
 }
 
 void _useCase() {

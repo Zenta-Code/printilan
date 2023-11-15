@@ -1,9 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sky_printing_admin/core/widgets/empty.dart';
-import 'package:sky_printing_admin/core/widgets/loading.dart';
 import 'package:sky_printing_admin/ui/dashboard/cubit/dashboard_cubit.dart';
-import 'package:sky_printing_admin/utils/utils.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -35,8 +33,8 @@ class DashboardPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  dashContainer(width / 5, 'Bundle', FluentIcons.package,
-                      data['bundle'].length.toString(), ' bundle'),
+                  dashContainer(width / 5, 'Order', FluentIcons.shopping_cart,
+                      data['order'].length.toString(), ' order'),
                   dashContainer(width / 5, 'Bundle', FluentIcons.package,
                       data['bundle'].length.toString(), ' bundle'),
                   dashContainer(width / 5, 'Bundle', FluentIcons.package,

@@ -13,8 +13,8 @@ import 'package:sky_printing_admin/ui/printer/bloc/printer_bloc.dart';
 import 'package:sky_printing_admin/ui/printer/printer_page.dart';
 import 'package:sky_printing_admin/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing_admin/ui/register/register_page.dart';
-import 'package:sky_printing_admin/ui/settings/settings.dart';
-import 'package:sky_printing_admin/utils/utils.dart';
+import 'package:sky_printing_admin/ui/settings/settings.dart'; 
+import 'package:sky_printing_core/sky_printing_core.dart';
 
 import '../ui/dashboard/dashboard_page.dart';
 

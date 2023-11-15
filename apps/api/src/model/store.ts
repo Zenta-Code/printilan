@@ -12,9 +12,10 @@ const StoreSchema = new Schema(
       zipCode: String,
     },
     phone: String,
-    ownerId: Object,
+    ownerId: mongoose.Types.ObjectId,
   },
   {
+    typeKey: "$type",
     timestamps: true,
   }
 );

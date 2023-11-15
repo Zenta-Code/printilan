@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sky_printing_admin/core/core.dart';
-import 'package:sky_printing_admin/utils/utils.dart';
+import 'package:sky_printing_core/sky_printing_core.dart'; 
 
 part 'main_cubit.freezed.dart';
 part 'main_state.dart';

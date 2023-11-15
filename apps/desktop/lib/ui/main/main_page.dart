@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/core/widgets/window_button.dart';
 import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
-import 'package:sky_printing_admin/utils/helper/constant.dart';
+import 'package:sky_printing_core/utils/helper/constant.dart'; 
 import 'package:window_manager/window_manager.dart';
 
 import 'cubit/main_cubit.dart';

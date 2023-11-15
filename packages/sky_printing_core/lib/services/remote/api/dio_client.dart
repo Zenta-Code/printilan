@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
@@ -5,7 +7,8 @@ import 'package:sky_printing_core/sky_printing_core.dart';
 typedef ResponseConverter<T> = T Function(dynamic response);
 
 class DioClient with MainBoxMixin, FirebaseCrashLogger {
-  final String _baseUrl = const String.fromEnvironment('SERVER_URL');
+  // final String _baseUrl = const String.fromEnvironment('SERVER_URL');
+  final String _baseUrl = 'http://192.168.151.129:3005';
 
   String? _auth;
   bool _isUnitTest = false;
@@ -46,7 +49,7 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             if (_auth != null) ...{
-              'Authorization': _auth,
+              'Authorization': 'Bearer $_auth',
             },
           },
           receiveTimeout: const Duration(minutes: 1),
@@ -83,12 +86,12 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       final result = await isolateParse.parseInBackground();
       return Right(result);
     } on DioException catch (e, stackTrace) {
-      if (!_isUnitTest) {
+      if (!_isUnitTest || Platform.isAndroid) {
         nonFatalError(error: e, stackTrace: stackTrace);
       }
       return Left(
         ServerFailure(
-          e.response?.data['error'] as String? ?? e.message,
+          e.response?.data ?? e.message,
         ),
       );
     }
