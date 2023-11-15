@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'register_cubit.dart';
+part of 'printer_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,32 +15,29 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$RegisterState {
+mixin _$PrinterState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(RegisterEntity? data) success,
+    required TResult Function(dynamic data) success,
     required TResult Function(String message) failure,
-    required TResult Function() init,
-    required TResult Function() showHidePassword,
+    required TResult Function() empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(RegisterEntity? data)? success,
+    TResult? Function(dynamic data)? success,
     TResult? Function(String message)? failure,
-    TResult? Function()? init,
-    TResult? Function()? showHidePassword,
+    TResult? Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(RegisterEntity? data)? success,
+    TResult Function(dynamic data)? success,
     TResult Function(String message)? failure,
-    TResult Function()? init,
-    TResult Function()? showHidePassword,
+    TResult Function()? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,8 +46,7 @@ mixin _$RegisterState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
-    required TResult Function(_Init value) init,
-    required TResult Function(_ShowHidePassword value) showHidePassword,
+    required TResult Function(_Empty value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,8 +54,7 @@ mixin _$RegisterState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
-    TResult? Function(_Init value)? init,
-    TResult? Function(_ShowHidePassword value)? showHidePassword,
+    TResult? Function(_Empty value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,24 +62,23 @@ mixin _$RegisterState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
-    TResult Function(_Init value)? init,
-    TResult Function(_ShowHidePassword value)? showHidePassword,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $RegisterStateCopyWith<$Res> {
-  factory $RegisterStateCopyWith(
-          RegisterState value, $Res Function(RegisterState) then) =
-      _$RegisterStateCopyWithImpl<$Res, RegisterState>;
+abstract class $PrinterStateCopyWith<$Res> {
+  factory $PrinterStateCopyWith(
+          PrinterState value, $Res Function(PrinterState) then) =
+      _$PrinterStateCopyWithImpl<$Res, PrinterState>;
 }
 
 /// @nodoc
-class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
-    implements $RegisterStateCopyWith<$Res> {
-  _$RegisterStateCopyWithImpl(this._value, this._then);
+class _$PrinterStateCopyWithImpl<$Res, $Val extends PrinterState>
+    implements $PrinterStateCopyWith<$Res> {
+  _$PrinterStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -101,7 +95,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$RegisterStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$PrinterStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -115,7 +109,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'RegisterState.loading()';
+    return 'PrinterState.loading()';
   }
 
   @override
@@ -131,10 +125,9 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(RegisterEntity? data) success,
+    required TResult Function(dynamic data) success,
     required TResult Function(String message) failure,
-    required TResult Function() init,
-    required TResult Function() showHidePassword,
+    required TResult Function() empty,
   }) {
     return loading();
   }
@@ -143,10 +136,9 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(RegisterEntity? data)? success,
+    TResult? Function(dynamic data)? success,
     TResult? Function(String message)? failure,
-    TResult? Function()? init,
-    TResult? Function()? showHidePassword,
+    TResult? Function()? empty,
   }) {
     return loading?.call();
   }
@@ -155,10 +147,9 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(RegisterEntity? data)? success,
+    TResult Function(dynamic data)? success,
     TResult Function(String message)? failure,
-    TResult Function()? init,
-    TResult Function()? showHidePassword,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -173,8 +164,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
-    required TResult Function(_Init value) init,
-    required TResult Function(_ShowHidePassword value) showHidePassword,
+    required TResult Function(_Empty value) empty,
   }) {
     return loading(this);
   }
@@ -185,8 +175,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
-    TResult? Function(_Init value)? init,
-    TResult? Function(_ShowHidePassword value)? showHidePassword,
+    TResult? Function(_Empty value)? empty,
   }) {
     return loading?.call(this);
   }
@@ -197,8 +186,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
-    TResult Function(_Init value)? init,
-    TResult Function(_ShowHidePassword value)? showHidePassword,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -208,7 +196,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements RegisterState {
+abstract class _Loading implements PrinterState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -218,14 +206,12 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({RegisterEntity? data});
-
-  $RegisterEntityCopyWith<$Res>? get data;
+  $Res call({dynamic data});
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$RegisterStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$PrinterStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
@@ -240,20 +226,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
       freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as RegisterEntity?,
+              as dynamic,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $RegisterEntityCopyWith<$Res>? get data {
-    if (_value.data == null) {
-      return null;
-    }
-
-    return $RegisterEntityCopyWith<$Res>(_value.data!, (value) {
-      return _then(_value.copyWith(data: value));
-    });
   }
 }
 
@@ -263,11 +237,11 @@ class _$SuccessImpl implements _Success {
   const _$SuccessImpl(this.data);
 
   @override
-  final RegisterEntity? data;
+  final dynamic data;
 
   @override
   String toString() {
-    return 'RegisterState.success(data: $data)';
+    return 'PrinterState.success(data: $data)';
   }
 
   @override
@@ -275,11 +249,12 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.data, data) || other.data == data));
+            const DeepCollectionEquality().equals(other.data, data));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
 
   @JsonKey(ignore: true)
   @override
@@ -291,10 +266,9 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(RegisterEntity? data) success,
+    required TResult Function(dynamic data) success,
     required TResult Function(String message) failure,
-    required TResult Function() init,
-    required TResult Function() showHidePassword,
+    required TResult Function() empty,
   }) {
     return success(data);
   }
@@ -303,10 +277,9 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(RegisterEntity? data)? success,
+    TResult? Function(dynamic data)? success,
     TResult? Function(String message)? failure,
-    TResult? Function()? init,
-    TResult? Function()? showHidePassword,
+    TResult? Function()? empty,
   }) {
     return success?.call(data);
   }
@@ -315,10 +288,9 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(RegisterEntity? data)? success,
+    TResult Function(dynamic data)? success,
     TResult Function(String message)? failure,
-    TResult Function()? init,
-    TResult Function()? showHidePassword,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -333,8 +305,7 @@ class _$SuccessImpl implements _Success {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
-    required TResult Function(_Init value) init,
-    required TResult Function(_ShowHidePassword value) showHidePassword,
+    required TResult Function(_Empty value) empty,
   }) {
     return success(this);
   }
@@ -345,8 +316,7 @@ class _$SuccessImpl implements _Success {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
-    TResult? Function(_Init value)? init,
-    TResult? Function(_ShowHidePassword value)? showHidePassword,
+    TResult? Function(_Empty value)? empty,
   }) {
     return success?.call(this);
   }
@@ -357,8 +327,7 @@ class _$SuccessImpl implements _Success {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
-    TResult Function(_Init value)? init,
-    TResult Function(_ShowHidePassword value)? showHidePassword,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -368,10 +337,10 @@ class _$SuccessImpl implements _Success {
   }
 }
 
-abstract class _Success implements RegisterState {
-  const factory _Success(final RegisterEntity? data) = _$SuccessImpl;
+abstract class _Success implements PrinterState {
+  const factory _Success(final dynamic data) = _$SuccessImpl;
 
-  RegisterEntity? get data;
+  dynamic get data;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -388,7 +357,7 @@ abstract class _$$FailureImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$FailureImplCopyWithImpl<$Res>
-    extends _$RegisterStateCopyWithImpl<$Res, _$FailureImpl>
+    extends _$PrinterStateCopyWithImpl<$Res, _$FailureImpl>
     implements _$$FailureImplCopyWith<$Res> {
   __$$FailureImplCopyWithImpl(
       _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
@@ -418,7 +387,7 @@ class _$FailureImpl implements _Failure {
 
   @override
   String toString() {
-    return 'RegisterState.failure(message: $message)';
+    return 'PrinterState.failure(message: $message)';
   }
 
   @override
@@ -442,10 +411,9 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(RegisterEntity? data) success,
+    required TResult Function(dynamic data) success,
     required TResult Function(String message) failure,
-    required TResult Function() init,
-    required TResult Function() showHidePassword,
+    required TResult Function() empty,
   }) {
     return failure(message);
   }
@@ -454,10 +422,9 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(RegisterEntity? data)? success,
+    TResult? Function(dynamic data)? success,
     TResult? Function(String message)? failure,
-    TResult? Function()? init,
-    TResult? Function()? showHidePassword,
+    TResult? Function()? empty,
   }) {
     return failure?.call(message);
   }
@@ -466,10 +433,9 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(RegisterEntity? data)? success,
+    TResult Function(dynamic data)? success,
     TResult Function(String message)? failure,
-    TResult Function()? init,
-    TResult Function()? showHidePassword,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -484,8 +450,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
-    required TResult Function(_Init value) init,
-    required TResult Function(_ShowHidePassword value) showHidePassword,
+    required TResult Function(_Empty value) empty,
   }) {
     return failure(this);
   }
@@ -496,8 +461,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
-    TResult? Function(_Init value)? init,
-    TResult? Function(_ShowHidePassword value)? showHidePassword,
+    TResult? Function(_Empty value)? empty,
   }) {
     return failure?.call(this);
   }
@@ -508,8 +472,7 @@ class _$FailureImpl implements _Failure {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
-    TResult Function(_Init value)? init,
-    TResult Function(_ShowHidePassword value)? showHidePassword,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -519,7 +482,7 @@ class _$FailureImpl implements _Failure {
   }
 }
 
-abstract class _Failure implements RegisterState {
+abstract class _Failure implements PrinterState {
   const factory _Failure(final String message) = _$FailureImpl;
 
   String get message;
@@ -529,34 +492,35 @@ abstract class _Failure implements RegisterState {
 }
 
 /// @nodoc
-abstract class _$$InitImplCopyWith<$Res> {
-  factory _$$InitImplCopyWith(
-          _$InitImpl value, $Res Function(_$InitImpl) then) =
-      __$$InitImplCopyWithImpl<$Res>;
+abstract class _$$EmptyImplCopyWith<$Res> {
+  factory _$$EmptyImplCopyWith(
+          _$EmptyImpl value, $Res Function(_$EmptyImpl) then) =
+      __$$EmptyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InitImplCopyWithImpl<$Res>
-    extends _$RegisterStateCopyWithImpl<$Res, _$InitImpl>
-    implements _$$InitImplCopyWith<$Res> {
-  __$$InitImplCopyWithImpl(_$InitImpl _value, $Res Function(_$InitImpl) _then)
+class __$$EmptyImplCopyWithImpl<$Res>
+    extends _$PrinterStateCopyWithImpl<$Res, _$EmptyImpl>
+    implements _$$EmptyImplCopyWith<$Res> {
+  __$$EmptyImplCopyWithImpl(
+      _$EmptyImpl _value, $Res Function(_$EmptyImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$InitImpl implements _Init {
-  const _$InitImpl();
+class _$EmptyImpl implements _Empty {
+  const _$EmptyImpl();
 
   @override
   String toString() {
-    return 'RegisterState.init()';
+    return 'PrinterState.empty()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitImpl);
+        (other.runtimeType == runtimeType && other is _$EmptyImpl);
   }
 
   @override
@@ -566,38 +530,35 @@ class _$InitImpl implements _Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(RegisterEntity? data) success,
+    required TResult Function(dynamic data) success,
     required TResult Function(String message) failure,
-    required TResult Function() init,
-    required TResult Function() showHidePassword,
+    required TResult Function() empty,
   }) {
-    return init();
+    return empty();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(RegisterEntity? data)? success,
+    TResult? Function(dynamic data)? success,
     TResult? Function(String message)? failure,
-    TResult? Function()? init,
-    TResult? Function()? showHidePassword,
+    TResult? Function()? empty,
   }) {
-    return init?.call();
+    return empty?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(RegisterEntity? data)? success,
+    TResult Function(dynamic data)? success,
     TResult Function(String message)? failure,
-    TResult Function()? init,
-    TResult Function()? showHidePassword,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
-    if (init != null) {
-      return init();
+    if (empty != null) {
+      return empty();
     }
     return orElse();
   }
@@ -608,10 +569,9 @@ class _$InitImpl implements _Init {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
     required TResult Function(_Failure value) failure,
-    required TResult Function(_Init value) init,
-    required TResult Function(_ShowHidePassword value) showHidePassword,
+    required TResult Function(_Empty value) empty,
   }) {
-    return init(this);
+    return empty(this);
   }
 
   @override
@@ -620,10 +580,9 @@ class _$InitImpl implements _Init {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Success value)? success,
     TResult? Function(_Failure value)? failure,
-    TResult? Function(_Init value)? init,
-    TResult? Function(_ShowHidePassword value)? showHidePassword,
+    TResult? Function(_Empty value)? empty,
   }) {
-    return init?.call(this);
+    return empty?.call(this);
   }
 
   @override
@@ -632,137 +591,16 @@ class _$InitImpl implements _Init {
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
     TResult Function(_Failure value)? failure,
-    TResult Function(_Init value)? init,
-    TResult Function(_ShowHidePassword value)? showHidePassword,
+    TResult Function(_Empty value)? empty,
     required TResult orElse(),
   }) {
-    if (init != null) {
-      return init(this);
+    if (empty != null) {
+      return empty(this);
     }
     return orElse();
   }
 }
 
-abstract class _Init implements RegisterState {
-  const factory _Init() = _$InitImpl;
-}
-
-/// @nodoc
-abstract class _$$ShowHidePasswordImplCopyWith<$Res> {
-  factory _$$ShowHidePasswordImplCopyWith(_$ShowHidePasswordImpl value,
-          $Res Function(_$ShowHidePasswordImpl) then) =
-      __$$ShowHidePasswordImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$ShowHidePasswordImplCopyWithImpl<$Res>
-    extends _$RegisterStateCopyWithImpl<$Res, _$ShowHidePasswordImpl>
-    implements _$$ShowHidePasswordImplCopyWith<$Res> {
-  __$$ShowHidePasswordImplCopyWithImpl(_$ShowHidePasswordImpl _value,
-      $Res Function(_$ShowHidePasswordImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$ShowHidePasswordImpl implements _ShowHidePassword {
-  const _$ShowHidePasswordImpl();
-
-  @override
-  String toString() {
-    return 'RegisterState.showHidePassword()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ShowHidePasswordImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(RegisterEntity? data) success,
-    required TResult Function(String message) failure,
-    required TResult Function() init,
-    required TResult Function() showHidePassword,
-  }) {
-    return showHidePassword();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(RegisterEntity? data)? success,
-    TResult? Function(String message)? failure,
-    TResult? Function()? init,
-    TResult? Function()? showHidePassword,
-  }) {
-    return showHidePassword?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(RegisterEntity? data)? success,
-    TResult Function(String message)? failure,
-    TResult Function()? init,
-    TResult Function()? showHidePassword,
-    required TResult orElse(),
-  }) {
-    if (showHidePassword != null) {
-      return showHidePassword();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Success value) success,
-    required TResult Function(_Failure value) failure,
-    required TResult Function(_Init value) init,
-    required TResult Function(_ShowHidePassword value) showHidePassword,
-  }) {
-    return showHidePassword(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Success value)? success,
-    TResult? Function(_Failure value)? failure,
-    TResult? Function(_Init value)? init,
-    TResult? Function(_ShowHidePassword value)? showHidePassword,
-  }) {
-    return showHidePassword?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Success value)? success,
-    TResult Function(_Failure value)? failure,
-    TResult Function(_Init value)? init,
-    TResult Function(_ShowHidePassword value)? showHidePassword,
-    required TResult orElse(),
-  }) {
-    if (showHidePassword != null) {
-      return showHidePassword(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ShowHidePassword implements RegisterState {
-  const factory _ShowHidePassword() = _$ShowHidePasswordImpl;
+abstract class _Empty implements PrinterState {
+  const factory _Empty() = _$EmptyImpl;
 }

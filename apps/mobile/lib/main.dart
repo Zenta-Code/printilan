@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sky_printing/dependencies_injection.dart';
 import 'package:sky_printing/app.dart';
-import 'package:sky_printing/utils/utils.dart'; 
+import 'package:sky_printing_core/sky_printing_core.dart'; 
 
 void main() {
   runZonedGuarded(

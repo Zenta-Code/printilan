@@ -19,7 +19,7 @@ mixin _$DashboardState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Location data) success,
+    required TResult Function(LocationEntity data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) =>
@@ -27,7 +27,7 @@ mixin _$DashboardState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Location data)? success,
+    TResult? Function(LocationEntity data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) =>
@@ -35,7 +35,7 @@ mixin _$DashboardState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Location data)? success,
+    TResult Function(LocationEntity data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -125,7 +125,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Location data) success,
+    required TResult Function(LocationEntity data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -136,7 +136,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Location data)? success,
+    TResult? Function(LocationEntity data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -147,7 +147,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Location data)? success,
+    TResult Function(LocationEntity data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -206,9 +206,9 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Location data});
+  $Res call({LocationEntity data});
 
-  $LocationCopyWith<$Res> get data;
+  $LocationEntityCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -228,14 +228,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
       null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Location,
+              as LocationEntity,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $LocationCopyWith<$Res> get data {
-    return $LocationCopyWith<$Res>(_value.data, (value) {
+  $LocationEntityCopyWith<$Res> get data {
+    return $LocationEntityCopyWith<$Res>(_value.data, (value) {
       return _then(_value.copyWith(data: value));
     });
   }
@@ -247,7 +247,7 @@ class _$SuccessImpl implements _Success {
   const _$SuccessImpl(this.data);
 
   @override
-  final Location data;
+  final LocationEntity data;
 
   @override
   String toString() {
@@ -275,7 +275,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Location data) success,
+    required TResult Function(LocationEntity data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -286,7 +286,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Location data)? success,
+    TResult? Function(LocationEntity data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -297,7 +297,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Location data)? success,
+    TResult Function(LocationEntity data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -347,9 +347,9 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements DashboardState {
-  const factory _Success(final Location data) = _$SuccessImpl;
+  const factory _Success(final LocationEntity data) = _$SuccessImpl;
 
-  Location get data;
+  LocationEntity get data;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -420,7 +420,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Location data) success,
+    required TResult Function(LocationEntity data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -431,7 +431,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Location data)? success,
+    TResult? Function(LocationEntity data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -442,7 +442,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Location data)? success,
+    TResult Function(LocationEntity data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -539,7 +539,7 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(Location data) success,
+    required TResult Function(LocationEntity data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -550,7 +550,7 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(Location data)? success,
+    TResult? Function(LocationEntity data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -561,7 +561,7 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(Location data)? success,
+    TResult Function(LocationEntity data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),

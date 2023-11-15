@@ -1,13 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:sky_printing/core/core.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
 
-///*********************************************
-/// Created by ukietux on 03/11/20 with ♥
-/// (>’_’)> email : ukie.tux@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
 class CircleImage extends StatelessWidget {
   final String url;
   final double? size;

@@ -3,7 +3,8 @@ import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/ui/dashboard/cubit/dashboard_cubit.dart';
 import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
 import 'package:sky_printing_admin/ui/main/cubit/main_cubit.dart';
-import 'package:sky_printing_admin/ui/printer/bloc/printer_bloc.dart';
+import 'package:sky_printing_admin/ui/order/cubit/order_cubit.dart';
+import 'package:sky_printing_admin/ui/printer/cubit/printer_cubit.dart';
 import 'package:sky_printing_admin/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing_admin/ui/settings/cubit/settings_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
@@ -88,10 +89,6 @@ void _cubit() {
     () => AuthCubit(sl()),
   );
 
-  /// Users
-  // sl.registerFactory(
-  //   () => UsersCubit(sl()),
-  // );
   sl.registerFactory(
     () => SettingsCubit(),
   );
@@ -101,13 +98,16 @@ void _cubit() {
   sl.registerFactory(
     () => DashboardCubit(sl()),
   );
+  sl.registerFactory(
+    () => OrderCubit(),
+  );
+  sl.registerFactory(
+    () => PrinterCubit(),
+  );
 }
 
 void _bloc() {
   sl.registerFactory<ThemeBloc>(
     () => ThemeBloc(),
-  );
-  sl.registerFactory<PrinterBloc>(
-    () => PrinterBloc(),
   );
 }

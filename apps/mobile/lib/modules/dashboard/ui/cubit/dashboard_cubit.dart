@@ -3,15 +3,13 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:sky_printing/core/error/failure.dart';
-import 'package:sky_printing/modules/dashboard/domain/entities/location.dart';
-import 'package:sky_printing/modules/dashboard/domain/usecases/get_location.dart';
 import 'package:sky_printing/modules/dashboard/domain/usecases/sockets/connect_socket.dart';
 import 'package:sky_printing/modules/dashboard/domain/usecases/sockets/join_socket.dart';
 import 'package:sky_printing/modules/dashboard/domain/usecases/sockets/receive_socket.dart';
 import 'package:sky_printing/modules/dashboard/domain/usecases/sockets/send_socket.dart';
 import 'package:sky_printing/modules/dashboard/domain/usecases/sockets/socket_params.dart';
-import 'package:sky_printing/utils/utils.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 part 'dashboard_cubit.freezed.dart';
@@ -37,7 +35,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     target: LatLng(-7.4241966, 112.426744),
   );
   Marker? marker;
-  Location? location;
+  LocationEntity? location;
   IO.Socket? socket;
 
   Future<void> getLocation(LocationParams params) async {

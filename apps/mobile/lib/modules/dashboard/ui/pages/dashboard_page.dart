@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sky_printing/core/core.dart';
-import 'package:sky_printing/modules/dashboard/domain/usecases/get_location.dart';
 import 'package:sky_printing/modules/dashboard/ui/cubit/dashboard_cubit.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});

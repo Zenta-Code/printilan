@@ -9,11 +9,11 @@ import 'package:sky_printing_admin/ui/login/login_page.dart';
 import 'package:sky_printing_admin/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing_admin/ui/main/main_page.dart';
 import 'package:sky_printing_admin/ui/order/order_page.dart';
-import 'package:sky_printing_admin/ui/printer/bloc/printer_bloc.dart';
+import 'package:sky_printing_admin/ui/printer/cubit/printer_cubit.dart';
 import 'package:sky_printing_admin/ui/printer/printer_page.dart';
 import 'package:sky_printing_admin/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing_admin/ui/register/register_page.dart';
-import 'package:sky_printing_admin/ui/settings/settings.dart'; 
+import 'package:sky_printing_admin/ui/settings/settings.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 
 import '../ui/dashboard/dashboard_page.dart';
@@ -86,7 +86,7 @@ class AppRoute {
             path: Routes.printer.path,
             name: Routes.printer.name,
             builder: (_, __) => BlocProvider(
-              create: (_) => sl<PrinterBloc>()..fetchPrinters(),
+              create: (_) => sl<PrinterCubit>()..fetchPrinters(),
               child: const PrinterPage(),
             ),
           ),

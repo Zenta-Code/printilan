@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sky_printing/core/core.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sky_printing/core/core.dart';
-import 'package:sky_printing/modules/register/domain/usecases/post_register.dart';
 import 'package:sky_printing/modules/register/ui/cubit/register_cubit.dart';
-import 'package:sky_printing/utils/ext/ext.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart'; 
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/core/core.dart';
-import 'package:sky_printing/utils/utils.dart';
+import 'package:sky_printing_core/sky_printing_core.dart'; 
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({

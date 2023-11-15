@@ -8,8 +8,7 @@ import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/dependencies_injection.dart';
 import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
 import 'package:sky_printing/modules/settings/ui/cubit/settings_cubit.dart';
-import 'package:sky_printing/utils/helper/helper.dart';
-
+import 'package:sky_printing_core/sky_printing_core.dart'; 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

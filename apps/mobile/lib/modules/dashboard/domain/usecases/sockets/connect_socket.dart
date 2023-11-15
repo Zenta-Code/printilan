@@ -1,7 +1,5 @@
-import 'package:dartz/dartz.dart';
-import 'package:sky_printing/core/error/failure.dart';
-import 'package:sky_printing/core/services/remote/socket/socket_client.dart';
-import 'package:sky_printing/core/usecase/usecase.dart';
+import 'package:dartz/dartz.dart'; 
+import 'package:sky_printing_core/sky_printing_core.dart'; 
 
 class ConnectSocket extends UseCase<void, void> {
   final SocketClient _client;

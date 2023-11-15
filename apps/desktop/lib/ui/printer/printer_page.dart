@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'; 
-import 'package:sky_printing_admin/ui/printer/bloc/printer_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';  
+import 'package:sky_printing_admin/ui/printer/cubit/printer_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:windows_printing_models/windows_printing_models.dart';
 
@@ -14,7 +14,7 @@ class PrinterPage extends StatefulWidget {
 class _PrinterPageState extends State<PrinterPage> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PrinterBloc, PrinterState>(
+    return BlocBuilder<PrinterCubit, PrinterState>(
       builder: (context, state) => state.when(
         loading: () => const Center(
           child: Loading(),

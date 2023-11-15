@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:sky_printing/core/core.dart';
-import 'package:sky_printing/core/services/remote/socket/socket_client.dart';
+import 'package:sky_printing_core/sky_printing_core.dart'; 
 
 class JoinSocket extends UseCase<void, String> {
   final SocketClient _client;

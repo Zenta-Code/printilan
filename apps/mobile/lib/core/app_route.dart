@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/dependencies_injection.dart';
-import 'package:sky_printing/modules/dashboard/domain/usecases/get_location.dart';
 import 'package:sky_printing/modules/dashboard/ui/cubit/dashboard_cubit.dart';
 import 'package:sky_printing/modules/dashboard/ui/pages/dashboard_page.dart';
 import 'package:sky_printing/modules/history/ui/pages/history_page.dart';
-import 'package:sky_printing/modules/login/domain/usecases/post_me.dart';
 import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
 import 'package:sky_printing/modules/login/ui/pages/login_page.dart';
 import 'package:sky_printing/modules/main/ui/cubit/main_cubit.dart';
@@ -17,7 +15,8 @@ import 'package:sky_printing/modules/register/ui/pages/register_page.dart';
 import 'package:sky_printing/modules/settings/ui/pages/settings_page.dart';
 import 'package:sky_printing/modules/splashscreen/ui/pages/splash_screen_page.dart';
 import 'package:sky_printing/modules/wallet/ui/pages/wallet_page.dart';
-import 'package:sky_printing/utils/utils.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 enum Routes {
   root("/"),
