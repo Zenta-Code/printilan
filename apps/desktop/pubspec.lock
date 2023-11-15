@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "61.0.0"
+  _flutterfire_internals:
+    dependency: transitive
+    description:
+      name: _flutterfire_internals
+      sha256: "8942974ee5dc932427704ede5e0db8b5f2b8f22172964544b56e6bd37f6c3634"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.12"
   analyzer:
     dependency: transitive
     description:
@@ -345,6 +353,70 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.0"
+  firebase_analytics:
+    dependency: transitive
+    description:
+      name: firebase_analytics
+      sha256: "624f234b0cb27c4d1c983d03489570471d85d5720159512c8e080cb6917a0a2b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.7.0"
+  firebase_analytics_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_analytics_platform_interface
+      sha256: "7e6cae535f3f2ab19ddb183ed48010f852baa20999a473b764c3db4e73d3fa0b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.8.0"
+  firebase_analytics_web:
+    dependency: transitive
+    description:
+      name: firebase_analytics_web
+      sha256: ff080e7793ab71f73fb4cb5223922638024144c1deecb3ec71c81e69f64409df
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.5+7"
+  firebase_core:
+    dependency: transitive
+    description:
+      name: firebase_core
+      sha256: "45f3f9babfc6f56fb94c3cd11584cf3c9672868228373b699b94427010e01dc3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.22.0"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      sha256: c437ae5d17e6b5cc7981cf6fd458a5db4d12979905f9aafd1fea930428a9fe63
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.0"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      sha256: "0631a2ec971dbc540275e2fa00c3a8a2676f0a7adbc3c197d6fba569db689d97"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.8.1"
+  firebase_crashlytics:
+    dependency: transitive
+    description:
+      name: firebase_crashlytics
+      sha256: "0d09f0e17b4174d850fd26a5036d51bb1b3e09c36a35ffcdc9dfa99fdbd6e9bb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.4.4"
+  firebase_crashlytics_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_crashlytics_platform_interface
+      sha256: "7ebb08dc5d53da3ca4122f2e84837dbfb1c3e6cc15731d5998893a5d41037a97"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.12"
   fixnum:
     dependency: transitive
     description:
@@ -435,6 +507,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.17"
+  flutter_screenutil:
+    dependency: transitive
+    description:
+      name: flutter_screenutil
+      sha256: "8cf100b8e4973dc570b6415a2090b0bfaa8756ad333db46939efc3e774ee100d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.9.0"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -486,6 +566,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  geocoding:
+    dependency: transitive
+    description:
+      name: geocoding
+      sha256: e1dc0ac56666d9ed1d5a9ae5543ce9eb5986db6209cc7600103487d09192059c
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  geocoding_android:
+    dependency: transitive
+    description:
+      name: geocoding_android
+      sha256: "609db1d71bc364dd9d0616f72a41c01e0c74f3a3807efb85e0d5a67e57baf50f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
+  geocoding_ios:
+    dependency: transitive
+    description:
+      name: geocoding_ios
+      sha256: "8f79e380abb640ef4d88baee8bb65390058c802601158d0813dc990b36b189d2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  geocoding_platform_interface:
+    dependency: transitive
+    description:
+      name: geocoding_platform_interface
+      sha256: "8848605d307d844d89937cdb4b8ad7dfa880552078f310fa24d8a460f6dddab4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   get_it:
     dependency: "direct main"
     description:
@@ -630,6 +742,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  location:
+    dependency: transitive
+    description:
+      name: location
+      sha256: "06be54f682c9073cbfec3899eb9bc8ed90faa0e17735c9d9fa7fe426f5be1dd1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.3"
+  location_platform_interface:
+    dependency: transitive
+    description:
+      name: location_platform_interface
+      sha256: "8aa1d34eeecc979d7c9fe372931d84f6d2ebbd52226a54fe1620de6fdc0753b1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
+  location_web:
+    dependency: transitive
+    description:
+      name: location_web
+      sha256: ec484c66e8a4ff1ee5d044c203f4b6b71e3a0556a97b739a5bc9616de672412b
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.0"
   logger:
     dependency: "direct dev"
     description:
@@ -963,10 +1099,24 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sky_printing_core:
+    dependency: "direct main"
+    description:
+      path: "../../packages/sky_printing_core"
+      relative: true
+    source: path
+    version: "0.0.1"
   sky_printing_data:
     dependency: "direct main"
     description:
       path: "../../packages/sky_printing_data"
+      relative: true
+    source: path
+    version: "0.0.1"
+  sky_printing_domain:
+    dependency: "direct main"
+    description:
+      path: "../../packages/sky_printing_domain"
       relative: true
     source: path
     version: "0.0.1"
