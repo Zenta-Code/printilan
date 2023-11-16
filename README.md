@@ -42,9 +42,17 @@ Sky Printing uses a number of open source projects to work properly :
 To build all apps and packages, run the following command :
 ```
 git clone https://github.com/Zenta-Code/printilan.git
+```
+```
 cd my-turborepo
+```
+```
 pnpm build
+```
+```
 cd apps/mobile
+```
+```
 flutter build apk
 ```
 
