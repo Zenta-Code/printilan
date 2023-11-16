@@ -1,10 +1,12 @@
 # Sky Printing
 > Sky Printing is a cutting-edge mobile app that introduces an automatic printing system with features like printing, binding, and photo printing. This mobile app can simplifying employee tasks and it enhances store efficiency without the need for extra time and effort. Additionally, it provides remote accessibility with ensuring customer convenience in managing their printing needs effortlessly.
 
+
 ## Concepts
 This concept we've design early :
 
 ![Alt text](https://raw.githubusercontent.com/Zenta-Code/sky_printing/dc5499dfc3426b2e39b4501d9a05bda69157d479/images/base-concepts.svg "Base Concepts")
+
 
 ## Features
 - Printing : Easily print documents both color and non-color (black and white).
@@ -13,6 +15,7 @@ This concept we've design early :
 - History : Track past printing activities.
 - EProfile : Manage personal information.
 - Wallet (Payment) : Handle transactions effortlessly.
+
 
 ## Tech
 Sky Printing uses a number of open source projects to work properly :
@@ -23,7 +26,9 @@ Sky Printing uses a number of open source projects to work properly :
 - [Swift](https://www.swift.org/getting-started/) - Swift is a fast and modern programming language developed by Apple, designed for building iOS, macOS, watchOS, and tvOS applications.
 - [JavaScript](https://code.visualstudio.com/docs/languages/javascript) - JavaScript is a dynamic scripting language widely used for web development, enabling interactive and dynamic content creation within web browsers.
 
+
 ## Requirement
+
 
 ## User Interface
 ### Splash Screen
@@ -56,6 +61,7 @@ cd apps/mobile
 flutter build apk
 ```
 
+
 ## Plugins
 Sky Printing is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
 | Plugin | README |
@@ -66,6 +72,7 @@ Sky Printing is currently extended with the following plugins. Instructions on h
 | OneDrive | [plugins/onedrive/README.md][PlOd] |
 | Medium | [plugins/medium/README.md][PlMe] |
 | Google Analytics | [plugins/googleanalytics/README.md][PlGa] |
+
 
 ## Development
 To develop all apps and packages, read readme.md in each folder.
@@ -80,6 +87,7 @@ To develop all apps and packages, read readme.md in each folder.
 #### Mobile
 
 [Mobile](https://github.com/Zenta-Code/sky_printing/blob/main/apps/mobile/README.md)
+
 
 ## License
 > Zenta-Code (2023)
