@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { Types } from "mongoose";
 import { authenticateJWT } from "../middleware/auth";
 import { Order } from "../model/order";
 import { OrderTypes } from "../types/order";
@@ -35,8 +36,12 @@ export const OrderController = ({ route }: { route: Router }) => {
   });
   route.get("/list/:storeId", authenticateJWT, async (req, res) => {
     try {
-      const storeId = req.params;
-      const find = await Order.find(storeId);
+      const params = req.params;
+      console.log("id...: ", params);
+      const find = await Order.find({
+        storeId: new Types.ObjectId(params.storeId),
+      });
+      console.log("find...: ", find);
       if (!find) {
         return res.status(400).json({
           success: false,

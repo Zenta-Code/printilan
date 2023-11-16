@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { Types } from "mongoose";
+import path from "path";
 import { authenticateJWT } from "../middleware/auth";
 import { Document } from "../model/document";
 import { upload } from "../storage";
@@ -11,14 +12,27 @@ export const DocumentController = ({ route }: { route: Router }) => {
     upload.single("file"),
     authenticateJWT,
     async function (req, res) {
-      await Document.create({
+      const document = await Document.create({
         fileName: req!.file!.filename,
         type: req!.file!.mimetype,
         userId: new Types.ObjectId(req.body.userId),
       });
-      res.send(req.file);
+      res.send({
+        success: true,
+        message: "file berhasil di upload",
+        data: req!.file!.filename,
+        documentId: document._id,
+      });
     }
   );
+  route.get("/download/:fileName", authenticateJWT, async function (req, res) {
+    const fileName = req.params.fileName;
+    const baseDir = path.join(__dirname, "../../files");
+    console.log("baseDir", baseDir);
+    const filePath = path.join(baseDir, fileName);
+    console.log("filePath", filePath);
+    res.download(filePath, fileName);
+  });
   route.post("/register", async (req, res) => {
     try {
       const body = DocumentTypes.parse(req.body);

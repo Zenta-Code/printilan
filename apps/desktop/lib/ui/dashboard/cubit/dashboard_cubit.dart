@@ -13,6 +13,7 @@ class DashboardCubit extends Cubit<DashboardState> {
   DashboardCubit(this._client) : super(const _Loading());
 
   final user = sl<MainBoxMixin>().getData(MainBoxKeys.user);
+  final store = sl<MainBoxMixin>().getData(MainBoxKeys.store);
 
   Future<void> fetchData() async {
     Map<String, dynamic>? data = {
@@ -22,7 +23,7 @@ class DashboardCubit extends Cubit<DashboardState> {
     emit(const _Loading());
     log.i(user['_id']);
     final order = await _client.getRequest(
-      "${ListAPI.order}/list/${user['_id']}",
+      "${ListAPI.order}/list/${store['_id']}",
       converter: (response) {
         final data = response['data'] as List;
         return data.map((e) => Order.fromJson(e)).toList();

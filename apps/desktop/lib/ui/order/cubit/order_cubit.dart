@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
@@ -17,23 +19,26 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   final JoinSocket _joinSocket;
   final SocketClient _socketClient;
   final DioClient _dioClient;
+  final List<Order> orderData = [];
   Future<void> fetchData() async {
-    emit(const OrderState.loading());
+    emit(const _Loading());
     final store = getData(MainBoxKeys.store);
     final response = await _dioClient.getRequest(
-      ListAPI.order,
-      queryParameters: {
-        "storeId": store!['_id'],
-      },
+      "${ListAPI.order}/list/${store['_id']}",
       converter: (response) {
         final data = response['data'] as List<dynamic>;
         return data.map((e) => Order.fromJson(e)).toList();
       },
     );
+    response.fold((l) => emit(const OrderState.failure("Error")), (r) {
+      orderData.addAll(r);
+      joinRoom();
+      emit(_Success(r));
+    });
   }
 
   Future<void> joinRoom() async {
-    emit(const OrderState.loading());
+    emit(const _Loading());
     final store = getData(MainBoxKeys.store);
     log.f("Store: ${store["_id"]}");
     _joinSocket.call(store!['_id']);
@@ -41,8 +46,25 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   }
 
   void message() {
-    _socketClient.socket.on('message', (data) {
-      log.i(data);
+    _socketClient.socket.on('message', (data) async {
+      emit(const _Loading());
+      final order = Order.fromJson(data["order"]);
+
+      const JsonEncoder encoder = JsonEncoder.withIndent('  ');
+      final String prettyJson = encoder.convert(data["document"]);
+      log.i(prettyJson);
+      orderData.add(order);
+      final res = await _dioClient.getRequest(
+        "${ListAPI.document}/download/${data["document"]["fileName"]}",
+        converter: (response) {
+          return response;
+        },
+      );
+      res.fold(
+        (l) => log.i(l),
+        (r) => log.i(r),
+      );
+      emit(_Success(orderData));
     });
   }
 }

@@ -1,10 +1,10 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 
 const OrderSchema = new Schema(
   {
-    userId: String,
-    storeId: String,
-    documentId: String,
+    userId: Types.ObjectId,
+    storeId: Types.ObjectId,
+    documentId: Types.ObjectId,
     totalPrice: Number,
   },
   {

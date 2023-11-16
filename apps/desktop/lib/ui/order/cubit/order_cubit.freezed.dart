@@ -19,7 +19,7 @@ mixin _$OrderState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(dynamic data) success,
+    required TResult Function(List<Order> data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) =>
@@ -27,7 +27,7 @@ mixin _$OrderState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(dynamic data)? success,
+    TResult? Function(List<Order> data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) =>
@@ -35,7 +35,7 @@ mixin _$OrderState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(dynamic data)? success,
+    TResult Function(List<Order> data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -125,7 +125,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(dynamic data) success,
+    required TResult Function(List<Order> data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -136,7 +136,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(dynamic data)? success,
+    TResult? Function(List<Order> data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -147,7 +147,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(dynamic data)? success,
+    TResult Function(List<Order> data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -206,7 +206,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({dynamic data});
+  $Res call({List<Order> data});
 }
 
 /// @nodoc
@@ -220,13 +220,13 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? data = freezed,
+    Object? data = null,
   }) {
     return _then(_$SuccessImpl(
-      freezed == data
-          ? _value.data
+      null == data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as List<Order>,
     ));
   }
 }
@@ -234,10 +234,15 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(this.data);
+  const _$SuccessImpl(final List<Order> data) : _data = data;
 
+  final List<Order> _data;
   @override
-  final dynamic data;
+  List<Order> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
   @override
   String toString() {
@@ -249,12 +254,12 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            const DeepCollectionEquality().equals(other.data, data));
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -266,7 +271,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(dynamic data) success,
+    required TResult Function(List<Order> data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -277,7 +282,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(dynamic data)? success,
+    TResult? Function(List<Order> data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -288,7 +293,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(dynamic data)? success,
+    TResult Function(List<Order> data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -338,9 +343,9 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements OrderState {
-  const factory _Success(final dynamic data) = _$SuccessImpl;
+  const factory _Success(final List<Order> data) = _$SuccessImpl;
 
-  dynamic get data;
+  List<Order> get data;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -411,7 +416,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(dynamic data) success,
+    required TResult Function(List<Order> data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -422,7 +427,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(dynamic data)? success,
+    TResult? Function(List<Order> data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -433,7 +438,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(dynamic data)? success,
+    TResult Function(List<Order> data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -530,7 +535,7 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(dynamic data) success,
+    required TResult Function(List<Order> data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -541,7 +546,7 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(dynamic data)? success,
+    TResult? Function(List<Order> data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -552,7 +557,7 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(dynamic data)? success,
+    TResult Function(List<Order> data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),

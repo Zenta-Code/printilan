@@ -66,26 +66,44 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
         ),
       });
 
-      await _client.postRequest(
+      final upload = await _client.postRequest(
         "${ListAPI.document}/upload",
         formData: formData,
         converter: null,
       );
-      final user = getData(MainBoxKeys.user);
-      log.i(user);
-      _socketClient.send(
-        store,
-        user['_id'],
-        store,
-        {
-          "type": "order",
-          "content": {
-            "name": user['name'],
-            "email": user['email'],
-            "phone": user['phone'],
-            "address": user['address'],
-            "document": name,
-          }
+      upload.fold(
+        (l) => log.e(l),
+        (r) {
+          log.i(r);
+          final user = getData(MainBoxKeys.user);
+          final content = {
+            "type": "order",
+            "content": {
+              "name": user['name'],
+              "email": user['email'],
+              "phone": user['phone'],
+              "address": user['address'],
+              "document": name,
+              "documentId": r['documentId'],
+            },
+          };
+          log.i(content);
+          _socketClient.send(
+            store,
+            user['_id'],
+            store,
+            {
+              "type": "order",
+              "content": {
+                "name": user['name'],
+                "email": user['email'],
+                "phone": user['phone'],
+                "address": user['address'],
+                "document": name,
+                "documentId": r['documentId'],
+              },
+            },
+          );
         },
       );
     }
@@ -97,6 +115,5 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       allowedExtensions: ['pdf', 'doc'],
       withData: true,
     );
-    log.i(result!.names);
   }
 }

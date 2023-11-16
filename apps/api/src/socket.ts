@@ -1,6 +1,9 @@
 import { Express } from "express";
 import { createServer as http } from "http";
+import { Types } from "mongoose";
 import { Server } from "socket.io";
+import { Document } from "./model/document";
+import { Order } from "./model/order";
 export const createSocket = (server: Express) => {
   try {
     const httpServer = http(server);
@@ -25,24 +28,30 @@ export const createSocket = (server: Express) => {
       });
 
       socket.on("message", async (message) => {
-        // console.log("message", message);
+        console.log("message", message);
         const receiver = message.receiver;
         const sender = message.sender;
         const roomId = message.roomId;
         const content = message.content;
 
-        io.to(roomId).emit("message", {
-          receiver,
-          sender,
-          content,
-        });
         if (message.content.type == "order") {
-          // console.log("asc", message.content);
-          // await Order.create({
-          //   userId: message.sender,
-          //   storeId: message.receiver,
-          //   // documentId: message.content.documentId,
-          // });
+          console.log("asc", message.content.content.documentId);
+          const order = await Order.create({
+            userId: new Types.ObjectId(message.sender),
+            storeId: new Types.ObjectId(message.receiver),
+            documentId: new Types.ObjectId(message.content.content.documentId),
+          });
+          const document = await Document.findOne({
+            _id: new Types.ObjectId(message.content.content.documentId),
+          });
+          console.log("document", document);
+          io.to(roomId).emit("message", {
+            receiver,
+            sender,
+            content,
+            order,
+            document,
+          });
         }
       });
     });
