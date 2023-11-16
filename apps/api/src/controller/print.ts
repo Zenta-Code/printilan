@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { Types } from "mongoose";
 import { authenticateJWT } from "../middleware/auth";
 import { Print } from "../model/print";
 import { PrintTypes } from "../types/print";
@@ -6,37 +7,37 @@ import { PrintTypes } from "../types/print";
 export const PrintController = ({ route }: { route: Router }) => {
   route.post("/register", async (req, res) => {
     try {
-      const body = PrintTypes.parse(req.body);
+      console.log(req.body);
 
-      console.log(body);
-
-      if (!body) {
-        return res.status(400).json({
-          success: false,
-          message: "Body tidak boleh kosong",
-        });
-      }
-
-      const find = await Print.findOne({
-        model: body.model,
+      const listPrinter = req.body.printers.map((item: any) => {
+        return {
+          printerName: item.printerName,
+          storeId: new Types.ObjectId(item.storeId),
+          status: item.status,
+        };
       });
-      if (find) {
-        return res.status(400).json({
-          success: false,
-          message: "model sudah terdaftar",
+      console.log(listPrinter);
+      for (let i = 0; i < listPrinter.length; i++) {
+        const find = await Print.findOne({
+          printerName: listPrinter[i].printerName,
+          storeId: listPrinter[i].storeId,
         });
+        if (!find) {
+          const newPrint = await Print.create(listPrinter[i]);
+          if (!newPrint) {
+            return res.status(400).json({
+              success: false,
+              message: "print gagal di tambahkan",
+            });
+          }
+        }
       }
-
-      const print = await Print.create({
-        ...body,
-      });
-
       return res.status(200).json({
         success: true,
-        message: "Berhasil",
-        data: print,
+        message: "print berhasil di tambahkan",
       });
     } catch (error) {
+      console.log(error);
       return res.status(400).json({
         success: false,
         message: error,
@@ -100,7 +101,10 @@ export const PrintController = ({ route }: { route: Router }) => {
           message: "data tidak valid",
         });
       }
-      const updatePrint = await Print.findOneAndUpdate({model: updateData.model},updateData);
+      const updatePrint = await Print.findOneAndUpdate(
+        { model: req.body.model },
+        updateData
+      );
       if (!updatePrint) {
         return res.status(400).json({
           success: false,

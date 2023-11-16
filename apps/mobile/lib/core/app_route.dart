@@ -3,18 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/dependencies_injection.dart';
-import 'package:sky_printing/modules/dashboard/ui/cubit/dashboard_cubit.dart';
-import 'package:sky_printing/modules/dashboard/ui/pages/dashboard_page.dart';
-import 'package:sky_printing/modules/history/ui/pages/history_page.dart';
-import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
-import 'package:sky_printing/modules/login/ui/pages/login_page.dart';
-import 'package:sky_printing/modules/main/ui/cubit/main_cubit.dart';
-import 'package:sky_printing/modules/main/ui/pages/main_page.dart';
-import 'package:sky_printing/modules/register/ui/cubit/register_cubit.dart';
-import 'package:sky_printing/modules/register/ui/pages/register_page.dart';
-import 'package:sky_printing/modules/settings/ui/pages/settings_page.dart';
-import 'package:sky_printing/modules/splashscreen/ui/pages/splash_screen_page.dart';
-import 'package:sky_printing/modules/wallet/ui/pages/wallet_page.dart';
+import 'package:sky_printing/ui/dashboard/cubit/dashboard_cubit.dart';
+import 'package:sky_printing/ui/dashboard/pages/dashboard_page.dart';
+import 'package:sky_printing/ui/history/pages/history_page.dart';
+import 'package:sky_printing/ui/login/cubit/login_cubit.dart';
+import 'package:sky_printing/ui/login/pages/login_page.dart';
+import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
+import 'package:sky_printing/ui/main/pages/main_page.dart';
+import 'package:sky_printing/ui/order/cubit/order_cubit.dart';
+import 'package:sky_printing/ui/order/pages/order_page.dart';
+import 'package:sky_printing/ui/register/cubit/register_cubit.dart';
+import 'package:sky_printing/ui/register/pages/register_page.dart';
+import 'package:sky_printing/ui/settings/pages/settings_page.dart';
+import 'package:sky_printing/ui/splashscreen/pages/splash_screen_page.dart';
+import 'package:sky_printing/ui/wallet/pages/wallet_page.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
@@ -27,6 +29,9 @@ enum Routes {
   history("/history"),
   wallet("/wallet"),
   settings("/settings"),
+
+  // sub page
+  order("/dashboard/order"),
 
   // Login Page
   login("/login/login"),
@@ -82,6 +87,14 @@ class AppRoute {
               create: (_) =>
                   sl<DashboardCubit>()..getLocation(const LocationParams()),
               child: const DashboardPage(),
+            ),
+          ),
+          GoRoute(
+            path: Routes.order.path,
+            name: Routes.order.name,
+            builder: (context, state) => BlocProvider(
+              create: (_) => sl<OrderCubit>()..getStore(),
+              child: OrderPage(),
             ),
           ),
           GoRoute(

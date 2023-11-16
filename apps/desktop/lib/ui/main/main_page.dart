@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/core/widgets/window_button.dart';
 import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
-import 'package:sky_printing_core/utils/helper/constant.dart'; 
+import 'package:sky_printing_core/utils/helper/constant.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'cubit/main_cubit.dart';
@@ -19,7 +19,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WindowListener {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -196,4 +196,46 @@ class _MainPageState extends State<MainPage>
       },
     ),
   ];
+  @override
+  void initState() {
+    windowManager.addListener(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    windowManager.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  void onWindowClose() async {
+    bool isPreventClose = await windowManager.isPreventClose();
+    if (isPreventClose && mounted) {
+      showDialog(
+        context: context,
+        builder: (_) {
+          return ContentDialog(
+            title: const Text('Confirm close'),
+            content: const Text('Are you sure you want to close this window?'),
+            actions: [
+              FilledButton(
+                child: const Text('Yes'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  windowManager.destroy();
+                },
+              ),
+              Button(
+                child: const Text('No'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
 }

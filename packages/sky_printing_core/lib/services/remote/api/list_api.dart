@@ -9,4 +9,6 @@ class ListAPI {
   static const String order = "/api/order";
   static const String bundle = "/api/bundle";
   static const String print = "/api/print";
+  static const String store = "/api/store";
+  static const String document = "/api/document";
 }

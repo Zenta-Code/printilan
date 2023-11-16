@@ -7,6 +7,7 @@ part 'store.g.dart';
 @freezed
 class Store with _$Store {
   const factory Store({
+    @JsonKey(name: '_id') String? id,
     String? name,
     Address? address,
     String? phone,
@@ -17,6 +18,11 @@ class Store with _$Store {
 
   factory Store.fromJson(Map<String, dynamic> json) => _$StoreFromJson(json);
 
-  Store toEntity() =>
-      Store(name: name, address: address, phone: phone, ownerId: ownerId);
+  Store toEntity() => Store(
+        id: id,
+        name: name,
+        address: address,
+        phone: phone,
+        ownerId: ownerId,
+      );
 }

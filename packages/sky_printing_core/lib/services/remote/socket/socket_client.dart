@@ -10,6 +10,8 @@ class SocketClient with MainBoxMixin, FirebaseCrashLogger {
   bool _isUnitTest = false;
   Socket? _socket;
 
+  Socket get socket => _socket!;
+
   SocketClient({bool isUnitTest = false}) {
     _isUnitTest = isUnitTest;
 
@@ -17,7 +19,7 @@ class SocketClient with MainBoxMixin, FirebaseCrashLogger {
       _auth = getData(MainBoxKeys.token);
     } catch (_) {}
 
-    if (_auth != null) {
+    if (_auth != null || _socket == null) {
       _socket = _createSocket();
       connect();
     }

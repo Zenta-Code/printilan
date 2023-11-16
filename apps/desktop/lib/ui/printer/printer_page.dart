@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';  
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing_admin/ui/printer/cubit/printer_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:windows_printing_models/windows_printing_models.dart';
@@ -29,27 +29,32 @@ class _PrinterPageState extends State<PrinterPage> {
         ),
         success: (data) {
           final List<Printer> printers = data;
-          return ScaffoldPage.scrollable(
-            header: const PageHeader(
+          log.i(data);
+          return ScaffoldPage(
+            header: PageHeader(
               title: Text('Printer'),
-            ),
-            children: [
-              GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: Dimens.space8,
-                  crossAxisSpacing: Dimens.space8,
-                ),
-                itemCount: printers.length,
-                itemBuilder: (context, index) {
-                  final Printer printer = printers[index];
-                  return buildPrinterCard(
-                    name: printer.printerName ?? '',
-                    countJobs: printer.cJobs.toString() ?? '',
-                  );
+              commandBar: FilledButton(
+                onPressed: () {
+                  context.read<PrinterCubit>().syncPrinter();
                 },
+                child: Text('Sync'),
               ),
-            ],
+            ),
+            content: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 270,
+                  mainAxisExtent: 290,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10),
+              padding: const EdgeInsets.all(16),
+              itemCount: printers.length,
+              itemBuilder: (context, index) {
+                return buildPrinterCard(
+                  name: printers[index].printerName!,
+                  countJobs: printers[index].cJobs!.toString(),
+                );
+              },
+            ),
           );
         },
       ),
@@ -57,20 +62,25 @@ class _PrinterPageState extends State<PrinterPage> {
   }
 
   Widget buildPrinterCard({required String name, required String countJobs}) {
-    return Container(
-      margin: EdgeInsets.all(Dimens.space8),
-      width: MediaQuery.of(context).size.width / 2 - Dimens.space16,
-      child: Card(
-        child: Column(
-          children: [
-            Text(name),
-            SizedBox(
-              height: Dimens.space8,
-            ),
-            Text(countJobs),
-          ],
-        ),
-      ),
+    return HoverButton(
+      onPressed: () {
+        log.i('click');
+      },
+      cursor: SystemMouseCursors.click,
+      builder: (context, state) {
+        return Card(
+          padding: EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: FluentTheme.of(context).typography.subtitle,
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { authenticateJWT } from "../middleware/auth";
 import { Store } from "../model/store";
 import { StoreTypes } from "../types/store";
 
@@ -30,6 +31,21 @@ export const StoreController = ({ route }: { route: Router }) => {
         ...body,
       });
 
+      return res.status(200).json({
+        success: true,
+        message: "Berhasil",
+        data: store,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  });
+  route.get("/list", authenticateJWT, async (req, res) => {
+    try {
+      const store = await Store.find();
       return res.status(200).json({
         success: true,
         message: "Berhasil",

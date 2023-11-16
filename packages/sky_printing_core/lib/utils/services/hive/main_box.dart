@@ -20,6 +20,7 @@ enum MainBoxKeys {
   locale,
   isLogin,
   user,
+  store,
 }
 
 mixin class MainBoxMixin {
@@ -46,6 +47,8 @@ mixin class MainBoxMixin {
     /// Clear the box
     removeData(MainBoxKeys.isLogin);
     removeData(MainBoxKeys.token);
+    removeData(MainBoxKeys.user);
+    removeData(MainBoxKeys.store);
   }
 
   Future<void> closeBox({bool isUnitTest = false}) async {

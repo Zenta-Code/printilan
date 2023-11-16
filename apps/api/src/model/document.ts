@@ -1,15 +1,15 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 
 const DocumentSchema = new Schema(
   {
-    name: String,
+    fileName: String,
     type: String,
     count: Number,
     size: String,
     color: Boolean,
     price: Number,
     copies: Number,
-    
+    userId: Types.ObjectId,
   },
   {
     timestamps: true,

@@ -1,12 +1,10 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 
 const PrintSchema = new Schema(
   {
-    storeId: String,
-    brand: String,
-    model: String,
-    type: String,
-    status: Boolean,
+    storeId: Types.ObjectId,
+    printerName: String,
+    isBusy: Boolean,
   },
   {
     timestamps: true,

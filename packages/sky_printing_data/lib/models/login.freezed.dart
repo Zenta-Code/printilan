@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Login {
   String? get token => throw _privateConstructorUsedError;
+  dynamic get user => throw _privateConstructorUsedError;
+  dynamic get store => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginCopyWith<Login> get copyWith => throw _privateConstructorUsedError;
@@ -27,7 +29,7 @@ abstract class $LoginCopyWith<$Res> {
   factory $LoginCopyWith(Login value, $Res Function(Login) then) =
       _$LoginCopyWithImpl<$Res, Login>;
   @useResult
-  $Res call({String? token});
+  $Res call({String? token, dynamic user, dynamic store});
 }
 
 /// @nodoc
@@ -44,12 +46,22 @@ class _$LoginCopyWithImpl<$Res, $Val extends Login>
   @override
   $Res call({
     Object? token = freezed,
+    Object? user = freezed,
+    Object? store = freezed,
   }) {
     return _then(_value.copyWith(
       token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      store: freezed == store
+          ? _value.store
+          : store // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ) as $Val);
   }
 }
@@ -61,7 +73,7 @@ abstract class _$$LoginImplCopyWith<$Res> implements $LoginCopyWith<$Res> {
       __$$LoginImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? token});
+  $Res call({String? token, dynamic user, dynamic store});
 }
 
 /// @nodoc
@@ -76,12 +88,22 @@ class __$$LoginImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? token = freezed,
+    Object? user = freezed,
+    Object? store = freezed,
   }) {
     return _then(_$LoginImpl(
       token: freezed == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
+      user: freezed == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      store: freezed == store
+          ? _value.store
+          : store // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -89,14 +111,18 @@ class __$$LoginImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoginImpl implements _Login {
-  const _$LoginImpl({this.token});
+  const _$LoginImpl({this.token, this.user, this.store});
 
   @override
   final String? token;
+  @override
+  final dynamic user;
+  @override
+  final dynamic store;
 
   @override
   String toString() {
-    return 'Login(token: $token)';
+    return 'Login(token: $token, user: $user, store: $store)';
   }
 
   @override
@@ -104,11 +130,17 @@ class _$LoginImpl implements _Login {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginImpl &&
-            (identical(other.token, token) || other.token == token));
+            (identical(other.token, token) || other.token == token) &&
+            const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality().equals(other.store, store));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, token);
+  int get hashCode => Object.hash(
+      runtimeType,
+      token,
+      const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(store));
 
   @JsonKey(ignore: true)
   @override
@@ -118,10 +150,17 @@ class _$LoginImpl implements _Login {
 }
 
 abstract class _Login implements Login {
-  const factory _Login({final String? token}) = _$LoginImpl;
+  const factory _Login(
+      {final String? token,
+      final dynamic user,
+      final dynamic store}) = _$LoginImpl;
 
   @override
   String? get token;
+  @override
+  dynamic get user;
+  @override
+  dynamic get store;
   @override
   @JsonKey(ignore: true)
   _$$LoginImplCopyWith<_$LoginImpl> get copyWith =>

@@ -16,6 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserEntity {
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
@@ -35,7 +37,8 @@ abstract class $UserEntityCopyWith<$Res> {
       _$UserEntityCopyWithImpl<$Res, UserEntity>;
   @useResult
   $Res call(
-      {String? name,
+      {@JsonKey(name: '_id') String? id,
+      String? name,
       String? email,
       String? password,
       Address? address,
@@ -58,6 +61,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? email = freezed,
     Object? password = freezed,
@@ -66,6 +70,10 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
     Object? role = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -115,7 +123,8 @@ abstract class _$$UserEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? name,
+      {@JsonKey(name: '_id') String? id,
+      String? name,
       String? email,
       String? password,
       Address? address,
@@ -137,6 +146,7 @@ class __$$UserEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? email = freezed,
     Object? password = freezed,
@@ -145,6 +155,10 @@ class __$$UserEntityImplCopyWithImpl<$Res>
     Object? role = freezed,
   }) {
     return _then(_$UserEntityImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -177,13 +191,17 @@ class __$$UserEntityImplCopyWithImpl<$Res>
 
 class _$UserEntityImpl implements _UserEntity {
   const _$UserEntityImpl(
-      {this.name,
+      {@JsonKey(name: '_id') this.id,
+      this.name,
       this.email,
       this.password,
       this.address,
       this.phone,
       this.role});
 
+  @override
+  @JsonKey(name: '_id')
+  final String? id;
   @override
   final String? name;
   @override
@@ -199,7 +217,7 @@ class _$UserEntityImpl implements _UserEntity {
 
   @override
   String toString() {
-    return 'UserEntity(name: $name, email: $email, password: $password, address: $address, phone: $phone, role: $role)';
+    return 'UserEntity(id: $id, name: $name, email: $email, password: $password, address: $address, phone: $phone, role: $role)';
   }
 
   @override
@@ -207,6 +225,7 @@ class _$UserEntityImpl implements _UserEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UserEntityImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.password, password) ||
@@ -218,7 +237,7 @@ class _$UserEntityImpl implements _UserEntity {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, name, email, password, address, phone, role);
+      Object.hash(runtimeType, id, name, email, password, address, phone, role);
 
   @JsonKey(ignore: true)
   @override
@@ -229,13 +248,17 @@ class _$UserEntityImpl implements _UserEntity {
 
 abstract class _UserEntity implements UserEntity {
   const factory _UserEntity(
-      {final String? name,
+      {@JsonKey(name: '_id') final String? id,
+      final String? name,
       final String? email,
       final String? password,
       final Address? address,
       final String? phone,
       final String? role}) = _$UserEntityImpl;
 
+  @override
+  @JsonKey(name: '_id')
+  String? get id;
   @override
   String? get name;
   @override

@@ -7,6 +7,7 @@ part of 'store.dart';
 // **************************************************************************
 
 _$StoreImpl _$$StoreImplFromJson(Map<String, dynamic> json) => _$StoreImpl(
+      id: json['_id'] as String?,
       name: json['name'] as String?,
       address: json['address'] == null
           ? null
@@ -17,6 +18,7 @@ _$StoreImpl _$$StoreImplFromJson(Map<String, dynamic> json) => _$StoreImpl(
 
 Map<String, dynamic> _$$StoreImplToJson(_$StoreImpl instance) =>
     <String, dynamic>{
+      '_id': instance.id,
       'name': instance.name,
       'address': instance.address,
       'phone': instance.phone,

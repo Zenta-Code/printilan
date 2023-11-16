@@ -1,16 +1,13 @@
-import 'package:get_it/get_it.dart';  
-import 'package:sky_printing/modules/dashboard/domain/usecases/sockets/connect_socket.dart';
-import 'package:sky_printing/modules/dashboard/domain/usecases/sockets/join_socket.dart';
-import 'package:sky_printing/modules/dashboard/domain/usecases/sockets/receive_socket.dart';
-import 'package:sky_printing/modules/dashboard/domain/usecases/sockets/send_socket.dart';
-import 'package:sky_printing/modules/dashboard/ui/cubit/dashboard_cubit.dart'; 
-import 'package:sky_printing/modules/login/ui/cubit/login_cubit.dart';
-import 'package:sky_printing/modules/main/ui/cubit/main_cubit.dart'; 
-import 'package:sky_printing/modules/register/ui/cubit/register_cubit.dart';
-import 'package:sky_printing/modules/settings/ui/cubit/settings_cubit.dart';
+import 'package:get_it/get_it.dart';
+import 'package:sky_printing/ui/dashboard/cubit/dashboard_cubit.dart';
+import 'package:sky_printing/ui/login/cubit/login_cubit.dart';
+import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
+import 'package:sky_printing/ui/order/cubit/order_cubit.dart';
+import 'package:sky_printing/ui/register/cubit/register_cubit.dart';
+import 'package:sky_printing/ui/settings/cubit/settings_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_data/sky_printing_data.dart';
-import 'package:sky_printing_domain/sky_printing_domain.dart'; 
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 GetIt sl = GetIt.instance;
 
@@ -29,6 +26,9 @@ Future<void> serviceLocator({
     await sl.reset();
   }
   sl.registerSingleton<DioClient>(DioClient(
+    isUnitTest: isUnitTest,
+  ));
+  sl.registerSingleton<SocketClient>(SocketClient(
     isUnitTest: isUnitTest,
   ));
   sl.registerSingleton<LocationClient>(LocationClient(
@@ -132,6 +132,16 @@ void _cubit() {
 
   /// Location
   sl.registerFactory(
-    () => DashboardCubit(sl(), sl(), sl(), sl(), sl()),
+    () => DashboardCubit(
+      sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => OrderCubit(
+      sl(),
+      sl(),
+      sl(),
+    ),
   );
 }

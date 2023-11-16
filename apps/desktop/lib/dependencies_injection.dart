@@ -18,21 +18,26 @@ Future<void> serviceLocator({
   bool isHiveEnable = true,
   String prefixBox = '',
 }) async {
-  if (isUnitTest) {
-    await sl.reset();
-  }
-  sl.registerSingleton<DioClient>(DioClient(isUnitTest: isUnitTest));
-  _dataSources();
-  _repositories();
-  _useCase();
-  _cubit();
-  _bloc();
   if (isHiveEnable) {
     await _initHiveBoxes(
       isUnitTest: isUnitTest,
       prefixBox: prefixBox,
     );
   }
+  if (isUnitTest) {
+    await sl.reset();
+  }
+  sl.registerSingleton<DioClient>(
+    DioClient(isUnitTest: isUnitTest),
+  );
+  sl.registerSingleton<SocketClient>(
+    SocketClient(isUnitTest: isUnitTest),
+  );
+  _dataSources();
+  _repositories();
+  _useCase();
+  _cubit();
+  _bloc();
 }
 
 Future<void> _initHiveBoxes({
@@ -74,10 +79,20 @@ void _useCase() {
     () => PostRegister(sl()),
   );
 
-  /// Users
-  // sl.registerLazySingleton(
-  //   () => GetUsers(sl()),
-  // );
+  /// Socket
+  sl.registerLazySingleton(
+    () => ConnectSocket(sl()),
+  );
+  sl.registerLazySingleton(
+    () => JoinSocket(sl()),
+  );
+
+  sl.registerLazySingleton(
+    () => SendSocket(sl()),
+  );
+  sl.registerLazySingleton(
+    () => ReceiveSocket(sl()),
+  );
 }
 
 void _cubit() {
@@ -99,10 +114,16 @@ void _cubit() {
     () => DashboardCubit(sl()),
   );
   sl.registerFactory(
-    () => OrderCubit(),
+    () => OrderCubit(
+      sl(),
+      sl(),
+      sl(),
+    ),
   );
   sl.registerFactory(
-    () => PrinterCubit(),
+    () => PrinterCubit(
+      sl(),
+    ),
   );
 }
 

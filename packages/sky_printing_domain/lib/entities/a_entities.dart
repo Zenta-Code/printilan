@@ -6,3 +6,4 @@ export 'order_entity.dart';
 export 'store_entity.dart';
 export 'user_entity.dart';
 export 'register_entity.dart';
+export 'printer_enitity.dart';

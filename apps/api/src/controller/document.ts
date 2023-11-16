@@ -1,9 +1,24 @@
 import { Router } from "express";
+import { Types } from "mongoose";
 import { authenticateJWT } from "../middleware/auth";
 import { Document } from "../model/document";
+import { upload } from "../storage";
 import { DocumentTypes } from "../types/document";
 
 export const DocumentController = ({ route }: { route: Router }) => {
+  route.post(
+    "/upload",
+    upload.single("file"),
+    authenticateJWT,
+    async function (req, res) {
+      await Document.create({
+        fileName: req!.file!.filename,
+        type: req!.file!.mimetype,
+        userId: new Types.ObjectId(req.body.userId),
+      });
+      res.send(req.file);
+    }
+  );
   route.post("/register", async (req, res) => {
     try {
       const body = DocumentTypes.parse(req.body);
@@ -98,7 +113,10 @@ export const DocumentController = ({ route }: { route: Router }) => {
           message: "data tidak valid",
         });
       }
-      const updateDocument = await Document.findOneAndUpdate({ name: updateData.name },updateData);
+      const updateDocument = await Document.findOneAndUpdate(
+        { name: updateData.name },
+        updateData
+      );
       if (!updateDocument) {
         return res.status(400).json({
           success: false,

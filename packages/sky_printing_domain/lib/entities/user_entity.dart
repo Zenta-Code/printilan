@@ -6,12 +6,12 @@ part 'user_entity.freezed.dart';
 @freezed
 class UserEntity with _$UserEntity {
   const factory UserEntity({
+    @JsonKey(name: '_id') String? id,
     String? name,
     String? email,
     String? password,
     Address? address,
     String? phone,
     String? role,
-  }) =_UserEntity;
-  
+  }) = _UserEntity;
 }

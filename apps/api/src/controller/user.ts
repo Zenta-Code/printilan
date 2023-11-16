@@ -1,10 +1,11 @@
 import bcrypt from "bcrypt";
 import { Router } from "express";
 import jwt from "jsonwebtoken";
-import { sanitize } from "../lib/sanitzer";
 import { authenticateJWT } from "../middleware/auth";
+import { Store } from "../model/store";
 import { User } from "../model/user";
 import { UserTypes } from "../types/user";
+import { sanitize } from "../utils/sanitzer";
 
 export const UserController = ({ route }: { route: Router }) => {
   route.post("/register", async (req, res) => {
@@ -109,10 +110,12 @@ export const UserController = ({ route }: { route: Router }) => {
       const token = jwt.sign({ id: user._id }, jwtSecret, {
         expiresIn: "1d",
       });
+      const store = await Store.findOne({ ownerId: user._id });
       return res.status(200).json({
         success: true,
         message: "Berhasil",
         user: sanitize(user.toObject(), ["password"]),
+        store: store,
         token,
       });
     } catch (error) {

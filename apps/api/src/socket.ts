@@ -8,12 +8,15 @@ export const createSocket = (server: Express) => {
       cors: {
         origin: "*",
       },
+      path: process.env.SOCKET_PATH || "/socket.io",
     });
     io.on("connection", (socket) => {
       console.log("Socket connected", socket.id);
       socket.on("join", (roomId: string) => {
         console.log("join", roomId);
         socket.join(roomId);
+        // tell user that he has joined the room
+        socket.emit("joined", roomId);
       });
 
       socket.on("leave", (roomId: string) => {
@@ -21,8 +24,8 @@ export const createSocket = (server: Express) => {
         socket.leave(roomId);
       });
 
-      socket.on("message", (message) => {
-        console.log("message", message);
+      socket.on("message", async (message) => {
+        // console.log("message", message);
         const receiver = message.receiver;
         const sender = message.sender;
         const roomId = message.roomId;
@@ -33,6 +36,14 @@ export const createSocket = (server: Express) => {
           sender,
           content,
         });
+        if (message.content.type == "order") {
+          // console.log("asc", message.content);
+          // await Order.create({
+          //   userId: message.sender,
+          //   storeId: message.receiver,
+          //   // documentId: message.content.documentId,
+          // });
+        }
       });
     });
     console.log(`Socket Ready Launched 🚀`);

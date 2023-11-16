@@ -8,6 +8,7 @@ import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
 import 'package:sky_printing_admin/ui/login/login_page.dart';
 import 'package:sky_printing_admin/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing_admin/ui/main/main_page.dart';
+import 'package:sky_printing_admin/ui/order/cubit/order_cubit.dart';
 import 'package:sky_printing_admin/ui/order/order_page.dart';
 import 'package:sky_printing_admin/ui/printer/cubit/printer_cubit.dart';
 import 'package:sky_printing_admin/ui/printer/printer_page.dart';
@@ -80,7 +81,10 @@ class AppRoute {
           GoRoute(
             path: Routes.order.path,
             name: Routes.order.name,
-            builder: (_, __) => const OrderPage(),
+            builder: (_, __) => BlocProvider(
+              create: (_) => sl<OrderCubit>()..fetchData(),
+              child: const OrderPage(),
+            ),
           ),
           GoRoute(
             path: Routes.printer.path,

@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/core/widgets/window_button.dart';
-import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart'; 
+import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
 import 'package:sky_printing_core/utils/helper/constant.dart';
-import 'package:sky_printing_domain/sky_printing_domain.dart'; 
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 import 'package:window_manager/window_manager.dart';
 
 class LoginPage extends StatefulWidget {
@@ -180,8 +180,7 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
                                     builder: (context, close) {
                                   return const InfoBar(
                                     title: Text('Success!'),
-                                    content: Text(
-                                        'Successfully logged in.Successfully logged in.Successfully logged in.Successfully logged in.Successfully logged in.Successfully logged in.'),
+                                    content: Text('Successfully logged in.'),
                                     severity: InfoBarSeverity.success,
                                     isLong: true,
                                   );

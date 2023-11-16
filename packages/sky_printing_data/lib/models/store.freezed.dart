@@ -20,6 +20,8 @@ Store _$StoreFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Store {
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   Address? get address => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
@@ -35,7 +37,12 @@ abstract class $StoreCopyWith<$Res> {
   factory $StoreCopyWith(Store value, $Res Function(Store) then) =
       _$StoreCopyWithImpl<$Res, Store>;
   @useResult
-  $Res call({String? name, Address? address, String? phone, String? ownerId});
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String? name,
+      Address? address,
+      String? phone,
+      String? ownerId});
 
   $AddressCopyWith<$Res>? get address;
 }
@@ -53,12 +60,17 @@ class _$StoreCopyWithImpl<$Res, $Val extends Store>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? address = freezed,
     Object? phone = freezed,
     Object? ownerId = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -98,7 +110,12 @@ abstract class _$$StoreImplCopyWith<$Res> implements $StoreCopyWith<$Res> {
       __$$StoreImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, Address? address, String? phone, String? ownerId});
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String? name,
+      Address? address,
+      String? phone,
+      String? ownerId});
 
   @override
   $AddressCopyWith<$Res>? get address;
@@ -115,12 +132,17 @@ class __$$StoreImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? address = freezed,
     Object? phone = freezed,
     Object? ownerId = freezed,
   }) {
     return _then(_$StoreImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -144,12 +166,20 @@ class __$$StoreImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$StoreImpl extends _Store {
-  const _$StoreImpl({this.name, this.address, this.phone, this.ownerId})
+  const _$StoreImpl(
+      {@JsonKey(name: '_id') this.id,
+      this.name,
+      this.address,
+      this.phone,
+      this.ownerId})
       : super._();
 
   factory _$StoreImpl.fromJson(Map<String, dynamic> json) =>
       _$$StoreImplFromJson(json);
 
+  @override
+  @JsonKey(name: '_id')
+  final String? id;
   @override
   final String? name;
   @override
@@ -161,7 +191,7 @@ class _$StoreImpl extends _Store {
 
   @override
   String toString() {
-    return 'Store(name: $name, address: $address, phone: $phone, ownerId: $ownerId)';
+    return 'Store(id: $id, name: $name, address: $address, phone: $phone, ownerId: $ownerId)';
   }
 
   @override
@@ -169,6 +199,7 @@ class _$StoreImpl extends _Store {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StoreImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.phone, phone) || other.phone == phone) &&
@@ -177,7 +208,8 @@ class _$StoreImpl extends _Store {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, address, phone, ownerId);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, address, phone, ownerId);
 
   @JsonKey(ignore: true)
   @override
@@ -195,7 +227,8 @@ class _$StoreImpl extends _Store {
 
 abstract class _Store extends Store {
   const factory _Store(
-      {final String? name,
+      {@JsonKey(name: '_id') final String? id,
+      final String? name,
       final Address? address,
       final String? phone,
       final String? ownerId}) = _$StoreImpl;
@@ -203,6 +236,9 @@ abstract class _Store extends Store {
 
   factory _Store.fromJson(Map<String, dynamic> json) = _$StoreImpl.fromJson;
 
+  @override
+  @JsonKey(name: '_id')
+  String? get id;
   @override
   String? get name;
   @override

@@ -100,11 +100,12 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
   Future<Either<Failure, T>> postRequest<T>(
     String url, {
     Map<String, dynamic>? data,
-    required ResponseConverter<T> converter,
+    FormData? formData,
+    ResponseConverter<T>? converter,
     bool isIsolate = true,
   }) async {
     try {
-      final response = await dio.post(url, data: data);
+      final response = await dio.post(url, data: data ?? formData);
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -112,16 +113,19 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
           response: response,
         );
       }
-
-      if (!isIsolate) {
-        return Right(converter(response.data));
+      if (converter == null) {
+        return Right(response.data as T);
+      } else {
+        if (!isIsolate) {
+          return Right(converter(response.data));
+        }
+        final isolateParse = IsolateParser<T>(
+          response.data as Map<String, dynamic>,
+          converter,
+        );
+        final result = await isolateParse.parseInBackground();
+        return Right(result);
       }
-      final isolateParse = IsolateParser<T>(
-        response.data as Map<String, dynamic>,
-        converter,
-      );
-      final result = await isolateParse.parseInBackground();
-      return Right(result);
     } on DioException catch (e, stackTrace) {
       if (!_isUnitTest) {
         nonFatalError(error: e, stackTrace: stackTrace);

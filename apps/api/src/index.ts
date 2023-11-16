@@ -1,15 +1,18 @@
 import dotenv from "dotenv";
 import { Express } from "express";
+import fs from "fs";
 import { Server } from "http";
 import mongoose from "mongoose";
-import { Seeder } from "./seeders/seeder";
 import { createServer } from "./server";
 import { createSocket } from "./socket";
 
 dotenv.config();
 
 const port = process.env.PORT || 3001;
+
 const server: Express = createServer();
+
+const socketServer = createSocket(server) as Server;
 
 try {
   mongoose.connect(
@@ -25,7 +28,6 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.on("connected", () => {
   console.log("Connected to MongoDB 🚀");
 
-  const socketServer = createSocket(server) as Server;
   try {
     socketServer.listen(port, () => {
       console.log(`API Ready at http://localhost:${port} 🚀`);
@@ -47,3 +49,8 @@ mongoose.connection.on("connected", () => {
 
   // Seeder();
 });
+
+// create files folder if not exist
+if (!fs.existsSync("./files")) {
+  fs.mkdirSync("./files");
+}
