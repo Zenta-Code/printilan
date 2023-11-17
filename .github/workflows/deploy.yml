@@ -39,7 +39,5 @@ jobs:
             git pull
             pnpm install
             pnpm build 
-            ls 
-            pwd
             screen -S sky_printing -X quit
             screen -dmS sky_printing pnpm run start
