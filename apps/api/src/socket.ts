@@ -4,12 +4,15 @@ import { Types } from "mongoose";
 import { Server } from "socket.io";
 import { Document } from "./model/document";
 import { Order } from "./model/order";
+
+import cors from "cors";
 export const createSocket = (server: Express) => {
   try {
     const httpServer = http(server);
     const io = new Server(httpServer, {
       cors: {
-        origin: "*",
+        origin: "https://manpro.zenta.dev",
+        methods: ["GET", "POST"], 
       },
       path: process.env.SOCKET_PATH || "/socket.io",
     });
@@ -55,7 +58,7 @@ export const createSocket = (server: Express) => {
         }
       });
     });
-    console.log(`Socket Ready Launched 🚀`);
+    console.log(`Socket Ready Launched :${process.env.SOCKET_PATH} 🚀`);
     return httpServer;
   } catch (error) {
     console.log("Error launching socket server 🚀");
