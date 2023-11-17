@@ -6,6 +6,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_data/sky_printing_data.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 part 'order_cubit.freezed.dart';
 part 'order_state.dart';
@@ -15,10 +16,13 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     this._client,
     this._joinSocket,
     this._socketClient,
+    this._webViewClient,
   ) : super(const _Loading());
   final DioClient _client;
   final JoinSocket _joinSocket;
   final SocketClient _socketClient;
+  final WebViewClient _webViewClient;
+  WebViewController? controller;
   FilePickerResult? result;
   String store = '';
 
@@ -51,6 +55,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   }
 
   void order() async {
+    emit(const _Loading());
     if (result == null) {
       return;
     } else if (result != null) {
@@ -72,7 +77,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       );
       upload.fold(
         (l) => log.e(l),
-        (r) {
+        (r) async {
           log.i(r);
           final user = getData(MainBoxKeys.user);
           _socketClient.send(
@@ -91,6 +96,32 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
               },
             },
           );
+          final res = await _client.postRequest(
+            "${ListAPI.order}/payment",
+            data: {
+              "transaction_details": {
+                "order_id": r['documentId'],
+                "gross_amount": 10000
+              },
+              "credit_card": {"secure": true}
+            },
+            converter: (response) {
+              log.i(response);
+              return response;
+            },
+          );
+          res.fold(
+            (l) => log.e(l),
+            (r) async {
+              log.i(r);
+              controller = await _webViewClient.loadUrl(
+                r['redirect_url'],
+              );
+            },
+          );
+          emit(const _Success(
+            [],
+          ));
         },
       );
     }

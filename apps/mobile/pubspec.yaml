@@ -83,6 +83,7 @@ dependencies:
   sky_printing_domain:
     path: ../../packages/sky_printing_domain
   http_parser: ^4.0.2
+  webview_flutter: ^4.4.2
 
 dev_dependencies:
   flutter_test:

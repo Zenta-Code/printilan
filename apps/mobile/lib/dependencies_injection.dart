@@ -34,6 +34,9 @@ Future<void> serviceLocator({
   sl.registerSingleton<LocationClient>(LocationClient(
     isUnitTest: isUnitTest,
   ));
+  sl.registerSingleton<WebViewClient>(WebViewClient(
+    isUnitTest: isUnitTest,
+  ));
 
   _dataSources();
   _repositories();
@@ -139,6 +142,7 @@ void _cubit() {
 
   sl.registerFactory(
     () => OrderCubit(
+      sl(),
       sl(),
       sl(),
       sl(),

@@ -4,6 +4,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/ui/order/cubit/order_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class OrderPage extends StatefulWidget {
   OrderPage({
@@ -82,10 +83,18 @@ class _OrderPageState extends State<OrderPage> {
               child: Text('Pick File'),
             ),
             ElevatedButton(
-                onPressed: () => context.read<OrderCubit>().result == null
-                    ? null
-                    : context.read<OrderCubit>().order(),
-                child: Text('Order'))
+              onPressed: () => context.read<OrderCubit>().result == null
+                  ? null
+                  : context.read<OrderCubit>().order(),
+              child: Text('Order'),
+            ),
+            context.watch<OrderCubit>().controller == null
+                ? Container()
+                : Expanded(
+                    child: WebViewWidget(
+                      controller: context.read<OrderCubit>().controller!,
+                    ),
+                  ),
           ],
         ),
       ),
