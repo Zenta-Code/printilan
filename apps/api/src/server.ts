@@ -23,7 +23,7 @@ export const createServer: () => Express = () => {
 
   root.group("/", (app) => {
     app.get("/ping", (req, res) => {
-      res.send("Punk!! 💣");
+      res.send("Punk! 💣");
     });
     app.group("/user", (app) => {
       UserController({ route: app });
