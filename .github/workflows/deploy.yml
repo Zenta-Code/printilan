@@ -39,5 +39,7 @@ jobs:
             git pull origin main
             pnpm install
             pnpm build 
+            ls 
+            pwd
             screen -S sky_printing -X quit
-            screen -S sky_printing -dm bash -c "pnpm start"
+            screen -dmS sky_printing pnpm run start
