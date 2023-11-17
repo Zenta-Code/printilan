@@ -8,7 +8,7 @@ typedef ResponseConverter<T> = T Function(dynamic response);
 
 class DioClient with MainBoxMixin, FirebaseCrashLogger {
   // final String _baseUrl = const String.fromEnvironment('SERVER_URL');
-  final String _baseUrl = 'http://192.168.151.129:3005';
+  final String _baseUrl = ListAPI.baseUrl;
 
   String? _auth;
   bool _isUnitTest = false;

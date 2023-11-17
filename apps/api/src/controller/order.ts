@@ -5,6 +5,32 @@ import { Order } from "../model/order";
 import { OrderTypes } from "../types/order";
 
 export const OrderController = ({ route }: { route: Router }) => {
+  route.get("/clear/:storeId", authenticateJWT, async (req, res) => {
+    try {
+      const params = req.params;
+      console.log("id...: ", params);
+      const find = await Order.deleteMany({
+        storeId: new Types.ObjectId(params.storeId),
+      });
+      console.log("find...: ", find);
+      if (!find) {
+        return res.status(400).json({
+          success: false,
+          message: "order tidak di temukan",
+        });
+      }
+      return res.status(200).json({
+        success: true,
+        message: "order berhasil ditemukan",
+        data: find,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  });
   route.post("/register", async (req, res) => {
     try {
       const body = OrderTypes.parse(req.body);
