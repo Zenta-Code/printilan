@@ -34,18 +34,7 @@ mongoose.connection.on("connected", () => {
     });
   } catch (err) {
     console.log(err);
-  }
-  // try {
-  //   console.log("====== API ENDPOINTS ======\n");
-  //   console.log(listEndpoint(server));
-  //   console.log("\n============================\n");
-  // } catch (e) {
-  //   console.log("Error listing endpoints\n");
-  //   console.log(e);
-  // }
-  // server.listen(port, () => {
-  //   console.log(`API Ready at http://localhost:${port} 🚀`);
-  // });
+  } 
 
   // Seeder();
 });
