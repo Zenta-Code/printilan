@@ -1,11 +1,10 @@
+import 'package:sky_printing_core/services/remote/api/list_api.dart';
 import 'package:sky_printing_core/utils/utils.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 class SocketClient with MainBoxMixin, FirebaseCrashLogger {
-  // final String _baseUrl = const String.fromEnvironment('SERVER_URL');
-  // final String _socketPath = const String.fromEnvironment('SOCKET_PATH');
-  final String _baseUrl = 'http://192.168.151.129:3005';
-  final String _socketPath = '/sky-printing';
+  static const String _baseUrl = ListAPI.baseUrl;
+  static const String _socketPath = ListAPI.socketPath;
   String? _auth;
   bool _isUnitTest = false;
   Socket? _socket;

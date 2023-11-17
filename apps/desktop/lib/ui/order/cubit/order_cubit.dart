@@ -67,4 +67,17 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       emit(_Success(orderData));
     });
   }
+
+  void clearOrder() {
+    emit(const _Loading());
+    final store = getData(MainBoxKeys.store);
+    _dioClient.getRequest(
+      "${ListAPI.order}/clear/${store!['_id']}",
+      converter: (response) {
+        return response;
+      },
+    );
+    orderData.clear();
+    emit(_Success(orderData));
+  }
 }

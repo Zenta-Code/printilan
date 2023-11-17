@@ -7,8 +7,7 @@ import 'package:sky_printing_core/sky_printing_core.dart';
 typedef ResponseConverter<T> = T Function(dynamic response);
 
 class DioClient with MainBoxMixin, FirebaseCrashLogger {
-  // final String _baseUrl = const String.fromEnvironment('SERVER_URL');
-  final String _baseUrl = ListAPI.baseUrl;
+  static const String _baseUrl = ListAPI.baseUrl;
 
   String? _auth;
   bool _isUnitTest = false;
@@ -127,6 +126,7 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
         return Right(result);
       }
     } on DioException catch (e, stackTrace) {
+      log.e(e);
       if (!_isUnitTest) {
         nonFatalError(error: e, stackTrace: stackTrace);
       }

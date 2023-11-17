@@ -1,3 +1,4 @@
+ 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing_admin/ui/order/cubit/order_cubit.dart';
@@ -26,17 +27,23 @@ class OrderPage extends StatelessWidget {
           success: (_) {
             final data = context.watch<OrderCubit>().orderData;
             log.f(data);
-            return buildScaffold(data);
+            return buildScaffold(data,context);
           },
         );
       },
     );
   }
 
-  ScaffoldPage buildScaffold(List<Order> data) {
+  ScaffoldPage buildScaffold(List<Order> data,BuildContext context) {
     return ScaffoldPage.scrollable(
       header: PageHeader(
         title: Text('Order'),
+        commandBar: FilledButton(
+          onPressed: () {
+            context.read<OrderCubit>().clearOrder();
+          },
+          child: Text('Clear Order'),
+        ),
       ),
       children: data
           .map((e) => Card(
