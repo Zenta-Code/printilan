@@ -33,4 +33,4 @@ jobs:
             pnpm dlx kill-port 3000
             pnpm install
             pnpm build 
-            pnpm start
+            screen -S sky_printing -d -m pnpm start
