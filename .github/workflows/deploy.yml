@@ -9,25 +9,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    - name: Install dependencies
+      run: |
+        npm i -g pnpm
+        pnpm install
+
+    - name: Build
+      run: | 
+        pnpm build
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-
-      - name: Install pnpm (if not installed)
-        run: |
-          npm install -g pnpm
-          pnpm setup
-
-      - name: Install dependencies and build
-        run: |
-          pnpm install
-          pnpm build
-
       - name: SSH Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -36,10 +27,9 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
-            screen -S "sp_api" -X quit
-            cd ~/manpro/sky_printing
-            git pull 
-            screen -S "sp_api"
-            npm i -g pnpm
-            pnpm setup
-            pnpm start
+            screen -S "sp_api" 
+            screen -r "sp_api" -X stuff $'cd ~/manpro/sky_printng/\n'
+            screen -r "sp_api" -X stuff $'git pull\n'
+            screen -r "sp_api" -X stuff $'pnpm install\n'
+            screen -r "sp_api" -X stuff $'pnpm build\n'
+            screen -r "sp_api" -X stuff $'pnpm start\n'
