@@ -40,4 +40,4 @@ jobs:
             pnpm install
             pnpm build 
             screen -S sky_printing -X quit
-            screen -dmS sky_printing pnpm run start
+            screen -S sky_printing -d -m pnpm start
