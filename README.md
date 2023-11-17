@@ -23,8 +23,6 @@ Sky Printing uses a number of open source projects to work properly :
 - [TypeScript](https://www.npmjs.com/package/typescript) - TypeScript is a superset of JavaScript, offering static typing and enhanced tooling for building scalable and maintainable web applications.
 - [C++](https://code.visualstudio.com/docs/languages/cpp) - C++ is a powerful, high-performance programming language widely used for system/application development, game development, and performance-critical applications.
 - [CMake](https://cmake.org/cmake/help/latest/guide/tutorial/Installing%20and%20Testing.html) - CMake is a cross-platform build system generator, facilitating the management of the build process for software projects across various platforms and environments.
-- [Swift](https://www.swift.org/getting-started/) - Swift is a fast and modern programming language developed by Apple, designed for building iOS, macOS, watchOS, and tvOS applications.
-- [JavaScript](https://code.visualstudio.com/docs/languages/javascript) - JavaScript is a dynamic scripting language widely used for web development, enabling interactive and dynamic content creation within web browsers.
 
 
 ## Requirement
