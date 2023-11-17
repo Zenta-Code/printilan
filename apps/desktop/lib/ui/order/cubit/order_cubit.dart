@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_data/sky_printing_data.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
@@ -54,11 +55,13 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       final String prettyJson = encoder.convert(data["document"]);
       log.i(prettyJson);
       orderData.add(order);
-      final res = await _dioClient.getRequest(
+
+      final savePath = await getApplicationDocumentsDirectory();
+      log.i(savePath.path);
+
+      final res = await _dioClient.downloadRequest(
         "${ListAPI.document}/download/${data["document"]["fileName"]}",
-        converter: (response) {
-          return response;
-        },
+        savePath.path + "/${data["document"]["fileName"]}",
       );
       res.fold(
         (l) => log.i(l),

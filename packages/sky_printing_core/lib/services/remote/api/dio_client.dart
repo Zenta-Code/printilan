@@ -137,4 +137,42 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       );
     }
   }
+
+  Future<Either<Failure, T>> downloadRequest<T>(
+    String url,
+    String path, {
+    bool isIsolate = true,
+  }) async {
+    try {
+      final response = await dio.download(url, path);
+      if ((response.statusCode ?? 0) < 200 ||
+          (response.statusCode ?? 0) > 201) {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+        );
+      }
+      return Right(response.data as T);
+    } on DioException catch (e, stackTrace) {
+      log.e(e);
+      if (!_isUnitTest) {
+        nonFatalError(error: e, stackTrace: stackTrace);
+      }
+      return Left(
+        ServerFailure(
+          e.response?.data['error'] as String? ?? e.message,
+        ),
+      );
+    } catch (e, stackTrace) {
+      log.e(e);
+      if (!_isUnitTest) {
+        nonFatalError(error: e, stackTrace: stackTrace);
+      }
+      return Left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
 }
