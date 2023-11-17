@@ -19,11 +19,12 @@ jobs:
           node-version: "18"
 
       - name: Install pnpm (if not installed)
-        run: npm install -g pnpm
+        run: |
+          npm install -g pnpm
+          pnpm setup
 
       - name: Install dependencies and build
         run: |
-          cd apps/api
           pnpm install
           pnpm build
 
@@ -37,7 +38,8 @@ jobs:
           script: |
             screen -S "sp_api" -X quit
             cd ~/manpro/sky_printing
-            git pull
-            cd apps/api
+            git pull 
             screen -S "sp_api"
+            npm i -g pnpm
+            pnpm setup
             pnpm start
