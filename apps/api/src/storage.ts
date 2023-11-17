@@ -1,25 +1,29 @@
 import crypto from "crypto";
+import fs from "fs";
 import multer from "multer";
-
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "./files/");
+  destination: function (req, file, cb) { 
+      const userId = req.body.userId;
+      const dir = "./files/" + userId;
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+      }
+      cb(null, dir);
+
+
   },
-  filename: function (req, file, cb) {
-    // encrypt file name
+  filename: function (req, file, cb) { 
     const fileName = file.originalname;
-    const userId = req.body.userId;
-    const encryptedFileName = `${userId}-${fileName}`;
-    const hashedFileName = crypto
-      .createHash("sha256")
-      .update(encryptedFileName)
+    const userId = req.body.userId; 
+    const split = fileName.split(".");
+    const extension = split[split.length - 1];
+    const encryptedFileName = crypto 
+      .createHash("sha1")
+      .update(fileName + userId)
       .digest("hex");
-    const fileExtension = hashedFileName.split(".");
-    const fileExtensionLength = fileExtension.length;
-    const fileExtensionName = fileExtension[fileExtensionLength - 1];
-    const fileExtensionNameLowerCase = fileExtensionName.toLowerCase();
-    const newFileName = `${hashedFileName}.${fileExtensionNameLowerCase}`;
-    cb(null, newFileName);
+
+    cb(null, encryptedFileName + "." + extension);
+     
   },
 });
 

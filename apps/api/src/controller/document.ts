@@ -1,4 +1,5 @@
 import { Router } from "express";
+import fs from "fs";
 import { Types } from "mongoose";
 import path from "path";
 import { authenticateJWT } from "../middleware/auth";
@@ -12,27 +13,37 @@ export const DocumentController = ({ route }: { route: Router }) => {
     upload.single("file"),
     authenticateJWT,
     async function (req, res) {
+      console.log("res.file", res.req.file?.path);
       const document = await Document.create({
-        fileName: req!.file!.filename,
+        fileName: res.req.file?.path,
         type: req!.file!.mimetype,
         userId: new Types.ObjectId(req.body.userId),
       });
       res.send({
         success: true,
         message: "file berhasil di upload",
-        data: req!.file!.filename,
+        filePath: res.req.file?.path,
         documentId: document._id,
       });
     }
   );
-  route.get("/download/:fileName", authenticateJWT, async function (req, res) {
-    const fileName = req.params.fileName;
-    const baseDir = path.join(__dirname, "../../files");
-    console.log("baseDir", baseDir);
-    const filePath = path.join(baseDir, fileName);
-    console.log("filePath", filePath);
-    res.download(filePath, fileName);
-  });
+  route.get(
+    "/download/:dir/:userId/:fileName",
+    authenticateJWT,
+    async function (req, res) {
+      const dir = req.params.dir;
+      const userId = req.params.userId;
+      const fileName = req.params.fileName;
+      const filePath = path.join(__dirname, "../..", dir, userId, fileName);
+      console.log("filePath", filePath);
+      const bytes = fs.readFileSync(filePath);
+      res.send({
+        name: fileName,
+        type: "application/pdf",
+        data: bytes,
+      });
+    }
+  );
   route.post("/register", async (req, res) => {
     try {
       const body = DocumentTypes.parse(req.body);
