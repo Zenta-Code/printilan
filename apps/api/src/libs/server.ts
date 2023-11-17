@@ -3,12 +3,12 @@ import cors from "cors";
 import express, { Express } from "express";
 import RouteGroup from "express-route-grouping";
 import morgan from "morgan";
-import { BundleController } from "./controller/bundle";
-import { DocumentController } from "./controller/document";
-import { OrderController } from "./controller/order";
-import { PrintController } from "./controller/print";
-import { StoreController } from "./controller/store";
-import { UserController } from "./controller/user";
+import { BundleController } from "../controller/bundle";
+import { DocumentController } from "../controller/document";
+import { OrderController } from "../controller/order";
+import { PrintController } from "../controller/print";
+import { StoreController } from "../controller/store";
+import { UserController } from "../controller/user";
 
 export const createServer: () => Express = () => {
   const app: Express = express();

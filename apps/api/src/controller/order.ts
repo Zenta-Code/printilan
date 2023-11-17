@@ -1,9 +1,9 @@
 import { Router } from "express";
 import { Types } from "mongoose";
+import { snap } from "../libs/midtrans";
 import { authenticateJWT } from "../middleware/auth";
 import { Order } from "../model/order";
 import { OrderTypes } from "../types/order";
-
 export const OrderController = ({ route }: { route: Router }) => {
   route.get("/clear/:storeId", authenticateJWT, async (req, res) => {
     try {
@@ -30,6 +30,29 @@ export const OrderController = ({ route }: { route: Router }) => {
         message: error,
       });
     }
+  });
+  route.post("/payment", authenticateJWT, async (req, res) => {
+    try {
+      const testBody = {
+        transaction_details: {
+          order_id: "test-transaction-123",
+          gross_amount: 200000,
+        },
+        credit_card: {
+          secure: true,
+        },
+      };
+
+      const payment = await snap.createTransaction(testBody);
+
+      console.log(payment);
+
+      return res.status(200).json({
+        success: true,
+        message: "Berhasil",
+        transactionToken: payment.token,
+      });
+    } catch (error) {}
   });
   route.post("/register", async (req, res) => {
     try {

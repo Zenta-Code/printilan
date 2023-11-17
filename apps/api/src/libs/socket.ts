@@ -2,17 +2,16 @@ import { Express } from "express";
 import { createServer as http } from "http";
 import { Types } from "mongoose";
 import { Server } from "socket.io";
-import { Document } from "./model/document";
-import { Order } from "./model/order";
+import { Document } from "../model/document";
+import { Order } from "../model/order";
 
-import cors from "cors";
 export const createSocket = (server: Express) => {
   try {
     const httpServer = http(server);
     const io = new Server(httpServer, {
       cors: {
         origin: "https://manpro.zenta.dev",
-        methods: ["GET", "POST"], 
+        methods: ["GET", "POST"],
       },
       path: process.env.SOCKET_PATH || "/socket.io",
     });

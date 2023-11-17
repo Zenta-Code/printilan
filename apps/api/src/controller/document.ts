@@ -4,7 +4,7 @@ import { Types } from "mongoose";
 import path from "path";
 import { authenticateJWT } from "../middleware/auth";
 import { Document } from "../model/document";
-import { upload } from "../storage";
+import { upload } from "../libs/storage";
 import { DocumentTypes } from "../types/document";
 
 export const DocumentController = ({ route }: { route: Router }) => {

@@ -3,8 +3,8 @@ import { Express } from "express";
 import fs from "fs";
 import { Server } from "http";
 import mongoose from "mongoose";
-import { createServer } from "./server";
-import { createSocket } from "./socket";
+import { createServer } from "./libs/server";
+import { createSocket } from "./libs/socket";
 
 dotenv.config();
 
