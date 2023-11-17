@@ -19,7 +19,7 @@ jobs:
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
             screen -S "sp_api" -d -m
-            screen -r "sp_api" -X stuff $'cd ~/manpro/sky_prinitng/\n'
+            screen -r "sp_api" -X stuff $'cd ~/manpro/sky_printing/\n'
             screen -r "sp_api" -X stuff $'git pull\n'
             screen -r "sp_api" -X stuff $'pnpm install\n'
             screen -r "sp_api" -X stuff $'pnpm build\n'
