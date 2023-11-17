@@ -18,6 +18,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_SSH_PORT }}
           script: |
+            npm i -g pnpm
             screen -S "sp_api" -X quit
             cd ~/manpro/sky_printing
             git pull
