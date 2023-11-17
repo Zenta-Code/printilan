@@ -26,5 +26,4 @@ jobs:
             kill $(lsof -t -i:3000)
             pnpm install
             pnpm build 
-            screen -S "sp_api"  
-            screen -r "sp_api" -X stuff $'pnpm start\n'
+            pnpm start
