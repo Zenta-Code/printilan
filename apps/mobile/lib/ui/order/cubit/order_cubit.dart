@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_data/sky_printing_data.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
@@ -55,14 +56,12 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     } else if (result != null) {
       List<int> bytes = result!.files.single.bytes!.cast();
 
-      var name =
-          "${DateTime.now().millisecondsSinceEpoch}-${result!.files.single.name}";
-
       FormData formData = FormData.fromMap({
         "userId": getData(MainBoxKeys.user)['_id'],
         "file": MultipartFile.fromBytes(
           bytes,
-          filename: name,
+          filename: result!.files.single.name,
+          contentType: MediaType("application", "pdf"),
         ),
       });
 
@@ -76,18 +75,6 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
         (r) {
           log.i(r);
           final user = getData(MainBoxKeys.user);
-          final content = {
-            "type": "order",
-            "content": {
-              "name": user['name'],
-              "email": user['email'],
-              "phone": user['phone'],
-              "address": user['address'],
-              "document": name,
-              "documentId": r['documentId'],
-            },
-          };
-          log.i(content);
           _socketClient.send(
             store,
             user['_id'],
@@ -99,7 +86,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
                 "email": user['email'],
                 "phone": user['phone'],
                 "address": user['address'],
-                "document": name,
+                "document": r['filePath'],
                 "documentId": r['documentId'],
               },
             },

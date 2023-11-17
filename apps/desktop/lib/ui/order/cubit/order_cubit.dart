@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:printing/printing.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_data/sky_printing_data.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
@@ -31,10 +34,16 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
         return data.map((e) => Order.fromJson(e)).toList();
       },
     );
+    final tes = await Printing.listPrinters();
+    log.i(tes.last);
     response.fold((l) => emit(const OrderState.failure("Error")), (r) {
       orderData.addAll(r);
       joinRoom();
-      emit(_Success(r));
+      try {
+        emit(_Success(r));
+      } catch (e) {
+        log.e(e);
+      }
     });
   }
 
@@ -49,6 +58,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   void message() {
     _socketClient.socket.on('message', (data) async {
       emit(const _Loading());
+      log.i(data);
       final order = Order.fromJson(data["order"]);
 
       const JsonEncoder encoder = JsonEncoder.withIndent('  ');
@@ -59,15 +69,43 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       final savePath = await getApplicationDocumentsDirectory();
       log.i(savePath.path);
 
-      final res = await _dioClient.downloadRequest(
-        "${ListAPI.document}/download/${data["document"]["fileName"]}",
-        savePath.path + "/${data["document"]["fileName"]}",
-      );
-      res.fold(
-        (l) => log.i(l),
-        (r) => log.i(r),
-      );
-      emit(_Success(orderData));
+      // check if sub folder exists
+      final path = data["document"]["fileName"].split("/");
+      final folder = path[0];
+      final userFolder = path[1];
+      final fileName = path[2];
+      final dir =
+          Directory("${savePath.path}/Sky Printing/$folder/$userFolder");
+      if (!dir.existsSync()) {
+        dir.createSync(recursive: true);
+      }
+
+      try {
+        final res = await _dioClient.dio.get(
+          "${ListAPI.document}/download/${data["document"]["fileName"]}",
+        );
+        if (res.data != null) {
+          final List<dynamic> bytes = res.data['data']['data'];
+          var newBytes = bytes.map((e) => e as int).toList();
+          final Uint8List xBytes = Uint8List.fromList(newBytes);
+          final file = File("${dir.path}/$fileName");
+          file.writeAsBytesSync(newBytes);
+          // final jobs = await WindowsPrinting().directPrint(
+          //     printerName: "EPSON L3210 Series",
+          //     filePath: file.path,
+          //     jobName: "Order-$fileName",
+          //     copies: 1);
+          final jobs = await Printing.directPrintPdf(
+              printer: const Printer(url: 'EPSON L3210 Series'),
+              onLayout: (format) => xBytes);
+          log.i(jobs);
+          emit(_Success(orderData));
+        } else {
+          log.e('Invalid response or empty data.');
+        }
+      } catch (e) {
+        log.e(e);
+      }
     });
   }
 

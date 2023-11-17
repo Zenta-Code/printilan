@@ -55,6 +55,8 @@ dependencies:
     path: ../../packages/sky_printing_data
   sky_printing_domain:
     path: ../../packages/sky_printing_domain
+  path_provider: ^2.1.1
+  printing: ^5.11.1
 
 dev_dependencies:
   bloc_test: ^9.1.5

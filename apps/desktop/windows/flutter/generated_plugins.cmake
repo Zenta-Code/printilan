@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   firebase_core
   flutter_acrylic
+  printing
   screen_retriever
   system_theme
   url_launcher_windows

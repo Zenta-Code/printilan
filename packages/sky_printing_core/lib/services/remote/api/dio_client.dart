@@ -64,9 +64,14 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
     Map<String, dynamic>? queryParameters,
     required ResponseConverter<T> converter,
     bool isIsolate = true,
+    ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final response = await dio.get(url, queryParameters: queryParameters);
+      final response = await dio.get(
+        url,
+        queryParameters: queryParameters,
+        onReceiveProgress: onReceiveProgress,
+      );
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -79,7 +84,7 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
         return Right(converter(response.data));
       }
       final isolateParse = IsolateParser<T>(
-        response.data as Map<String, dynamic>,
+        response.data,
         converter,
       );
       final result = await isolateParse.parseInBackground();
