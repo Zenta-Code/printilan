@@ -10,34 +10,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
 
-    - name: Install pnpm (if not installed)
-      run: npm install -g pnpm
+      - name: Install pnpm (if not installed)
+        run: npm install -g pnpm
 
-    - name: Install dependencies and build
-      run: |
-        cd apps/api
-        npx pnpm install
-        npx pnpm build
-
-    - name: SSH Deploy
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USERNAME }}
-        key: ${{ secrets.VPS_SSH_KEY }}
-        port: ${{ secrets.VPS_SSH_PORT }}
-        script: |
-          screen -S "sp_api" -X quit
-          cd ~/manpro/sky_printing
-          git pull
+      - name: Install dependencies and build
+        run: |
           cd apps/api
-          screen -S "sp_api"
-          npx pnpm start
+          pnpm install
+          pnpm build
+
+      - name: SSH Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_SSH_PORT }}
+          script: |
+            screen -S "sp_api" -X quit
+            cd ~/manpro/sky_printing
+            git pull
+            cd apps/api
+            screen -S "sp_api"
+            pnpm start
