@@ -42,11 +42,14 @@ enum Routes {
   final String path;
 }
 
-class AppRoute {
+class AppRoute with MainBoxMixin {
   static late BuildContext context;
-
+  static late String? token;
+  static late bool isLogin;
   AppRoute.setStream(BuildContext ctx) {
     context = ctx;
+    token = getData(MainBoxKeys.token);
+    isLogin = getData(MainBoxKeys.isLogin) ?? false;
   }
 
   static final GoRouter router = GoRouter(
@@ -59,7 +62,8 @@ class AppRoute {
       GoRoute(
         path: Routes.root.path,
         name: Routes.root.name,
-        redirect: (_, __) => Routes.splashScreen.path,
+        redirect: (_, __) =>
+            isLogin ? Routes.splashScreen.path : Routes.login.path,
       ),
       GoRoute(
         path: Routes.login.path,
@@ -122,26 +126,22 @@ class AppRoute {
     redirect: (_, GoRouterState state) async {
       final bool isLoginPage = state.matchedLocation == Routes.login.path ||
           state.matchedLocation == Routes.register.path;
-      final token =
-          MainBoxMixin.mainBox?.get(MainBoxKeys.token.name) as String?;
+      if (token == null) {
+        log.e('Token : $token');
+        return isLoginPage ? null : Routes.splashScreen.path;
+      }
+
       final me =
           await context.read<LoginCubit>().me(MeParams(token: token ?? ''));
       log.e('IS AUTH: $me');
 
-      if (!((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
-          false)) {
-        return isLoginPage ? null : Routes.splashScreen.path;
-      } else if (state.matchedLocation == Routes.splashScreen.path) {
-        return Routes.dashboard.path;
+      if (!me) {
+        return Routes.splashScreen.path;
+      }
+      if (me && isLoginPage) {
+        return isLoginPage ? null : Routes.dashboard.path;
       }
 
-      if (isLoginPage &&
-          ((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
-              false)) {
-        return Routes.dashboard.path;
-      }
-
-      /// No direct
       return null;
     },
   );

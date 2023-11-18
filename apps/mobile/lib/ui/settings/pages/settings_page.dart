@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sky_printing/core/app_route.dart';
 import 'package:sky_printing/dependencies_injection.dart';
-import 'package:sky_printing/ui/login/cubit/login_cubit.dart'; 
+import 'package:sky_printing/ui/login/cubit/login_cubit.dart';
 import 'package:sky_printing/ui/settings/cubit/settings_cubit.dart';
-import 'package:sky_printing_core/sky_printing_core.dart'; 
+import 'package:sky_printing_core/sky_printing_core.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -85,7 +87,13 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
               ),
               TextButton(
                 onPressed: () {
-                  context.read<LoginCubit>().logout();
+                  isLogout().then((value) {
+                    if (value) {
+                      Future.delayed(const Duration(seconds: 1), () {
+                        context.pushReplacementNamed(Routes.splashScreen.name);
+                      });
+                    }
+                  });
                 },
                 child: Text(Strings.of(context)!.logout),
               ),
@@ -94,6 +102,10 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
         ),
       ),
     );
+  }
+
+  Future<bool> isLogout() async {
+    return await context.read<LoginCubit>().logout(context);
   }
 
   String _getThemeName(ActiveTheme activeTheme, BuildContext context) {

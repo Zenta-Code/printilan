@@ -66,7 +66,7 @@ dependencies:
 
   # Screen Util (Responsive)
   flutter_screenutil: ^5.9.0
-  dot_navigation_bar: ^1.0.2
+  
   logger: ^2.0.2+1
   google_maps_flutter: ^2.5.0
   location: ^5.0.3
@@ -84,6 +84,7 @@ dependencies:
     path: ../../packages/sky_printing_domain
   http_parser: ^4.0.2
   webview_flutter: ^4.4.2
+  flutter_snake_navigationbar: ^0.6.1
 
 dev_dependencies:
   flutter_test:

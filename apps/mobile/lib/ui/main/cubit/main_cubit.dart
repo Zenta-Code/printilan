@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sky_printing_core/sky_printing_core.dart'; 
+import 'package:sky_printing_core/sky_printing_core.dart';
 
 part 'main_cubit.freezed.dart';
 part 'main_state.dart';
@@ -9,23 +9,23 @@ part 'main_state.dart';
 class MainCubit extends Cubit<MainState> {
   MainCubit() : super(const _Loading());
 
-  int _currentIndex = 0;
+  int currentIndex = 0;
   late List<DataHelper> dataMenus;
 
   void updateIndex(int index, {BuildContext? context}) {
     emit(const _Loading());
-    _currentIndex = index;
+    currentIndex = index;
     if (context != null) {
       initMenu(context);
+      emit(const _Loading());
     }
-    emit(_Success(dataMenus[_currentIndex]));
+    emit(_Success(dataMenus[index]));
   }
 
   void initMenu(BuildContext context) {
     dataMenus = [
       DataHelper(
         title: Strings.of(context)!.dashboard,
-        isSelected: true,
         icon: Icons.home,
       ),
       DataHelper(
@@ -41,6 +41,6 @@ class MainCubit extends Cubit<MainState> {
         icon: Icons.person_2_outlined,
       ),
     ];
-    updateIndex(_currentIndex);
+    updateIndex(currentIndex);
   }
 }

@@ -48,10 +48,20 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 
-  Future<void> logout() async {
+  Future<bool> logout(context) async {
     emit(const _Loading());
     isPasswordHide = true;
-    await MainBoxMixin().logoutBox();
-    emit(const _Success(null));
+    await MainBoxMixin().removeData(MainBoxKeys.token);
+    final isLogin = MainBoxMixin().getData(MainBoxKeys.token);
+    if (isLogin == null || isLogin == false) {
+      emit(const _Success("Logout success"));
+
+      return true;
+    }
+    if (isLogin == true) {
+      emit(const _Failure("Logout failed"));
+      return false;
+    }
+    return false;
   }
 }

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/core/core.dart';
-import 'package:sky_printing/ui/login/cubit/login_cubit.dart'; 
+import 'package:sky_printing/ui/login/cubit/login_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
@@ -35,6 +35,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _conEmail.dispose();
+    _conPassword.dispose();
+    _fnEmail.dispose();
+    _fnPassword.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Parent(
       child: BlocListener<LoginCubit, LoginState>(
@@ -43,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
             loading: () => context.show(),
             success: (data) {
               context.dismiss();
+              // context.pop();
               data.toString().toToastSuccess(context);
               TextInput.finishAutofillContext();
               context.goNamed(Routes.dashboard.name);

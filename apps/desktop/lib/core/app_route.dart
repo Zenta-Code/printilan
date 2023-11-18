@@ -110,16 +110,10 @@ class AppRoute {
       final bool isLoginPage = state.matchedLocation == Routes.login.path ||
           state.matchedLocation == Routes.register.path;
 
-      ///  Check if not login
-      ///  if current page is login page we don't need to direct user
-      ///  but if not we must direct user to login page
       if (!((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
           false)) {
         return isLoginPage ? null : Routes.login.path;
       }
-
-      /// Check if already login and in login page
-      /// we should direct user to main page
 
       if (isLoginPage &&
           ((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
@@ -127,7 +121,6 @@ class AppRoute {
         return Routes.root.path;
       }
 
-      /// No direct
       return null;
     },
   );

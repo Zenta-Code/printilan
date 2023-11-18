@@ -34,22 +34,13 @@ class _MainPageState extends State<MainPage>
       scaffoldKey: _scaffoldKey,
       // appBar: _appBar(),
       extendBody: true,
-      bottomNavigation: Container(
-        margin: EdgeInsets.all(Dimens.space16),
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            canvasColor: Colors.black,
-          ),
-          child: BottomNavBar(
-            dataMenu: context.read<MainCubit>().dataMenus,
-            currentIndex: (int index) {
-              if (index != 2) {
-                context.read<MainCubit>().updateIndex(index);
-              }
-            },
-            child: widget.child,
-          ),
-        ),
+      bottomNavigation: BottomNavBar(
+        dataMenu: context.read<MainCubit>().dataMenus,
+        currentIndex: (int index) {
+          context.read<MainCubit>().updateIndex(
+                index,
+              );
+        },
       ),
       child: widget.child,
     );
