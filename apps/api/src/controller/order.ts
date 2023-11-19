@@ -32,7 +32,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.post("/payment", async function (req, res) {
+  route.post("/payment", authenticateJWT, async function (req, res) {
     try {
       const serverKey = process.env.DEV_MIDTRANS_SERVER_KEY || "";
       const clientKey = process.env.DEV_MIDTRANS_CLIENT_KEY || "";
@@ -59,7 +59,7 @@ export const OrderController = ({ route }: { route: Router }) => {
         });
     } catch (error) {}
   });
-  route.post("/callback", authenticateJWT, async function (req, res) {
+  route.post("/callback", async function (req, res) {
     try {
       const body = req.body;
       console.log("body: ", body);
