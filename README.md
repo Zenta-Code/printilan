@@ -104,103 +104,12 @@ To develop all apps and packages, read readme.md in each folder.
 
 ## License
 
+```mermaid
+  graph TD;
+      A-->B;
+      A-->C;
+      B-->D;
+      C-->D;
+```
+
 > Zenta-Code (2023)
-
-<details>
-    <summary>Gant Chart</summary>
-    ```mermaid
-    gantt
-    title Project Management Course
-
-    section Environment Setup
-        Initialize Turborepo     :a1, 2023-01-01, 30d
-        Setup API Workspace     :after a1  , 20d
-        Setup Mobile Workspace  :after a1  , 20d
-        Setup Desktop Workspace :after a1  , 20d
-        Setup Shared Package    :after a1  , 20d
-
-    section API
-        Create Schema            :a2, 2023-02-01, 40d
-            User                 :after a2, 10d
-            Store                :after a2, 10d
-            Printer              :after a2, 10d
-            Bundle               :after a2, 10d
-            Document             :after a2, 10d
-            Order                :after a2, 10d
-        Create Rest API Controller :after a2  , 20d
-            User                 :after a2, 5d
-            Store                :after a2, 5d
-            Printer              :after a2, 5d
-            Bundle               :after a2, 5d
-            Document             :after a2, 5d
-            Order                :after a2, 5d
-        Create Seeder             :after a2  , 5d
-        Create Types Validation   :after a2  , 10d
-            User                 :after a2, 2d
-            Store                :after a2, 2d
-            Printer              :after a2, 2d
-            Bundle               :after a2, 2d
-            Document             :after a2, 2d
-            Order                :after a2, 2d
-        Optimize Auth with Middleware :after a2, 5d
-        Create Sanitizer for Crucial Data :after a2, 5d
-        Create Routing for Rest API :after a2, 5d
-        Create WebSocket         :after a2, 5d
-        Add Payment Gateway      :after a2, 5d
-
-    section Create Core Package
-        Create Entities          :a3, 2023-03-15, 40d
-            User                 :after a3, 7d
-            Store                :after a3, 7d
-            Printer              :after a3, 7d
-            Bundle               :after a3, 7d
-            Document             :after a3, 7d
-            Order                :after a3, 7d
-        Create Models            :after a3  , 20d
-            User                 :after a3, 5d
-            Store                :after a3, 5d
-            Printer              :after a3, 5d
-            Bundle               :after a3, 5d
-            Document             :after a3, 5d
-            Order                :after a3, 5d
-        Create Core Package       :after a3  , 30d
-            Create Response Handler :after a3, 5d
-            Create Common Utilities & Context Extension :after a3, 5d
-            Create Network Adapter :after a3, 5d
-            Create WebSocket Adapter :after a3, 5d
-            Create Payment Gateway Adapter :after a3, 5d
-            Create GPS Adapter   :after a3, 5d
-            Create Localization  :after a3, 5d
-        Create Abstraction Contract Repository :after a3, 15d
-            Auth                 :after a3, 5d
-            Store                :after a3, 5d
-            Product              :after a3, 5d
-            Location             :after a3, 5d
-        Create Implementation of Contract Repository :after a3, 15d
-            Auth                 :after a3, 5d
-            Store                :after a3, 5d
-            Product              :after a3, 5d
-            Location             :after a3, 5d
-        Create Data Source        :after a3  , 25d
-            Remote               :after a3, 5d
-            Auth                 :after a3, 5d
-            Store                :after a3, 5d
-            Local                :after a3, 5d
-            GPS Location         :after a3, 5d
-        Create Use Case           :after a3  , 40d
-            Login                :after a3, 3d
-            Register             :after a3, 3d
-            Fetch User Data      :after a3, 3d
-            Fetch Store          :after a3, 3d
-            Fetch Store Products :after a3, 3d
-            Post Order           :after a3, 3d
-            Update Location      :after a3, 3d
-            Connect Socket        :after a3, 3d
-            Join Room (Store)    :after a3, 3d
-            Send Socket Message  :after a3, 3d
-            Retrieve Broadcast Message :after a3, 3d
-        Local                    :after a3  , 5d
-            Fetch GPS Location   :after a3, 5d
-    ```
-
-</details>
