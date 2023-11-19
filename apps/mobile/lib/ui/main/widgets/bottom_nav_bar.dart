@@ -18,7 +18,7 @@ class BottomNavBar extends StatelessWidget {
   void selectPage(String title, int index, BuildContext context) {
     currentIndex(index);
     if (title == Strings.of(context)!.dashboard) {
-      context.goNamed(Routes.dashboard.name);
+      context.goNamed(Routes.home.name);
     } else if (title == Strings.of(context)!.history) {
       context.goNamed(Routes.history.name);
     } else if (title == Strings.of(context)!.wallet) {

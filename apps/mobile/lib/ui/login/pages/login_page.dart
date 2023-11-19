@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
               // context.pop();
               data.toString().toToastSuccess(context);
               TextInput.finishAutofillContext();
-              context.goNamed(Routes.dashboard.name);
+              context.goNamed(Routes.home.name);
             },
             failure: (message) {
               context.dismiss();

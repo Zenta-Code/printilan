@@ -59,6 +59,14 @@ export const OrderController = ({ route }: { route: Router }) => {
         });
     } catch (error) {}
   });
+  route.post("/callback", authenticateJWT, async function (req, res) {
+    try {
+      const body = req.body;
+      console.log("body: ", body);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  });
   route.post("/register", async (req, res) => {
     try {
       const body = OrderTypes.parse(req.body);

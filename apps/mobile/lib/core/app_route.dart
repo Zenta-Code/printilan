@@ -25,13 +25,13 @@ enum Routes {
   splashScreen("/splashscreen"),
 
   /// Main Page
-  dashboard("/dashboard"),
+  home("/home"),
   history("/history"),
   wallet("/wallet"),
   settings("/settings"),
 
   // sub page
-  order("/dashboard/order"),
+  order("order"),
 
   // Login Page
   login("/login/login"),
@@ -79,28 +79,33 @@ class AppRoute with MainBoxMixin {
         ),
       ),
       ShellRoute(
-        builder: (_, __, child) => BlocProvider(
-          create: (context) => sl<MainCubit>(),
+        builder: (_, __, child) => MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (_) => sl<MainCubit>(),
+            ),
+          ],
           child: MainPage(child: child),
         ),
         routes: [
           GoRoute(
-            path: Routes.dashboard.path,
-            name: Routes.dashboard.name,
-            builder: (_, __) => BlocProvider(
-              create: (_) =>
-                  sl<HomeCubit>()..getLocation(const LocationParams()),
-              child: const HomePage(),
-            ),
-          ),
-          GoRoute(
-            path: Routes.order.path,
-            name: Routes.order.name,
-            builder: (context, state) => BlocProvider(
-              create: (_) => sl<OrderCubit>()..getStore(),
-              child: OrderPage(),
-            ),
-          ),
+              path: Routes.home.path,
+              name: Routes.home.name,
+              builder: (_, __) => BlocProvider(
+                    create: (_) =>
+                        sl<HomeCubit>()..getLocation(const LocationParams()),
+                    child: const HomePage(),
+                  ),
+              routes: [
+                GoRoute(
+                  path: Routes.order.path,
+                  name: Routes.order.name,
+                  builder: (context, state) => BlocProvider(
+                    create: (_) => sl<OrderCubit>()..getStore(),
+                    child: OrderPage(),
+                  ),
+                ),
+              ]),
           GoRoute(
             path: Routes.history.path,
             name: Routes.history.name,
@@ -146,11 +151,11 @@ class AppRoute with MainBoxMixin {
       }
       if (me && isLoginPage) {
         log.i("me && isLoginPage Condition");
-        return isLoginPage ? null : Routes.dashboard.path;
+        return isLoginPage ? null : Routes.home.path;
       }
       if (me && state.matchedLocation == Routes.splashScreen.path) {
         log.i("me Condition");
-        return isLoginPage ? null : Routes.dashboard.path;
+        return isLoginPage ? null : Routes.home.path;
       }
       return null;
     },
