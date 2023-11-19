@@ -62,9 +62,15 @@ export const OrderController = ({ route }: { route: Router }) => {
   route.post("/callback", async function (req, res) {
     try {
       const body = req.body;
+      console.log("=== CALLBACK ===");
       console.log("body: ", body);
+      console.log("=== CALLBACK ===");
+      res.status(200).json(body);
     } catch (error) {
       console.log("error: ", error);
+      res.status(400).json({
+        error: "Midtrans Error",
+      });
     }
   });
   route.post("/register", async (req, res) => {
