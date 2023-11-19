@@ -1,3 +1,4 @@
+const midtransClient = require("midtrans-client");
 declare module "midtrans-client" {
   export class Snap {
     constructor(options: {
@@ -8,6 +9,4 @@ declare module "midtrans-client" {
 
     createTransaction(transactionDetails: object): Promise<{ token: string }>;
   }
-
-  // Add any other types you might need here
 }

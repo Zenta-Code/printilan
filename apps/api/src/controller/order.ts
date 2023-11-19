@@ -1,6 +1,7 @@
 import { Router } from "express";
+import * as midtransClient from "midtrans-client";
 import { Types } from "mongoose";
-import { snap } from "../libs/midtrans";
+
 import { authenticateJWT } from "../middleware/auth";
 import { Order } from "../model/order";
 import { OrderTypes } from "../types/order";
@@ -31,27 +32,31 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.post("/payment", authenticateJWT, async (req, res) => {
+  route.post("/payment", authenticateJWT, async function (req, res) {
     try {
-      const testBody = {
-        transaction_details: {
-          order_id: "test-transaction-123",
-          gross_amount: 200000,
-        },
-        credit_card: {
-          secure: true,
-        },
-      };
+      const serverKey = process.env.DEV_MIDTRANS_SERVER_KEY || "";
+      const clientKey = process.env.DEV_MIDTRANS_CLIENT_KEY || "";
 
-      const payment = await snap.createTransaction(testBody);
-
-      console.log(payment);
-
-      return res.status(200).json({
-        success: true,
-        message: "Berhasil",
-        transactionToken: payment.token,
+      const snap = new midtransClient.Snap({
+        isProduction: false,
+        serverKey: serverKey,
+        clientKey: clientKey,
       });
+      console.log("serverKey: ", serverKey);
+      console.log("clientKey: ", clientKey);
+      console.log("body: ", req.body);
+      snap
+        .createTransaction(req.body)
+        .then((transaction) => {
+          console.log("transaction: ", transaction);
+          res.status(200).json(transaction);
+        })
+        .catch((error) => {
+          console.log("error: ", error);
+          res.status(400).json({
+            error: "Midtrans Error",
+          });
+        });
     } catch (error) {}
   });
   route.post("/register", async (req, res) => {
