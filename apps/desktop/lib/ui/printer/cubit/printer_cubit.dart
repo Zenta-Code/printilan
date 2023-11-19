@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_data/models/printer_model.dart';
+import 'package:sky_printing_data/models/printer/printer_model.dart'; 
 import 'package:windows_printing/windows_printing.dart';
 import 'package:windows_printing_models/models/printer.dart';
 

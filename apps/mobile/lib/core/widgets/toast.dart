@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-///*********************************************
-/// Created by ukietux on 11/09/20 with ♥
-/// (>’_’)> email : hey.mudassir@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
 class Toast extends StatelessWidget {
   final IconData? icon;
   final Color? bgColor;
   final Color? textColor;
   final String? message;
 
-  const Toast({super.key, this.icon, this.bgColor, this.message, this.textColor});
+  const Toast(
+      {super.key, this.icon, this.bgColor, this.message, this.textColor});
 
   @override
   Widget build(BuildContext context) {

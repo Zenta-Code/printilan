@@ -1,5 +1,6 @@
 import 'package:sky_printing_core/services/remote/api/list_api.dart';
 import 'package:sky_printing_core/utils/utils.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
 class SocketClient with MainBoxMixin, FirebaseCrashLogger {
@@ -58,13 +59,7 @@ class SocketClient with MainBoxMixin, FirebaseCrashLogger {
     _socket!.on('message', handler);
   }
 
-  void send(String receiver, String sender, String roomId,
-      Map<String, dynamic> content) {
-    _socket!.emit('message', {
-      'receiver': receiver,
-      'sender': sender,
-      'roomId': roomId,
-      'content': content,
-    });
+  void send( SocketParams params) {
+    _socket!.emit('message', params.toJson());
   }
 }

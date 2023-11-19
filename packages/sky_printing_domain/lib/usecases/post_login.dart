@@ -1,19 +1,19 @@
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_data/sky_printing_data.dart';
-import 'package:sky_printing_domain/repositories/login_repository.dart'; 
+import 'package:sky_printing_domain/entities/login_entity.dart';
+import 'package:sky_printing_domain/repositories/login_repository.dart';
 
 part 'post_login.freezed.dart';
 part 'post_login.g.dart';
 
-class PostLogin extends UseCase<Login, LoginParams> {
+class PostLogin extends UseCase<LoginEntity , LoginParams> {
   final LoginRepository _repo;
 
   PostLogin(this._repo);
 
   @override
-  Future<Either<Failure, Login>> call(LoginParams params) =>
+  Future<Either<Failure, LoginEntity>> call(LoginParams params) =>
       _repo.login(params);
 }
 

@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:geocoding/geocoding.dart' hide Location;
 import 'package:location/location.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_data/models/location_response.dart';
+import 'package:sky_printing_data/models/location/location_model.dart';
 
 class LocationClient {
   bool _isUnitTest = false;
@@ -36,7 +36,7 @@ class LocationClient {
     return await location.requestPermission();
   }
 
-  Future<Either<Failure, LocationResponse>> getLocation() async {
+  Future<Either<Failure, LocationModel>> getLocation() async {
     final perm = await hasPermission();
     log.i("Permission status: $perm");
     if (perm == PermissionStatus.granted ||
@@ -46,25 +46,27 @@ class LocationClient {
         final locationData = await location.getLocation();
         placemark = await placemarkFromCoordinates(
             locationData.latitude!, locationData.longitude!);
-        return Right(LocationResponse(
-          latitude: locationData.latitude,
-          longitude: locationData.longitude,
-          accuracy: locationData.accuracy,
-          verticalAccuracy: locationData.verticalAccuracy,
-          altitude: locationData.altitude,
-          speed: locationData.speed,
-          speedAccuracy: locationData.speedAccuracy,
-          heading: locationData.heading,
-          time: locationData.time,
-          isMock: locationData.isMock,
-          headingAccuracy: locationData.headingAccuracy,
-          elapsedRealtimeNanos: locationData.elapsedRealtimeNanos,
-          elapsedRealtimeUncertaintyNanos:
-              locationData.elapsedRealtimeUncertaintyNanos,
-          satelliteNumber: locationData.satelliteNumber,
-          provider: locationData.provider,
-          placemarks: placemark,
-        ));
+        return Right(
+          LocationModel(
+            latitude: locationData.latitude,
+            longitude: locationData.longitude,
+            accuracy: locationData.accuracy,
+            verticalAccuracy: locationData.verticalAccuracy,
+            altitude: locationData.altitude,
+            speed: locationData.speed,
+            speedAccuracy: locationData.speedAccuracy,
+            heading: locationData.heading,
+            time: locationData.time,
+            isMock: locationData.isMock,
+            headingAccuracy: locationData.headingAccuracy,
+            elapsedRealtimeNanos: locationData.elapsedRealtimeNanos,
+            elapsedRealtimeUncertaintyNanos:
+                locationData.elapsedRealtimeUncertaintyNanos,
+            satelliteNumber: locationData.satelliteNumber,
+            provider: locationData.provider,
+            placemarks: placemark,
+          ),
+        );
       } catch (e) {
         return Left(LocationFailure(message: e.toString()));
       }

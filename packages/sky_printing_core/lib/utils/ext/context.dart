@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sky_printing_core/sky_printing_core.dart'; 
+import 'package:sky_printing_core/sky_printing_core.dart';
 
 extension ContextExtensions on BuildContext {
   bool isMobile() {
@@ -39,12 +39,14 @@ extension ContextExtensions on BuildContext {
   //Start Loading Dialog
   static late BuildContext ctx;
 
-  Future<void> show() => showDialog(
+  Future<void> show({
+    BuildContext? context,
+  }) =>
+      showDialog(
         context: this,
         barrierDismissible: false,
-        builder: (c) {
-          ctx = c;
-
+        builder: (_) {
+          context == null ? ctx = this : ctx = context;
           return WillPopScope(
             onWillPop: () async => false,
             child: Material(
@@ -52,7 +54,6 @@ extension ContextExtensions on BuildContext {
               child: Center(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(this).extension<LzyctColors>()!.background,
                     borderRadius: BorderRadius.circular(Dimens.cornerRadius),
                   ),
                   margin: EdgeInsets.symmetric(horizontal: Dimens.space30),

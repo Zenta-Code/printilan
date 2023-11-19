@@ -16,8 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$StoreEntity {
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  Address? get address => throw _privateConstructorUsedError;
+  AddressEntity? get address => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get ownerId => throw _privateConstructorUsedError;
 
@@ -32,9 +34,14 @@ abstract class $StoreEntityCopyWith<$Res> {
           StoreEntity value, $Res Function(StoreEntity) then) =
       _$StoreEntityCopyWithImpl<$Res, StoreEntity>;
   @useResult
-  $Res call({String? name, Address? address, String? phone, String? ownerId});
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String? name,
+      AddressEntity? address,
+      String? phone,
+      String? ownerId});
 
-  $AddressCopyWith<$Res>? get address;
+  $AddressEntityCopyWith<$Res>? get address;
 }
 
 /// @nodoc
@@ -50,12 +57,17 @@ class _$StoreEntityCopyWithImpl<$Res, $Val extends StoreEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? address = freezed,
     Object? phone = freezed,
     Object? ownerId = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -63,7 +75,7 @@ class _$StoreEntityCopyWithImpl<$Res, $Val extends StoreEntity>
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as Address?,
+              as AddressEntity?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -77,12 +89,12 @@ class _$StoreEntityCopyWithImpl<$Res, $Val extends StoreEntity>
 
   @override
   @pragma('vm:prefer-inline')
-  $AddressCopyWith<$Res>? get address {
+  $AddressEntityCopyWith<$Res>? get address {
     if (_value.address == null) {
       return null;
     }
 
-    return $AddressCopyWith<$Res>(_value.address!, (value) {
+    return $AddressEntityCopyWith<$Res>(_value.address!, (value) {
       return _then(_value.copyWith(address: value) as $Val);
     });
   }
@@ -96,10 +108,15 @@ abstract class _$$StoreEntityImplCopyWith<$Res>
       __$$StoreEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, Address? address, String? phone, String? ownerId});
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String? name,
+      AddressEntity? address,
+      String? phone,
+      String? ownerId});
 
   @override
-  $AddressCopyWith<$Res>? get address;
+  $AddressEntityCopyWith<$Res>? get address;
 }
 
 /// @nodoc
@@ -113,12 +130,17 @@ class __$$StoreEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? address = freezed,
     Object? phone = freezed,
     Object? ownerId = freezed,
   }) {
     return _then(_$StoreEntityImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -126,7 +148,7 @@ class __$$StoreEntityImplCopyWithImpl<$Res>
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as Address?,
+              as AddressEntity?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -142,12 +164,20 @@ class __$$StoreEntityImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$StoreEntityImpl implements _StoreEntity {
-  const _$StoreEntityImpl({this.name, this.address, this.phone, this.ownerId});
+  const _$StoreEntityImpl(
+      {@JsonKey(name: '_id') this.id,
+      this.name,
+      this.address,
+      this.phone,
+      this.ownerId});
 
+  @override
+  @JsonKey(name: '_id')
+  final String? id;
   @override
   final String? name;
   @override
-  final Address? address;
+  final AddressEntity? address;
   @override
   final String? phone;
   @override
@@ -155,7 +185,7 @@ class _$StoreEntityImpl implements _StoreEntity {
 
   @override
   String toString() {
-    return 'StoreEntity(name: $name, address: $address, phone: $phone, ownerId: $ownerId)';
+    return 'StoreEntity(id: $id, name: $name, address: $address, phone: $phone, ownerId: $ownerId)';
   }
 
   @override
@@ -163,6 +193,7 @@ class _$StoreEntityImpl implements _StoreEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StoreEntityImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.phone, phone) || other.phone == phone) &&
@@ -170,7 +201,8 @@ class _$StoreEntityImpl implements _StoreEntity {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, address, phone, ownerId);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, address, phone, ownerId);
 
   @JsonKey(ignore: true)
   @override
@@ -181,15 +213,19 @@ class _$StoreEntityImpl implements _StoreEntity {
 
 abstract class _StoreEntity implements StoreEntity {
   const factory _StoreEntity(
-      {final String? name,
-      final Address? address,
+      {@JsonKey(name: '_id') final String? id,
+      final String? name,
+      final AddressEntity? address,
       final String? phone,
       final String? ownerId}) = _$StoreEntityImpl;
 
   @override
+  @JsonKey(name: '_id')
+  String? get id;
+  @override
   String? get name;
   @override
-  Address? get address;
+  AddressEntity? get address;
   @override
   String? get phone;
   @override

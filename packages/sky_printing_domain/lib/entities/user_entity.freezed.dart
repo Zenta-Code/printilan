@@ -21,7 +21,7 @@ mixin _$UserEntity {
   String? get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
-  Address? get address => throw _privateConstructorUsedError;
+  AddressEntity? get address => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get role => throw _privateConstructorUsedError;
 
@@ -41,11 +41,11 @@ abstract class $UserEntityCopyWith<$Res> {
       String? name,
       String? email,
       String? password,
-      Address? address,
+      AddressEntity? address,
       String? phone,
       String? role});
 
-  $AddressCopyWith<$Res>? get address;
+  $AddressEntityCopyWith<$Res>? get address;
 }
 
 /// @nodoc
@@ -89,7 +89,7 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as Address?,
+              as AddressEntity?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -103,12 +103,12 @@ class _$UserEntityCopyWithImpl<$Res, $Val extends UserEntity>
 
   @override
   @pragma('vm:prefer-inline')
-  $AddressCopyWith<$Res>? get address {
+  $AddressEntityCopyWith<$Res>? get address {
     if (_value.address == null) {
       return null;
     }
 
-    return $AddressCopyWith<$Res>(_value.address!, (value) {
+    return $AddressEntityCopyWith<$Res>(_value.address!, (value) {
       return _then(_value.copyWith(address: value) as $Val);
     });
   }
@@ -127,12 +127,12 @@ abstract class _$$UserEntityImplCopyWith<$Res>
       String? name,
       String? email,
       String? password,
-      Address? address,
+      AddressEntity? address,
       String? phone,
       String? role});
 
   @override
-  $AddressCopyWith<$Res>? get address;
+  $AddressEntityCopyWith<$Res>? get address;
 }
 
 /// @nodoc
@@ -174,7 +174,7 @@ class __$$UserEntityImplCopyWithImpl<$Res>
       address: freezed == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as Address?,
+              as AddressEntity?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -209,7 +209,7 @@ class _$UserEntityImpl implements _UserEntity {
   @override
   final String? password;
   @override
-  final Address? address;
+  final AddressEntity? address;
   @override
   final String? phone;
   @override
@@ -252,7 +252,7 @@ abstract class _UserEntity implements UserEntity {
       final String? name,
       final String? email,
       final String? password,
-      final Address? address,
+      final AddressEntity? address,
       final String? phone,
       final String? role}) = _$UserEntityImpl;
 
@@ -266,7 +266,7 @@ abstract class _UserEntity implements UserEntity {
   @override
   String? get password;
   @override
-  Address? get address;
+  AddressEntity? get address;
   @override
   String? get phone;
   @override

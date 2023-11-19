@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sky_printing_data/models/address.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'user_entity.freezed.dart';
 
@@ -10,7 +10,7 @@ class UserEntity with _$UserEntity {
     String? name,
     String? email,
     String? password,
-    Address? address,
+    AddressEntity? address,
     String? phone,
     String? role,
   }) = _UserEntity;

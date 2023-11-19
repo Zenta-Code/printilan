@@ -33,7 +33,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       converter: (response) {
         final data = response['data'] as List;
         log.i(data);
-        return data.map((e) => Store.fromJson(e)).toList();
+        return data.map((e) => StoreModel.fromJson(e).toEntity()).toList();
       },
     );
     data.fold(
@@ -81,20 +81,22 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
           log.i(r);
           final user = getData(MainBoxKeys.user);
           _socketClient.send(
-            store,
-            user['_id'],
-            store,
-            {
-              "type": "order",
-              "content": {
-                "name": user['name'],
-                "email": user['email'],
-                "phone": user['phone'],
-                "address": user['address'],
-                "document": r['filePath'],
-                "documentId": r['documentId'],
+            SocketParams(
+              roomId: store,
+              sender: user['_id'],
+              receiver: store,
+              content: {
+                "type": "order",
+                "content": {
+                  "name": user['name'],
+                  "email": user['email'],
+                  "phone": user['phone'],
+                  "address": user['address'],
+                  "document": r['filePath'],
+                  "documentId": r['documentId'],
+                },
               },
-            },
+            ),
           );
           final res = await _client.postRequest(
             "${ListAPI.order}/payment",

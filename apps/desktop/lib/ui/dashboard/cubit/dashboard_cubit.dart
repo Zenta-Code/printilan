@@ -33,7 +33,7 @@ class DashboardCubit extends Cubit<DashboardState> {
       "${ListAPI.bundle}/list/${user['_id']}",
       converter: (response) {
         final data = response['data'] as List;
-        return data.map((e) => Bundle.fromJson(e)).toList();
+        return data.map((e) => BundleModel.fromJson(e)).toList();
       },
     );
     order.fold(
