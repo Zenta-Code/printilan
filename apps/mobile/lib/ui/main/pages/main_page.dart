@@ -10,7 +10,7 @@ class MainPage extends StatefulWidget {
   final Widget child;
 
   @override
-  _MainPageState createState() => _MainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage>

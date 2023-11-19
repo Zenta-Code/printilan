@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -7,13 +6,13 @@ import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-part 'dashboard_cubit.freezed.dart';
-part 'dashboard_state.dart';
+part 'home_cubit.freezed.dart';
+part 'home_state.dart';
 
-class DashboardCubit extends Cubit<DashboardState> {
-  final GetLocation _getLocation;  
-  DashboardCubit(
-    this._getLocation,  
+class HomeCubit extends Cubit<HomeState> {
+  final GetLocation _getLocation;
+  HomeCubit(
+    this._getLocation,
   ) : super(const _Loading());
 
   final Completer<GoogleMapController> controller =

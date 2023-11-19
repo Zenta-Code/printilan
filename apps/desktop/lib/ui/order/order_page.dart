@@ -1,9 +1,8 @@
- 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing_admin/ui/order/cubit/order_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_data/sky_printing_data.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 class OrderPage extends StatelessWidget {
   const OrderPage({super.key});
@@ -27,14 +26,14 @@ class OrderPage extends StatelessWidget {
           success: (_) {
             final data = context.watch<OrderCubit>().orderData;
             log.f(data);
-            return buildScaffold(data,context);
+            return buildScaffold(data, context);
           },
         );
       },
     );
   }
 
-  ScaffoldPage buildScaffold(List<Order> data,BuildContext context) {
+  ScaffoldPage buildScaffold(List<OrderEntity> data, BuildContext context) {
     return ScaffoldPage.scrollable(
       header: PageHeader(
         title: Text('Order'),

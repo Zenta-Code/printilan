@@ -3,18 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/core/app_route.dart';
-import 'package:sky_printing/ui/dashboard/cubit/dashboard_cubit.dart';
+import 'package:sky_printing/ui/home/cubit/home_cubit.dart'; 
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _HomePageState extends State<HomePage> {
   final _textCon = TextEditingController();
 
   @override
@@ -27,9 +27,9 @@ class _DashboardPageState extends State<DashboardPage> {
     return Parent(
       child: RefreshIndicator(
         onRefresh: () async {
-          context.read<DashboardCubit>().getLocation(const LocationParams());
+          context.read<HomeCubit>().getLocation(const LocationParams());
         },
-        child: BlocBuilder<DashboardCubit, DashboardState>(
+        child: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
             return state.when(
               loading: () => const Center(

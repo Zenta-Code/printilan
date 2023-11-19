@@ -26,7 +26,7 @@ class DashboardCubit extends Cubit<DashboardState> {
       "${ListAPI.order}/list/${store['_id']}",
       converter: (response) {
         final data = response['data'] as List;
-        return data.map((e) => Order.fromJson(e)).toList();
+        return data.map((e) => OrderModel.fromJson(e).toEntity()).toList();
       },
     );
     final bundle = await _client.getRequest(

@@ -4,7 +4,6 @@ import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewClient with MainBoxMixin {
-  String? _auth;
   bool _isUnitTest = false;
   late WebViewController _controller;
 
@@ -14,7 +13,6 @@ class WebViewClient with MainBoxMixin {
     _isUnitTest = isUnitTest;
 
     try {
-      _auth = getData(MainBoxKeys.token);
     } catch (_) {}
 
     _controller = createBase();
@@ -27,7 +25,6 @@ class WebViewClient with MainBoxMixin {
       return _controller;
     } else {
       try {
-        _auth = getData(MainBoxKeys.token);
       } catch (_) {}
 
       final controller = createBase();

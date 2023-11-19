@@ -1,4 +1,3 @@
-export 'app_route.dart';
-export 'core_mapper.dart';
+export 'app_route.dart'; 
 export 'resources/resources.dart';
 export 'widgets/widgets.dart';

@@ -8,7 +8,6 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dashCubit = context.read<DashboardCubit>();
     final width = MediaQuery.of(context).size.width;
     return BlocBuilder<DashboardCubit, DashboardState>(
         builder: (context, state) {

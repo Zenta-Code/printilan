@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/dependencies_injection.dart';
-import 'package:sky_printing/ui/dashboard/cubit/dashboard_cubit.dart';
-import 'package:sky_printing/ui/dashboard/pages/dashboard_page.dart';
 import 'package:sky_printing/ui/history/pages/history_page.dart';
+import 'package:sky_printing/ui/home/cubit/home_cubit.dart';
+import 'package:sky_printing/ui/home/pages/home_page.dart';
 import 'package:sky_printing/ui/login/cubit/login_cubit.dart';
 import 'package:sky_printing/ui/login/pages/login_page.dart';
 import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
@@ -89,8 +89,8 @@ class AppRoute with MainBoxMixin {
             name: Routes.dashboard.name,
             builder: (_, __) => BlocProvider(
               create: (_) =>
-                  sl<DashboardCubit>()..getLocation(const LocationParams()),
-              child: const DashboardPage(),
+                  sl<HomeCubit>()..getLocation(const LocationParams()),
+              child: const HomePage(),
             ),
           ),
           GoRoute(
@@ -136,13 +136,31 @@ class AppRoute with MainBoxMixin {
       log.e('IS AUTH: $me');
 
       if (!me) {
-        return Routes.splashScreen.path;
+        log.i("!me Condition");
+        // return Routes.splashScreen.path;
+        final isLogout = await logout();
+        if (!isLogout) {
+          log.e('Logout : $isLogout');
+          return Routes.splashScreen.path;
+        }
       }
       if (me && isLoginPage) {
+        log.i("me && isLoginPage Condition");
         return isLoginPage ? null : Routes.dashboard.path;
       }
-
+      if (me && state.matchedLocation == Routes.splashScreen.path) {
+        log.i("me Condition");
+        return isLoginPage ? null : Routes.dashboard.path;
+      }
       return null;
     },
   );
+}
+
+Future<bool> logout() async {
+  await MainBoxMixin().removeData(MainBoxKeys.token);
+  await MainBoxMixin().removeData(MainBoxKeys.isLogin);
+  await MainBoxMixin().removeData(MainBoxKeys.user);
+  final isLogin = MainBoxMixin().getData(MainBoxKeys.isLogin);
+  return isLogin;
 }

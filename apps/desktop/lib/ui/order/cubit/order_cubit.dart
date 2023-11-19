@@ -23,7 +23,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   final JoinSocket _joinSocket;
   final SocketClient _socketClient;
   final DioClient _dioClient;
-  final List<Order> orderData = [];
+  final List<OrderEntity> orderData = [];
   Future<void> fetchData() async {
     emit(const _Loading());
     final store = getData(MainBoxKeys.store);
@@ -31,7 +31,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       "${ListAPI.order}/list/${store['_id']}",
       converter: (response) {
         final data = response['data'] as List<dynamic>;
-        return data.map((e) => Order.fromJson(e)).toList();
+        return data.map((e) => OrderModel.fromJson(e).toEntity()).toList();
       },
     );
     final tes = await Printing.listPrinters();
@@ -59,7 +59,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     _socketClient.socket.on('message', (data) async {
       emit(const _Loading());
       log.i(data);
-      final order = Order.fromJson(data["order"]);
+      final order = OrderModel.fromJson(data["order"]).toEntity();
 
       const JsonEncoder encoder = JsonEncoder.withIndent('  ');
       final String prettyJson = encoder.convert(data["document"]);

@@ -65,6 +65,7 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
 
     if (response.data is FormData) {
       log.d(
+        // ignore: unnecessary_null_comparison
         "<-- ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
         "Headers:\n"
         "$headerMessage\n"
@@ -72,16 +73,16 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
         "Body: ${response.data.toString()}",
       );
     } else {
-      // const JsonEncoder encoder = JsonEncoder.withIndent('  ');
-      // final String prettyJson = encoder.convert(response.data);
-      // log.d(
-      //   // ignore: unnecessary_null_comparison
-      //   "◀ ︎RESPONSE ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
-      //   "Headers:\n"
-      //   "$headerMessage\n"
-      //   "❖ Results : \n"
-      //   "Response: $prettyJson",
-      // );
+      const JsonEncoder encoder = JsonEncoder.withIndent('  ');
+      final String prettyJson = encoder.convert(response.data);
+      log.d(
+        // ignore: unnecessary_null_comparison
+        "◀ ︎RESPONSE ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
+        "Headers:\n"
+        "$headerMessage\n"
+        "❖ Results : \n"
+        "Response: $prettyJson",
+      );
     }
     super.onResponse(response, handler);
   }

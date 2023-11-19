@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:sky_printing/ui/dashboard/cubit/dashboard_cubit.dart';
+import 'package:sky_printing/ui/home/cubit/home_cubit.dart';
 import 'package:sky_printing/ui/login/cubit/login_cubit.dart';
 import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing/ui/order/cubit/order_cubit.dart';
@@ -135,7 +135,7 @@ void _cubit() {
 
   /// Location
   sl.registerFactory(
-    () => DashboardCubit(
+    () => HomeCubit(
       sl(),
     ),
   );
