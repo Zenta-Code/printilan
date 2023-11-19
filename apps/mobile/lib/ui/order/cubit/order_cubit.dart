@@ -33,7 +33,11 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       converter: (response) {
         final data = response['data'] as List;
         log.i(data);
-        return data.map((e) => StoreModel.fromJson(e).toEntity()).toList();
+        final List<StoreEntity> listStore = data
+            .map((e) => StoreModel.fromJson(e).toEntity())
+            .toList()
+            .cast<StoreEntity>();
+        return listStore;
       },
     );
     data.fold(

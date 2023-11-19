@@ -11,7 +11,7 @@ class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
@@ -25,79 +25,91 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
       (getData(MainBoxKeys.locale) ?? "en") == "en"
           ? _listLanguage[0]
           : _listLanguage[1];
+  dynamic user;
+  @override
+  void initState() {
+    user = getData(MainBoxKeys.user);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Parent(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(Dimens.space16),
-          child: Column(
-            children: [
-              DropDown<ActiveTheme>(
-                key: const Key("dropdown_theme"),
-                hint: Strings.of(context)!.choose_theme,
-                value: _selectedTheme,
-                prefixIcon: const Icon(Icons.light),
-                items: ActiveTheme.values
-                    .map(
-                      (data) => DropdownMenuItem(
-                        value: data,
-                        child: Text(
-                          _getThemeName(data, context),
-                          style: Theme.of(context).textTheme.bodyMedium,
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(Dimens.space16),
+            child: Column(
+              children: [
+                Text(
+                  user.toString(),
+                ),
+                DropDown<ActiveTheme>(
+                  key: const Key("dropdown_theme"),
+                  hint: Strings.of(context)!.choose_theme,
+                  value: _selectedTheme,
+                  prefixIcon: const Icon(Icons.light),
+                  items: ActiveTheme.values
+                      .map(
+                        (data) => DropdownMenuItem(
+                          value: data,
+                          child: Text(
+                            _getThemeName(data, context),
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                         ),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  /// Reload theme
-                  context
-                      .read<SettingsCubit>()
-                      .updateTheme(value ?? ActiveTheme.system);
-                },
-              ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    /// Reload theme
+                    context
+                        .read<SettingsCubit>()
+                        .updateTheme(value ?? ActiveTheme.system);
+                  },
+                ),
 
-              /// Language
-              DropDown<DataHelper>(
-                key: const Key("dropdown_language"),
-                hint: Strings.of(context)!.choose_language,
-                value: _selectedLanguage,
-                prefixIcon: const Icon(Icons.language_outlined),
-                items: _listLanguage
-                    .map(
-                      (data) => DropdownMenuItem(
-                        value: data,
-                        child: Text(
-                          data.title ?? "-",
-                          style: Theme.of(context).textTheme.bodyMedium,
+                /// Language
+                DropDown<DataHelper>(
+                  key: const Key("dropdown_language"),
+                  hint: Strings.of(context)!.choose_language,
+                  value: _selectedLanguage,
+                  prefixIcon: const Icon(Icons.language_outlined),
+                  items: _listLanguage
+                      .map(
+                        (data) => DropdownMenuItem(
+                          value: data,
+                          child: Text(
+                            data.title ?? "-",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                         ),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (DataHelper? value) async {
-                  _selectedLanguage = value ?? _listLanguage[0];
+                      )
+                      .toList(),
+                  onChanged: (DataHelper? value) async {
+                    _selectedLanguage = value ?? _listLanguage[0];
 
-                  /// Reload theme
-                  if (!mounted) return;
-                  context
-                      .read<SettingsCubit>()
-                      .updateLanguage(value?.type ?? "en");
-                },
-              ),
-              TextButton(
-                onPressed: () {
-                  isLogout().then((value) {
-                    if (value) {
-                      Future.delayed(const Duration(seconds: 1), () {
-                        context.pushReplacementNamed(Routes.splashScreen.name);
-                      });
-                    }
-                  });
-                },
-                child: Text(Strings.of(context)!.logout),
-              ),
-            ],
+                    /// Reload theme
+                    if (!mounted) return;
+                    context
+                        .read<SettingsCubit>()
+                        .updateLanguage(value?.type ?? "en");
+                  },
+                ),
+                TextButton(
+                  onPressed: () {
+                    isLogout().then((value) {
+                      if (value) {
+                        Future.delayed(const Duration(seconds: 1), () {
+                          context
+                              .pushReplacementNamed(Routes.splashScreen.name);
+                        });
+                      }
+                    });
+                  },
+                  child: Text(Strings.of(context)!.logout),
+                ),
+              ],
+            ),
           ),
         ),
       ),

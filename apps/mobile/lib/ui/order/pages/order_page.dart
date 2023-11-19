@@ -7,19 +7,33 @@ import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class OrderPage extends StatefulWidget {
-  OrderPage({
-    super.key,
-  });
+  const OrderPage({super.key});
 
   @override
   State<OrderPage> createState() => _OrderPageState();
 }
 
 class _OrderPageState extends State<OrderPage> {
+  final _copiesController = TextEditingController();
+  final _fileController = TextEditingController();
+  @override
+  void didUpdateWidget(covariant OrderPage oldWidget) {
+    log.i("didUpdateWidget");
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _copiesController.dispose();
+    _fileController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final params = GoRouterState.of(context).extra as Map<String, dynamic>?;
     final List<Placemark> placemark = params!['placemarks'];
+
     return Parent(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
@@ -40,6 +54,8 @@ class _OrderPageState extends State<OrderPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Text(
+                "Store Nearby and available ${placemark.first.locality!.split(' ').last}"),
             BlocBuilder<OrderCubit, OrderState>(
               builder: (context, state) {
                 return state.when(
@@ -67,7 +83,7 @@ class _OrderPageState extends State<OrderPage> {
                           },
                           child: ListTile(
                             title: Text(data[index].name!),
-                            subtitle: Text(data[index].id!),
+                            subtitle: Text(data[index].address!.city!),
                           ),
                         );
                       },
@@ -75,6 +91,20 @@ class _OrderPageState extends State<OrderPage> {
                   },
                 );
               },
+            ),
+            TextF(
+              controller: _fileController,
+              enable: false,
+              keyboardType: TextInputType.number,
+              prefixIcon: const Icon(Icons.file_copy),
+              hint: 'No File Choosen',
+            ),
+            TextF(
+              controller: _copiesController,
+              keyboardType: TextInputType.number,
+              prefixIcon: const Icon(Icons.copy),
+              hintText: 'Copies',
+              hint: 'Copies',
             ),
             TextButton(
               onPressed: () {
