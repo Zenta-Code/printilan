@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:sky_printing_core/error/failure.dart';
-import 'package:sky_printing_data/sources/file_local_data_sources.dart';
+import 'package:sky_printing_data/sources/local/file_local_data_sources.dart';
 import 'package:sky_printing_domain/entities/file_entity.dart';
 import 'package:sky_printing_domain/repositories/file_repository.dart';
 import 'package:sky_printing_domain/usecases/file/get_file_usecase.dart';
