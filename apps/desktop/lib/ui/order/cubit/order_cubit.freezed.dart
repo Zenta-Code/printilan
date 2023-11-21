@@ -19,7 +19,7 @@ mixin _$OrderState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Order> data) success,
+    required TResult Function(List<OrderEntity> data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) =>
@@ -27,7 +27,7 @@ mixin _$OrderState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Order> data)? success,
+    TResult? Function(List<OrderEntity> data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) =>
@@ -35,7 +35,7 @@ mixin _$OrderState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Order> data)? success,
+    TResult Function(List<OrderEntity> data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -125,7 +125,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Order> data) success,
+    required TResult Function(List<OrderEntity> data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -136,7 +136,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Order> data)? success,
+    TResult? Function(List<OrderEntity> data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -147,7 +147,7 @@ class _$LoadingImpl implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Order> data)? success,
+    TResult Function(List<OrderEntity> data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -206,7 +206,7 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Order> data});
+  $Res call({List<OrderEntity> data});
 }
 
 /// @nodoc
@@ -226,7 +226,7 @@ class __$$SuccessImplCopyWithImpl<$Res>
       null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as List<Order>,
+              as List<OrderEntity>,
     ));
   }
 }
@@ -234,11 +234,11 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements _Success {
-  const _$SuccessImpl(final List<Order> data) : _data = data;
+  const _$SuccessImpl(final List<OrderEntity> data) : _data = data;
 
-  final List<Order> _data;
+  final List<OrderEntity> _data;
   @override
-  List<Order> get data {
+  List<OrderEntity> get data {
     if (_data is EqualUnmodifiableListView) return _data;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_data);
@@ -271,7 +271,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Order> data) success,
+    required TResult Function(List<OrderEntity> data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -282,7 +282,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Order> data)? success,
+    TResult? Function(List<OrderEntity> data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -293,7 +293,7 @@ class _$SuccessImpl implements _Success {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Order> data)? success,
+    TResult Function(List<OrderEntity> data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -343,9 +343,9 @@ class _$SuccessImpl implements _Success {
 }
 
 abstract class _Success implements OrderState {
-  const factory _Success(final List<Order> data) = _$SuccessImpl;
+  const factory _Success(final List<OrderEntity> data) = _$SuccessImpl;
 
-  List<Order> get data;
+  List<OrderEntity> get data;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -416,7 +416,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Order> data) success,
+    required TResult Function(List<OrderEntity> data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -427,7 +427,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Order> data)? success,
+    TResult? Function(List<OrderEntity> data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -438,7 +438,7 @@ class _$FailureImpl implements _Failure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Order> data)? success,
+    TResult Function(List<OrderEntity> data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),
@@ -535,7 +535,7 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Order> data) success,
+    required TResult Function(List<OrderEntity> data) success,
     required TResult Function(String message) failure,
     required TResult Function() empty,
   }) {
@@ -546,7 +546,7 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Order> data)? success,
+    TResult? Function(List<OrderEntity> data)? success,
     TResult? Function(String message)? failure,
     TResult? Function()? empty,
   }) {
@@ -557,7 +557,7 @@ class _$EmptyImpl implements _Empty {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Order> data)? success,
+    TResult Function(List<OrderEntity> data)? success,
     TResult Function(String message)? failure,
     TResult Function()? empty,
     required TResult orElse(),

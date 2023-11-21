@@ -55,3 +55,15 @@ class LocationFailure extends Failure {
   @override
   int get hashCode => 0;
 }
+
+class LocalFailure extends Failure {
+  final String? message;
+
+  const LocalFailure({this.message});
+
+  @override
+  bool operator ==(Object other) => other is LocalFailure;
+
+  @override
+  int get hashCode => 0;
+}

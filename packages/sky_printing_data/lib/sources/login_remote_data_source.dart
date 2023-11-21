@@ -18,8 +18,7 @@ class LoginRemoteDatasourceImpl implements LoginRemoteDatasource {
       await _client.postRequest(
         ListAPI.login,
         data: loginParams.toJson(),
-        converter: (response) =>
-            LoginModel.fromJson(response as Map<String, dynamic>),
+        converter: (response) => LoginModel.fromJson(response),
       );
 
   @override

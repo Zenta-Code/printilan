@@ -6,6 +6,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_data/sky_printing_data.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
+import 'package:sky_printing_domain/usecases/file/get_file_usecase.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 part 'order_cubit.freezed.dart';
@@ -17,13 +18,14 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     this._joinSocket,
     this._socketClient,
     this._webViewClient,
+    this._getFile,
   ) : super(const _Loading());
   final DioClient _client;
   final JoinSocket _joinSocket;
   final SocketClient _socketClient;
   final WebViewClient _webViewClient;
+  final GetFileUseCase _getFile;
   WebViewController? controller;
-  FilePickerResult? result;
   String store = '';
 
   Future<void> getStore() async {
@@ -133,11 +135,20 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     }
   }
 
-  void upload() async {
-    result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['pdf', 'doc'],
-      withData: true,
+  FilePickerResult? result;
+  void pickFile() {
+    _getFile(
+      const GetFileParams(
+        allowedExtensions: [
+          'pdf',
+          'doc',
+        ],
+      ),
+    ).then(
+      (value) => value.fold(
+        (l) => log.e(l),
+        (r) => result = r.result,
+      ),
     );
   }
 }

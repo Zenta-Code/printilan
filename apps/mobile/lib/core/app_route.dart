@@ -131,10 +131,10 @@ class AppRoute with MainBoxMixin {
     redirect: (_, GoRouterState state) async {
       final bool isLoginPage = state.matchedLocation == Routes.login.path ||
           state.matchedLocation == Routes.register.path;
-      if (token == null) {
-        log.e('Token : $token');
-        return isLoginPage ? null : Routes.splashScreen.path;
-      }
+      // if (token == null) {
+      //   log.e('Token : $token');
+      //   return isLoginPage ? null : Routes.splashScreen.path;
+      // }
 
       final me =
           await context.read<LoginCubit>().me(MeParams(token: token ?? ''));
@@ -143,11 +143,11 @@ class AppRoute with MainBoxMixin {
       if (!me) {
         log.i("!me Condition");
         // return Routes.splashScreen.path;
-        final isLogout = await logout();
-        if (!isLogout) {
-          log.e('Logout : $isLogout');
-          return Routes.splashScreen.path;
-        }
+        // final isLogout = await logout();
+        // if (!isLogout) {
+        //   log.e('Logout : $isLogout');
+        //   return Routes.splashScreen.path;
+        // }
       }
       if (me && isLoginPage) {
         log.i("me && isLoginPage Condition");
@@ -167,5 +167,5 @@ Future<bool> logout() async {
   await MainBoxMixin().removeData(MainBoxKeys.isLogin);
   await MainBoxMixin().removeData(MainBoxKeys.user);
   final isLogin = MainBoxMixin().getData(MainBoxKeys.isLogin);
-  return isLogin;
+  return isLogin ?? false;
 }

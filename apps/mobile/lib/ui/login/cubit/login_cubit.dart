@@ -30,7 +30,10 @@ class LoginCubit extends Cubit<LoginState> {
           emit(_Failure(l.message ?? ""));
         }
       },
-      (r) => emit(_Success(r.token)),
+      (r) {
+        log.f("Response: $r");
+        emit(_Success(r.token));
+      },
     );
   }
 

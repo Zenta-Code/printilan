@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sky_printing/ui/register/cubit/register_cubit.dart'; 
+import 'package:sky_printing/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_domain/sky_printing_domain.dart'; 
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -54,8 +54,6 @@ class _RegisterPageState extends State<RegisterPage> {
             loading: () => context.show(),
             success: (data) {
               context.dismiss();
-
-              /// back to login page after register success
               context.pop();
             },
             failure: (message) {

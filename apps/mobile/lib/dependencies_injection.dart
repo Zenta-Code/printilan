@@ -5,9 +5,14 @@ import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing/ui/order/cubit/order_cubit.dart';
 import 'package:sky_printing/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing/ui/settings/cubit/settings_cubit.dart';
+import 'package:sky_printing_core/services/local/file/file_client.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_data/repositories/file_repository_impl.dart';
 import 'package:sky_printing_data/sky_printing_data.dart';
+import 'package:sky_printing_data/sources/file_local_data_sources.dart';
+import 'package:sky_printing_domain/repositories/file_repository.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
+import 'package:sky_printing_domain/usecases/file/get_file_usecase.dart';
 
 GetIt sl = GetIt.instance;
 
@@ -35,6 +40,9 @@ Future<void> serviceLocator({
     isUnitTest: isUnitTest,
   ));
   sl.registerSingleton<WebViewClient>(WebViewClient(
+    isUnitTest: isUnitTest,
+  ));
+  sl.registerSingleton<FileClient>(FileClient(
     isUnitTest: isUnitTest,
   ));
 
@@ -66,6 +74,11 @@ void _repositories() {
   sl.registerLazySingleton<LocationRepository>(
     () => LocationRepositoryImpl(sl()),
   );
+
+  /// File
+  sl.registerLazySingleton<FileRepository>(
+    () => FileRepositoryImpl(sl()),
+  );
 }
 
 /// Register dataSources
@@ -81,6 +94,11 @@ void _dataSources() {
   /// Location
   sl.registerLazySingleton<LocationLocalDatasource>(
     () => LocationLocalDatasourceImpl(sl()),
+  );
+
+  /// File
+  sl.registerLazySingleton<FileLocalDatasource>(
+    () => FileLocalDatasourceImpl(sl()),
   );
 }
 
@@ -115,6 +133,11 @@ void _useCase() {
   sl.registerLazySingleton(
     () => ReceiveSocket(sl()),
   );
+
+  /// File
+  sl.registerLazySingleton(
+    () => GetFileUseCase(sl()),
+  );
 }
 
 void _cubit() {
@@ -142,6 +165,7 @@ void _cubit() {
 
   sl.registerFactory(
     () => OrderCubit(
+      sl(),
       sl(),
       sl(),
       sl(),

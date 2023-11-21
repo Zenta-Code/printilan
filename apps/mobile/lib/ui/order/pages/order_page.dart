@@ -38,12 +38,11 @@ class _OrderPageState extends State<OrderPage> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: AppBar(
-          title: Text(params!['title']),
+          title: Text(params['title']),
         ),
       ),
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(params['title']),
             Text(params['price']),
@@ -108,7 +107,7 @@ class _OrderPageState extends State<OrderPage> {
             ),
             TextButton(
               onPressed: () {
-                context.read<OrderCubit>().upload();
+                context.read<OrderCubit>().pickFile();
               },
               child: Text('Pick File'),
             ),

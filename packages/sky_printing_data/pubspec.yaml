@@ -26,6 +26,7 @@ dependencies:
     path: ../sky_printing_core
   geocoding: ^2.1.1
   dartz: ^0.10.1
+  file_picker: ^6.1.1
 
 dev_dependencies:
   flutter_test:

@@ -46,13 +46,13 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Parent(
+      avoidBottomInset: true,
       child: BlocListener<LoginCubit, LoginState>(
         listener: (_, state) {
           state.whenOrNull(
             loading: () => context.show(),
             success: (data) {
               context.dismiss();
-              // context.pop();
               data.toString().toToastSuccess(context);
               TextInput.finishAutofillContext();
               context.goNamed(Routes.home.name);
@@ -63,31 +63,32 @@ class _LoginPageState extends State<LoginPage> {
             },
           );
         },
-        child: Center(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(Dimens.space12),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+        child: Padding(
+          padding: EdgeInsets.all(Dimens.space12),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                height: Dimens.space12,
+              ),
+              SvgPicture.asset(
+                'assets/images/sign-in.svg',
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SvgPicture.asset(
-                    'assets/images/sign-in.svg',
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: Dimens.space24,
-                        top: Dimens.space16,
-                        bottom: Dimens.space8,
-                      ),
-                      child: Text(
-                        Strings.of(context)!.login,
-                        style:
-                            Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                      ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: Dimens.space24,
+                      top: Dimens.space16,
+                      bottom: Dimens.space8,
+                    ),
+                    child: Text(
+                      Strings.of(context)!.login,
+                      style:
+                          Theme.of(context).textTheme.headlineSmall!.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                     ),
                   ),
                   Card(
@@ -191,31 +192,31 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Colors.black,
                                 fontSize: Dimens.titleLarge,
                               ),
-                              const SpacerV(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    Strings.of(context)!.ask_register,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      context.pushNamed(Routes.register.name);
+                                    },
+                                    child: Text(Strings.of(context)!.register),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        Strings.of(context)!.ask_register,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          context.pushNamed(Routes.register.name);
-                        },
-                        child: Text(Strings.of(context)!.register),
-                      ),
-                    ],
-                  ),
                 ],
               ),
-            ),
+            ],
           ),
         ),
       ),
