@@ -13,8 +13,14 @@ cd %packages_dir%
 for /D %%d in (*) do (
     if exist "%%d\pubspec.yaml" (
         cd "%%d"
-        echo Building generated code for package: %%d
-        dart build_runner build --delete-conflicting-outputs
+        echo Checking if %%d has build_runner dependency
+        findstr /I "build_runner" pubspec.yaml > nul 2>&1
+        if !errorlevel! equ 0 (
+            echo build_runner dependency found
+            start "" cmd /c dart run build_runner build --delete-conflicting-outputs
+        ) else (
+            echo build_runner dependency not found
+        )
         cd %packages_dir%
     )
 )
@@ -24,8 +30,14 @@ cd %apps_dir%
 for /D %%d in (*) do (
     if exist "%%d\pubspec.yaml" (
         cd "%%d"
-        echo Building generated code for package: %%d
-        dart build_runner build --delete-conflicting-outputs
+        echo Checking if %%d has build_runner dependency
+        findstr /I "build_runner" pubspec.yaml > nul 2>&1
+        if !errorlevel! equ 0 (
+            echo build_runner dependency found
+            start "" cmd /c dart run build_runner build --delete-conflicting-outputs
+        ) else (
+            echo build_runner dependency not found
+        )
         cd %apps_dir%
     )
 )
@@ -33,4 +45,3 @@ for /D %%d in (*) do (
 cd %root_dir%
 
 echo Finished building generated code.
-
