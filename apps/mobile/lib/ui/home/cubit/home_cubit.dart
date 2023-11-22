@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -25,7 +26,6 @@ class HomeCubit extends Cubit<HomeState> {
   IO.Socket? socket;
 
   Future<void> getLocation(LocationParams params) async {
-    log.i("Someone call me");
     emit(const _Loading());
     final data = await _getLocation.call(params);
 
