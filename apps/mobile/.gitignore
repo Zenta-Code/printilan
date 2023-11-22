@@ -51,5 +51,8 @@ app.*.map.json
 build
 
 # ignore .freezed.dart files and .g.dart files
+
 **/*.freezed.dart
-**/*.g.dart
+**/*.g.dart 
+*.freezed.dart
+*.g.dart 
