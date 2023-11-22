@@ -43,3 +43,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# ignore .freezed.dart files and .g.dart files
+**/*.freezed.dart
+**/*.g.dart

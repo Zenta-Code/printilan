@@ -7,10 +7,7 @@ import 'package:sky_printing/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing/ui/settings/cubit/settings_cubit.dart';
 import 'package:sky_printing_core/services/local/file/file_client.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_data/repositories/file_repository_impl.dart';
 import 'package:sky_printing_data/sky_printing_data.dart';
-import 'package:sky_printing_data/sources/file_local_data_sources.dart';
-import 'package:sky_printing_domain/repositories/file_repository.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 import 'package:sky_printing_domain/usecases/file/get_file_usecase.dart';
 

@@ -39,3 +39,7 @@ dist
 
 # pnpm
 pnpm-lock.yaml
+
+# ignore .freezed.dart files and .g.dart files
+**/*.freezed.dart
+**/*.g.dart
