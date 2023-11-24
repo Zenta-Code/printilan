@@ -8,7 +8,7 @@ This concept we've design early :
 
 ![Alt text](https://raw.githubusercontent.com/Zenta-Code/sky_printing/dc5499dfc3426b2e39b4501d9a05bda69157d479/images/base-concepts.svg "Base Concepts")
 
-## Gantt chart
+### Gantt chart
 
 <details>
     <summary>Click to view</summary>
