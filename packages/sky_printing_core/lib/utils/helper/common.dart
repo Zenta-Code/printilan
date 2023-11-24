@@ -6,3 +6,16 @@ final log = Logger(
     lineLength: 110,
   ),
 );
+
+void safeEmit<T>(
+  T state, {
+  bool isClosed = false,
+  required void Function(T) emit,
+}) {
+  if (isClosed) {
+    log.d("Cubit is closed");
+    return;
+  } else {
+    emit(state);
+  }
+}

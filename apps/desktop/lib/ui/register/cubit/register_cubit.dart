@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';  
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
@@ -16,28 +16,56 @@ class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit(this._postRegister) : super(const _Loading());
 
   void showHidePassword() {
-    emit(const _Init());
+    safeEmit(
+      const _Init(),
+      emit: emit,
+      isClosed: isClosed,
+    );
     isPasswordHide = !(isPasswordHide ?? false);
-    emit(const _ShowHidePassword());
+    safeEmit(
+      const _ShowHidePassword(),
+      emit: emit,
+      isClosed: isClosed,
+    );
   }
 
   void showHideConfirmPassword() {
-    emit(const _Init());
+    safeEmit(
+      const _Init(),
+      emit: emit,
+      isClosed: isClosed,
+    );
     isConfirmPasswordHide = !(isConfirmPasswordHide ?? false);
-    emit(const _ShowHidePassword());
+    safeEmit(
+      const _ShowHidePassword(),
+      emit: emit,
+      isClosed: isClosed,
+    );
   }
 
   Future<void> register(RegisterParams params) async {
-    emit(const _Loading());
+    safeEmit(
+      const _Loading(),
+      emit: emit,
+      isClosed: isClosed,
+    );
     log.d(params.toJson());
     final data = await _postRegister.call(params);
     data.fold(
       (l) {
         if (l is ServerFailure) {
-          emit(_Failure(l.message ?? ""));
+          safeEmit(
+            _Failure(l.message ?? ""),
+            emit: emit,
+            isClosed: isClosed,
+          );
         }
       },
-      (r) => emit(_Success(r)),
+      (r) => safeEmit(
+        _Success(r),
+        emit: emit,
+        isClosed: isClosed,
+      ),
     );
   }
 }

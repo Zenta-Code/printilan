@@ -18,14 +18,20 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     this._joinSocket,
     this._socketClient,
     this._dioClient,
-  ) : super(const _Loading());
+  ) : super(
+          const _Loading(),
+        );
 
   final JoinSocket _joinSocket;
   final SocketClient _socketClient;
   final DioClient _dioClient;
   final List<OrderEntity> orderData = [];
   Future<void> fetchData() async {
-    emit(const _Loading());
+    safeEmit(
+      const _Loading(),
+      emit: emit,
+      isClosed: isClosed,
+    );
     final store = getData(MainBoxKeys.store);
     final response = await _dioClient.getRequest(
       "${ListAPI.order}/list/${store['_id']}",
@@ -36,11 +42,20 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     );
     final tes = await Printing.listPrinters();
     log.i(tes.last);
-    response.fold((l) => emit(const OrderState.failure("Error")), (r) {
+    response.fold(
+        (l) => safeEmit(
+              const OrderState.failure("Error"),
+              emit: emit,
+              isClosed: isClosed,
+            ), (r) {
       orderData.addAll(r);
       joinRoom();
       try {
-        emit(_Success(r));
+        safeEmit(
+          _Success(r),
+          emit: emit,
+          isClosed: isClosed,
+        );
       } catch (e) {
         log.e(e);
       }
@@ -48,7 +63,11 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   }
 
   Future<void> joinRoom() async {
-    emit(const _Loading());
+    safeEmit(
+      const _Loading(),
+      emit: emit,
+      isClosed: isClosed,
+    );
     final store = getData(MainBoxKeys.store);
     log.f("Store: ${store["_id"]}");
     _joinSocket.call(store!['_id']);
@@ -57,7 +76,11 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
 
   void message() {
     _socketClient.socket.on('message', (data) async {
-      emit(const _Loading());
+      safeEmit(
+        const _Loading(),
+        emit: emit,
+        isClosed: isClosed,
+      );
       log.i(data);
       final order = OrderModel.fromJson(data["order"]).toEntity();
 
@@ -99,7 +122,11 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
               printer: const Printer(url: 'EPSON L3210 Series'),
               onLayout: (format) => xBytes);
           log.i(jobs);
-          emit(_Success(orderData));
+          safeEmit(
+            _Success(orderData),
+            emit: emit,
+            isClosed: isClosed,
+          );
         } else {
           log.e('Invalid response or empty data.');
         }
@@ -110,7 +137,11 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   }
 
   void clearOrder() {
-    emit(const _Loading());
+    safeEmit(
+      const _Loading(),
+      emit: emit,
+      isClosed: isClosed,
+    );
     final store = getData(MainBoxKeys.store);
     _dioClient.getRequest(
       "${ListAPI.order}/clear/${store!['_id']}",
@@ -119,6 +150,10 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       },
     );
     orderData.clear();
-    emit(_Success(orderData));
+    safeEmit(
+      _Success(orderData),
+      emit: emit,
+      isClosed: isClosed,
+    );
   }
 }

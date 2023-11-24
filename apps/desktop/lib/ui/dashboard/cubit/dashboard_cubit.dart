@@ -20,7 +20,11 @@ class DashboardCubit extends Cubit<DashboardState> {
       "order": [],
       "bundle": [],
     };
-    emit(const _Loading());
+    safeEmit(
+      const _Loading(),
+      emit: emit,
+      isClosed: isClosed,
+    );
     log.i(user['_id']);
     final order = await _client.getRequest(
       "${ListAPI.order}/list/${store['_id']}",
@@ -44,6 +48,10 @@ class DashboardCubit extends Cubit<DashboardState> {
       (l) => null,
       (r) => data['bundle'] = r,
     );
-    emit(DashboardState.success(data));
+    safeEmit(
+      DashboardState.success(data),
+      emit: emit,
+      isClosed: isClosed,
+    );
   }
 }
