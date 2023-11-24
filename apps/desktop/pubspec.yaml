@@ -37,13 +37,27 @@ dependencies:
   json_annotation: ^4.8.1
   oktoast: ^3.3.2+1
   pdf: ^3.10.4
-  printing: ^5.11.0
   socket_io_client: ^2.0.3+1
   system_theme: ^2.3.1
   url_launcher: ^6.2.1
   url_strategy: ^0.2.0
   win32: ^5.0.9
   window_manager: ^0.3.7
+  windows_printing:
+    path: ../../packages/windows_printing
+  windows_printing_models:
+    path: ../../packages/windows_printing_models
+
+    # Sky Printing packages modules
+  sky_printing_core:
+    path: ../../packages/sky_printing_core
+  sky_printing_data:
+    path: ../../packages/sky_printing_data
+  sky_printing_domain:
+    path: ../../packages/sky_printing_domain
+  path_provider: ^2.1.1
+  printing: ^5.11.1
+
 dev_dependencies:
   bloc_test: ^9.1.5
   build_runner: ^2.4.6
@@ -55,7 +69,7 @@ dev_dependencies:
   freezed: ^2.4.5
   http_mock_adapter: ^0.6.0
   json_serializable: ^6.7.1
-  logger: ^2.0.2+1 
+  logger: ^2.0.2+1
 
 flutter:
   uses-material-design: true

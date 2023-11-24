@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { authenticateJWT } from "../middleware/auth";
 import { Bundle } from "../model/bundle";
+import { Store } from "../model/store";
 import { BundleTypes } from "../types/bundle";
 
 export const BundleController = ({ route }: { route: Router }) => {
@@ -43,15 +44,18 @@ export const BundleController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/list/:id", authenticateJWT, async (req, res) => {
+  route.get("/list/:ownerId", authenticateJWT, async (req, res) => {
     try {
-      const id = req.params;
-      console.log("id...: ", id);
-      const find = await Bundle.findById(id.id);
+      const store = await Store.findOne({ ownerId: req.params.ownerId });
+      if (!store) {
+        return res.status(400).json({
+          error: "store tidak di temukan",
+        });
+      }
+      const find = await Bundle.find({ storeId: store._id });
       if (!find) {
         return res.status(400).json({
-          success: false,
-          message: "bundle tidak di temukan",
+          error: "bundle tidak di temukan",
         });
       }
       return res.status(200).json({
@@ -61,8 +65,7 @@ export const BundleController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -101,7 +104,10 @@ export const BundleController = ({ route }: { route: Router }) => {
           message: "data tidak valid",
         });
       }
-      const updateBundle = await Bundle.findOneAndUpdate({name:updateData.name}, updateData);
+      const updateBundle = await Bundle.findOneAndUpdate(
+        { name: updateData.name },
+        updateData
+      );
       if (!updateBundle) {
         return res.status(400).json({
           success: false,

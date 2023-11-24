@@ -3,17 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing_admin/dependencies_injection.dart';
-import 'package:sky_printing_admin/module/login/cubit/auth_cubit.dart';
-import 'package:sky_printing_admin/module/login/login_page.dart';
-import 'package:sky_printing_admin/module/main/cubit/main_cubit.dart';
-import 'package:sky_printing_admin/module/main/main_page.dart';
-import 'package:sky_printing_admin/module/order/order_page.dart';
-import 'package:sky_printing_admin/module/register/cubit/register_cubit.dart';
-import 'package:sky_printing_admin/module/register/register_page.dart';
-import 'package:sky_printing_admin/module/settings/settings.dart';
-import 'package:sky_printing_admin/utils/utils.dart';
+import 'package:sky_printing_admin/ui/dashboard/cubit/dashboard_cubit.dart';
+import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
+import 'package:sky_printing_admin/ui/login/login_page.dart';
+import 'package:sky_printing_admin/ui/main/cubit/main_cubit.dart';
+import 'package:sky_printing_admin/ui/main/main_page.dart';
+import 'package:sky_printing_admin/ui/order/cubit/order_cubit.dart';
+import 'package:sky_printing_admin/ui/order/order_page.dart';
+import 'package:sky_printing_admin/ui/printer/cubit/printer_cubit.dart';
+import 'package:sky_printing_admin/ui/printer/printer_page.dart';
+import 'package:sky_printing_admin/ui/register/cubit/register_cubit.dart';
+import 'package:sky_printing_admin/ui/register/register_page.dart';
+import 'package:sky_printing_admin/ui/settings/settings.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
 
-import '../module/dashboard/dashboard_page.dart';
+import '../ui/dashboard/dashboard_page.dart';
 
 enum Routes {
   root("/"),
@@ -21,6 +25,7 @@ enum Routes {
   /// Home Page
   dashboard("/dashboard"),
   order("/order"),
+  printer("/printer"),
   settings("/settings"),
 
   // Auth Page
@@ -68,17 +73,31 @@ class AppRoute {
           GoRoute(
             path: Routes.dashboard.path,
             name: Routes.dashboard.name,
-            builder: (_, __) => DashboardPage(),
+            builder: (_, __) => BlocProvider(
+              create: (_) => sl<DashboardCubit>()..fetchData(),
+              child: const DashboardPage(),
+            ),
           ),
           GoRoute(
             path: Routes.order.path,
             name: Routes.order.name,
-            builder: (_, __) => OrderPage(),
+            builder: (_, __) => BlocProvider(
+              create: (_) => sl<OrderCubit>()..fetchData(),
+              child: const OrderPage(),
+            ),
+          ),
+          GoRoute(
+            path: Routes.printer.path,
+            name: Routes.printer.name,
+            builder: (_, __) => BlocProvider(
+              create: (_) => sl<PrinterCubit>()..fetchPrinters(),
+              child: const PrinterPage(),
+            ),
           ),
           GoRoute(
             path: Routes.settings.path,
             name: Routes.settings.name,
-            builder: (_, __) => SettingsPage(),
+            builder: (_, __) => const SettingsPage(),
           ),
         ],
       ),
@@ -91,16 +110,10 @@ class AppRoute {
       final bool isLoginPage = state.matchedLocation == Routes.login.path ||
           state.matchedLocation == Routes.register.path;
 
-      ///  Check if not login
-      ///  if current page is login page we don't need to direct user
-      ///  but if not we must direct user to login page
       if (!((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
           false)) {
         return isLoginPage ? null : Routes.login.path;
       }
-
-      /// Check if already login and in login page
-      /// we should direct user to main page
 
       if (isLoginPage &&
           ((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
@@ -108,7 +121,6 @@ class AppRoute {
         return Routes.root.path;
       }
 
-      /// No direct
       return null;
     },
   );

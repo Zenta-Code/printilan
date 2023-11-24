@@ -1,7 +1,15 @@
 import 'package:get_it/get_it.dart';
-import 'package:sky_printing/core/core.dart';
-import 'package:sky_printing/features/features.dart';
-import 'package:sky_printing/utils/utils.dart';
+import 'package:sky_printing/ui/home/cubit/home_cubit.dart';
+import 'package:sky_printing/ui/login/cubit/login_cubit.dart';
+import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
+import 'package:sky_printing/ui/order/cubit/order_cubit.dart';
+import 'package:sky_printing/ui/register/cubit/register_cubit.dart';
+import 'package:sky_printing/ui/settings/cubit/settings_cubit.dart';
+import 'package:sky_printing_core/services/local/file/file_client.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_data/sky_printing_data.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
+import 'package:sky_printing_domain/usecases/file/get_file_usecase.dart';
 
 GetIt sl = GetIt.instance;
 
@@ -10,21 +18,35 @@ Future<void> serviceLocator({
   bool isHiveEnable = true,
   String prefixBox = '',
 }) async {
-  /// For unit testing only
-  if (isUnitTest) {
-    await sl.reset();
-  }
-  sl.registerSingleton<DioClient>(DioClient(isUnitTest: isUnitTest));
-  _dataSources();
-  _repositories();
-  _useCase();
-  _cubit();
   if (isHiveEnable) {
     await _initHiveBoxes(
       isUnitTest: isUnitTest,
       prefixBox: prefixBox,
     );
   }
+  if (isUnitTest) {
+    await sl.reset();
+  }
+  sl.registerSingleton<DioClient>(DioClient(
+    isUnitTest: isUnitTest,
+  ));
+  sl.registerSingleton<SocketClient>(SocketClient(
+    isUnitTest: isUnitTest,
+  ));
+  sl.registerSingleton<LocationClient>(LocationClient(
+    isUnitTest: isUnitTest,
+  ));
+  sl.registerSingleton<WebViewClient>(WebViewClient(
+    isUnitTest: isUnitTest,
+  ));
+  sl.registerSingleton<FileClient>(FileClient(
+    isUnitTest: isUnitTest,
+  ));
+
+  _dataSources();
+  _repositories();
+  _useCase();
+  _cubit();
 }
 
 Future<void> _initHiveBoxes({
@@ -37,26 +59,51 @@ Future<void> _initHiveBoxes({
 
 /// Register repositories
 void _repositories() {
-  sl.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(sl(), sl()),
+  /// Auth
+  sl.registerLazySingleton<LoginRepository>(
+    () => LoginRepositoryImpl(sl(), sl()),
   );
-  sl.registerLazySingleton<UsersRepository>(
-    () => UsersRepositoryImpl(sl()),
+  sl.registerLazySingleton<RegisterRepository>(
+    () => RegisterRepositoryImpl(sl(), sl()),
+  );
+
+  /// Location
+  sl.registerLazySingleton<LocationRepository>(
+    () => LocationRepositoryImpl(sl()),
+  );
+
+  /// File
+  sl.registerLazySingleton<FileRepository>(
+    () => FileRepositoryImpl(sl()),
   );
 }
 
 /// Register dataSources
 void _dataSources() {
-  sl.registerLazySingleton<AuthRemoteDatasource>(
-    () => AuthRemoteDatasourceImpl(sl()),
+  /// Auth
+  sl.registerLazySingleton<LoginRemoteDatasource>(
+    () => LoginRemoteDatasourceImpl(sl()),
   );
-  sl.registerLazySingleton<UsersRemoteDatasource>(
-    () => UsersRemoteDatasourceImpl(sl()),
+  sl.registerLazySingleton<RegisterRemoteDataSource>(
+    () => RegisterRemoteDataSourceImpl(sl()),
+  );
+
+  /// Location
+  sl.registerLazySingleton<LocationLocalDatasource>(
+    () => LocationLocalDatasourceImpl(sl()),
+  );
+
+  /// File
+  sl.registerLazySingleton<FileLocalDatasource>(
+    () => FileLocalDatasourceImpl(sl()),
   );
 }
 
 void _useCase() {
   /// Auth
+  sl.registerLazySingleton(
+    () => PostMe(sl()),
+  );
   sl.registerLazySingleton(
     () => PostLogin(sl()),
   );
@@ -64,9 +111,29 @@ void _useCase() {
     () => PostRegister(sl()),
   );
 
-  /// Users
+  /// Location
   sl.registerLazySingleton(
-    () => GetUsers(sl()),
+    () => GetLocation(sl()),
+  );
+
+  /// Socket
+  sl.registerLazySingleton(
+    () => ConnectSocket(sl()),
+  );
+  sl.registerLazySingleton(
+    () => JoinSocket(sl()),
+  );
+
+  sl.registerLazySingleton(
+    () => SendSocket(sl()),
+  );
+  sl.registerLazySingleton(
+    () => ReceiveSocket(sl()),
+  );
+
+  /// File
+  sl.registerLazySingleton(
+    () => GetFileUseCase(sl()),
   );
 }
 
@@ -76,17 +143,30 @@ void _cubit() {
     () => RegisterCubit(sl()),
   );
   sl.registerFactory(
-    () => AuthCubit(sl()),
+    () => LoginCubit(sl(), sl()),
   );
 
-  /// Users
-  sl.registerFactory(
-    () => UsersCubit(sl()),
-  );
   sl.registerFactory(
     () => SettingsCubit(),
   );
   sl.registerFactory(
     () => MainCubit(),
+  );
+
+  /// Location
+  sl.registerFactory(
+    () => HomeCubit(
+      sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => OrderCubit(
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+      sl(),
+    ),
   );
 }

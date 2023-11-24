@@ -1,10 +1,11 @@
 import bcrypt from "bcrypt";
 import { Router } from "express";
 import jwt from "jsonwebtoken";
-import { sanitize } from "../lib/sanitzer";
 import { authenticateJWT } from "../middleware/auth";
+import { Store } from "../model/store";
 import { User } from "../model/user";
 import { UserTypes } from "../types/user";
+import { sanitize } from "../utils/sanitzer";
 
 export const UserController = ({ route }: { route: Router }) => {
   route.post("/register", async (req, res) => {
@@ -109,10 +110,12 @@ export const UserController = ({ route }: { route: Router }) => {
       const token = jwt.sign({ id: user._id }, jwtSecret, {
         expiresIn: "1d",
       });
+      const store = await Store.findOne({ ownerId: user._id });
       return res.status(200).json({
         success: true,
         message: "Berhasil",
         user: sanitize(user.toObject(), ["password"]),
+        store: store,
         token,
       });
     } catch (error) {
@@ -122,26 +125,25 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/me", authenticateJWT, async (req, res) => {
+  route.post("/me", async (req, res) => {
     try {
-      const token = req.headers.authorization!.split(' ')[1]
+      const token = req.body.token;
       if (!token) {
         return res.status(400).json({ error: "Unathorized" });
       }
       const jwtSecret = process.env.JWT_SECRET || "JWT_SECRET";
       const found = jwt.verify(token, jwtSecret) as any;
-       
+
       if (!found) {
         return res.status(400).json({
-          error: "Unathorized"
+          error: "Unathorized",
         });
-      } 
-      const user =await User.findById(found.id);
-      console.log(user);
+      }
+      const user = await User.findById(found.id);
       return res.status(200).json({
         success: true,
-        message: "user berhasil ditemukan", 
-        data: sanitize(user!.toObject(), ['password'])
+        message: "user berhasil ditemukan",
+        data: sanitize(user!.toObject(), ["password"]),
       });
     } catch (error) {
       return res.status(400).json({

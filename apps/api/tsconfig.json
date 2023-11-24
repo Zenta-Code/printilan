@@ -12,6 +12,7 @@
     ],
     "extends": "tsconfig/base.json",
     "include": [
-        "src"
+        "src",
+        "src/midtrans-client.d.ts"
     ]
 }

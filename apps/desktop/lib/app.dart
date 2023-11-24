@@ -6,9 +6,9 @@ import 'package:oktoast/oktoast.dart';
 import 'package:sky_printing_admin/core/core.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/dependencies_injection.dart';
-import 'package:sky_printing_admin/module/login/cubit/auth_cubit.dart';
-import 'package:sky_printing_admin/module/settings/cubit/settings_cubit.dart';
-import 'package:sky_printing_admin/utils/helper/helper.dart';
+import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
+import 'package:sky_printing_admin/ui/settings/cubit/settings_cubit.dart';
+import 'package:sky_printing_core/sky_printing_core.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
             AppRoute.setStream(context);
-            // context.read<AuthCubit>().logout();
             final router = AppRoute.router;
             return FluentApp.router(
               title: Constants.get.appName,

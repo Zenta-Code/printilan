@@ -1,9 +1,49 @@
 import { Router } from "express";
+import fs from "fs";
+import { Types } from "mongoose";
+import path from "path";
 import { authenticateJWT } from "../middleware/auth";
 import { Document } from "../model/document";
+import { upload } from "../libs/storage";
 import { DocumentTypes } from "../types/document";
 
 export const DocumentController = ({ route }: { route: Router }) => {
+  route.post(
+    "/upload",
+    upload.single("file"),
+    authenticateJWT,
+    async function (req, res) {
+      console.log("res.file", res.req.file?.path);
+      const document = await Document.create({
+        fileName: res.req.file?.path,
+        type: req!.file!.mimetype,
+        userId: new Types.ObjectId(req.body.userId),
+      });
+      res.send({
+        success: true,
+        message: "file berhasil di upload",
+        filePath: res.req.file?.path,
+        documentId: document._id,
+      });
+    }
+  );
+  route.get(
+    "/download/:dir/:userId/:fileName",
+    authenticateJWT,
+    async function (req, res) {
+      const dir = req.params.dir;
+      const userId = req.params.userId;
+      const fileName = req.params.fileName;
+      const filePath = path.join(__dirname, "../..", dir, userId, fileName);
+      console.log("filePath", filePath);
+      const bytes = fs.readFileSync(filePath);
+      res.send({
+        name: fileName,
+        type: "application/pdf",
+        data: bytes,
+      });
+    }
+  );
   route.post("/register", async (req, res) => {
     try {
       const body = DocumentTypes.parse(req.body);
@@ -98,7 +138,10 @@ export const DocumentController = ({ route }: { route: Router }) => {
           message: "data tidak valid",
         });
       }
-      const updateDocument = await Document.findOneAndUpdate({ name: updateData.name },updateData);
+      const updateDocument = await Document.findOneAndUpdate(
+        { name: updateData.name },
+        updateData
+      );
       if (!updateDocument) {
         return res.status(400).json({
           success: false,

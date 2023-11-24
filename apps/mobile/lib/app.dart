@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:sky_printing/core/core.dart';
 import 'package:sky_printing/dependencies_injection.dart';
-import 'package:sky_printing/features/features.dart';
-import 'package:sky_printing/utils/helper/helper.dart';
-
+import 'package:sky_printing/ui/login/cubit/login_cubit.dart'; 
+import 'package:sky_printing/ui/settings/cubit/settings_cubit.dart';
+import 'package:sky_printing_core/sky_printing_core.dart'; 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -23,20 +23,15 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<SettingsCubit>()..getActiveTheme()),
-        BlocProvider(create: (_) => sl<AuthCubit>()),
+        BlocProvider(create: (_) => sl<LoginCubit>()),
       ],
       child: OKToast(
         child: ScreenUtilInit(
-          /// Set screen size to make responsive
-          /// Almost all device
-
           designSize: const Size(360, 756),
           minTextAdapt: true,
           splitScreenMode: true,
           builder: (context, __) {
-            /// Pass context to appRoute
             AppRoute.setStream(context);
-
             return BlocBuilder<SettingsCubit, DataHelper>(
               builder: (_, data) => MaterialApp.router(
                 routerConfig: AppRoute.router,
@@ -63,7 +58,6 @@ class MyApp extends StatelessWidget {
                 darkTheme: themeDark(context),
                 locale: Locale(data.type ?? "en"),
                 supportedLocales: L10n.all,
-                // themeMode: data.activeTheme.mode,
                 themeMode: ThemeMode.light,
               ),
             );
