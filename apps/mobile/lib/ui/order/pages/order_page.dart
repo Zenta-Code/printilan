@@ -78,7 +78,7 @@ class _OrderPageState extends State<OrderPage> {
                           onTap: () {
                             context
                                 .read<OrderCubit>()
-                                .joinRoom(data[index]!.id!);
+                                .joinRoom(data[index].id!);
                           },
                           child: ListTile(
                             title: Text(data[index].name!),
@@ -109,13 +109,13 @@ class _OrderPageState extends State<OrderPage> {
               onPressed: () {
                 context.read<OrderCubit>().pickFile();
               },
-              child: Text('Pick File'),
+              child: const Text('Pick File'),
             ),
             ElevatedButton(
               onPressed: () => context.read<OrderCubit>().result == null
                   ? null
                   : context.read<OrderCubit>().order(),
-              child: Text('Order'),
+              child: const Text('Order'),
             ),
             context.watch<OrderCubit>().controller == null
                 ? Container()

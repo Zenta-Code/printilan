@@ -36,18 +36,18 @@ class OrderPage extends StatelessWidget {
   ScaffoldPage buildScaffold(List<OrderEntity> data, BuildContext context) {
     return ScaffoldPage.scrollable(
       header: PageHeader(
-        title: Text('Order'),
+        title: const Text('Order'),
         commandBar: FilledButton(
           onPressed: () {
             context.read<OrderCubit>().clearOrder();
           },
-          child: Text('Clear Order'),
+          child: const Text('Clear Order'),
         ),
       ),
       children: data
           .map((e) => Card(
-                padding: EdgeInsets.all(8),
-                margin: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Column(
                   children: [
                     Text("Document Id : ${e.documentId ?? "No Document ID"}"),

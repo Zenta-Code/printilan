@@ -32,12 +32,12 @@ class _PrinterPageState extends State<PrinterPage> {
           log.i(data);
           return ScaffoldPage(
             header: PageHeader(
-              title: Text('Printer'),
+              title: const Text('Printer'),
               commandBar: FilledButton(
                 onPressed: () {
                   context.read<PrinterCubit>().syncPrinter();
                 },
-                child: Text('Sync'),
+                child: const Text('Sync'),
               ),
             ),
             content: GridView.builder(
@@ -69,7 +69,7 @@ class _PrinterPageState extends State<PrinterPage> {
       cursor: SystemMouseCursors.click,
       builder: (context, state) {
         return Card(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

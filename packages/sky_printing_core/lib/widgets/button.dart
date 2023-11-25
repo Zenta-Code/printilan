@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_core/utils/ext/ext.dart';
 
 class Button extends StatelessWidget {
   final String title;

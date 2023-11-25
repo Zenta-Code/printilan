@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                                           children: [
                                             Row(
                                               children: [
-                                                Icon(
+                                                const Icon(
                                                   Icons.print,
                                                   color: Colors.black,
                                                   size: 32,
@@ -174,7 +174,7 @@ class _HomePageState extends State<HomePage> {
                                                       BorderRadius.circular(
                                                           Dimens.space8),
                                                 ),
-                                                child: Icon(
+                                                child: const Icon(
                                                   Icons.arrow_forward_ios,
                                                 ),
                                               ),

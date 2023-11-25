@@ -102,7 +102,7 @@ class AppRoute with MainBoxMixin {
                   name: Routes.order.name,
                   builder: (context, state) => BlocProvider(
                     create: (_) => sl<OrderCubit>()..getStore(),
-                    child: OrderPage(),
+                    child: const OrderPage(),
                   ),
                 ),
               ]),
