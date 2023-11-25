@@ -4,3 +4,4 @@ export 'login_repository.dart';
 export 'order_repository.dart';
 export 'register_repository.dart';
 export 'store_repository.dart';
+export 'bundle_repository.dart';
