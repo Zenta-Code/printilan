@@ -1,13 +1,14 @@
 class ListAPI {
   ListAPI._();
 
-  static const String baseUrl= "https://manpro.zenta.dev";
+  static const String baseUrl = "https://manpro.zenta.dev";
   static const String socketPath = "/sky-printing";
 
-  static const String register = "/api/user/register";
-
-  static const String login = "/api/user/login";
   static const String users = "/api/users";
+
+  static const String signUp = "/api/user/sign-up";
+  static const String signIn = "/api/user/sign-in";
+
   static const String me = "/api/user/me";
   static const String order = "/api/order";
   static const String bundle = "/api/bundle";
