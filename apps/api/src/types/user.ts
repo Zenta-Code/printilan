@@ -1,4 +1,5 @@
 import z from "zod";
+import { AddressTypes } from "./address";
 export const UserTypes = z.object({
   name: z
     .string({
@@ -15,11 +16,7 @@ export const UserTypes = z.object({
       required_error: "Password is required",
     })
     .min(8, "Password must be at least 8 characters"),
-  address: z
-    .string({
-      required_error: "Address is required",
-    })
-    .min(4, "Address must be at least 4 characters"),
+  address: AddressTypes,
   phone: z
     .string({
       required_error: "Phone is required",
