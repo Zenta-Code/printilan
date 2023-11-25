@@ -29,6 +29,9 @@ class StringsId extends Strings {
   String get choose_theme => 'Pilih Tema';
 
   @override
+  String get city => 'Kota';
+
+  @override
   String get colors => 'Warna';
 
   @override
@@ -36,6 +39,9 @@ class StringsId extends Strings {
 
   @override
   String get copies => 'Salinan';
+
+  @override
+  String get country => 'Negara';
 
   @override
   String get dashboard => 'Beranda';
@@ -164,6 +170,12 @@ class StringsId extends Strings {
   String get start_from => 'Mulai dari';
 
   @override
+  String get state => 'Provinsi';
+
+  @override
+  String get street => 'Jalan';
+
+  @override
   String get theme_dark => 'Tema Gelap';
 
   @override
@@ -186,4 +198,7 @@ class StringsId extends Strings {
 
   @override
   String get yes => 'Ya';
+
+  @override
+  String get zipcode => 'Kode Pos';
 }

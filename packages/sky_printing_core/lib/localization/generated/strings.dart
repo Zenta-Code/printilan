@@ -141,6 +141,12 @@ abstract class Strings {
   /// **'Choose Theme'**
   String get choose_theme;
 
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get city;
+
   /// No description provided for @colors.
   ///
   /// In en, this message translates to:
@@ -158,6 +164,12 @@ abstract class Strings {
   /// In en, this message translates to:
   /// **'Copies'**
   String get copies;
+
+  /// No description provided for @country.
+  ///
+  /// In en, this message translates to:
+  /// **'Country'**
+  String get country;
 
   /// No description provided for @dashboard.
   ///
@@ -411,6 +423,18 @@ abstract class Strings {
   /// **'Strat from'**
   String get start_from;
 
+  /// No description provided for @state.
+  ///
+  /// In en, this message translates to:
+  /// **'State'**
+  String get state;
+
+  /// No description provided for @street.
+  ///
+  /// In en, this message translates to:
+  /// **'Street'**
+  String get street;
+
   /// No description provided for @theme_dark.
   ///
   /// In en, this message translates to:
@@ -458,6 +482,12 @@ abstract class Strings {
   /// In en, this message translates to:
   /// **'Yes'**
   String get yes;
+
+  /// No description provided for @zipcode.
+  ///
+  /// In en, this message translates to:
+  /// **'Zip Code'**
+  String get zipcode;
 }
 
 class _StringsDelegate extends LocalizationsDelegate<Strings> {
