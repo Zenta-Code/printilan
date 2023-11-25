@@ -58,32 +58,32 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
     super.onError(dioException, handler);
   }
 
-  // @override
-  // void onResponse(Response response, ResponseInterceptorHandler handler) {
-  //   String headerMessage = "";
-  //   response.headers.forEach((k, v) => headerMessage += '► $k: $v\n');
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    String headerMessage = "";
+    response.headers.forEach((k, v) => headerMessage += '► $k: $v\n');
 
-  //   if (response.data is FormData) {
-  //     log.d(
-  //       // ignore: unnecessary_null_comparison
-  //       "<-- ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
-  //       "Headers:\n"
-  //       "$headerMessage\n"
-  //       "❖ QueryParameters : \n"
-  //       "Body: ${response.data.toString()}",
-  //     );
-  //   } else {
-  //     const JsonEncoder encoder = JsonEncoder.withIndent('  ');
-  //     final String prettyJson = encoder.convert(response.data);
-  //     log.d(
-  //       // ignore: unnecessary_null_comparison
-  //       "◀ ︎RESPONSE ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
-  //       "Headers:\n"
-  //       "$headerMessage\n"
-  //       "❖ Results : \n"
-  //       "Response: $prettyJson",
-  //     );
-  //   }
-  //   super.onResponse(response, handler);
-  // }
+    if (response.data is FormData) {
+      log.d(
+        // ignore: unnecessary_null_comparison
+        "<-- ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
+        "Headers:\n"
+        "$headerMessage\n"
+        "❖ QueryParameters : \n"
+        "Body: ${response.data.toString()}",
+      );
+    } else {
+      const JsonEncoder encoder = JsonEncoder.withIndent('  ');
+      final String prettyJson = encoder.convert(response.data);
+      log.d(
+        // ignore: unnecessary_null_comparison
+        "◀ ︎RESPONSE ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
+        "Headers:\n"
+        "$headerMessage\n"
+        "❖ Results : \n"
+        "Response: $prettyJson",
+      );
+    }
+    super.onResponse(response, handler);
+  }
 }

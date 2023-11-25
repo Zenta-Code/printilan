@@ -69,12 +69,16 @@ class _RegisterPageState extends State<RegisterPage> {
     _fnZipcode = FocusNode();
 
     // dummy data
-    // _conName.text = "Rahmat Hidayatullah";
-    // _conEmail.text = "rahmat@gmail.com";
-    // _conPassword.text = "password";
-    // _conConfirmPassword.text = "password";
-    // _conStreet.text = "Jl. Raya Bogor, Jakarta";
-    // _conPhone.text = "081234567890";
+    _conName.text = "Vio";
+    _conEmail.text = "vio@gmail.com";
+    _conPassword.text = "password";
+    _conConfirmPassword.text = "password";
+    _conStreet.text = "Jl. Ketiintang No. 123";
+    _conCity.text = "Surabaya";
+    _conState.text = "Jawa Timur";
+    _conCountry.text = "Indonesia";
+    _conZipcode.text = "60231";
+    _conPhone.text = "081234567890";
     super.initState();
   }
 
@@ -435,6 +439,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           country: _conCountry.text,
                                           zipcode: _conZipcode.text,
                                         ),
+                                        role: "customer",
                                         phone: _conPhone.text,
                                       ),
                                     );

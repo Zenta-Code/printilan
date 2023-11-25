@@ -16,6 +16,7 @@ class DropDown<T> extends StatefulWidget {
     required this.onChanged,
     this.hintIsVisible = true,
     this.prefixIcon,
+    this.width,
   });
   final T value;
   final List<DropdownMenuItem<T>> items;
@@ -23,7 +24,7 @@ class DropDown<T> extends StatefulWidget {
   final String? hint;
   final ValueChanged<T?>? onChanged;
   final Widget? prefixIcon;
-
+  final double? width;
   @override
   _DropDownState<T> createState() => _DropDownState();
 }
@@ -33,6 +34,7 @@ class _DropDownState<T> extends State<DropDown<T>> {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: Dimens.space8),
+      width: widget.width ?? double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -16,7 +16,7 @@ class LoginRemoteDatasourceImpl implements LoginRemoteDatasource {
   @override
   Future<Either<Failure, LoginModel>> login(LoginParams loginParams) async =>
       await _client.postRequest(
-        ListAPI.login,
+        ListAPI.signIn,
         data: loginParams.toJson(),
         converter: (response) => LoginModel.fromJson(response),
       );

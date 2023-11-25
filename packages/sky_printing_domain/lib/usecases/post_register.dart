@@ -26,6 +26,7 @@ class RegisterParams with _$RegisterParams {
     @Default("") String confirmPassword,
     @Default(null) AddressModel? address,
     @Default("") String phone,
+    @Default("customer") String role,
   }) = _RegisterParams;
 
   factory RegisterParams.fromJson(Map<String, dynamic> json) =>

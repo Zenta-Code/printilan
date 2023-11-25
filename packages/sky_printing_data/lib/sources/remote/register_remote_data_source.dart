@@ -19,7 +19,7 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
     RegisterParams registerParams,
   ) async {
     final response = await _client.postRequest(
-      ListAPI.register,
+      ListAPI.signUp,
       data: registerParams.toJson(),
       converter: (response) =>
           RegisterModel.fromJson(response as Map<String, dynamic>),
