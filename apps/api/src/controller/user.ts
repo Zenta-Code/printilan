@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { Router } from "express";
 import jwt from "jsonwebtoken";
+import { ZodError } from "zod";
 import { authenticateJWT } from "../middleware/auth";
 import { Store } from "../model/store";
 import { User } from "../model/user";
@@ -8,17 +9,13 @@ import { UserTypes } from "../types/user";
 import { sanitize } from "../utils/sanitzer";
 
 export const UserController = ({ route }: { route: Router }) => {
-  route.post("/register", async (req, res) => {
-    try { 
-      console.log(req.body)
+  route.post("/sign-up", async (req, res) => {
+    try {
       const body = UserTypes.parse(req.body);
-
-      console.log(body);
-
+      console.log("UserController -> sign-up -> body :\n", body);
       if (!body) {
         return res.status(400).json({
-          success: false,
-          message: "Body tidak boleh kosong",
+          error: req.t("Empty data"),
         });
       }
 
@@ -27,15 +24,13 @@ export const UserController = ({ route }: { route: Router }) => {
 
       if (password !== confirmPassword) {
         return res.status(400).json({
-          success: false,
-          message: "Password tidak sesuai",
+          error: req.t("Password doesn't match"),
         });
       }
 
       if (password.length < 8) {
         return res.status(400).json({
-          success: false,
-          message: "Password minimal 8 karakter",
+          error: req.t("Password must be at least 8 characters"),
         });
       }
 
@@ -44,8 +39,7 @@ export const UserController = ({ route }: { route: Router }) => {
       });
       if (find) {
         return res.status(400).json({
-          success: false,
-          message: "Email sudah terdaftar",
+          error: req.t("Email already registered"),
         });
       }
       const salt = await bcrypt.genSalt(10);
@@ -58,30 +52,32 @@ export const UserController = ({ route }: { route: Router }) => {
       console.log(user);
       return res.status(200).json({
         success: true,
-        message: "Berhasil",
+        message: req.t("Sign up success"),
         data: sanitize(user.toObject(), ["password"]),
       });
-    } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error,
-      });
+    } catch (error: any) {
+      if (error instanceof ZodError) {
+        console.log(error);
+        return res.status(400).json({
+          error: req.t(error.errors[0].message),
+        });
+      }
     }
   });
 
-  route.post("/login", async (req, res) => {
+  route.post("/sign-in", async (req, res) => {
     try {
       const body = req.body;
 
       if (body.email === undefined || body.password === undefined) {
         return res.status(400).json({
-          error: "Body tidak boleh kosong",
+          error: req.t("Empty body"),
         });
       }
 
       if (body.email === "" || body.password === "") {
         return res.status(400).json({
-          error: "Body tidak boleh kosong",
+          error: req.t("Empty body"),
         });
       }
 
@@ -91,7 +87,7 @@ export const UserController = ({ route }: { route: Router }) => {
 
       if (!user) {
         return res.status(400).json({
-          error: "Email tidak ditemukan",
+          error: req.t("Email not found"),
         });
       }
 
@@ -101,7 +97,7 @@ export const UserController = ({ route }: { route: Router }) => {
 
       if (!validPassword) {
         return res.status(400).json({
-          error: "Password salah",
+          error: req.t("Wrong password"),
         });
       }
 
@@ -113,7 +109,7 @@ export const UserController = ({ route }: { route: Router }) => {
       const store = await Store.findOne({ ownerId: user._id });
       return res.status(200).json({
         success: true,
-        message: "Berhasil",
+        message: req.t("Sign in success"),
         user: sanitize(user.toObject(), ["password"]),
         store: store,
         token,
@@ -129,20 +125,20 @@ export const UserController = ({ route }: { route: Router }) => {
     try {
       const token = req.body.token;
       if (!token) {
-        return res.status(400).json({ error: "Unathorized" });
+        return res.status(400).json({ error:  req.t("Unathorized")});
       }
       const jwtSecret = process.env.JWT_SECRET || "JWT_SECRET";
       const found = jwt.verify(token, jwtSecret) as any;
 
       if (!found) {
         return res.status(400).json({
-          error: "Unathorized",
+          error:  req.t("Unathorized"),
         });
       }
       const user = await User.findById(found.id);
       return res.status(200).json({
         success: true,
-        message: "user berhasil ditemukan",
+        message: req.t("User found"),
         data: sanitize(user!.toObject(), ["password"]),
       });
     } catch (error) {

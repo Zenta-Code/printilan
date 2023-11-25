@@ -5,7 +5,7 @@ export const UserTypes = z.object({
     .string({
       required_error: "Name is required",
     })
-    .min(4, "Name must be at least 4 characters"),
+    .min(2, "Name must be at least 4 characters"),
   email: z
     .string({
       required_error: "Email is required",

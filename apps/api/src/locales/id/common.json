@@ -1,0 +1,27 @@
+{
+ 
+  "Email must be at least 4 characters": "Email minimal 4 karakter",
+  "Email is required": "Email harus diisi",
+  "Email already registered": "Email sudah terdaftar",
+  "Email not found" : "Email tidak ditemukan",
+  
+  "Name must be at least 4 characters": "Nama minimal 4 karakter",
+  "Name is required": "Nama harus diisi",
+ 
+  "Password must be at least 8 characters": "Password minimal 8 karakter",
+  "Password is required": "Password harus diisi",
+  "Password doesn't match": "Password tidak cocok",
+  "Wrong password": "Password salah",
+
+  "Phone must be at least 10 characters" : "Nomor telepon minimal 10 karakter",
+  "Phone is required" : "Nomor telepon harus diisi",
+
+  "Role is required" : "Role harus diisi",
+
+  "hello": "Halo",
+  "Empty body": "Data kosong",
+  "Sign up success": "Pendaftaran berhasil",
+  "Sign in success": "Login berhasil",
+  "User found": "User ditemukan",
+  "Unathorized": "Tidak diizinkan",
+}

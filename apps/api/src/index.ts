@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import { Express } from "express";
 import fs from "fs";
 import { Server } from "http";
-import mongoose from "mongoose";
+import mongoose from "mongoose"; 
 import { createServer } from "./libs/server";
 import { createSocket } from "./libs/socket";
 
@@ -34,7 +34,7 @@ mongoose.connection.on("connected", () => {
     });
   } catch (err) {
     console.log(err);
-  } 
+  }
 
   // Seeder();
 });

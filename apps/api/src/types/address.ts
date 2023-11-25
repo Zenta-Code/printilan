@@ -16,7 +16,12 @@ export const AddressTypes = z.object({
       required_error: "State is required",
     })
     .min(4, "State must be at least 4 characters"),
-  zipcode: z
+  country: z
+    .string({
+      required_error: "Country is required",
+    })
+    .min(4, "Country must be at least 4 characters"),
+  zipCode: z
     .string({
       required_error: "Zip is required",
     })
