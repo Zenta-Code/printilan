@@ -5,7 +5,7 @@ import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 abstract class LoginRemoteDatasource {
   Future<Either<Failure, LoginModel>> login(LoginParams loginParams);
-  Future<Either<Failure, LoginModel>> me(String token);
+  Future<Either<Failure, UserModel>> me(String token);
 }
 
 class LoginRemoteDatasourceImpl implements LoginRemoteDatasource {
@@ -22,10 +22,10 @@ class LoginRemoteDatasourceImpl implements LoginRemoteDatasource {
       );
 
   @override
-  Future<Either<Failure, LoginModel>> me(String token) async =>
+  Future<Either<Failure, UserModel>> me(String token) async =>
       await _client.postRequest(
         ListAPI.me,
         data: {"token": token},
-        converter: (response) => LoginModel.fromJson(response),
+        converter: (response) => UserModel.fromJson(response['data']),
       );
 }

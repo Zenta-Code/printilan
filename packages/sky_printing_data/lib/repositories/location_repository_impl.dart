@@ -4,13 +4,13 @@ import 'package:sky_printing_data/sources/local/location_local_data_sources.dart
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 class LocationRepositoryImpl implements LocationRepository {
-  final LocationLocalDatasource locationClient;
-  LocationRepositoryImpl(this.locationClient);
+  final LocationLocalDatasource _localDataSource;
+  LocationRepositoryImpl(this._localDataSource);
 
   @override
   Future<Either<Failure, LocationEntity>> getLocation(
       LocationParams locationParams) async {
-    final response = await locationClient.getLocation(
+    final response = await _localDataSource.getLocation(
       locationParams,
     );
     return response.fold(

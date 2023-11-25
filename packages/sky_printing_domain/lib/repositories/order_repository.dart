@@ -15,7 +15,7 @@ abstract class OrderRepository {
   Future<Either<Failure, OrderEntity>> postOrder(
     PostOrderParams params,
   );
-  Future<Either<Failure, void>> deleteOrderById(
+  Future<Either<Failure, OrderEntity>> deleteOrderById(
     DeleteOrderByIdParams params,
   );
 }

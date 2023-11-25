@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +18,7 @@ import 'package:sky_printing_admin/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing_admin/ui/register/register_page.dart';
 import 'package:sky_printing_admin/ui/settings/settings.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 import '../ui/dashboard/dashboard_page.dart';
 
@@ -106,22 +109,31 @@ class AppRoute {
     routerNeglect: true,
     debugLogDiagnostics: kDebugMode,
     refreshListenable: GoRouterRefreshStream(context.read<AuthCubit>().stream),
-    redirect: (_, GoRouterState state) {
-      final bool isLoginPage = state.matchedLocation == Routes.login.path ||
-          state.matchedLocation == Routes.register.path;
-
-      if (!((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
-          false)) {
-        return isLoginPage ? null : Routes.login.path;
-      }
-
-      if (isLoginPage &&
-          ((MainBoxMixin.mainBox?.get(MainBoxKeys.isLogin.name) as bool?) ??
-              false)) {
-        return Routes.root.path;
-      }
-
-      return null;
-    },
+    redirect: validateToken,
   );
+}
+
+FutureOr<String?> validateToken(
+  BuildContext context,
+  GoRouterState state,
+) async {
+  final bool isLoginPage = state.matchedLocation == Routes.login.path ||
+      state.matchedLocation == Routes.register.path;
+  final token = MainBoxMixin().getData(MainBoxKeys.token);
+  if (token == null) {
+    return Routes.login.path;
+  }
+  final res = await context.read<AuthCubit>().me(MeParams(
+        token: token,
+      ));
+  if (res.id == null) {
+    return Routes.login.path;
+  }
+  if (res.id != null && isLoginPage && res.role == "seller") {
+    return Routes.dashboard.path;
+  }
+  if (res.id != null && state.matchedLocation == Routes.root.path) {
+    return Routes.dashboard.path;
+  }
+  return null;
 }

@@ -5,5 +5,5 @@ export 'location/location_model.dart';
 export 'login/login_model.dart';
 export 'order/order_model.dart';
 export 'store/store_model.dart';
-export 'user/user.dart';
+export 'user/user_model.dart';
 export 'register/register_model.dart';

@@ -7,10 +7,10 @@ import 'package:sky_printing_domain/repositories/order_repository.dart';
 part 'get_order_by_id_usecase.freezed.dart';
 part 'get_order_by_id_usecase.g.dart';
 
-class GetOrderById extends UseCase<OrderEntity, GetOrderByIdParams> {
+class GetOrderByIdUsecase extends UseCase<OrderEntity, GetOrderByIdParams> {
   final OrderRepository _repo;
 
-  GetOrderById(this._repo);
+  GetOrderByIdUsecase(this._repo);
 
   @override
   Future<Either<Failure, OrderEntity>> call(GetOrderByIdParams params) =>
@@ -20,7 +20,7 @@ class GetOrderById extends UseCase<OrderEntity, GetOrderByIdParams> {
 @freezed
 class GetOrderByIdParams with _$GetOrderByIdParams {
   const factory GetOrderByIdParams({
-    @Default(null) String? orderId,
+    @Default(null) String? id,
   }) = _GetOrderByIdParams;
 
   factory GetOrderByIdParams.fromJson(Map<String, dynamic> json) =>

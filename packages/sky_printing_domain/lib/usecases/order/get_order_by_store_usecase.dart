@@ -7,11 +7,11 @@ import 'package:sky_printing_domain/sky_printing_domain.dart';
 part 'get_order_by_store_usecase.freezed.dart';
 part 'get_order_by_store_usecase.g.dart';
 
-class GetOrderByStore
+class GetOrderByStoreUsecase
     extends UseCase<List<OrderEntity>, GetOrderByStoreParams> {
   final OrderRepository _repo;
 
-  GetOrderByStore(this._repo);
+  GetOrderByStoreUsecase(this._repo);
 
   @override
   Future<Either<Failure, List<OrderEntity>>> call(

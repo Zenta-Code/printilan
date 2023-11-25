@@ -17,8 +17,7 @@ enum MainBoxKeys {
   fcm,
   language,
   theme,
-  locale,
-  isLogin,
+  locale, 
   user,
   store,
 }

@@ -5,16 +5,16 @@ import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 
 class RegisterRepositoryImpl implements RegisterRepository {
-  final RegisterRemoteDataSource registerRemoteDatasource;
+  final RegisterRemoteDataSource _remoteDataSource;
   final MainBoxMixin mainBoxMixin;
 
   const RegisterRepositoryImpl(
-      this.registerRemoteDatasource, this.mainBoxMixin);
+      this._remoteDataSource, this.mainBoxMixin);
 
   @override
   Future<Either<Failure, RegisterEntity>> register(
       RegisterParams registerParams) async {
-    final response = await registerRemoteDatasource.register(registerParams);
+    final response = await _remoteDataSource.register(registerParams);
 
     return response.fold(
       (failure) => Left(failure),

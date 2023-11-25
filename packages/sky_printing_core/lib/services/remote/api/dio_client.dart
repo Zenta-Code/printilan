@@ -143,6 +143,47 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
     }
   }
 
+  Future<Either<Failure, T>> deleteRequest<T>(
+    String url, {
+    Map<String, dynamic>? data,
+    ResponseConverter<T>? converter,
+    bool isIsolate = true,
+  }) async {
+    try {
+      final response = await dio.delete(url, data: data);
+      if ((response.statusCode ?? 0) < 200 ||
+          (response.statusCode ?? 0) > 201) {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+        );
+      }
+      if (converter == null) {
+        return Right(response.data as T);
+      } else {
+        if (!isIsolate) {
+          return Right(converter(response.data));
+        }
+        final isolateParse = IsolateParser<T>(
+          response.data as Map<String, dynamic>,
+          converter,
+        );
+        final result = await isolateParse.parseInBackground();
+        return Right(result);
+      }
+    } on DioException catch (e, stackTrace) {
+      log.e(e);
+      if (!_isUnitTest) {
+        nonFatalError(error: e, stackTrace: stackTrace);
+      }
+      return Left(
+        ServerFailure(
+          e.response?.data['error'] as String? ?? e.message,
+        ),
+      );
+    }
+  }
+
   Future<Either<Failure, T>> downloadRequest<T>(
     String url,
     String path, {

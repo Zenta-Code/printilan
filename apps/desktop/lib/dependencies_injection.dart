@@ -57,6 +57,12 @@ void _repositories() {
   sl.registerLazySingleton<RegisterRepository>(
     () => RegisterRepositoryImpl(sl(), sl()),
   );
+  sl.registerLazySingleton<StoreRepository>(
+    () => StoreRepositoryImpl(sl()),
+  );
+  sl.registerLazySingleton<OrderRepository>(
+    () => OrderRepositoryImpl(sl()),
+  );
 }
 
 /// Register dataSources
@@ -68,6 +74,10 @@ void _dataSources() {
   sl.registerLazySingleton<RegisterRemoteDataSource>(
     () => RegisterRemoteDataSourceImpl(sl()),
   );
+
+  sl.registerLazySingleton<OrderRemoteDataSource>(
+    () => OrderRemoteDataSourceImpl(sl()),
+  );
 }
 
 void _useCase() {
@@ -77,6 +87,9 @@ void _useCase() {
   );
   sl.registerLazySingleton(
     () => PostRegister(sl()),
+  );
+  sl.registerLazySingleton(
+    () => PostMe(sl()),
   );
 
   /// Socket
@@ -93,6 +106,10 @@ void _useCase() {
   sl.registerLazySingleton(
     () => ReceiveSocket(sl()),
   );
+
+  sl.registerLazySingleton(
+    () => GetOrderByStoreUsecase(sl()),
+  );
 }
 
 void _cubit() {
@@ -101,7 +118,10 @@ void _cubit() {
     () => RegisterCubit(sl()),
   );
   sl.registerFactory(
-    () => AuthCubit(sl()),
+    () => AuthCubit(
+      sl(),
+      sl(),
+    ),
   );
 
   sl.registerFactory(
@@ -111,7 +131,10 @@ void _cubit() {
     () => MainCubit(),
   );
   sl.registerFactory(
-    () => DashboardCubit(sl()),
+    () => DashboardCubit(
+      sl(),
+      sl(),
+    ),
   );
   sl.registerFactory(
     () => OrderCubit(

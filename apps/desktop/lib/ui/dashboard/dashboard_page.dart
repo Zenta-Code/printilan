@@ -30,15 +30,13 @@ class DashboardPage extends StatelessWidget {
             ),
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   dashContainer(width / 5, 'Order', FluentIcons.shopping_cart,
                       data['order'].length.toString(), ' order'),
                   dashContainer(width / 5, 'Bundle', FluentIcons.package,
                       data['bundle'].length.toString(), ' bundle'),
-                  dashContainer(width / 5, 'Bundle', FluentIcons.package,
-                      data['bundle'].length.toString(), ' bundle'),
-                  dashContainer(width / 5, 'Bundle', FluentIcons.package,
+                  dashContainer(width / 5, 'Printer', FluentIcons.print,
                       data['bundle'].length.toString(), ' bundle'),
                 ],
               ),

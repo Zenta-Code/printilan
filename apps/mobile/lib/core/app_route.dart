@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,11 +47,9 @@ enum Routes {
 class AppRoute with MainBoxMixin {
   static late BuildContext context;
   static late String? token;
-  static late bool isLogin;
   AppRoute.setStream(BuildContext ctx) {
     context = ctx;
     token = getData(MainBoxKeys.token);
-    isLogin = getData(MainBoxKeys.isLogin) ?? false;
   }
 
   static final GoRouter router = GoRouter(
@@ -63,7 +63,7 @@ class AppRoute with MainBoxMixin {
         path: Routes.root.path,
         name: Routes.root.name,
         redirect: (_, __) =>
-            isLogin ? Routes.splashScreen.path : Routes.login.path,
+            token == null ? Routes.splashScreen.path : Routes.login.path,
       ),
       GoRoute(
         path: Routes.login.path,
@@ -162,10 +162,21 @@ class AppRoute with MainBoxMixin {
   );
 }
 
-Future<bool> logout() async {
-  await MainBoxMixin().removeData(MainBoxKeys.token);
-  await MainBoxMixin().removeData(MainBoxKeys.isLogin);
-  await MainBoxMixin().removeData(MainBoxKeys.user);
-  final isLogin = MainBoxMixin().getData(MainBoxKeys.isLogin);
-  return isLogin ?? false;
+FutureOr<String?> validateToken(
+  BuildContext context,
+  GoRouterState state,
+) async {
+  final bool isLoginPage = state.matchedLocation == Routes.login.path ||
+      state.matchedLocation == Routes.register.path;
+  final token = MainBoxMixin().getData(MainBoxKeys.token);
+  if (token == null) {
+    return Routes.login.path;
+  }
+  final res = await context.read<LoginCubit>().me(MeParams(
+        token: token,
+      ));
+  if (res) {
+    return isLoginPage ? Routes.splashScreen.path : null;
+  }
+  return isLoginPage ? null : Routes.login.path;
 }
