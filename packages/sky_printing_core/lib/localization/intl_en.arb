@@ -7,9 +7,11 @@
   "cancel": "Cancel",
   "choose_language": "Choose Language",
   "choose_theme": "Choose Theme",
+  "city": "City",
   "colors": "Colors",
   "confirm_password": "Repeat Password",
   "copies": "Copies",
+  "country": "Country",
   "dashboard": "Dashboard",
   "email": "Email",
   "enter": "Enter",
@@ -52,6 +54,8 @@
   "select_time": "Choose Time",
   "settings": "Settings",
   "start_from": "Strat from",
+  "state": "State",
+  "street": "Street",
   "theme_dark": "Theme Dark",
   "theme_light": "Theme Light",
   "theme_system": "Theme System",
@@ -59,5 +63,6 @@
   "transfer": "Transfer",
   "wallet": "Wallet",
   "welcome_to": "Welcome to",
-  "yes": "Yes"
+  "yes": "Yes",
+  "zipcode": "Zip Code"
 }

@@ -177,6 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               // SpacerV(value: Dimens.space24),
                               ButtonText(
+                                key: const Key("btn_login"),
                                 title: Strings.of(context)!.login,
                                 onPressed: () {
                                   if (_keyForm.currentState?.validate() ??
@@ -190,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                                   }
                                 },
                                 color: Colors.black,
-                                fontSize: Dimens.titleLarge,
+                                fontSize: Dimens.titleMedium,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,

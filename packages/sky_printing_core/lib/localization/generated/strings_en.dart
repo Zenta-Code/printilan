@@ -29,6 +29,9 @@ class StringsEn extends Strings {
   String get choose_theme => 'Choose Theme';
 
   @override
+  String get city => 'City';
+
+  @override
   String get colors => 'Colors';
 
   @override
@@ -36,6 +39,9 @@ class StringsEn extends Strings {
 
   @override
   String get copies => 'Copies';
+
+  @override
+  String get country => 'Country';
 
   @override
   String get dashboard => 'Dashboard';
@@ -164,6 +170,12 @@ class StringsEn extends Strings {
   String get start_from => 'Strat from';
 
   @override
+  String get state => 'State';
+
+  @override
+  String get street => 'Street';
+
+  @override
   String get theme_dark => 'Theme Dark';
 
   @override
@@ -186,4 +198,7 @@ class StringsEn extends Strings {
 
   @override
   String get yes => 'Yes';
+
+  @override
+  String get zipcode => 'Zip Code';
 }
