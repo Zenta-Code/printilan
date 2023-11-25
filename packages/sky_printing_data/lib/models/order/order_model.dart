@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sky_printing_data/models/models.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'order_model.freezed.dart';
@@ -10,6 +11,9 @@ class OrderModel with _$OrderModel {
     String? userId,
     String? storeId,
     String? documentId,
+    UserModel? user,
+    StoreModel? store,
+    DocumentModel? document,
     int? totalPrice,
   }) = _OrderModel;
 
@@ -23,5 +27,8 @@ class OrderModel with _$OrderModel {
         storeId: storeId,
         documentId: documentId,
         totalPrice: totalPrice,
+        user: user?.toEntity(),
+        store: store?.toEntity(),
+        document: document?.toEntity(),
       );
 }

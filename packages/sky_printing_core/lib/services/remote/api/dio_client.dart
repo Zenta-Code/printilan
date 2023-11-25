@@ -137,7 +137,9 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       }
       return Left(
         ServerFailure(
-          e.response?.data['error'] as String? ?? e.message,
+          e.response == null
+              ? e.message
+              : e.response?.data['error'] as String? ?? "Internal Server Error",
         ),
       );
     }

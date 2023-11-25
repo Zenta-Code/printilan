@@ -31,7 +31,8 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     GetOrderByIdParams params,
   ) {
     final response = _client.getRequest(
-      "${ListAPI.order}/${params.id}",
+      ListAPI.order,
+      queryParameters: params.toJson(),
       converter: (response) => OrderModel.fromJson(response),
     );
     return response;
@@ -42,9 +43,10 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     GetOrderByStoreParams params,
   ) {
     final response = _client.getRequest(
-      "${ListAPI.order}/store/${params.storeId}",
+      ListAPI.order,
+      queryParameters: params.toJson(),
       converter: (response) {
-        final List<OrderModel> orders = response
+        final List<OrderModel> orders = response['data']
             .map<OrderModel>((order) => OrderModel.fromJson(order))
             .toList();
         return orders;
@@ -58,9 +60,10 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     GetOrderByUserParams params,
   ) {
     final response = _client.getRequest(
-      "${ListAPI.order}/user/${params.userId}",
+      ListAPI.order,
+      queryParameters: params.toJson(),
       converter: (response) {
-        final List<OrderModel> orders = response
+        final List<OrderModel> orders = response['data']
             .map<OrderModel>((order) => OrderModel.fromJson(order))
             .toList();
         return orders;
@@ -76,7 +79,7 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     final response = _client.postRequest(
       ListAPI.order,
       data: params.toJson(),
-      converter: (response) => OrderModel.fromJson(response),
+      converter: (response) => OrderModel.fromJson(response['data']),
     );
     return response;
   }

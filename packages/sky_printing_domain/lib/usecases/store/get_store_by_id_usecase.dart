@@ -6,10 +6,10 @@ import 'package:sky_printing_domain/sky_printing_domain.dart';
 part 'get_store_by_id_usecase.freezed.dart';
 part 'get_store_by_id_usecase.g.dart';
 
-class GetStoreById extends UseCase<StoreEntity, GetStoreByIdParams> {
+class GetStoreByIdUsecase extends UseCase<StoreEntity, GetStoreByIdParams> {
   final StoreRepository _repo;
 
-  GetStoreById(this._repo);
+  GetStoreByIdUsecase(this._repo);
 
   @override
   Future<Either<Failure, StoreEntity>> call(GetStoreByIdParams params) =>

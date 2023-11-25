@@ -52,6 +52,7 @@ class OrderPage extends StatelessWidget {
                   children: [
                     Text("Document Id : ${e.documentId ?? "No Document ID"}"),
                     Text("User Id : ${e.userId ?? "No User ID"}"),
+                    Text("User Name : ${e.user!.name ?? "No User Name"}"),
                   ],
                 ),
               ))

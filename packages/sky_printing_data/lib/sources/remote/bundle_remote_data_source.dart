@@ -27,9 +27,9 @@ class BundleRemoteDataSourceImpl implements BundleRemoteDataSource {
     GetBundleByIdParams params,
   ) async {
     final response = await _client.getRequest(
-      "${ListAPI.bundle}/${params.id}",
+      "${ListAPI.bundle}",
       queryParameters: params.toJson(),
-      converter: (response) => BundleModel.fromJson(response),
+      converter: (response) => BundleModel.fromJson(response['data']),
     );
     return response;
   }
@@ -39,10 +39,10 @@ class BundleRemoteDataSourceImpl implements BundleRemoteDataSource {
     GetBundleByNameParams params,
   ) async {
     final response = await _client.getRequest(
-      "${ListAPI.bundle}/${params.name}",
+      "${ListAPI.bundle}}",
       queryParameters: params.toJson(),
       converter: (response) {
-        final List<BundleModel> bundles = response
+        final List<BundleModel> bundles = response['data']
             .map<BundleModel>((bundle) => BundleModel.fromJson(bundle))
             .toList();
         return bundles;
@@ -56,10 +56,10 @@ class BundleRemoteDataSourceImpl implements BundleRemoteDataSource {
     GetBundleByStoreParams params,
   ) async {
     final response = await _client.getRequest(
-      "${ListAPI.bundle}/${params.storeId}",
+      "${ListAPI.bundle}",
       queryParameters: params.toJson(),
       converter: (response) {
-        final List<BundleModel> bundles = response
+        final List<BundleModel> bundles = response['data']
             .map<BundleModel>((bundle) => BundleModel.fromJson(bundle))
             .toList();
         return bundles;

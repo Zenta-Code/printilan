@@ -8,10 +8,10 @@ import 'package:sky_printing_domain/repositories/store_repository.dart';
 part 'get_store_by_city_usecase.freezed.dart';
 part 'get_store_by_city_usecase.g.dart';
 
-class GetStoreByCity extends UseCase<List<StoreEntity>, GetStoreByCityParams> {
+class GetStoreByCityUsecase extends UseCase<List<StoreEntity>, GetStoreByCityParams> {
   final StoreRepository _repo;
 
-  GetStoreByCity(this._repo);
+  GetStoreByCityUsecase(this._repo);
 
   @override
   Future<Either<Failure, List<StoreEntity>>> call(GetStoreByCityParams params) =>

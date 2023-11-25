@@ -6,13 +6,15 @@ import 'package:sky_printing_domain/sky_printing_domain.dart';
 part 'get_bundle_by_name_usecase.freezed.dart';
 part 'get_bundle_by_name_usecase.g.dart';
 
-class GetBundleByName extends UseCase<List<BundleEntity>, GetBundleByNameParams> {
+class GetBundleByNameUsecase
+    extends UseCase<List<BundleEntity>, GetBundleByNameParams> {
   final BundleRepository _repo;
 
-  GetBundleByName(this._repo);
+  GetBundleByNameUsecase(this._repo);
 
   @override
-  Future<Either<Failure, List<BundleEntity>>> call(GetBundleByNameParams params) =>
+  Future<Either<Failure, List<BundleEntity>>> call(
+          GetBundleByNameParams params) =>
       _repo.getBundleByName(params);
 }
 

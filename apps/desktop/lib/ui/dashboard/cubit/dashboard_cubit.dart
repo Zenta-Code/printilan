@@ -2,19 +2,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing_admin/dependencies_injection.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_data/sky_printing_data.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'dashboard_cubit.freezed.dart';
 part 'dashboard_state.dart';
 
-class DashboardCubit extends Cubit<DashboardState> {
-  final DioClient _client;
+class DashboardCubit extends Cubit<DashboardState> { 
   final GetOrderByStoreUsecase _getOrderByStoreUsecase;
+  final GetBundleByStoreUsecase _getBundleByStoreUsecase;
 
-  DashboardCubit(
-    this._client,
+  DashboardCubit( 
     this._getOrderByStoreUsecase,
+    this._getBundleByStoreUsecase,
   ) : super(const _Loading());
 
   final user = sl<MainBoxMixin>().getData(MainBoxKeys.user);
@@ -35,12 +34,8 @@ class DashboardCubit extends Cubit<DashboardState> {
     final order = await _getOrderByStoreUsecase.call(
       GetOrderByStoreParams(storeId: store['_id']),
     );
-    final bundle = await _client.getRequest(
-      "${ListAPI.bundle}/list/${user['_id']}",
-      converter: (response) {
-        final data = response['data'] as List;
-        return data.map((e) => BundleModel.fromJson(e)).toList();
-      },
+    final bundle = await _getBundleByStoreUsecase.call(
+      GetBundleByStoreParams(storeId: store['_id']),
     );
     order.fold(
       (l) => null,

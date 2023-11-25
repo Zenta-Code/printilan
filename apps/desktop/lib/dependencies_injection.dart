@@ -63,6 +63,9 @@ void _repositories() {
   sl.registerLazySingleton<OrderRepository>(
     () => OrderRepositoryImpl(sl()),
   );
+  sl.registerLazySingleton<BundleRepository>(
+    () => BundleRepositoryImpl(sl()),
+  );
 }
 
 /// Register dataSources
@@ -77,6 +80,9 @@ void _dataSources() {
 
   sl.registerLazySingleton<OrderRemoteDataSource>(
     () => OrderRemoteDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<BundleRemoteDataSource>(
+    () => BundleRemoteDataSourceImpl(sl()),
   );
 }
 
@@ -110,6 +116,9 @@ void _useCase() {
   sl.registerLazySingleton(
     () => GetOrderByStoreUsecase(sl()),
   );
+  sl.registerLazySingleton(
+    () => GetBundleByStoreUsecase(sl()),
+  );
 }
 
 void _cubit() {
@@ -138,6 +147,7 @@ void _cubit() {
   );
   sl.registerFactory(
     () => OrderCubit(
+      sl(),
       sl(),
       sl(),
       sl(),

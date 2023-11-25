@@ -18,6 +18,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     this._joinSocket,
     this._socketClient,
     this._dioClient,
+    this._getOrderByStoreUsecase,
   ) : super(
           const _Loading(),
         );
@@ -25,6 +26,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   final JoinSocket _joinSocket;
   final SocketClient _socketClient;
   final DioClient _dioClient;
+  final GetOrderByStoreUsecase _getOrderByStoreUsecase;
   final List<OrderEntity> orderData = [];
   Future<void> fetchData() async {
     safeEmit(
@@ -33,13 +35,9 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       isClosed: isClosed,
     );
     final store = getData(MainBoxKeys.store);
-    final response = await _dioClient.getRequest(
-      "${ListAPI.order}/list/${store['_id']}",
-      converter: (response) {
-        final data = response['data'] as List<dynamic>;
-        return data.map((e) => OrderModel.fromJson(e).toEntity()).toList();
-      },
-    );
+
+    final response = await _getOrderByStoreUsecase
+        .call(GetOrderByStoreParams(storeId: store['_id']));
     final tes = await Printing.listPrinters();
     log.i(tes.last);
     response.fold(
