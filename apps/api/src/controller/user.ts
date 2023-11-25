@@ -10,6 +10,7 @@ import { sanitize } from "../utils/sanitzer";
 export const UserController = ({ route }: { route: Router }) => {
   route.post("/register", async (req, res) => {
     try {
+      req.body.role = "user";
       const body = UserTypes.parse(req.body);
 
       console.log(body);

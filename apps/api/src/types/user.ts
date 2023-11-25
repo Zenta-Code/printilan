@@ -22,7 +22,7 @@ export const UserTypes = z.object({
       required_error: "Phone is required",
     })
     .min(10, "Phone must be at least 10 characters"),
-  role: z.enum(["maintainer", "seller", "user"], {
+  role: z.enum(["seller", "customer"], {
     required_error: "Role is required",
   }),
 });
