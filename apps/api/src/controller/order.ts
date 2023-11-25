@@ -3,7 +3,10 @@ import * as midtransClient from "midtrans-client";
 import { Types } from "mongoose";
 
 import { authenticateJWT } from "../middleware/auth";
+import { Document } from "../model/document";
 import { Order } from "../model/order";
+import { Store } from "../model/store";
+import { User } from "../model/user";
 import { OrderTypes } from "../types/order";
 export const OrderController = ({ route }: { route: Router }) => {
   route.get("/clear/:storeId", authenticateJWT, async (req, res) => {
@@ -102,29 +105,59 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/list/:storeId", authenticateJWT, async (req, res) => {
+  route.get("/", authenticateJWT, async (req, res) => {
     try {
-      const params = req.params;
-      console.log("id...: ", params);
-      const find = await Order.find({
-        storeId: new Types.ObjectId(params.storeId),
-      });
-      console.log("find...: ", find);
-      if (!find) {
-        return res.status(400).json({
-          success: false,
-          message: "order tidak di temukan",
-        });
+      const { id, storeId, userId } = req.query;
+
+      let find;
+
+      if (id) {
+        find = await Order.findById(id);
+      } else if (storeId) {
+        const store = await Store.findById(storeId);
+        if (!store) {
+          return res.status(400).json({ error: "Store not found" });
+        }
+        const order = await Order.find({ storeId: store._id });
+        let listOfOrder = [];
+        // this will be detail of order, it has document, user, and store as object
+        for (let i = 0; i < order.length; i++) {
+          const document = await Document.findById(order[i].documentId);
+          const user = await User.findById(order[i].userId);
+          const store = await Store.findById(order[i].storeId);
+          listOfOrder.push({
+            userId: order[i].userId,
+            storeId: order[i].storeId,
+            documentId: order[i].documentId,
+            order: order[i],
+            document,
+            user,
+            store,
+          });
+        }
+        find = listOfOrder;
+      } else if (userId) {
+        const user = await User.findById(userId);
+        if (!user) {
+          return res.status(400).json({ error: "User not found" });
+        }
+        find = await Order.find({ userId: user._id });
+      } else {
+        return res.status(400).json({ error: req.t("Order not found") });
       }
-      return res.status(200).json({
-        success: true,
-        message: "order berhasil ditemukan",
-        data: find,
-      });
-    } catch (error) {
+
+      if (!find || (Array.isArray(find) && find.length === 0)) {
+        return res
+          .status(400)
+          .json({ error: req.t("Order not found"), data: find });
+      }
+
+      return res
+        .status(200)
+        .json({ success: true, message: req.t("Order found"), data: find });
+    } catch (error: any) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: req.t(error.errors[0].message),
       });
     }
   });

@@ -1,27 +1,37 @@
 {
- 
   "Email must be at least 4 characters": "Email must be at least 4 characters",
   "Email is required": "Email is required",
   "Email already registered": "Email already registered",
-  "Email not found" : "Email not found",
- 
+  "Email not found": "Email not found",
+
   "Name must be at least 4 characters": "Name must be at least 4 characters",
   "Name is required": "Name is required",
- 
+
   "Password must be at least 8 characters": "Password must be at least 8 characters",
   "Password is required": "Password is required",
   "Password doesn't match": "Password doesn't match",
   "Wrong password": "Wrong password",
 
-  "Phone must be at least 10 characters" : "Phone must be at least 10 characters",
-  "Phone is required" : "Phone is required",
+  "Phone must be at least 10 characters": "Phone must be at least 10 characters",
+  "Phone is required": "Phone is required",
 
-  "Role is required" : "Role is required",
+  "Role is required": "Role is required",
 
   "hello": "Hello",
   "Empty body": "Body was empty",
   "Sign up success": "Sign up success",
   "Sign in success": "Sign in success",
   "User found": "User found",
-  "Unathorized": "Unathorized" 
+  "User not found": "User not found",
+  "Unathorized": "Unathorized",
+  "Parameter not found": "Parameter not found",
+
+  "Order found": "Order found",
+  "Order not found": "Order not found",
+
+  "Store found": "Store found",
+  "Store not found": "Store not found",
+
+  "Bundle found": "Bundle found",
+  "Bundle not found": "Bundle not found"
 }
