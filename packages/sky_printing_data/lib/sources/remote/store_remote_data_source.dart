@@ -30,9 +30,10 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
     final response = await _client.getRequest(
       ListAPI.store,
       converter: (response) {
-        final List<StoreModel> stores = response
-            .map<StoreModel>((store) => StoreModel.fromJson(store))
-            .toList();
+        final List<StoreModel> stores =
+            response['data'].map<StoreModel>((store) {
+          return StoreModel.fromJson(store);
+        }).toList();
         return stores;
       },
     );
@@ -44,12 +45,13 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
     GetStoreByCityParams params,
   ) async {
     final response = await _client.getRequest(
-      "${ListAPI.store}/${params.city}",
+      ListAPI.store,
       queryParameters: params.toJson(),
       converter: (response) {
-        final List<StoreModel> stores = response
-            .map<StoreModel>((store) => StoreModel.fromJson(store))
-            .toList();
+        final List<StoreModel> stores =
+            response['data'].map<StoreModel>((store) {
+          return StoreModel.fromJson(store);
+        }).toList();
         return stores;
       },
     );
@@ -61,9 +63,17 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
     GetStoreByIdParams params,
   ) async {
     final response = await _client.getRequest(
-      "${ListAPI.store}/${params.id}",
+      ListAPI.store,
       queryParameters: params.toJson(),
-      converter: (response) => StoreModel.fromJson(response),
+      converter: (response) {
+        final StoreModel store = response['data']
+            .map<StoreModel>((store) {
+              return StoreModel.fromJson(store);
+            })
+            .toList()
+            .first;
+        return store;
+      },
     );
     return response;
   }
@@ -73,9 +83,14 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
     GetStoreByNameParams params,
   ) async {
     final response = await _client.getRequest(
-      "${ListAPI.store}/${params.name}",
+      ListAPI.store,
       queryParameters: params.toJson(),
-      converter: (response) => StoreModel.fromJson(response),
+      converter: (response) {
+        final StoreModel store = response['data'].map<StoreModel>((store) {
+          return StoreModel.fromJson(store);
+        }).toList();
+        return store;
+      },
     );
     return response;
   }

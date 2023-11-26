@@ -116,20 +116,20 @@ void _useCase() {
     () => GetLocation(sl()),
   );
 
-  /// Socket
-  sl.registerLazySingleton(
-    () => ConnectSocketUsecase(sl()),
-  );
-  sl.registerLazySingleton(
-    () => JoinSocketUsecase(sl()),
-  );
+  // /// Socket
+  // sl.registerLazySingleton(
+  //   () => ConnectSocketUsecase(sl()),
+  // );
+  // sl.registerLazySingleton(
+  //   () => JoinSocketUsecase(sl()),
+  // );
 
-  sl.registerLazySingleton(
-    () => SendSocketUsecase(sl()),
-  );
-  sl.registerLazySingleton(
-    () => ReceiveSocketUsecase(sl()),
-  );
+  // sl.registerLazySingleton(
+  //   () => SendSocketUsecase(sl()),
+  // );
+  // sl.registerLazySingleton(
+  //   () => ReceiveSocketUsecase(sl()),
+  // );
 
   /// File
   sl.registerLazySingleton(

@@ -90,6 +90,9 @@ void _dataSources() {
   sl.registerLazySingleton<PrinterRemoteDataSource>(
     () => PrinterRemoteDataSourceImpl(sl()),
   );
+  sl.registerLazySingleton<StoreRemoteDataSource>(
+    () => StoreRemoteDataSourceImpl(sl()),
+  );
 }
 
 void _useCase() {
@@ -112,12 +115,12 @@ void _useCase() {
     () => JoinSocketUsecase(sl()),
   );
 
-  sl.registerLazySingleton(
-    () => SendSocketUsecase(sl()),
-  );
-  sl.registerLazySingleton(
-    () => ReceiveSocketUsecase(sl()),
-  );
+  // sl.registerLazySingleton(
+  //   () => SendSocketUsecase(sl()),
+  // );
+  // sl.registerLazySingleton(
+  //   () => ReceiveSocketUsecase(sl()),
+  // );
 
   sl.registerLazySingleton(
     () => GetOrderByStoreUsecase(sl()),
@@ -127,6 +130,9 @@ void _useCase() {
   );
   sl.registerLazySingleton(
     () => GetPrinterByStoreUsecase(sl()),
+  );
+  sl.registerLazySingleton(
+    () => GetStoreByIdUsecase(sl()),
   );
 }
 
@@ -143,7 +149,9 @@ void _cubit() {
   );
 
   sl.registerFactory(
-    () => SettingsCubit(),
+    () => SettingsCubit(
+      sl(),
+    ),
   );
   sl.registerFactory(
     () => MainCubit(

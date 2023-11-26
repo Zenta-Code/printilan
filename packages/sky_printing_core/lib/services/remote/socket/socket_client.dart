@@ -39,27 +39,23 @@ class SocketClient with MainBoxMixin, FirebaseCrashLogger {
     );
   }
 
-  void disconnect() {
-    _socket!.disconnect();
+  Socket disconnect() {
+    return _socket!.disconnect();
   }
 
-  void connect() {
-    _socket!.connect();
+  Socket connect() {
+    return _socket!.connect();
   }
 
   void join(String room) {
     _socket!.emit('join', room);
   }
 
-  void leave(String room) {
-    _socket!.emit('leave', room);
-  }
-
   void message(dynamic Function(dynamic) handler) {
     _socket!.on('message', handler);
   }
 
-  void send( SocketParams params) {
+  void send(SocketParams params) {
     _socket!.emit('message', params.toJson());
   }
 }

@@ -36,7 +36,6 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
 
     final response = await _getOrderByStoreUsecase
         .call(GetOrderByStoreParams(storeId: store['_id']));
- 
 
     response.fold((l) {
       if (l is ServerFailure) {
@@ -49,15 +48,11 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     }, (r) {
       orderData.addAll(r);
 
-      try {
-        safeEmit(
-          _Success(r),
-          emit: emit,
-          isClosed: isClosed,
-        );
-      } catch (e) {
-        log.e(e);
-      }
+      safeEmit(
+        _Success(r),
+        emit: emit,
+        isClosed: isClosed,
+      );
     });
   }
 
