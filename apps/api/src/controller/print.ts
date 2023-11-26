@@ -45,53 +45,36 @@ export const PrintController = ({ route }: { route: Router }) => {
     }
   });
 
-  route.get("/list/:brand", authenticateJWT, async (req, res) => {
+  route.get("/", authenticateJWT, async (req, res) => {
     try {
-      const brand = req.params;
-      console.log("brand...: ", brand);
-      const find = await Print.find(brand);
-      if (!find) {
-        return res.status(400).json({
-          success: false,
-          message: "print tidak di temukan",
-        });
-      }
-      return res.status(200).json({
-        success: true,
-        message: "print berhasil ditemukan",
-        data: find,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error,
-      });
-    }
-  });
-  route.get("/list/:id", authenticateJWT, async (req, res) => {
-    try {
-      const id = req.params;
-      console.log("id...: ", id);
-      const find = await Print.findById(id.id);
-      if (!find) {
-        return res.status(400).json({
-          success: false,
-          message: "print tidak di temukan",
-        });
-      }
-      return res.status(200).json({
-        success: true,
-        message: "print berhasil ditemukan",
-        data: find,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: error,
-      });
-    }
-  });
+      const { id, storeId } = req.query;
 
+      let find;
+
+      if (id) {
+        find = await Print.findById(id);
+      } else if (storeId) {
+        find = await Print.find({ storeId: storeId });
+      } else {
+        res.status(400).json({ error: req.t("Print not found") });
+      }
+
+      if (!find || (Array.isArray(find) && find.length === 0)) {
+        return res
+          .status(400)
+          .json({ error: req.t("Printer not found"), data: find });
+      }
+
+      return res
+        .status(200)
+        .json({ success: true, message: req.t("Printer found"), data: find });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  });
   route.put("/update", authenticateJWT, async (req, res) => {
     try {
       const updateData = PrintTypes.parse(req.body);
