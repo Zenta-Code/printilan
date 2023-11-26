@@ -147,9 +147,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       }
 
       if (!find || (Array.isArray(find) && find.length === 0)) {
-        return res
-          .status(400)
-          .json({ error: req.t("Order not found"), data: find });
+        return res.status(400).json({ error: req.t("Order not found") });
       }
 
       return res

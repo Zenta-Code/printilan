@@ -43,14 +43,36 @@ export const StoreController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/list", authenticateJWT, async (req, res) => {
+  route.get("/", authenticateJWT, async (req, res) => {
     try {
-      const store = await Store.find();
-      return res.status(200).json({
-        success: true,
-        message: "Berhasil",
-        data: store,
-      });
+      const { id, name, city } = req.query;
+
+      let find;
+
+      if (id) {
+        find = await Store.find({ _id: id });
+      } else if (name) {
+        find = await Store.find({
+          name: name,
+        });
+      } else if (city) {
+        const newCity = (city as string).replace(/%20/g, " ");
+        find = await Store.find({
+          "address.city": newCity,
+        });
+      } else {
+        return res.status(400).json({
+          error: req.t("Store not found"),
+        });
+      }
+
+      if (!find || (Array.isArray(find) && find.length === 0)) {
+        return res.status(400).json({ error: req.t("Store not found") });
+      }
+
+      return res
+        .status(200)
+        .json({ success: true, message: req.t("Store found"), data: find });
     } catch (error) {
       return res.status(400).json({
         success: false,

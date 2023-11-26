@@ -68,9 +68,7 @@ export const BundleController = ({ route }: { route: Router }) => {
       }
 
       if (!find || (Array.isArray(find) && find.length === 0)) {
-        return res
-          .status(400)
-          .json({ error: req.t("Bundle not found"), data: find });
+        return res.status(400).json({ error: req.t("Bundle not found") });
       }
 
       return res
