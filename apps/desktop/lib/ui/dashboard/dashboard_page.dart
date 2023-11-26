@@ -24,10 +24,10 @@ class DashboardPage extends StatelessWidget {
             child: Empty(
           errorMessage: message,
         )),
-        success: (data) { 
+        success: (data) {
           return ScaffoldPage.scrollable(
-            header: const PageHeader(
-              title: Text('Dashboard'),
+            header: PageHeader(
+              title: Text(Strings.of(context)!.home),
             ),
             children: [
               Row(

@@ -201,4 +201,7 @@ class StringsEn extends Strings {
 
   @override
   String get zipcode => 'Zip Code';
+
+  @override
+  String get home => 'Home';
 }

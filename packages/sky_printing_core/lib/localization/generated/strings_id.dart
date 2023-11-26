@@ -201,4 +201,7 @@ class StringsId extends Strings {
 
   @override
   String get zipcode => 'Kode Pos';
+
+  @override
+  String get home => 'Beranda';
 }

@@ -64,5 +64,6 @@
   "wallet": "Wallet",
   "welcome_to": "Welcome to",
   "yes": "Yes",
-  "zipcode": "Zip Code"
+  "zipcode": "Zip Code",
+  "home": "Home"
 }

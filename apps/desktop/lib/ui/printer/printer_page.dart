@@ -45,20 +45,37 @@ class _PrinterPageState extends State<PrinterPage> {
                 child: const Text('Sync'),
               ),
             ),
-            content: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 270,
-                  mainAxisExtent: 290,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10),
-              padding: const EdgeInsets.all(16),
-              itemCount: printersRemote.length,
-              itemBuilder: (context, index) {
-                return buildPrinterCard(
-                  name: printersRemote[index].printerName!,
-                  countJobs: printersRemote[index].storeId!.toString(),
-                );
-              },
+            content: Row(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: printersLocal.length,
+                    itemBuilder: (context, index) {
+                      return buildListView(
+                        name: printersLocal[index].printerName!,
+                        countJobs: printersLocal[index].cJobs!,
+                        printerOnline: printersLocal[index].printerOnline!,
+                        index: index,
+                        tag: "Local",
+                      );
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: printersRemote.length,
+                    itemBuilder: (context, index) {
+                      return buildListView(
+                        name: printersRemote[index].printerName!,
+                        index: index,
+                        tag: "Remote",
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           );
         },
@@ -66,22 +83,74 @@ class _PrinterPageState extends State<PrinterPage> {
     );
   }
 
-  Widget buildPrinterCard({required String name, required String countJobs}) {
+  Widget buildListView({
+    required String name,
+    int? countJobs,
+    bool? printerOnline,
+    required int index,
+    required String tag,
+  }) {
+    if (index == 0) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            tag,
+            style: FluentTheme.of(context).typography.subtitle,
+          ),
+          const SizedBox(height: 8),
+          buildPrinterListItem(
+            name: name,
+            countJobs: countJobs,
+            printerOnline: printerOnline,
+          ),
+        ],
+      );
+    } else {
+      return buildPrinterListItem(
+        name: name,
+        countJobs: countJobs,
+        printerOnline: printerOnline,
+      );
+    }
+  }
+
+  Widget buildPrinterListItem({
+    required String name,
+    int? countJobs,
+    bool? printerOnline,
+  }) {
     return HoverButton(
-      onPressed: () { 
-      },
+      onPressed: () {},
       cursor: SystemMouseCursors.click,
       builder: (context, state) {
-        return Card(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                name,
-                style: FluentTheme.of(context).typography.subtitle,
-              ),
-            ],
+        return SizedBox(
+          width: double.infinity,
+          child: Card(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: FluentTheme.of(context).typography.subtitle,
+                ),
+                const SizedBox(height: 8),
+                countJobs == null
+                    ? Container()
+                    : Text(
+                        "Total Job : $countJobs",
+                        style: FluentTheme.of(context).typography.body,
+                      ),
+                const SizedBox(height: 8),
+                printerOnline == null
+                    ? Container()
+                    : Text(
+                        "Status : ${printerOnline ? "Online" : "Offline"}",
+                        style: FluentTheme.of(context).typography.body,
+                      ),
+              ],
+            ),
           ),
         );
       },

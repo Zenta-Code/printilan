@@ -488,6 +488,12 @@ abstract class Strings {
   /// In en, this message translates to:
   /// **'Zip Code'**
   String get zipcode;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
 }
 
 class _StringsDelegate extends LocalizationsDelegate<Strings> {

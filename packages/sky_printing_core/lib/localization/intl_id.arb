@@ -64,5 +64,6 @@
   "wallet": "Dompet",
   "welcome_to": "Selamat Datang di",
   "yes": "Ya",
-  "zipcode": "Kode Pos"
+  "zipcode": "Kode Pos",
+  "home": "Beranda"
 }

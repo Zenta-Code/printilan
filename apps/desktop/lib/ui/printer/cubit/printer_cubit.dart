@@ -19,14 +19,14 @@ class PrinterCubit extends Cubit<PrinterState> with MainBoxMixin {
 
   Future<void> fetchPrinters() async {
     emit(const _Loading());
-    List<dynamic>? printers = await WindowsPrinting().getPrinterList();
+    List<Printer>? printers = await WindowsPrinting().getPrinterList();
     log.e("====================================");
     log.e(printers);
     log.e("====================================");
     if (printers != null) {
-      // _printers.clear();
-      // _printers.addAll(
-      //     printers.where((printer) => !printer.printerName!.contains('PDF')));
+      _printers.clear();
+      _printers.addAll(
+          printers.where((printer) => !printer.printerName!.contains('PDF')));
       emit(_printers.isEmpty ? const _Empty() : _Success(_printers));
     } else {
       emit(const _Empty());

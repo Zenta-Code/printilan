@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/core/widgets/window_button.dart';
 import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
+import 'package:sky_printing_core/localization/generated/strings.dart';
 import 'package:sky_printing_core/utils/helper/constant.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -15,7 +16,7 @@ class MainPage extends StatefulWidget {
   final Widget child;
 
   @override
-  _MainPageState createState() => _MainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage>
@@ -86,11 +87,24 @@ class _MainPageState extends State<MainPage>
                 ],
               ).createShader(rect);
             },
-            child: const FlutterLogo(
-              style: FlutterLogoStyle.horizontal,
-              size: 80.0,
-              textColor: Colors.white,
-              duration: Duration.zero,
+            child: Row(
+              children: [
+                Image.asset(
+                  'assets/images/logo.png',
+                  width: 24,
+                  height: 24,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  Strings.of(context)!.dashboard,
+                  style: FluentTheme.of(context)
+                      .typography
+                      .title!
+                      .copyWith(fontSize: 16),
+                ),
+              ],
             ),
           ),
         ),
