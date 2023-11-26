@@ -21,7 +21,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     this._getFile,
   ) : super(const _Loading());
   final DioClient _client;
-  final JoinSocket _joinSocket;
+  final JoinSocketUsecase _joinSocket;
   final SocketClient _socketClient;
   final WebViewClient _webViewClient;
   final GetFileUseCase _getFile;

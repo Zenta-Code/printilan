@@ -90,12 +90,13 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       final result = await isolateParse.parseInBackground();
       return Right(result);
     } on DioException catch (e, stackTrace) {
+      log.e(e.response?.data['error'] ?? e.message);
       if (!_isUnitTest || Platform.isAndroid) {
         nonFatalError(error: e, stackTrace: stackTrace);
       }
       return Left(
         ServerFailure(
-          e.response?.data ?? e.message,
+          e.response?.data['error'],
         ),
       );
     }

@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing_admin/ui/dashboard/cubit/dashboard_cubit.dart';
+import 'package:sky_printing_admin/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -9,6 +10,7 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final mainCubit = context.read<MainCubit>();
     return BlocBuilder<DashboardCubit, DashboardState>(
         builder: (context, state) {
       return state.when(
@@ -22,8 +24,7 @@ class DashboardPage extends StatelessWidget {
             child: Empty(
           errorMessage: message,
         )),
-        success: (data) {
-          log.i(data);
+        success: (data) { 
           return ScaffoldPage.scrollable(
             header: const PageHeader(
               title: Text('Dashboard'),
@@ -37,7 +38,7 @@ class DashboardPage extends StatelessWidget {
                   dashContainer(width / 5, 'Bundle', FluentIcons.package,
                       data['bundle'].length.toString(), ' bundle'),
                   dashContainer(width / 5, 'Printer', FluentIcons.print,
-                      data['bundle'].length.toString(), ' bundle'),
+                      mainCubit.printerData.length.toString(), ' printer'),
                 ],
               ),
             ],

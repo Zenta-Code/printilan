@@ -15,4 +15,5 @@ class ListAPI {
   static const String print = "/api/print";
   static const String store = "/api/store";
   static const String document = "/api/document";
+  static const String printer = "/api/print"; 
 }

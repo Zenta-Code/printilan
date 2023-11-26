@@ -7,11 +7,11 @@ import 'package:sky_printing_domain/sky_printing_domain.dart';
 part 'dashboard_cubit.freezed.dart';
 part 'dashboard_state.dart';
 
-class DashboardCubit extends Cubit<DashboardState> { 
+class DashboardCubit extends Cubit<DashboardState> {
   final GetOrderByStoreUsecase _getOrderByStoreUsecase;
   final GetBundleByStoreUsecase _getBundleByStoreUsecase;
 
-  DashboardCubit( 
+  DashboardCubit(
     this._getOrderByStoreUsecase,
     this._getBundleByStoreUsecase,
   ) : super(const _Loading());
@@ -29,7 +29,6 @@ class DashboardCubit extends Cubit<DashboardState> {
       emit: emit,
       isClosed: isClosed,
     );
-    log.i(user['_id']);
 
     final order = await _getOrderByStoreUsecase.call(
       GetOrderByStoreParams(storeId: store['_id']),

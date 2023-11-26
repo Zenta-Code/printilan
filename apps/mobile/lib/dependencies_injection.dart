@@ -118,17 +118,17 @@ void _useCase() {
 
   /// Socket
   sl.registerLazySingleton(
-    () => ConnectSocket(sl()),
+    () => ConnectSocketUsecase(sl()),
   );
   sl.registerLazySingleton(
-    () => JoinSocket(sl()),
+    () => JoinSocketUsecase(sl()),
   );
 
   sl.registerLazySingleton(
-    () => SendSocket(sl()),
+    () => SendSocketUsecase(sl()),
   );
   sl.registerLazySingleton(
-    () => ReceiveSocket(sl()),
+    () => ReceiveSocketUsecase(sl()),
   );
 
   /// File

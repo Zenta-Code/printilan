@@ -66,6 +66,9 @@ void _repositories() {
   sl.registerLazySingleton<BundleRepository>(
     () => BundleRepositoryImpl(sl()),
   );
+  sl.registerLazySingleton<PrinterRepository>(
+    () => PrinterRepositoryImpl(sl()),
+  );
 }
 
 /// Register dataSources
@@ -84,6 +87,9 @@ void _dataSources() {
   sl.registerLazySingleton<BundleRemoteDataSource>(
     () => BundleRemoteDataSourceImpl(sl()),
   );
+  sl.registerLazySingleton<PrinterRemoteDataSource>(
+    () => PrinterRemoteDataSourceImpl(sl()),
+  );
 }
 
 void _useCase() {
@@ -100,17 +106,17 @@ void _useCase() {
 
   /// Socket
   sl.registerLazySingleton(
-    () => ConnectSocket(sl()),
+    () => ConnectSocketUsecase(sl()),
   );
   sl.registerLazySingleton(
-    () => JoinSocket(sl()),
+    () => JoinSocketUsecase(sl()),
   );
 
   sl.registerLazySingleton(
-    () => SendSocket(sl()),
+    () => SendSocketUsecase(sl()),
   );
   sl.registerLazySingleton(
-    () => ReceiveSocket(sl()),
+    () => ReceiveSocketUsecase(sl()),
   );
 
   sl.registerLazySingleton(
@@ -118,6 +124,9 @@ void _useCase() {
   );
   sl.registerLazySingleton(
     () => GetBundleByStoreUsecase(sl()),
+  );
+  sl.registerLazySingleton(
+    () => GetPrinterByStoreUsecase(sl()),
   );
 }
 
@@ -137,7 +146,10 @@ void _cubit() {
     () => SettingsCubit(),
   );
   sl.registerFactory(
-    () => MainCubit(),
+    () => MainCubit(
+      sl(),
+      sl(),
+    ),
   );
   sl.registerFactory(
     () => DashboardCubit(
@@ -147,7 +159,6 @@ void _cubit() {
   );
   sl.registerFactory(
     () => OrderCubit(
-      sl(),
       sl(),
       sl(),
       sl(),

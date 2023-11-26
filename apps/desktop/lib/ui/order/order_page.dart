@@ -25,7 +25,7 @@ class OrderPage extends StatelessWidget {
           ),
           success: (_) {
             final data = context.watch<OrderCubit>().orderData;
-            log.f(data);
+
             return buildScaffold(data, context);
           },
         );

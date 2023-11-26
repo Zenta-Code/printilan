@@ -48,8 +48,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       const _Loading(),
       emit: emit,
       isClosed: isClosed,
-    );
-    log.d(params.toJson());
+    ); 
     final data = await _postRegister.call(params);
     data.fold(
       (l) {

@@ -15,7 +15,6 @@ part 'order_state.dart';
 
 class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   OrderCubit(
-    this._joinSocket,
     this._socketClient,
     this._dioClient,
     this._getOrderByStoreUsecase,
@@ -23,7 +22,6 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
           const _Loading(),
         );
 
-  final JoinSocket _joinSocket;
   final SocketClient _socketClient;
   final DioClient _dioClient;
   final GetOrderByStoreUsecase _getOrderByStoreUsecase;
@@ -39,15 +37,18 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     final response = await _getOrderByStoreUsecase
         .call(GetOrderByStoreParams(storeId: store['_id']));
     final tes = await Printing.listPrinters();
-    log.i(tes.last);
-    response.fold(
-        (l) => safeEmit(
-              const OrderState.failure("Error"),
-              emit: emit,
-              isClosed: isClosed,
-            ), (r) {
+
+    response.fold((l) {
+      if (l is ServerFailure) {
+        safeEmit(
+          _Failure(l.message.toString()),
+          emit: emit,
+          isClosed: isClosed,
+        );
+      }
+    }, (r) {
       orderData.addAll(r);
-      joinRoom();
+
       try {
         safeEmit(
           _Success(r),
@@ -58,18 +59,6 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
         log.e(e);
       }
     });
-  }
-
-  Future<void> joinRoom() async {
-    safeEmit(
-      const _Loading(),
-      emit: emit,
-      isClosed: isClosed,
-    );
-    final store = getData(MainBoxKeys.store);
-    log.f("Store: ${store["_id"]}");
-    _joinSocket.call(store!['_id']);
-    message();
   }
 
   void message() {
@@ -111,11 +100,6 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
           final Uint8List xBytes = Uint8List.fromList(newBytes);
           final file = File("${dir.path}/$fileName");
           file.writeAsBytesSync(newBytes);
-          // final jobs = await WindowsPrinting().directPrint(
-          //     printerName: "EPSON L3210 Series",
-          //     filePath: file.path,
-          //     jobName: "Order-$fileName",
-          //     copies: 1);
           final jobs = await Printing.directPrintPdf(
               printer: const Printer(url: 'EPSON L3210 Series'),
               onLayout: (format) => xBytes);

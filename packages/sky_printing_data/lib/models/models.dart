@@ -7,3 +7,4 @@ export 'order/order_model.dart';
 export 'store/store_model.dart';
 export 'user/user_model.dart';
 export 'register/register_model.dart';
+export 'printer/printer_model.dart';

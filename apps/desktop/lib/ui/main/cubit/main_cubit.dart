@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sky_printing_core/sky_printing_core.dart'; 
+import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'main_cubit.freezed.dart';
 part 'main_state.dart';
 
-class MainCubit extends Cubit<MainState> {
-  MainCubit() : super(const _Loading());
+class MainCubit extends Cubit<MainState> with MainBoxMixin {
+  MainCubit(
+    this._getPrinterByStoreUsecase,
+    this._joinSocketUsecase,
+  ) : super(const _Loading());
+
+  final GetPrinterByStoreUsecase _getPrinterByStoreUsecase;
+  final JoinSocketUsecase _joinSocketUsecase;
 
   int _currentIndex = 0;
   late List<DataHelper> dataMenus;
+  late List<PrinterEntity> printerData;
 
   void updateIndex(int index, {BuildContext? context}) {
     emit(const _Loading());
@@ -22,6 +30,7 @@ class MainCubit extends Cubit<MainState> {
   }
 
   void initMenu(BuildContext context) {
+    bootstrap();
     dataMenus = [
       DataHelper(
         title: Strings.of(context)!.dashboard,
@@ -42,5 +51,28 @@ class MainCubit extends Cubit<MainState> {
       ),
     ];
     updateIndex(_currentIndex);
+  }
+
+  void bootstrap() {
+    fetchPrinters();
+    joinRoom();
+  }
+ 
+
+  void fetchPrinters() async {
+    final res = await _getPrinterByStoreUsecase.call(
+      GetPrinterByStoreParams(
+        storeId: getData(MainBoxKeys.store)['_id'],
+      ),
+    );
+    res.fold(
+      (l) => printerData = [],
+      (r) => printerData = r,
+    ); 
+  }
+
+  void joinRoom() {
+    final store = getData(MainBoxKeys.store);
+    _joinSocketUsecase.call(store!['_id']);
   }
 }

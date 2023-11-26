@@ -1,7 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sky_printing_admin/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing_admin/ui/printer/cubit/printer_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_domain/entities/printer_enitity.dart';
 import 'package:windows_printing_models/windows_printing_models.dart';
 
 class PrinterPage extends StatefulWidget {
@@ -14,6 +16,8 @@ class PrinterPage extends StatefulWidget {
 class _PrinterPageState extends State<PrinterPage> {
   @override
   Widget build(BuildContext context) {
+    final mainCubit = context.read<MainCubit>();
+
     return BlocBuilder<PrinterCubit, PrinterState>(
       builder: (context, state) => state.when(
         loading: () => const Center(
@@ -28,8 +32,9 @@ class _PrinterPageState extends State<PrinterPage> {
           ),
         ),
         success: (data) {
-          final List<Printer> printers = data;
-          log.i(data);
+          final List<Printer> printersLocal = data;
+          final List<PrinterEntity> printersRemote = mainCubit.printerData;
+
           return ScaffoldPage(
             header: PageHeader(
               title: const Text('Printer'),
@@ -47,11 +52,11 @@ class _PrinterPageState extends State<PrinterPage> {
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10),
               padding: const EdgeInsets.all(16),
-              itemCount: printers.length,
+              itemCount: printersRemote.length,
               itemBuilder: (context, index) {
                 return buildPrinterCard(
-                  name: printers[index].printerName!,
-                  countJobs: printers[index].cJobs!.toString(),
+                  name: printersRemote[index].printerName!,
+                  countJobs: printersRemote[index].storeId!.toString(),
                 );
               },
             ),
@@ -63,8 +68,7 @@ class _PrinterPageState extends State<PrinterPage> {
 
   Widget buildPrinterCard({required String name, required String countJobs}) {
     return HoverButton(
-      onPressed: () {
-        log.i('click');
+      onPressed: () { 
       },
       cursor: SystemMouseCursors.click,
       builder: (context, state) {
