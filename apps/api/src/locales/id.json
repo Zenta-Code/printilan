@@ -33,5 +33,8 @@
   "Store not found": "Toko tidak ditemukan",
 
   "Bundle found": "Bundle ditemukan",
-  "Bundle not found": "Bundle tidak ditemukan"
+  "Bundle not found": "Bundle tidak ditemukan",
+
+  "Print found": "Print ditemukan",
+  "Print not found": "Print tidak ditemukan"
 }
