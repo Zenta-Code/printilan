@@ -46,7 +46,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       });
     }
   );
-  route.post("/register", async (req, res) => {
+  route.post("/", async (req, res) => {
     try {
       const body = DocumentTypes.parse(req.body);
 

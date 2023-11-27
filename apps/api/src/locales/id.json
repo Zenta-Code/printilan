@@ -55,6 +55,10 @@
 
   "Print found": "Print ditemukan",
   "Print not found": "Print tidak ditemukan",
+  "Print data doesn't valid": "Data print tidak valid",
+  "Print successfully created": "Print berhasil dibuat",
+  "Print successfully updated": "Print berhasil diupdate",
+  "Print successfully deleted": "Print berhasil dihapus",  
 
   "Name already exist": "Nama sudah ada"
 }

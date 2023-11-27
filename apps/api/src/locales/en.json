@@ -55,6 +55,10 @@
 
   "Printer found": "Printer found",
   "Printer not found": "Printer not found",
+  "Printer data doesn't valid": "Printer data doesn't valid",
+  "Printer successfully created": "Printer successfully created",
+  "Printer successfully updated": "Printer successfully updated",
+  "Printer successfully deleted": "Printer successfully deleted", 
 
   "Name already exist": "Name already exist"
 }

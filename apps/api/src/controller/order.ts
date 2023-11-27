@@ -157,7 +157,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.put("/update", authenticateJWT, async (req, res) => {
+  route.put("/", authenticateJWT, async (req, res) => {
     try {
       const body = OrderTypes.parse(req.body);
 
