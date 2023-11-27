@@ -21,7 +21,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       });
       res.send({
         success: true,
-        message: "file berhasil di upload",
+        message: req.t("Document successfully uploaded"),
         data: {
           filePath: res.req.file?.path,
           documentId: document._id,

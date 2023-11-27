@@ -28,6 +28,10 @@
 
   "Order found": "Order ditemukan",
   "Order not found": "Order tidak ditemukan",
+  "Order data doesn't valid": "Data order tidak valid",
+  "Order successfully created": "Order berhasil dibuat",
+  "Order successfully updated": "Order berhasil diupdate",  
+  "Order successfully deleted": "Order berhasil dihapus",
 
   "Store found": "Toko ditemukan",
   "Store not found": "Toko tidak ditemukan",
@@ -38,15 +42,16 @@
   "Bundle successfully created": "Bundle berhasil dibuat",
   "Bundle successfully updated": "Bundle berhasil diupdate",
   "Bundle doesn't updated": "Bundle tidak diupdate",
-  "Bundle successfully deleted": "Bundle berhasil dihapus", 
+  "Bundle successfully deleted": "Bundle berhasil dihapus",
 
   "Document found": "Dokumen ditemukan",
   "Document not found": "Dokumen tidak ditemukan",
   "Document data doesn't valid": "Data dokumen tidak valid",
   "Document successfully created": "Dokumen berhasil dibuat",
-  "Document successfully updated": "Dokumen berhasil diupdate", 
+  "Document successfully updated": "Dokumen berhasil diupdate",
   "Document successfully deleted": "Dokumen berhasil dihapus",
-  "Document name already exist" : "Nama dokumen sudah ada",
+  "Document name already exist": "Nama dokumen sudah ada",
+  "Document successfully uploaded": "Dokumen berhasil diupload",
 
   "Print found": "Print ditemukan",
   "Print not found": "Print tidak ditemukan",

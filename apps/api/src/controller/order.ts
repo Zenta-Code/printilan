@@ -43,9 +43,7 @@ export const OrderController = ({ route }: { route: Router }) => {
         serverKey: serverKey,
         clientKey: clientKey,
       });
-      console.log("serverKey: ", serverKey);
-      console.log("clientKey: ", clientKey);
-      console.log("body: ", req.body);
+
       snap
         .createTransaction(req.body)
         .then((transaction) => {
@@ -78,7 +76,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.post("/register", async (req, res) => {
+  route.post("/", async (req, res) => {
     try {
       const body = OrderTypes.parse(req.body);
 
@@ -86,7 +84,7 @@ export const OrderController = ({ route }: { route: Router }) => {
 
       if (!body) {
         return res.status(400).json({
-          error: "Body tidak boleh kosong",
+          error: req.t("Order data doesn't valid"),
         });
       }
 
@@ -96,7 +94,7 @@ export const OrderController = ({ route }: { route: Router }) => {
 
       return res.status(200).json({
         success: true,
-        message: "Berhasil",
+        message: req.t("Order successfully created"),
         data: order,
       });
     } catch (error) {
@@ -119,7 +117,7 @@ export const OrderController = ({ route }: { route: Router }) => {
           return res.status(400).json({ error: "Store not found" });
         }
         const order = await Order.find({ storeId: store._id });
-        let listOfOrder = []; 
+        let listOfOrder = [];
 
         for (let i = 0; i < order.length; i++) {
           const document = await Document.findById(order[i].documentId);
@@ -161,25 +159,26 @@ export const OrderController = ({ route }: { route: Router }) => {
   });
   route.put("/update", authenticateJWT, async (req, res) => {
     try {
-      const updateData = OrderTypes.parse(req.body);
-      if (!updateData) {
+      const body = OrderTypes.parse(req.body);
+
+      if (!body) {
         return res.status(400).json({
-          error: "data tidak valid",
+          error: req.t("Order data doesn't valid"),
         });
       }
-      const updateOrder = await Order.findOneAndUpdate(
-        { id: req.body.id },
-        updateData
-      );
-      if (!updateOrder) {
+
+      const updated = await Order.findOneAndUpdate({ id: req.body.id }, body);
+
+      if (!updated) {
         return res.status(400).json({
-          error: "tidak bisa pembaruan",
+          error: req.t("Order not found"),
         });
       }
+
       return res.status(200).json({
         success: true,
-        message: "order berhasil diperbarui",
-        data: updateOrder,
+        message: req.t("Order successfully updated"),
+        data: updated,
       });
     } catch (error) {
       return res.status(400).json({

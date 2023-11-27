@@ -28,6 +28,10 @@
 
   "Order found": "Order found",
   "Order not found": "Order not found",
+  "Order data doesn't valid": "Order data doesn't valid",
+  "Order successfully created": "Order successfully created",
+  "Order successfully updated": "Order berhasil diupdate",
+  "Order successfully deleted": "Order successfully deleted",
 
   "Store found": "Store found",
   "Store not found": "Store not found",
@@ -44,9 +48,10 @@
   "Document not found": "Document not found",
   "Document data doesn't valid": "Document data doesn't valid",
   "Document successfully created": "Document successfully created",
-  "Document successfully updated": "Document successfully updated", 
+  "Document successfully updated": "Document successfully updated",
   "Document successfully deleted": "Document successfully deleted",
   "Document name already exist": "Document name already exist",
+  "Document successfully uploaded": "Document successfully uploaded",
 
   "Printer found": "Printer found",
   "Printer not found": "Printer not found",
