@@ -40,6 +40,14 @@
   "Bundle doesn't updated": "Bundle doesn't updated",
   "Bundle successfully deleted": "Bundle successfully deleted",
 
+  "Document found": "Document found",
+  "Document not found": "Document not found",
+  "Document data doesn't valid": "Document data doesn't valid",
+  "Document successfully created": "Document successfully created",
+  "Document successfully updated": "Document successfully updated", 
+  "Document successfully deleted": "Document successfully deleted",
+  "Document name already exist": "Document name already exist",
+
   "Printer found": "Printer found",
   "Printer not found": "Printer not found",
 

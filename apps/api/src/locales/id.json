@@ -40,6 +40,14 @@
   "Bundle doesn't updated": "Bundle tidak diupdate",
   "Bundle successfully deleted": "Bundle berhasil dihapus", 
 
+  "Document found": "Dokumen ditemukan",
+  "Document not found": "Dokumen tidak ditemukan",
+  "Document data doesn't valid": "Data dokumen tidak valid",
+  "Document successfully created": "Dokumen berhasil dibuat",
+  "Document successfully updated": "Dokumen berhasil diupdate", 
+  "Document successfully deleted": "Dokumen berhasil dihapus",
+  "Document name already exist" : "Nama dokumen sudah ada",
+
   "Print found": "Print ditemukan",
   "Print not found": "Print tidak ditemukan",
 

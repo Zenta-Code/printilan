@@ -22,8 +22,10 @@ export const DocumentController = ({ route }: { route: Router }) => {
       res.send({
         success: true,
         message: "file berhasil di upload",
-        filePath: res.req.file?.path,
-        documentId: document._id,
+        data: {
+          filePath: res.req.file?.path,
+          documentId: document._id,
+        },
       });
     }
   );
@@ -52,8 +54,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
 
       if (!body) {
         return res.status(400).json({
-          success: false,
-          message: "Body tidak boleh kosong",
+          error: req.t("Document data doesn't valid"),
         });
       }
 
@@ -62,7 +63,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       });
       if (find) {
         return res.status(400).json({
-          error: "model sudah terdaftar",
+          error: req.t("Document name already exist"),
         });
       }
 
@@ -72,7 +73,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
 
       return res.status(200).json({
         success: true,
-        message: "Berhasil",
+        message: req.t("Document successfully created"),
         data: document,
       });
     } catch (error) {
@@ -81,21 +82,27 @@ export const DocumentController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.get("/list/:id", authenticateJWT, async (req, res) => {
+  route.get("/", authenticateJWT, async (req, res) => {
     try {
-      const id = req.params;
-      console.log("id...: ", id);
-      const find = await Document.findById(id.id);
-      if (!find) {
-        return res.status(400).json({
-          error: "user tidak di temukan",
-        });
+      const { id, name, userId } = req.query;
+
+      let find;
+
+      if (id) {
+        find = Document.find({ _id: id });
+      } else if (userId) {
+        find = Document.find({ userId: userId });
+      } else if (name) {
+        find = Document.find({ name: name });
       }
-      return res.status(200).json({
-        success: true,
-        message: "user berhasil ditemukan",
-        data: find,
-      });
+
+      if (!find || (Array.isArray(find) && find.length === 0)) {
+        return res.status(400).json({ error: req.t("Document not found") });
+      }
+
+      return res
+        .status(200)
+        .json({ success: true, message: req.t("Document found"), data: find });
     } catch (error) {
       return res.status(400).json({
         error: error,
@@ -105,17 +112,16 @@ export const DocumentController = ({ route }: { route: Router }) => {
   route.delete("/delete/:id", authenticateJWT, async (req, res) => {
     try {
       const id = req.params;
-      console.log("id...: ", id);
-      const deleteData = await Document.findByIdAndDelete(id.id);
-      if (!deleteData) {
+      const deleted = await Document.findByIdAndDelete(id.id);
+      if (!deleted) {
         return res.status(400).json({
-          error: "user tidak di temukan",
+          error: req.t("Document not found"),
         });
       }
       return res.status(200).json({
         success: true,
-        message: "user berhasil dihapus",
-        data: deleteData,
+        message: req.t("Document successfully deleted"),
+        data: deleted,
       });
     } catch (error) {
       return res.status(400).json({
@@ -125,25 +131,25 @@ export const DocumentController = ({ route }: { route: Router }) => {
   });
   route.put("/update", authenticateJWT, async (req, res) => {
     try {
-      const updateData = DocumentTypes.parse(req.body);
-      if (!updateData) {
+      const body = DocumentTypes.parse(req.body);
+      if (!body) {
         return res.status(400).json({
-          error: "data tidak valid",
+          error: req.t("Document data doesn't valid"),
         });
       }
-      const updateDocument = await Document.findOneAndUpdate(
-        { name: updateData.name },
-        updateData
+      const updated = await Document.findOneAndUpdate(
+        { name: body.name },
+        body
       );
-      if (!updateDocument) {
+      if (!updated) {
         return res.status(400).json({
-          error: "tidak bisa pembaruan",
+          error: req.t("Document not found"),
         });
       }
       return res.status(200).json({
         success: true,
-        message: "document berhasil diperbarui",
-        data: updateDocument,
+        message: req.t("Document successfully deleted"),
+        data: updated,
       });
     } catch (error) {
       return res.status(400).json({
