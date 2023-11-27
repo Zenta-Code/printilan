@@ -26,8 +26,7 @@ export const PrintController = ({ route }: { route: Router }) => {
           const newPrint = await Print.create(listPrinter[i]);
           if (!newPrint) {
             return res.status(400).json({
-              success: false,
-              message: "print gagal di tambahkan",
+              error: "print gagal di tambahkan",
             });
           }
         }
@@ -39,8 +38,7 @@ export const PrintController = ({ route }: { route: Router }) => {
     } catch (error) {
       console.log(error);
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -60,9 +58,7 @@ export const PrintController = ({ route }: { route: Router }) => {
       }
 
       if (!find || (Array.isArray(find) && find.length === 0)) {
-        return res
-          .status(400)
-          .json({ error: req.t("Printer not found"), data: find });
+        return res.status(400).json({ error: req.t("Printer not found") });
       }
 
       return res
@@ -70,8 +66,7 @@ export const PrintController = ({ route }: { route: Router }) => {
         .json({ success: true, message: req.t("Printer found"), data: find });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -90,8 +85,7 @@ export const PrintController = ({ route }: { route: Router }) => {
       );
       if (!updatePrint) {
         return res.status(400).json({
-          success: false,
-          message: "tidak bisa pembaruan",
+          error: "tidak bisa pembaruan",
         });
       }
       return res.status(200).json({
@@ -101,8 +95,7 @@ export const PrintController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -111,8 +104,7 @@ export const PrintController = ({ route }: { route: Router }) => {
       const deleteData = await Print.deleteOne();
       if (!deleteData) {
         return res.status(400).json({
-          success: false,
-          message: "tidak ada yang di hapus",
+          error: "tidak ada yang di hapus",
         });
       }
       return res.status(200).json({
@@ -122,8 +114,7 @@ export const PrintController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });

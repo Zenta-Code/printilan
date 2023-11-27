@@ -2,9 +2,9 @@ import { Router } from "express";
 import fs from "fs";
 import { Types } from "mongoose";
 import path from "path";
+import { upload } from "../libs/storage";
 import { authenticateJWT } from "../middleware/auth";
 import { Document } from "../model/document";
-import { upload } from "../libs/storage";
 import { DocumentTypes } from "../types/document";
 
 export const DocumentController = ({ route }: { route: Router }) => {
@@ -62,8 +62,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       });
       if (find) {
         return res.status(400).json({
-          success: false,
-          message: "model sudah terdaftar",
+          error: "model sudah terdaftar",
         });
       }
 
@@ -78,8 +77,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -90,8 +88,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       const find = await Document.findById(id.id);
       if (!find) {
         return res.status(400).json({
-          success: false,
-          message: "user tidak di temukan",
+          error: "user tidak di temukan",
         });
       }
       return res.status(200).json({
@@ -101,8 +98,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -113,8 +109,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       const deleteData = await Document.findByIdAndDelete(id.id);
       if (!deleteData) {
         return res.status(400).json({
-          success: false,
-          message: "user tidak di temukan",
+          error: "user tidak di temukan",
         });
       }
       return res.status(200).json({
@@ -124,8 +119,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -134,8 +128,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       const updateData = DocumentTypes.parse(req.body);
       if (!updateData) {
         return res.status(400).json({
-          success: false,
-          message: "data tidak valid",
+          error: "data tidak valid",
         });
       }
       const updateDocument = await Document.findOneAndUpdate(
@@ -144,8 +137,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       );
       if (!updateDocument) {
         return res.status(400).json({
-          success: false,
-          message: "tidak bisa pembaruan",
+          error: "tidak bisa pembaruan",
         });
       }
       return res.status(200).json({
@@ -155,8 +147,7 @@ export const DocumentController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });

@@ -116,8 +116,7 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -125,14 +124,14 @@ export const UserController = ({ route }: { route: Router }) => {
     try {
       const token = req.body.token;
       if (!token) {
-        return res.status(400).json({ error:  req.t("Unathorized")});
+        return res.status(400).json({ error: req.t("Unathorized") });
       }
       const jwtSecret = process.env.JWT_SECRET || "JWT_SECRET";
       const found = jwt.verify(token, jwtSecret) as any;
 
       if (!found) {
         return res.status(400).json({
-          error:  req.t("Unathorized"),
+          error: req.t("Unathorized"),
         });
       }
       const user = await User.findById(found.id);
@@ -143,8 +142,7 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -155,8 +153,7 @@ export const UserController = ({ route }: { route: Router }) => {
       const user = await User.findByIdAndDelete(id.id);
       if (!user) {
         return res.status(400).json({
-          success: false,
-          message: "user tidak di temukan",
+          error: "user tidak di temukan",
         });
       }
       return res.status(200).json({
@@ -166,8 +163,7 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -176,8 +172,7 @@ export const UserController = ({ route }: { route: Router }) => {
       const updateData = UserTypes.parse(req.body);
       if (!updateData) {
         return res.status(400).json({
-          success: false,
-          message: "data tidak valid",
+          error: "data tidak valid",
         });
       }
       const updateUser = await User.findOneAndUpdate(
@@ -186,8 +181,7 @@ export const UserController = ({ route }: { route: Router }) => {
       );
       if (!updateUser) {
         return res.status(400).json({
-          success: false,
-          message: "tidak bisa pembaruan",
+          error: "tidak bisa pembaruan",
         });
       }
       return res.status(200).json({
@@ -197,8 +191,7 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });

@@ -19,8 +19,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       console.log("find...: ", find);
       if (!find) {
         return res.status(400).json({
-          success: false,
-          message: "order tidak di temukan",
+          error: "order tidak di temukan",
         });
       }
       return res.status(200).json({
@@ -30,8 +29,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -60,7 +58,11 @@ export const OrderController = ({ route }: { route: Router }) => {
             error: "Midtrans Error",
           });
         });
-    } catch (error) {}
+    } catch (error) {
+      res.status(400).json({
+        error: "Midtrans Error",
+      });
+    }
   });
   route.post("/callback", async function (req, res) {
     try {
@@ -84,8 +86,7 @@ export const OrderController = ({ route }: { route: Router }) => {
 
       if (!body) {
         return res.status(400).json({
-          success: false,
-          message: "Body tidak boleh kosong",
+          error: "Body tidak boleh kosong",
         });
       }
 
@@ -100,8 +101,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -119,8 +119,8 @@ export const OrderController = ({ route }: { route: Router }) => {
           return res.status(400).json({ error: "Store not found" });
         }
         const order = await Order.find({ storeId: store._id });
-        let listOfOrder = [];
-        // this will be detail of order, it has document, user, and store as object
+        let listOfOrder = []; 
+
         for (let i = 0; i < order.length; i++) {
           const document = await Document.findById(order[i].documentId);
           const user = await User.findById(order[i].userId);
@@ -164,8 +164,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       const updateData = OrderTypes.parse(req.body);
       if (!updateData) {
         return res.status(400).json({
-          success: false,
-          message: "data tidak valid",
+          error: "data tidak valid",
         });
       }
       const updateOrder = await Order.findOneAndUpdate(
@@ -174,8 +173,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       );
       if (!updateOrder) {
         return res.status(400).json({
-          success: false,
-          message: "tidak bisa pembaruan",
+          error: "tidak bisa pembaruan",
         });
       }
       return res.status(200).json({
@@ -185,8 +183,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });

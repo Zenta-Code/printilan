@@ -38,8 +38,7 @@ export const StoreController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -75,8 +74,7 @@ export const StoreController = ({ route }: { route: Router }) => {
         .json({ success: true, message: req.t("Store found"), data: find });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });

@@ -13,8 +13,7 @@ export const BundleController = ({ route }: { route: Router }) => {
 
       if (!body) {
         return res.status(400).json({
-          success: false,
-          message: "Body tidak boleh kosong",
+          error: "Body tidak boleh kosong",
         });
       }
 
@@ -23,8 +22,7 @@ export const BundleController = ({ route }: { route: Router }) => {
       });
       if (find) {
         return res.status(400).json({
-          success: false,
-          message: "Name sudah terdaftar",
+          error: "Name sudah terdaftar",
         });
       }
 
@@ -39,8 +37,7 @@ export const BundleController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -86,8 +83,7 @@ export const BundleController = ({ route }: { route: Router }) => {
       const updateData = BundleTypes.parse(req.body);
       if (!updateData) {
         return res.status(400).json({
-          success: false,
-          message: "data tidak valid",
+          error: "data tidak valid",
         });
       }
       const updateBundle = await Bundle.findOneAndUpdate(
@@ -96,8 +92,7 @@ export const BundleController = ({ route }: { route: Router }) => {
       );
       if (!updateBundle) {
         return res.status(400).json({
-          success: false,
-          message: "tidak bisa pembaruan",
+          error: "tidak bisa pembaruan",
         });
       }
       return res.status(200).json({
@@ -107,8 +102,7 @@ export const BundleController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -120,8 +114,7 @@ export const BundleController = ({ route }: { route: Router }) => {
       const deleteData = await Bundle.findByIdAndDelete(id.id);
       if (!deleteData) {
         return res.status(400).json({
-          success: false,
-          message: "tidak ada yang di hapus",
+          error: "tidak ada yang di hapus",
         });
       }
       return res.status(200).json({
@@ -131,8 +124,7 @@ export const BundleController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
