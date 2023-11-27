@@ -34,7 +34,14 @@
 
   "Bundle found": "Bundle ditemukan",
   "Bundle not found": "Bundle tidak ditemukan",
+  "Bundle data doesn't valid": "Data bundle tidak valid",
+  "Bundle successfully created": "Bundle berhasil dibuat",
+  "Bundle successfully updated": "Bundle berhasil diupdate",
+  "Bundle doesn't updated": "Bundle tidak diupdate",
+  "Bundle successfully deleted": "Bundle berhasil dihapus", 
 
   "Print found": "Print ditemukan",
-  "Print not found": "Print tidak ditemukan"
+  "Print not found": "Print tidak ditemukan",
+
+  "Name already exist": "Nama sudah ada"
 }

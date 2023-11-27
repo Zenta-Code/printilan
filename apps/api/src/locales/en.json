@@ -34,7 +34,14 @@
 
   "Bundle found": "Bundle found",
   "Bundle not found": "Bundle not found",
+  "Bundle data doesn't valid": "Bundle data doesn't valid",
+  "Bundle successfully created": "Bundle successfully created",
+  "Bundle successfully updated": "Bundle successfully updated",
+  "Bundle doesn't updated": "Bundle doesn't updated",
+  "Bundle successfully deleted": "Bundle successfully deleted",
 
   "Printer found": "Printer found",
-  "Printer not found": "Printer not found"
+  "Printer not found": "Printer not found",
+
+  "Name already exist": "Name already exist"
 }
