@@ -21,8 +21,6 @@
   "Empty body": "Body was empty",
   "Sign up success": "Sign up success",
   "Sign in success": "Sign in success",
-  "User found": "User found",
-  "User not found": "User not found",
   "Unathorized": "Unathorized",
   "Parameter not found": "Parameter not found",
 
@@ -35,6 +33,10 @@
 
   "Store found": "Store found",
   "Store not found": "Store not found",
+  "Store data doesn't valid": "Store data doesn't valid",
+  "Store successfully created": "Store successfully created",
+  "Store successfully updated": "Store successfully updated",
+  "Store successfully deleted": "Store successfully deleted",
 
   "Bundle found": "Bundle found",
   "Bundle not found": "Bundle not found",
@@ -53,12 +55,19 @@
   "Document name already exist": "Document name already exist",
   "Document successfully uploaded": "Document successfully uploaded",
 
-  "Printer found": "Printer found",
-  "Printer not found": "Printer not found",
-  "Printer data doesn't valid": "Printer data doesn't valid",
-  "Printer successfully created": "Printer successfully created",
-  "Printer successfully updated": "Printer successfully updated",
-  "Printer successfully deleted": "Printer successfully deleted", 
+  "Print found": "Print found",
+  "Print not found": "Print not found",
+  "Print data doesn't valid": "Print data doesn't valid",
+  "Print successfully created": "Print successfully created",
+  "Print successfully updated": "Print successfully updated",
+  "Print successfully deleted": "Print successfully deleted",
+
+  "User found": "User found",
+  "User not found": "User not found",
+  "User data doesn't valid": "User data doesn't valid",
+  "User successfully created": "User successfully created",
+  "User successfully updated": "User successfully updated",
+  "User successfully deleted": "User successfully deleted",
 
   "Name already exist": "Name already exist"
 }
