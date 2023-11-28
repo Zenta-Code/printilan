@@ -21,20 +21,54 @@
   "Empty body": "Data kosong",
   "Sign up success": "Pendaftaran berhasil",
   "Sign in success": "Login berhasil",
-  "User found": "User ditemukan",
-  "User not found": "User tidak ditemukan",
   "Unathorized": "Tidak diizinkan",
   "Parameter not found": "Parameter tidak ditemukan",
 
   "Order found": "Order ditemukan",
   "Order not found": "Order tidak ditemukan",
+  "Order data doesn't valid": "Data order tidak valid",
+  "Order successfully created": "Order berhasil dibuat",
+  "Order successfully updated": "Order berhasil diupdate",
+  "Order successfully deleted": "Order berhasil dihapus",
 
   "Store found": "Toko ditemukan",
   "Store not found": "Toko tidak ditemukan",
+  "Store data doesn't valid": "Data toko tidak valid",
+  "Store successfully created": "Toko berhasil dibuat",
+  "Store successfully updated": "Toko berhasil diupdate",
+  "Store successfully deleted": "Toko berhasil dihapus",
+  "Store name already exist": "Nama toko sudah ada",
 
   "Bundle found": "Bundle ditemukan",
   "Bundle not found": "Bundle tidak ditemukan",
+  "Bundle data doesn't valid": "Data bundle tidak valid",
+  "Bundle successfully created": "Bundle berhasil dibuat",
+  "Bundle successfully updated": "Bundle berhasil diupdate",
+  "Bundle doesn't updated": "Bundle tidak diupdate",
+  "Bundle successfully deleted": "Bundle berhasil dihapus",
+
+  "Document found": "Dokumen ditemukan",
+  "Document not found": "Dokumen tidak ditemukan",
+  "Document data doesn't valid": "Data dokumen tidak valid",
+  "Document successfully created": "Dokumen berhasil dibuat",
+  "Document successfully updated": "Dokumen berhasil diupdate",
+  "Document successfully deleted": "Dokumen berhasil dihapus",
+  "Document name already exist": "Nama dokumen sudah ada",
+  "Document successfully uploaded": "Dokumen berhasil diupload",
 
   "Print found": "Print ditemukan",
-  "Print not found": "Print tidak ditemukan"
+  "Print not found": "Print tidak ditemukan",
+  "Print data doesn't valid": "Data print tidak valid",
+  "Print successfully created": "Print berhasil dibuat",
+  "Print successfully updated": "Print berhasil diupdate",
+  "Print successfully deleted": "Print berhasil dihapus",
+
+  "User found": "User ditemukan",
+  "User not found": "User tidak ditemukan",
+  "User data doesn't valid": "Data user tidak valid",
+  "User successfully created": "User successfully created",
+  "User successfully updated": "User successfully updated",
+  "User successfully deleted": "User successfully deleted",
+
+  "Name already exist": "Nama sudah ada"
 }

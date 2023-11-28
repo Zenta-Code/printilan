@@ -19,8 +19,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       console.log("find...: ", find);
       if (!find) {
         return res.status(400).json({
-          success: false,
-          message: "order tidak di temukan",
+          error: "order tidak di temukan",
         });
       }
       return res.status(200).json({
@@ -30,8 +29,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -45,9 +43,7 @@ export const OrderController = ({ route }: { route: Router }) => {
         serverKey: serverKey,
         clientKey: clientKey,
       });
-      console.log("serverKey: ", serverKey);
-      console.log("clientKey: ", clientKey);
-      console.log("body: ", req.body);
+
       snap
         .createTransaction(req.body)
         .then((transaction) => {
@@ -60,7 +56,11 @@ export const OrderController = ({ route }: { route: Router }) => {
             error: "Midtrans Error",
           });
         });
-    } catch (error) {}
+    } catch (error) {
+      res.status(400).json({
+        error: "Midtrans Error",
+      });
+    }
   });
   route.post("/callback", async function (req, res) {
     try {
@@ -76,7 +76,7 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.post("/register", async (req, res) => {
+  route.post("/", async (req, res) => {
     try {
       const body = OrderTypes.parse(req.body);
 
@@ -84,8 +84,7 @@ export const OrderController = ({ route }: { route: Router }) => {
 
       if (!body) {
         return res.status(400).json({
-          success: false,
-          message: "Body tidak boleh kosong",
+          error: req.t("Order data doesn't valid"),
         });
       }
 
@@ -95,13 +94,12 @@ export const OrderController = ({ route }: { route: Router }) => {
 
       return res.status(200).json({
         success: true,
-        message: "Berhasil",
+        message: req.t("Order successfully created"),
         data: order,
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -120,7 +118,7 @@ export const OrderController = ({ route }: { route: Router }) => {
         }
         const order = await Order.find({ storeId: store._id });
         let listOfOrder = [];
-        // this will be detail of order, it has document, user, and store as object
+
         for (let i = 0; i < order.length; i++) {
           const document = await Document.findById(order[i].documentId);
           const user = await User.findById(order[i].userId);
@@ -159,34 +157,32 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.put("/update", authenticateJWT, async (req, res) => {
+  route.put("/", authenticateJWT, async (req, res) => {
     try {
-      const updateData = OrderTypes.parse(req.body);
-      if (!updateData) {
+      const body = OrderTypes.parse(req.body);
+
+      if (!body) {
         return res.status(400).json({
-          success: false,
-          message: "data tidak valid",
+          error: req.t("Order data doesn't valid"),
         });
       }
-      const updateOrder = await Order.findOneAndUpdate(
-        { id: req.body.id },
-        updateData
-      );
-      if (!updateOrder) {
+
+      const updated = await Order.findOneAndUpdate({ id: req.body.id }, body);
+
+      if (!updated) {
         return res.status(400).json({
-          success: false,
-          message: "tidak bisa pembaruan",
+          error: req.t("Order not found"),
         });
       }
+
       return res.status(200).json({
         success: true,
-        message: "order berhasil diperbarui",
-        data: updateOrder,
+        message: req.t("Order successfully updated"),
+        data: updated,
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });

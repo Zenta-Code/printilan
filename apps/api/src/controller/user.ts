@@ -116,8 +116,7 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -125,14 +124,14 @@ export const UserController = ({ route }: { route: Router }) => {
     try {
       const token = req.body.token;
       if (!token) {
-        return res.status(400).json({ error:  req.t("Unathorized")});
+        return res.status(400).json({ error: req.t("Unathorized") });
       }
       const jwtSecret = process.env.JWT_SECRET || "JWT_SECRET";
       const found = jwt.verify(token, jwtSecret) as any;
 
       if (!found) {
         return res.status(400).json({
-          error:  req.t("Unathorized"),
+          error: req.t("Unathorized"),
         });
       }
       const user = await User.findById(found.id);
@@ -143,8 +142,7 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
@@ -152,53 +150,48 @@ export const UserController = ({ route }: { route: Router }) => {
     try {
       const id = req.params;
       console.log("id...: ", id);
-      const user = await User.findByIdAndDelete(id.id);
-      if (!user) {
+      const deleted = await User.findByIdAndDelete(id.id);
+      if (!deleted) {
         return res.status(400).json({
-          success: false,
-          message: "user tidak di temukan",
+          error: req.t("User not found"),
         });
       }
       return res.status(200).json({
         success: true,
-        message: "user berhasil dihapus",
-        data: sanitize(user.toObject(), ["password"]),
+        message: req.t("User successfully deleted"),
+        data: sanitize(deleted.toObject(), ["password"]),
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
   route.put("/update", authenticateJWT, async (req, res) => {
     try {
-      const updateData = UserTypes.parse(req.body);
-      if (!updateData) {
+      const updated = UserTypes.parse(req.body);
+      if (!updated) {
         return res.status(400).json({
-          success: false,
-          message: "data tidak valid",
+          error: req.t("User data doesn't valid"),
         });
       }
       const updateUser = await User.findOneAndUpdate(
-        { email: updateData.email },
-        updateData
+        { email: updated.email },
+        updated
       );
       if (!updateUser) {
         return res.status(400).json({
-          success: false,
-          message: "tidak bisa pembaruan",
+          error: req.t("User not found"),
         });
       }
       return res.status(200).json({
         success: true,
-        message: "user berhasil diperbarui",
+        message: req.t("User successfully updated"),
         data: updateUser,
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });

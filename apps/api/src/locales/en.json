@@ -21,20 +21,53 @@
   "Empty body": "Body was empty",
   "Sign up success": "Sign up success",
   "Sign in success": "Sign in success",
-  "User found": "User found",
-  "User not found": "User not found",
   "Unathorized": "Unathorized",
   "Parameter not found": "Parameter not found",
 
   "Order found": "Order found",
   "Order not found": "Order not found",
+  "Order data doesn't valid": "Order data doesn't valid",
+  "Order successfully created": "Order successfully created",
+  "Order successfully updated": "Order berhasil diupdate",
+  "Order successfully deleted": "Order successfully deleted",
 
   "Store found": "Store found",
   "Store not found": "Store not found",
+  "Store data doesn't valid": "Store data doesn't valid",
+  "Store successfully created": "Store successfully created",
+  "Store successfully updated": "Store successfully updated",
+  "Store successfully deleted": "Store successfully deleted",
 
   "Bundle found": "Bundle found",
   "Bundle not found": "Bundle not found",
+  "Bundle data doesn't valid": "Bundle data doesn't valid",
+  "Bundle successfully created": "Bundle successfully created",
+  "Bundle successfully updated": "Bundle successfully updated",
+  "Bundle doesn't updated": "Bundle doesn't updated",
+  "Bundle successfully deleted": "Bundle successfully deleted",
 
-  "Printer found": "Printer found",
-  "Printer not found": "Printer not found"
+  "Document found": "Document found",
+  "Document not found": "Document not found",
+  "Document data doesn't valid": "Document data doesn't valid",
+  "Document successfully created": "Document successfully created",
+  "Document successfully updated": "Document successfully updated",
+  "Document successfully deleted": "Document successfully deleted",
+  "Document name already exist": "Document name already exist",
+  "Document successfully uploaded": "Document successfully uploaded",
+
+  "Print found": "Print found",
+  "Print not found": "Print not found",
+  "Print data doesn't valid": "Print data doesn't valid",
+  "Print successfully created": "Print successfully created",
+  "Print successfully updated": "Print successfully updated",
+  "Print successfully deleted": "Print successfully deleted",
+
+  "User found": "User found",
+  "User not found": "User not found",
+  "User data doesn't valid": "User data doesn't valid",
+  "User successfully created": "User successfully created",
+  "User successfully updated": "User successfully updated",
+  "User successfully deleted": "User successfully deleted",
+
+  "Name already exist": "Name already exist"
 }

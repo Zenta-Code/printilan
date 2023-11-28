@@ -13,8 +13,7 @@ export const BundleController = ({ route }: { route: Router }) => {
 
       if (!body) {
         return res.status(400).json({
-          success: false,
-          message: "Body tidak boleh kosong",
+          error: req.t("Empty body"),
         });
       }
 
@@ -23,10 +22,19 @@ export const BundleController = ({ route }: { route: Router }) => {
       });
       if (find) {
         return res.status(400).json({
-          success: false,
-          message: "Name sudah terdaftar",
+          error: req.t("Name already exist"),
         });
       }
+
+      const store = await Store.findById(body.storeId);
+
+      if (!store) {
+        return res.status(400).json({
+          error: req.t("Store not found"),
+        });
+      }
+
+      body.storeId = store._id;
 
       const bundle = await Bundle.create({
         ...body,
@@ -34,16 +42,16 @@ export const BundleController = ({ route }: { route: Router }) => {
 
       return res.status(200).json({
         success: true,
-        message: "Berhasil",
-        data: bundle,
+        message: req.t("Bundle successfully created"),
+        data: [bundle],
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
+
   route.get("/", authenticateJWT, async (req, res) => {
     try {
       const { id, name, storeId, desc } = req.query;
@@ -51,9 +59,9 @@ export const BundleController = ({ route }: { route: Router }) => {
       let find;
 
       if (id) {
-        find = await Bundle.findById(id);
+        find = [await Bundle.findById(id)];
       } else if (name) {
-        find = await Bundle.findOne({ name: name });
+        find = [await Bundle.findOne({ name: name })];
       } else if (storeId) {
         const store = await Store.findById(storeId);
         if (!store) {
@@ -81,58 +89,67 @@ export const BundleController = ({ route }: { route: Router }) => {
     }
   });
 
-  route.put("/", authenticateJWT, async (req, res) => {
+  route.put("/:id", authenticateJWT, async (req, res) => {
     try {
-      const updateData = BundleTypes.parse(req.body);
-      if (!updateData) {
+      const body = BundleTypes.parse(req.body);
+
+      if (!body) {
         return res.status(400).json({
-          success: false,
-          message: "data tidak valid",
+          error: req.t("Empty body"),
         });
       }
-      const updateBundle = await Bundle.findOneAndUpdate(
-        { name: updateData.name },
-        updateData
-      );
-      if (!updateBundle) {
+
+      const find = await Bundle.findById(req.params.id);
+      if (!find) {
         return res.status(400).json({
-          success: false,
-          message: "tidak bisa pembaruan",
+          error: req.t("Bundle not found"),
         });
       }
+
+      const store = await Store.findById(body.storeId);
+
+      if (!store) {
+        return res.status(400).json({
+          error: req.t("Store not found"),
+        });
+      }
+
+      body.storeId = store._id;
+
+      await Bundle.findByIdAndUpdate(req.params.id, {
+        ...body,
+      });
+
+      const updated = await Bundle.findById(req.params.id);
+
       return res.status(200).json({
         success: true,
-        message: "bundle berhasil diperbarui",
-        data: updateBundle,
+        message: req.t("Bundle successfully updated"),
+        data: [updated],
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });
 
-  route.delete("/delete/:id", authenticateJWT, async (req, res) => {
+  route.delete("/:id", authenticateJWT, async (req, res) => {
     try {
-      const id = req.params;
-      console.log("id...: ", id);
-      const deleteData = await Bundle.findByIdAndDelete(id.id);
-      if (!deleteData) {
+      const deleted = await Bundle.findByIdAndDelete(req.params.id);
+      if (!deleted) {
         return res.status(400).json({
-          success: false,
-          message: "tidak ada yang di hapus",
+          error: req.t("Bundle not found"),
         });
       }
       return res.status(200).json({
         success: true,
-        message: "data berhasil di hapus",
-        data: deleteData,
+        message: req.t("Bundle successfully deleted"),
+        data: [deleted],
       });
     } catch (error) {
       return res.status(400).json({
-        success: false,
-        message: error,
+        error: error,
       });
     }
   });

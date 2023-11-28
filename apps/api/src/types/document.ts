@@ -1,17 +1,20 @@
 import z from "zod";
 export const DocumentTypes = z.object({
-  name: z
+  fileName: z
     .string({
       required_error: "Name is required",
     })
     .min(4, "Name must be at least 4 characters"),
+    filePath: z.string({
+      required_error: "Path is required",
+    }),
   type: z
     .string({
       required_error: "Type is required",
     })
     .min(4, "Type must be at least 10 characters"),
-  count: z.number({
-    required_error: "Count is required",
+  totalPage: z.number({
+    required_error: "Total Page is required",
   }),
   size: z
     .string({
@@ -21,7 +24,7 @@ export const DocumentTypes = z.object({
   color: z.boolean({
     required_error: "Color is required",
   }),
-  price: z
+  totalPrice: z
     .number({
       required_error: "Prize is required",
     })

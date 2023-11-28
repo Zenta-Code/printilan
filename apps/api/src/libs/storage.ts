@@ -15,9 +15,10 @@ const storage = multer.diskStorage({
     const userId = req.body.userId;
     const split = fileName.split(".");
     const extension = split[split.length - 1];
+    const now = Date.now();
     const encryptedFileName = crypto
       .createHash("sha1")
-      .update(fileName + userId)
+      .update(fileName + userId + now)
       .digest("hex");
 
     cb(null, encryptedFileName + "." + extension);
