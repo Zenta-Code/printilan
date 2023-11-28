@@ -9,43 +9,6 @@
 	},
 	"item": [
 		{
-			"name": "User Sign Up",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept-Language",
-						"value": "id-ID",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"viol\",\r\n  \"email\": \"violia@gmaiil.com\", \r\n  \"role\": \"customer\",\r\n  \"password\": \"password\",\r\n  \"confirmPassword\": \"password\",\r\n  \"address\": {\r\n    \"street\": \"Jl. Ketintang no 23\",\r\n    \"city\": \"Surabayaa\",\r\n    \"state\": \"Jawa Timur\",\r\n    \"country\": \"Indonesia\",\r\n    \"zipCode\": \"60231\"\r\n  },\r\n  \"phone\": \"085732030855\"\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://manpro.zenta.dev/api/user/sign-up",
-					"protocol": "https",
-					"host": [
-						"manpro",
-						"zenta",
-						"dev"
-					],
-					"path": [
-						"api",
-						"user",
-						"sign-up"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "User Sign In",
 			"event": [
 				{
@@ -183,6 +146,43 @@
 			"response": []
 		},
 		{
+			"name": "User Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"viol\",\r\n  \"email\": \"violia@gmaiil.com\", \r\n  \"role\": \"customer\",\r\n  \"password\": \"password\",\r\n  \"confirmPassword\": \"password\",\r\n  \"address\": {\r\n    \"street\": \"Jl. Ketintang no 23\",\r\n    \"city\": \"Surabayaa\",\r\n    \"state\": \"Jawa Timur\",\r\n    \"country\": \"Indonesia\",\r\n    \"zipCode\": \"60231\"\r\n  },\r\n  \"phone\": \"085732030855\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/user/sign-up",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"user",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "User Delete",
 			"request": {
 				"auth": {
@@ -243,7 +243,54 @@
 			"response": []
 		},
 		{
-			"name": "Find Bunde By Id",
+			"name": "Bunde By Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the success field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the data object is present in the response\", function () {",
+							"  const responseData = pm.response.json();",
+							"",
+							"  pm.expect(responseData.data).to.exist.and.to.be.an('object');",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that name is a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"});",
+							"",
+							"pm.test(\"Verify that _id is a non-empty string\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData._id).to.be.a('string').and.to.have.lengthOf.at.least(1, \"_id should not be empty\");",
+							"});",
+							"",
+							"pm.test(\"Prices array is present and contains at least one element\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.data.prices).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [
@@ -276,7 +323,53 @@
 			"response": []
 		},
 		{
-			"name": "Find Bundle by Store Id",
+			"name": "Bundle by Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'success' field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'message' field is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.be.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'data' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate that the name field in the data array is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.be.an('array');",
+							"    ",
+							"    responseData.data.forEach(function(item) {",
+							"        pm.expect(item.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [
@@ -309,7 +402,949 @@
 			"response": []
 		},
 		{
-			"name": "Find Order by Store Id",
+			"name": "Bundle by Store Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'success' field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'message' field is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.be.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'data' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate that the name field in the data array is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.be.an('array');",
+							"    ",
+							"    responseData.data.forEach(function(item) {",
+							"        pm.expect(item.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/bundle?storeId=65465440e95fa7bbeeb0815d",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"bundle"
+					],
+					"query": [
+						{
+							"key": "storeId",
+							"value": "65465440e95fa7bbeeb0815d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bundle by Description",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'success' field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'message' field is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.be.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'data' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate that the name field in the data array is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.be.an('array');",
+							"    ",
+							"    responseData.data.forEach(function(item) {",
+							"        pm.expect(item.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/bundle?storeId=65465440e95fa7bbeeb0815d",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"bundle"
+					],
+					"query": [
+						{
+							"key": "storeId",
+							"value": "65465440e95fa7bbeeb0815d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Bundle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'success' field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'message' field is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.be.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'data' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate that the name field in the data array is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.be.an('array');",
+							"    ",
+							"    responseData.data.forEach(function(item) {",
+							"        pm.expect(item.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"New Bundle\",\r\n    \"desc\":\"Bundle desc\",\r\n    \"prices\":[\r\n        {\r\n            \"option\":\"Opt 1\",\r\n            \"price\":2000\r\n        }\r\n    ],\r\n    \"storeId\":\"65465440e95fa7bbeeb0815d\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/bundle",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"bundle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Bundle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'success' field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'message' field is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.be.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'data' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate that the name field in the data array is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.be.an('array');",
+							"    ",
+							"    responseData.data.forEach(function(item) {",
+							"        pm.expect(item.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"New Bundle\",\r\n    \"desc\":\"Bundle desc\",\r\n    \"prices\":[\r\n        {\r\n            \"option\":\"Opt 1\",\r\n            \"price\":2000\r\n        }\r\n    ],\r\n    \"storeId\":\"65465440e95fa7bbeeb0815d\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/bundle/65656cd602b173c3bfc3d97e",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"bundle",
+						"65656cd602b173c3bfc3d97e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Bundle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'success' field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'message' field is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.be.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'data' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate that the name field in the data array is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.be.an('array');",
+							"    ",
+							"    responseData.data.forEach(function(item) {",
+							"        pm.expect(item.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"New Bundle\",\r\n    \"desc\":\"Bundle desc\",\r\n    \"price\":[\r\n        {\r\n            \"name\":\"Opt 1\",\r\n            \"value\":2000\r\n        }\r\n    ],\r\n    \"storeId\":\"65465440e95fa7bbeeb0815d\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/bundle/65656cd602b173c3bfc3d97e",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"bundle",
+						"65656cd602b173c3bfc3d97e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Document By Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'success' field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'message' field is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.be.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'data' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate that the name field in the data array is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.be.an('array');",
+							"    ",
+							"    responseData.data.forEach(function(item) {",
+							"        pm.expect(item.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"New Bundle\",\r\n    \"desc\":\"Bundle desc\",\r\n    \"price\":[\r\n        {\r\n            \"name\":\"Opt 1\",\r\n            \"value\":2000\r\n        }\r\n    ],\r\n    \"storeId\":\"65465440e95fa7bbeeb0815d\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/document?id=655599e3778e9276a51f1328",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"document"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "655599e3778e9276a51f1328"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Document By User Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'success' field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'message' field is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.be.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'data' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate that the name field in the data array is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.be.an('array');",
+							"    ",
+							"    responseData.data.forEach(function(item) {",
+							"        pm.expect(item.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"New Bundle\",\r\n    \"desc\":\"Bundle desc\",\r\n    \"price\":[\r\n        {\r\n            \"name\":\"Opt 1\",\r\n            \"value\":2000\r\n        }\r\n    ],\r\n    \"storeId\":\"65465440e95fa7bbeeb0815d\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/document?userId=654650bce95fa7bbeead691a",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"document"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "654650bce95fa7bbeead691a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Document By File Name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'success' field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'message' field is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.be.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'data' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate that the name field in the data array is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.be.an('array');",
+							"    ",
+							"    responseData.data.forEach(function(item) {",
+							"        pm.expect(item.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"New Bundle\",\r\n    \"desc\":\"Bundle desc\",\r\n    \"price\":[\r\n        {\r\n            \"name\":\"Opt 1\",\r\n            \"value\":2000\r\n        }\r\n    ],\r\n    \"storeId\":\"65465440e95fa7bbeeb0815d\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/document/?fileName=epson_rc_pl_7.0_api_manual-rc700a_rc90_t(r10).pdf",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"document",
+						""
+					],
+					"query": [
+						{
+							"key": "fileName",
+							"value": "epson_rc_pl_7.0_api_manual-rc700a_rc90_t(r10).pdf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Document",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'success' field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'message' field is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.be.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'data' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate that the name field in the data array is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.be.an('array');",
+							"    ",
+							"    responseData.data.forEach(function(item) {",
+							"        pm.expect(item.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "654650bce95fa7bbeead691a",
+							"type": "text"
+						},
+						{
+							"key": "totalPage",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "size",
+							"value": "A4",
+							"type": "text"
+						},
+						{
+							"key": "color",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "totalPrice",
+							"value": "2000",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Matt/Downloads/epson_rc_pl_7.0_api_manual-rc700a_rc90_t(r10).pdf"
+						},
+						{
+							"key": "copies",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/document",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Document",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'success' field is true\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData.success).to.be.true;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate the 'message' field is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData.message).to.be.empty;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Verify that the 'data' array is present and contains at least one element\", function () {",
+							"    const responseData = pm.response.json();",
+							"",
+							"    pm.expect(responseData.data).to.exist.and.to.be.an('array').and.to.have.lengthOf.at.least(1);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate that the name field in the data array is a non-empty string\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('object');",
+							"    pm.expect(responseData.data).to.be.an('array');",
+							"    ",
+							"    responseData.data.forEach(function(item) {",
+							"        pm.expect(item.name).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Name should not be empty\");",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "654650bce95fa7bbeead691a",
+							"type": "text"
+						},
+						{
+							"key": "totalPage",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "size",
+							"value": "A4",
+							"type": "text"
+						},
+						{
+							"key": "color",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "totalPrice",
+							"value": "2000",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/Matt/Downloads/epson_rc_pl_7.0_api_manual-rc700a_rc90_t(r10).pdf"
+						},
+						{
+							"key": "copies",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/document/656571ebbfcfb6cf631d8528",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"document",
+						"656571ebbfcfb6cf631d8528"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order by Store Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response is successful\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Message is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.message).to.equal(\"\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Data array is present and contains at least one element\", function () {",
+							"  const responseData = pm.response.json();",
+							"",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.data).to.exist.and.to.be.an('array').that.is.not.empty;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -334,6 +1369,87 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Store by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/store?id=65465440e95fa7bbeeb0815d",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"store"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "65465440e95fa7bbeeb0815d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store by Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/store?name=Matt's Store",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"store"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Matt's Store"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Store by City",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/store?city=New York",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"store"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "New York"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
@@ -341,7 +1457,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjFmNmU1OWFhYWE0MWQ1ZmUxNjM3OCIsImlhdCI6MTcwMDkzNTg2NiwiZXhwIjoxNzAxMDIyMjY2fQ.Q9xGOxpWpcI4V4DzIpARnsOv4RvouB887uMtk_gPgiA",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjFmNmU1OWFhYWE0MWQ1ZmUxNjM3OCIsImlhdCI6MTcwMTE0MDI5NywiZXhwIjoxNzAxMjI2Njk3fQ.egbQ-5eeJVt4SBQ9nxBpnxxkTZHy-voxMNCtsUSX37k",
 				"type": "string"
 			}
 		]
