@@ -3,11 +3,12 @@ import mongoose, { Schema, Types } from "mongoose";
 const DocumentSchema = new Schema(
   {
     fileName: String,
+    filePath: String,
     type: String,
-    count: Number,
+    totalPage: Number,
     size: String,
     color: Boolean,
-    price: Number,
+    totalPrice: Number,
     copies: Number,
     userId: Types.ObjectId,
   },
