@@ -6,6 +6,7 @@ const OrderSchema = new Schema(
     storeId: Types.ObjectId,
     documentId: Types.ObjectId,
     totalPrice: Number,
+    status: String,
   },
   {
     timestamps: true,

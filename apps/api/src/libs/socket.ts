@@ -58,6 +58,7 @@ export const createSocket = (server: Express) => {
       });
     });
     console.log(`Socket Ready Launched :${process.env.SOCKET_PATH} 🚀`);
+
     return httpServer;
   } catch (error) {
     console.log("Error launching socket server 🚀");

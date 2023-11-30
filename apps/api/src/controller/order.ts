@@ -1,49 +1,36 @@
+import * as crypto from "crypto";
 import { Router } from "express";
 import * as midtransClient from "midtrans-client";
-import { Types } from "mongoose";
-
 import { authenticateJWT } from "../middleware/auth";
 import { Document } from "../model/document";
 import { Order } from "../model/order";
 import { Store } from "../model/store";
 import { User } from "../model/user";
 import { OrderTypes } from "../types/order";
+import { PaymentCallbackTypes } from "../types/payment-callback";
+
 export const OrderController = ({ route }: { route: Router }) => {
-  route.get("/clear/:storeId", authenticateJWT, async (req, res) => {
-    try {
-      const params = req.params;
-      console.log("id...: ", params);
-      const find = await Order.deleteMany({
-        storeId: new Types.ObjectId(params.storeId),
-      });
-      console.log("find...: ", find);
-      if (!find) {
-        return res.status(400).json({
-          error: "order tidak di temukan",
-        });
-      }
-      return res.status(200).json({
-        success: true,
-        message: "order berhasil ditemukan",
-        data: find,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        error: error,
-      });
-    }
+  const serverKey = process.env.MIDTRANS_SERVER_KEY || "";
+  const snap = new midtransClient.Snap({
+    isProduction: false,
+    serverKey: serverKey,
+    clientKey: process.env.MIDTRANS_CLIENT_KEY || "",
+  });
+
+  Order.watch().on("change", async (data) => {
+    console.log("data", data);
+  });
+  const core = new midtransClient.CoreApi({
+    isProduction: false,
+    serverKey: serverKey,
+    clientKey: process.env.MIDTRANS_CLIENT_KEY || "",
+  });
+
+  Order.watch().on("change", async (data) => {
+    console.log("data", data);
   });
   route.post("/payment", authenticateJWT, async function (req, res) {
     try {
-      const serverKey = process.env.DEV_MIDTRANS_SERVER_KEY || "";
-      const clientKey = process.env.DEV_MIDTRANS_CLIENT_KEY || "";
-
-      const snap = new midtransClient.Snap({
-        isProduction: false,
-        serverKey: serverKey,
-        clientKey: clientKey,
-      });
-
       snap
         .createTransaction(req.body)
         .then((transaction) => {
@@ -64,11 +51,52 @@ export const OrderController = ({ route }: { route: Router }) => {
   });
   route.post("/callback", async function (req, res) {
     try {
-      const body = req.body;
-      console.log("=== CALLBACK ===");
-      console.log("body: ", body);
-      console.log("=== CALLBACK ===");
-      res.status(200).json(body);
+      const body = PaymentCallbackTypes.parse(req.body);
+
+      if (!body) {
+        return res.status(400).json({
+          error: "Midtrans Error",
+        });
+      }
+
+      const sk = body.signature_key;
+      const orderId = body.order_id;
+      const statusCode = body.status_code;
+      const grossAmount = body.gross_amount;
+
+      const mySignature = crypto
+        .createHash("sha512")
+        .update(`${orderId}${statusCode}${grossAmount}${serverKey}`)
+        .digest("hex");
+
+      if (mySignature !== sk) {
+        return res.status(400).json({
+          error: "Midtrans Error",
+        });
+      }
+
+      const transaction = await core.transaction.status(orderId);
+
+      if (!transaction) {
+        return res.status(400).json({
+          error: "Midtrans Error",
+        });
+      }
+
+      const channel_response_code = transaction?.channel_response_code;
+
+      if (channel_response_code !== "00") {
+        return res.status(400).json({
+          error: transaction?.status_message,
+        });
+      }
+
+      const order = await Order.findByIdAndUpdate(orderId, { status: "paid" });
+      res.status(200).json({
+        success: true,
+        message: "Payment success",
+        data: order,
+      });
     } catch (error) {
       console.log("error: ", error);
       res.status(400).json({
@@ -76,8 +104,10 @@ export const OrderController = ({ route }: { route: Router }) => {
       });
     }
   });
+
   route.post("/", async (req, res) => {
     try {
+      req.body.status = "pending";
       const body = OrderTypes.parse(req.body);
 
       console.log(body);
@@ -92,10 +122,51 @@ export const OrderController = ({ route }: { route: Router }) => {
         ...body,
       });
 
+      const user = await User.findById(order.userId);
+      const store = await Store.findById(order.storeId);
+      const document = await Document.findById(order.documentId);
+      const userName = user?.name?.split(" ");
+
+      const payment = await snap.createTransaction({
+        transaction_details: {
+          order_id: order.id,
+          gross_amount: order.totalPrice,
+        },
+        credit_card: {
+          secure: true,
+        },
+
+        customer_details: {
+          first_name: userName?.[0] || "",
+          last_name: userName?.[1] || "",
+          email: user?.email || "",
+          phone: user?.phone || "",
+          billing_address: {
+            first_name: userName?.[0] || "",
+            last_name: userName?.[1] || "",
+            phone: user?.phone || "",
+            adrress: user?.address?.street || "",
+            city: user?.address?.city || "",
+            postal_code: user?.address?.zipCode || 0,
+          },
+        },
+
+        item_details: [
+          {
+            id: order.id,
+            price: order.totalPrice,
+            quantity: document?.copies || 1,
+            name: order.documentId || "",
+            merchant_name: store?.name || "",
+          },
+        ],
+      });
+
       return res.status(200).json({
         success: true,
         message: req.t("Order successfully created"),
         data: order,
+        payment: payment,
       });
     } catch (error) {
       return res.status(400).json({

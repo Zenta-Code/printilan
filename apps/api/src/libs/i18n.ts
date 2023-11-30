@@ -7,7 +7,7 @@ import idCommon from "../locales/id.json";
 export const createI18n: () => Handler = () => {
   i18next.use(middleware.LanguageDetector).init(
     {
-      debug: true,
+      debug: false,
       preload: ["en", "id"],
       fallbackLng: "en",
       ns: ["translation", "zod"],
