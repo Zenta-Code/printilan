@@ -4,7 +4,7 @@ import { Store } from "../model/store";
 import { StoreTypes } from "../types/store";
 
 export const StoreController = ({ route }: { route: Router }) => {
-  route.post("/sign-up", async (req, res) => {
+  route.post("/sign-up", authenticateJWT, async (req, res) => {
     try {
       const body = StoreTypes.parse(req.body);
 
@@ -79,7 +79,7 @@ export const StoreController = ({ route }: { route: Router }) => {
     }
   });
 
-  route.put("/", authenticateJWT, async (req, res) => {
+  route.put("/:id", authenticateJWT, async (req, res) => {
     try {
       const body = StoreTypes.parse(req.body);
 
@@ -89,10 +89,7 @@ export const StoreController = ({ route }: { route: Router }) => {
         });
       }
 
-      const updated = await Store.findOneAndUpdate(
-        { name: req.body.name },
-        body
-      );
+      const updated = await Store.findByIdAndUpdate(req.params.id, body);
       if (!updated) {
         return res.status(400).json({
           error: req.t("Store not found"),
@@ -110,7 +107,7 @@ export const StoreController = ({ route }: { route: Router }) => {
     }
   });
 
-  route.delete("/delete/:id", authenticateJWT, async (req, res) => {
+  route.delete("/:id", authenticateJWT, async (req, res) => {
     try {
       const id = req.params;
       const deleted = await Store.findByIdAndDelete(id.id);

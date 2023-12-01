@@ -11,7 +11,7 @@ import { StoreController } from "../controller/store";
 import { UserController } from "../controller/user";
 import { createI18n } from "./i18n";
 
-export const createServer: () => Express = () => {
+export const createExpressServer: () => Express = () => {
   const app: Express = express();
   const i18n = createI18n();
   app
@@ -27,7 +27,7 @@ export const createServer: () => Express = () => {
   root.group("/", (app) => {
     app.get("/ping", (req, res) => {
       res.send(req.t("hello"));
-    }); 
+    });
     app.group("/user", (app) => {
       UserController({ route: app });
     });

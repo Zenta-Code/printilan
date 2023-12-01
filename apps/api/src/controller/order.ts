@@ -1,6 +1,7 @@
 import * as crypto from "crypto";
 import { Router } from "express";
 import * as midtransClient from "midtrans-client";
+import { io } from "../index";
 import { authenticateJWT } from "../middleware/auth";
 import { Document } from "../model/document";
 import { Order } from "../model/order";
@@ -11,15 +12,13 @@ import { PaymentCallbackTypes } from "../types/payment-callback";
 
 export const OrderController = ({ route }: { route: Router }) => {
   const serverKey = process.env.MIDTRANS_SERVER_KEY || "";
+
   const snap = new midtransClient.Snap({
     isProduction: false,
     serverKey: serverKey,
     clientKey: process.env.MIDTRANS_CLIENT_KEY || "",
   });
 
-  Order.watch().on("change", async (data) => {
-    console.log("data", data);
-  });
   const core = new midtransClient.CoreApi({
     isProduction: false,
     serverKey: serverKey,
@@ -27,28 +26,31 @@ export const OrderController = ({ route }: { route: Router }) => {
   });
 
   Order.watch().on("change", async (data) => {
-    console.log("data", data);
-  });
-  route.post("/payment", authenticateJWT, async function (req, res) {
-    try {
-      snap
-        .createTransaction(req.body)
-        .then((transaction) => {
-          console.log("transaction: ", transaction);
-          res.status(200).json(transaction);
-        })
-        .catch((error) => {
-          console.log("error: ", error);
-          res.status(400).json({
-            error: "Midtrans Error",
-          });
+    if (data.operationType === "update") {
+      console.log("UPDATE: ", data);
+      console.log("STATUS: ", data.updateDescription.updatedFields.status);
+      console.log("ID: ", data.documentKey._id);
+      if (data.updateDescription.updatedFields.status === "paid") {
+        const order = await Order.findById(data.documentKey._id);
+        const document = await Document.findById(order?.documentId);
+        const user = await User.findById(order?.userId);
+        const store = await Store.findById(order?.storeId);
+        io?.to(store?.id).emit("message", {
+          receiver: store?.id,
+          sender: user?.id,
+          content: {
+            type: "order",
+            content: {
+              documentId: document?.id,
+            },
+          },
+          order,
+          document,
         });
-    } catch (error) {
-      res.status(400).json({
-        error: "Midtrans Error",
-      });
+      }
     }
   });
+
   route.post("/callback", async function (req, res) {
     try {
       const body = PaymentCallbackTypes.parse(req.body);
@@ -109,8 +111,6 @@ export const OrderController = ({ route }: { route: Router }) => {
     try {
       req.body.status = "pending";
       const body = OrderTypes.parse(req.body);
-
-      console.log(body);
 
       if (!body) {
         return res.status(400).json({

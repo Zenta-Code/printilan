@@ -120,25 +120,28 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.post("/me", async (req, res) => {
+  route.get("/", authenticateJWT, async (req, res) => {
     try {
-      const token = req.body.token;
-      if (!token) {
-        return res.status(400).json({ error: req.t("Unathorized") });
-      }
-      const jwtSecret = process.env.JWT_SECRET || "JWT_SECRET";
-      const found = jwt.verify(token, jwtSecret) as any;
+      const { id, email } = req.query;
 
-      if (!found) {
+      let find;
+
+      if (id) {
+        find = await User.findById(id);
+      } else if (email) {
+        find = await User.findOne({ email: email });
+      }
+
+      if (!find) {
         return res.status(400).json({
-          error: req.t("Unathorized"),
+          error: req.t("User not found"),
         });
       }
-      const user = await User.findById(found.id);
+ 
       return res.status(200).json({
         success: true,
         message: req.t("User found"),
-        data: sanitize(user!.toObject(), ["password"]),
+        data: [sanitize(find!.toObject(), ["password"])],
       });
     } catch (error) {
       return res.status(400).json({
@@ -146,7 +149,7 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.delete("/delete/:id", authenticateJWT, async (req, res) => {
+  route.delete("/:id", authenticateJWT, async (req, res) => {
     try {
       const id = req.params;
       console.log("id...: ", id);
@@ -167,7 +170,7 @@ export const UserController = ({ route }: { route: Router }) => {
       });
     }
   });
-  route.put("/update", authenticateJWT, async (req, res) => {
+  route.put("/:id", authenticateJWT, async (req, res) => {
     try {
       const updated = UserTypes.parse(req.body);
       if (!updated) {

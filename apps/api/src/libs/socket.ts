@@ -1,13 +1,11 @@
-import { Express } from "express";
-import { createServer as http } from "http";
+import { Server as HttpServer } from "http";
 import { Types } from "mongoose";
 import { Server } from "socket.io";
 import { Document } from "../model/document";
 import { Order } from "../model/order";
 
-export const createSocket = (server: Express) => {
+export const createSocketServer = (httpServer: HttpServer) => {
   try {
-    const httpServer = http(server);
     const io = new Server(httpServer, {
       cors: {
         origin: "https://manpro.zenta.dev",
@@ -15,6 +13,7 @@ export const createSocket = (server: Express) => {
       },
       path: process.env.SOCKET_PATH || "/socket.io",
     });
+
     io.on("connection", (socket) => {
       console.log("Socket connected", socket.id);
       socket.on("join", (roomId: string) => {
@@ -57,9 +56,11 @@ export const createSocket = (server: Express) => {
         }
       });
     });
+
     console.log(`Socket Ready Launched :${process.env.SOCKET_PATH} 🚀`);
 
-    return httpServer;
+   
+    return io;
   } catch (error) {
     console.log("Error launching socket server 🚀");
     console.log(error);

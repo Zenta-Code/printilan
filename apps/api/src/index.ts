@@ -1,18 +1,20 @@
 import dotenv from "dotenv";
 import { Express } from "express";
 import fs from "fs";
-import { Server } from "http";
-import mongoose from "mongoose"; 
-import { createServer } from "./libs/server";
-import { createSocket } from "./libs/socket";
+import { Server, createServer } from "http";
+import mongoose from "mongoose";
+import { createExpressServer } from "./libs/server";
+import { createSocketServer } from "./libs/socket";
 
 dotenv.config();
 
 const port = process.env.PORT || 3001;
 
-const server: Express = createServer();
+const server: Express = createExpressServer();
 
-const socketServer = createSocket(server) as Server;
+const httpServer: Server = createServer(server);
+
+export const io = createSocketServer(httpServer); 
 
 try {
   mongoose.connect(
@@ -29,7 +31,7 @@ mongoose.connection.on("connected", () => {
   console.log("Connected to MongoDB 🚀");
 
   try {
-    socketServer.listen(port, () => {
+    httpServer.listen(port, () => {
       console.log(`API Ready at http://localhost:${port} 🚀`);
     });
   } catch (err) {

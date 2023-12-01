@@ -1,15 +1,12 @@
 import z from "zod";
+import { AddressTypes } from "./address";
 export const StoreTypes = z.object({
   name: z
     .string({
       required_error: "Name is required",
     })
     .min(4, "Name must be at least 4 characters"),
-  address: z
-    .string({
-      required_error: "Address is required",
-    })
-    .min(4, "Address must be at least 4 characters"),
+  address: AddressTypes,
   phone: z
     .string({
       required_error: "Phone is required",
