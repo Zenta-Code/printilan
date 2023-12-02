@@ -12,6 +12,7 @@ const StoreSchema = new Schema(
       zipCode: String,
     },
     phone: String,
+    status: String,
     ownerId: mongoose.Types.ObjectId,
   },
   {

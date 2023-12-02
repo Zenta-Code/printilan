@@ -10,7 +10,10 @@ export const PrintTypes = z.object({
       required_error: "Model is required",
     })
     .min(3, "Model must be at least 5 characters"),
-  status: z.boolean({
-    required_error: "Status is required",
+  countJob: z.number({
+    required_error: "Count Job is required",
+  }),
+  printerOnline: z.boolean({
+    required_error: "Printer Online is required",
   }),
 });

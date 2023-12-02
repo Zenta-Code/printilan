@@ -16,6 +16,9 @@ export const UserTypes = z.object({
       required_error: "Password is required",
     })
     .min(8, "Password must be at least 8 characters"),
+  confirmPassword: z.string({
+    required_error: "Confirm Password is required",
+  }),
   address: AddressTypes,
   phone: z
     .string({

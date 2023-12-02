@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { Types } from "mongoose";
 import { authenticateJWT } from "../middleware/auth";
 import { Print } from "../model/print";
 import { PrintTypes } from "../types/print";
@@ -10,11 +9,14 @@ export const PrintController = ({ route }: { route: Router }) => {
       const list = req.body.printers.map((item: any) => {
         return {
           printerName: item.printerName,
-          storeId: new Types.ObjectId(item.storeId),
-          status: item.status,
+          storeId: item.storeId,
+          countJobs: item.countJobs,
+          printerOnline: item.printerOnline,
         };
       });
 
+      let message;
+      let data;
       for (let i = 0; i < list.length; i++) {
         const find = await Print.findOne({
           printerName: list[i].printerName,
@@ -24,15 +26,29 @@ export const PrintController = ({ route }: { route: Router }) => {
           const newPrint = await Print.create(list[i]);
           if (!newPrint) {
             return res.status(400).json({
-              error: "print gagal di tambahkan",
+              error: req.t("Print not found"),
             });
           }
+          message = req.t("Print successfully created");
+          data = newPrint;
+        } else {
+          const updated = await Print.findOneAndUpdate(
+            { printerName: list[i].printerName, storeId: list[i].storeId },
+            list[i]
+          );
+          if (!updated) {
+            return res.status(400).json({
+              error: req.t("Print not found"),
+            });
+          }
+          message = req.t("Print successfully updated");
+          data = updated;
         }
       }
       return res.status(200).json({
         success: true,
-        message: req.t("Print successfully created"),
-        data: list,
+        message: message,
+        data: data,
       });
     } catch (error) {
       console.log(error);

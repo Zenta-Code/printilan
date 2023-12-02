@@ -92,8 +92,8 @@ export const DocumentController = ({ route }: { route: Router }) => {
   });
   route.delete("/:id", authenticateJWT, async (req, res) => {
     try {
-      const deleted = await Document.findByIdAndDelete(req.params.id);
-      if (!deleted) {
+      const document = await Document.findById(req.params.id);
+      if (!document) {
         return res.status(400).json({
           error: req.t("Document not found"),
         });
@@ -102,11 +102,11 @@ export const DocumentController = ({ route }: { route: Router }) => {
       const filePath = path.join(
         __dirname,
         "../..",
-        deleted.filePath as string
+        document.filePath as string
       );
 
       fs.unlinkSync(filePath);
-
+      const deleted = await Document.deleteOne({ _id: req.params.id });
       return res.status(200).json({
         success: true,
         message: req.t("Document successfully deleted"),

@@ -137,7 +137,7 @@ export const UserController = ({ route }: { route: Router }) => {
           error: req.t("User not found"),
         });
       }
- 
+
       return res.status(200).json({
         success: true,
         message: req.t("User found"),
@@ -151,18 +151,17 @@ export const UserController = ({ route }: { route: Router }) => {
   });
   route.delete("/:id", authenticateJWT, async (req, res) => {
     try {
-      const id = req.params;
-      console.log("id...: ", id);
-      const deleted = await User.findByIdAndDelete(id.id);
-      if (!deleted) {
+      const user = await User.findById(req.params.id);
+      if (!user) {
         return res.status(400).json({
           error: req.t("User not found"),
         });
       }
+      await User.findByIdAndDelete(user._id);
       return res.status(200).json({
         success: true,
         message: req.t("User successfully deleted"),
-        data: sanitize(deleted.toObject(), ["password"]),
+        data: sanitize(user.toObject(), ["password"]),
       });
     } catch (error) {
       return res.status(400).json({

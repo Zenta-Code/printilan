@@ -4,7 +4,8 @@ const PrintSchema = new Schema(
   {
     storeId: Types.ObjectId,
     printerName: String,
-    isBusy: Boolean,
+    countJobs: Number,
+    printerOnline: Boolean,
   },
   {
     timestamps: true,
