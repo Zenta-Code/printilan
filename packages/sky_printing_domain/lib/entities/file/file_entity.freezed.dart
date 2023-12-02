@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FileEntity {
+  @HiveField(0)
   FilePickerResult? get result => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,7 +30,7 @@ abstract class $FileEntityCopyWith<$Res> {
           FileEntity value, $Res Function(FileEntity) then) =
       _$FileEntityCopyWithImpl<$Res, FileEntity>;
   @useResult
-  $Res call({FilePickerResult? result});
+  $Res call({@HiveField(0) FilePickerResult? result});
 }
 
 /// @nodoc
@@ -64,7 +65,7 @@ abstract class _$$FileEntityImplCopyWith<$Res>
       __$$FileEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({FilePickerResult? result});
+  $Res call({@HiveField(0) FilePickerResult? result});
 }
 
 /// @nodoc
@@ -91,10 +92,12 @@ class __$$FileEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
+@HiveType(typeId: 3, adapterName: 'FileEntityAdapter')
 class _$FileEntityImpl implements _FileEntity {
-  const _$FileEntityImpl({this.result});
+  const _$FileEntityImpl({@HiveField(0) this.result});
 
   @override
+  @HiveField(0)
   final FilePickerResult? result;
 
   @override
@@ -121,10 +124,11 @@ class _$FileEntityImpl implements _FileEntity {
 }
 
 abstract class _FileEntity implements FileEntity {
-  const factory _FileEntity({final FilePickerResult? result}) =
+  const factory _FileEntity({@HiveField(0) final FilePickerResult? result}) =
       _$FileEntityImpl;
 
   @override
+  @HiveField(0)
   FilePickerResult? get result;
   @override
   @JsonKey(ignore: true)

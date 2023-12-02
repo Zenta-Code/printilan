@@ -1,8 +1,5 @@
-import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_data/models/printer/printer_model.dart';
-import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'printer_params.freezed.dart';
 part 'printer_params.g.dart';

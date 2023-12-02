@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_domain/entities/file_entity.dart';
+import 'package:sky_printing_domain/entities/file/file_entity.dart';
 import 'package:sky_printing_domain/repositories/file_repository.dart';
 
 part 'get_file_usecase.freezed.dart';

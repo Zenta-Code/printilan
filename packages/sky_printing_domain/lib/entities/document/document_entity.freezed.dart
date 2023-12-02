@@ -16,12 +16,21 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DocumentEntity {
+  @HiveField(0)
+  String? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get name => throw _privateConstructorUsedError;
+  @HiveField(2)
   String? get type => throw _privateConstructorUsedError;
+  @HiveField(3)
   int? get count => throw _privateConstructorUsedError;
+  @HiveField(4)
   String? get size => throw _privateConstructorUsedError;
+  @HiveField(5)
   bool? get color => throw _privateConstructorUsedError;
+  @HiveField(6)
   int? get price => throw _privateConstructorUsedError;
+  @HiveField(7)
   int? get copies => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -36,13 +45,14 @@ abstract class $DocumentEntityCopyWith<$Res> {
       _$DocumentEntityCopyWithImpl<$Res, DocumentEntity>;
   @useResult
   $Res call(
-      {String? name,
-      String? type,
-      int? count,
-      String? size,
-      bool? color,
-      int? price,
-      int? copies});
+      {@HiveField(0) String? id,
+      @HiveField(1) String? name,
+      @HiveField(2) String? type,
+      @HiveField(3) int? count,
+      @HiveField(4) String? size,
+      @HiveField(5) bool? color,
+      @HiveField(6) int? price,
+      @HiveField(7) int? copies});
 }
 
 /// @nodoc
@@ -58,6 +68,7 @@ class _$DocumentEntityCopyWithImpl<$Res, $Val extends DocumentEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? count = freezed,
@@ -67,6 +78,10 @@ class _$DocumentEntityCopyWithImpl<$Res, $Val extends DocumentEntity>
     Object? copies = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -108,13 +123,14 @@ abstract class _$$DocumentEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? name,
-      String? type,
-      int? count,
-      String? size,
-      bool? color,
-      int? price,
-      int? copies});
+      {@HiveField(0) String? id,
+      @HiveField(1) String? name,
+      @HiveField(2) String? type,
+      @HiveField(3) int? count,
+      @HiveField(4) String? size,
+      @HiveField(5) bool? color,
+      @HiveField(6) int? price,
+      @HiveField(7) int? copies});
 }
 
 /// @nodoc
@@ -128,6 +144,7 @@ class __$$DocumentEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? count = freezed,
@@ -137,6 +154,10 @@ class __$$DocumentEntityImplCopyWithImpl<$Res>
     Object? copies = freezed,
   }) {
     return _then(_$DocumentEntityImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -171,34 +192,46 @@ class __$$DocumentEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
+@HiveType(typeId: 3, adapterName: 'DocumentEntityAdapter')
 class _$DocumentEntityImpl implements _DocumentEntity {
   const _$DocumentEntityImpl(
-      {this.name,
-      this.type,
-      this.count,
-      this.size,
-      this.color,
-      this.price,
-      this.copies});
+      {@HiveField(0) this.id,
+      @HiveField(1) this.name,
+      @HiveField(2) this.type,
+      @HiveField(3) this.count,
+      @HiveField(4) this.size,
+      @HiveField(5) this.color,
+      @HiveField(6) this.price,
+      @HiveField(7) this.copies});
 
   @override
+  @HiveField(0)
+  final String? id;
+  @override
+  @HiveField(1)
   final String? name;
   @override
+  @HiveField(2)
   final String? type;
   @override
+  @HiveField(3)
   final int? count;
   @override
+  @HiveField(4)
   final String? size;
   @override
+  @HiveField(5)
   final bool? color;
   @override
+  @HiveField(6)
   final int? price;
   @override
+  @HiveField(7)
   final int? copies;
 
   @override
   String toString() {
-    return 'DocumentEntity(name: $name, type: $type, count: $count, size: $size, color: $color, price: $price, copies: $copies)';
+    return 'DocumentEntity(id: $id, name: $name, type: $type, count: $count, size: $size, color: $color, price: $price, copies: $copies)';
   }
 
   @override
@@ -206,6 +239,7 @@ class _$DocumentEntityImpl implements _DocumentEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DocumentEntityImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.count, count) || other.count == count) &&
@@ -216,8 +250,8 @@ class _$DocumentEntityImpl implements _DocumentEntity {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, type, count, size, color, price, copies);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, type, count, size, color, price, copies);
 
   @JsonKey(ignore: true)
   @override
@@ -229,27 +263,38 @@ class _$DocumentEntityImpl implements _DocumentEntity {
 
 abstract class _DocumentEntity implements DocumentEntity {
   const factory _DocumentEntity(
-      {final String? name,
-      final String? type,
-      final int? count,
-      final String? size,
-      final bool? color,
-      final int? price,
-      final int? copies}) = _$DocumentEntityImpl;
+      {@HiveField(0) final String? id,
+      @HiveField(1) final String? name,
+      @HiveField(2) final String? type,
+      @HiveField(3) final int? count,
+      @HiveField(4) final String? size,
+      @HiveField(5) final bool? color,
+      @HiveField(6) final int? price,
+      @HiveField(7) final int? copies}) = _$DocumentEntityImpl;
 
   @override
+  @HiveField(0)
+  String? get id;
+  @override
+  @HiveField(1)
   String? get name;
   @override
+  @HiveField(2)
   String? get type;
   @override
+  @HiveField(3)
   int? get count;
   @override
+  @HiveField(4)
   String? get size;
   @override
+  @HiveField(5)
   bool? get color;
   @override
+  @HiveField(6)
   int? get price;
   @override
+  @HiveField(7)
   int? get copies;
   @override
   @JsonKey(ignore: true)

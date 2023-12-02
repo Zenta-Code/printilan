@@ -16,9 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PrinterEntity {
+  @HiveField(0)
+  String? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get storeId => throw _privateConstructorUsedError;
+  @HiveField(2)
   String? get printerName => throw _privateConstructorUsedError;
+  @HiveField(3)
   int? get countJobs => throw _privateConstructorUsedError;
+  @HiveField(4)
   bool? get printerOnline => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -33,10 +39,11 @@ abstract class $PrinterEntityCopyWith<$Res> {
       _$PrinterEntityCopyWithImpl<$Res, PrinterEntity>;
   @useResult
   $Res call(
-      {String? storeId,
-      String? printerName,
-      int? countJobs,
-      bool? printerOnline});
+      {@HiveField(0) String? id,
+      @HiveField(1) String? storeId,
+      @HiveField(2) String? printerName,
+      @HiveField(3) int? countJobs,
+      @HiveField(4) bool? printerOnline});
 }
 
 /// @nodoc
@@ -52,12 +59,17 @@ class _$PrinterEntityCopyWithImpl<$Res, $Val extends PrinterEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? storeId = freezed,
     Object? printerName = freezed,
     Object? countJobs = freezed,
     Object? printerOnline = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       storeId: freezed == storeId
           ? _value.storeId
           : storeId // ignore: cast_nullable_to_non_nullable
@@ -87,10 +99,11 @@ abstract class _$$PrinterEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? storeId,
-      String? printerName,
-      int? countJobs,
-      bool? printerOnline});
+      {@HiveField(0) String? id,
+      @HiveField(1) String? storeId,
+      @HiveField(2) String? printerName,
+      @HiveField(3) int? countJobs,
+      @HiveField(4) bool? printerOnline});
 }
 
 /// @nodoc
@@ -104,12 +117,17 @@ class __$$PrinterEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? storeId = freezed,
     Object? printerName = freezed,
     Object? countJobs = freezed,
     Object? printerOnline = freezed,
   }) {
     return _then(_$PrinterEntityImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       storeId: freezed == storeId
           ? _value.storeId
           : storeId // ignore: cast_nullable_to_non_nullable
@@ -132,22 +150,34 @@ class __$$PrinterEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
+@HiveType(typeId: 4, adapterName: 'PrinterEntityAdapter')
 class _$PrinterEntityImpl implements _PrinterEntity {
   const _$PrinterEntityImpl(
-      {this.storeId, this.printerName, this.countJobs, this.printerOnline});
+      {@HiveField(0) this.id,
+      @HiveField(1) this.storeId,
+      @HiveField(2) this.printerName,
+      @HiveField(3) this.countJobs,
+      @HiveField(4) this.printerOnline});
 
   @override
+  @HiveField(0)
+  final String? id;
+  @override
+  @HiveField(1)
   final String? storeId;
   @override
+  @HiveField(2)
   final String? printerName;
   @override
+  @HiveField(3)
   final int? countJobs;
   @override
+  @HiveField(4)
   final bool? printerOnline;
 
   @override
   String toString() {
-    return 'PrinterEntity(storeId: $storeId, printerName: $printerName, countJobs: $countJobs, printerOnline: $printerOnline)';
+    return 'PrinterEntity(id: $id, storeId: $storeId, printerName: $printerName, countJobs: $countJobs, printerOnline: $printerOnline)';
   }
 
   @override
@@ -155,6 +185,7 @@ class _$PrinterEntityImpl implements _PrinterEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PrinterEntityImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.storeId, storeId) || other.storeId == storeId) &&
             (identical(other.printerName, printerName) ||
                 other.printerName == printerName) &&
@@ -165,8 +196,8 @@ class _$PrinterEntityImpl implements _PrinterEntity {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, storeId, printerName, countJobs, printerOnline);
+  int get hashCode => Object.hash(
+      runtimeType, id, storeId, printerName, countJobs, printerOnline);
 
   @JsonKey(ignore: true)
   @override
@@ -177,18 +208,26 @@ class _$PrinterEntityImpl implements _PrinterEntity {
 
 abstract class _PrinterEntity implements PrinterEntity {
   const factory _PrinterEntity(
-      {final String? storeId,
-      final String? printerName,
-      final int? countJobs,
-      final bool? printerOnline}) = _$PrinterEntityImpl;
+      {@HiveField(0) final String? id,
+      @HiveField(1) final String? storeId,
+      @HiveField(2) final String? printerName,
+      @HiveField(3) final int? countJobs,
+      @HiveField(4) final bool? printerOnline}) = _$PrinterEntityImpl;
 
   @override
+  @HiveField(0)
+  String? get id;
+  @override
+  @HiveField(1)
   String? get storeId;
   @override
+  @HiveField(2)
   String? get printerName;
   @override
+  @HiveField(3)
   int? get countJobs;
   @override
+  @HiveField(4)
   bool? get printerOnline;
   @override
   @JsonKey(ignore: true)

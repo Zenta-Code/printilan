@@ -16,11 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OrderEntity {
+  @HiveField(0)
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get userId => throw _privateConstructorUsedError;
+  @HiveField(2)
   String? get storeId => throw _privateConstructorUsedError;
+  @HiveField(3)
   String? get documentId => throw _privateConstructorUsedError;
+  @HiveField(4)
   UserEntity? get user => throw _privateConstructorUsedError;
+  @HiveField(5)
   StoreEntity? get store => throw _privateConstructorUsedError;
+  @HiveField(6)
   DocumentEntity? get document => throw _privateConstructorUsedError;
   int? get totalPrice => throw _privateConstructorUsedError;
 
@@ -36,12 +45,13 @@ abstract class $OrderEntityCopyWith<$Res> {
       _$OrderEntityCopyWithImpl<$Res, OrderEntity>;
   @useResult
   $Res call(
-      {String? userId,
-      String? storeId,
-      String? documentId,
-      UserEntity? user,
-      StoreEntity? store,
-      DocumentEntity? document,
+      {@HiveField(0) @JsonKey(name: '_id') String? id,
+      @HiveField(1) String? userId,
+      @HiveField(2) String? storeId,
+      @HiveField(3) String? documentId,
+      @HiveField(4) UserEntity? user,
+      @HiveField(5) StoreEntity? store,
+      @HiveField(6) DocumentEntity? document,
       int? totalPrice});
 
   $UserEntityCopyWith<$Res>? get user;
@@ -62,6 +72,7 @@ class _$OrderEntityCopyWithImpl<$Res, $Val extends OrderEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? userId = freezed,
     Object? storeId = freezed,
     Object? documentId = freezed,
@@ -71,6 +82,10 @@ class _$OrderEntityCopyWithImpl<$Res, $Val extends OrderEntity>
     Object? totalPrice = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -148,12 +163,13 @@ abstract class _$$OrderEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? userId,
-      String? storeId,
-      String? documentId,
-      UserEntity? user,
-      StoreEntity? store,
-      DocumentEntity? document,
+      {@HiveField(0) @JsonKey(name: '_id') String? id,
+      @HiveField(1) String? userId,
+      @HiveField(2) String? storeId,
+      @HiveField(3) String? documentId,
+      @HiveField(4) UserEntity? user,
+      @HiveField(5) StoreEntity? store,
+      @HiveField(6) DocumentEntity? document,
       int? totalPrice});
 
   @override
@@ -175,6 +191,7 @@ class __$$OrderEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? userId = freezed,
     Object? storeId = freezed,
     Object? documentId = freezed,
@@ -184,6 +201,10 @@ class __$$OrderEntityImplCopyWithImpl<$Res>
     Object? totalPrice = freezed,
   }) {
     return _then(_$OrderEntityImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -218,34 +239,46 @@ class __$$OrderEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
+@HiveType(typeId: 2, adapterName: 'OrderEntityAdapter')
 class _$OrderEntityImpl implements _OrderEntity {
   const _$OrderEntityImpl(
-      {this.userId,
-      this.storeId,
-      this.documentId,
-      this.user,
-      this.store,
-      this.document,
+      {@HiveField(0) @JsonKey(name: '_id') this.id,
+      @HiveField(1) this.userId,
+      @HiveField(2) this.storeId,
+      @HiveField(3) this.documentId,
+      @HiveField(4) this.user,
+      @HiveField(5) this.store,
+      @HiveField(6) this.document,
       this.totalPrice});
 
   @override
+  @HiveField(0)
+  @JsonKey(name: '_id')
+  final String? id;
+  @override
+  @HiveField(1)
   final String? userId;
   @override
+  @HiveField(2)
   final String? storeId;
   @override
+  @HiveField(3)
   final String? documentId;
   @override
+  @HiveField(4)
   final UserEntity? user;
   @override
+  @HiveField(5)
   final StoreEntity? store;
   @override
+  @HiveField(6)
   final DocumentEntity? document;
   @override
   final int? totalPrice;
 
   @override
   String toString() {
-    return 'OrderEntity(userId: $userId, storeId: $storeId, documentId: $documentId, user: $user, store: $store, document: $document, totalPrice: $totalPrice)';
+    return 'OrderEntity(id: $id, userId: $userId, storeId: $storeId, documentId: $documentId, user: $user, store: $store, document: $document, totalPrice: $totalPrice)';
   }
 
   @override
@@ -253,6 +286,7 @@ class _$OrderEntityImpl implements _OrderEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OrderEntityImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.storeId, storeId) || other.storeId == storeId) &&
             (identical(other.documentId, documentId) ||
@@ -266,7 +300,7 @@ class _$OrderEntityImpl implements _OrderEntity {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, userId, storeId, documentId,
+  int get hashCode => Object.hash(runtimeType, id, userId, storeId, documentId,
       user, store, document, totalPrice);
 
   @JsonKey(ignore: true)
@@ -278,25 +312,36 @@ class _$OrderEntityImpl implements _OrderEntity {
 
 abstract class _OrderEntity implements OrderEntity {
   const factory _OrderEntity(
-      {final String? userId,
-      final String? storeId,
-      final String? documentId,
-      final UserEntity? user,
-      final StoreEntity? store,
-      final DocumentEntity? document,
+      {@HiveField(0) @JsonKey(name: '_id') final String? id,
+      @HiveField(1) final String? userId,
+      @HiveField(2) final String? storeId,
+      @HiveField(3) final String? documentId,
+      @HiveField(4) final UserEntity? user,
+      @HiveField(5) final StoreEntity? store,
+      @HiveField(6) final DocumentEntity? document,
       final int? totalPrice}) = _$OrderEntityImpl;
 
   @override
+  @HiveField(0)
+  @JsonKey(name: '_id')
+  String? get id;
+  @override
+  @HiveField(1)
   String? get userId;
   @override
+  @HiveField(2)
   String? get storeId;
   @override
+  @HiveField(3)
   String? get documentId;
   @override
+  @HiveField(4)
   UserEntity? get user;
   @override
+  @HiveField(5)
   StoreEntity? get store;
   @override
+  @HiveField(6)
   DocumentEntity? get document;
   @override
   int? get totalPrice;

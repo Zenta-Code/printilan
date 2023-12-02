@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing_data/models/address/address_model.dart';
-import 'package:sky_printing_domain/entities/store_entity.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'store_model.freezed.dart';
 part 'store_model.g.dart';

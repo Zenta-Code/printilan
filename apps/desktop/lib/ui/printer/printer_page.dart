@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sky_printing_admin/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing_admin/ui/printer/cubit/printer_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_domain/entities/printer_enitity.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 import 'package:windows_printing_models/windows_printing_models.dart';
 
 class PrinterPage extends StatefulWidget {

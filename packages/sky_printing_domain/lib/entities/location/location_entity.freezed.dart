@@ -16,22 +16,38 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LocationEntity {
+  @HiveField(0)
   double? get latitude => throw _privateConstructorUsedError;
+  @HiveField(1)
   double? get longitude => throw _privateConstructorUsedError;
+  @HiveField(2)
   double? get accuracy => throw _privateConstructorUsedError;
+  @HiveField(3)
   double? get verticalAccuracy => throw _privateConstructorUsedError;
+  @HiveField(4)
   double? get altitude => throw _privateConstructorUsedError;
+  @HiveField(5)
   double? get speed => throw _privateConstructorUsedError;
+  @HiveField(6)
   double? get speedAccuracy => throw _privateConstructorUsedError;
+  @HiveField(7)
   double? get heading => throw _privateConstructorUsedError;
+  @HiveField(8)
   double? get time => throw _privateConstructorUsedError;
+  @HiveField(9)
   bool? get isMock => throw _privateConstructorUsedError;
+  @HiveField(10)
   double? get headingAccuracy => throw _privateConstructorUsedError;
+  @HiveField(11)
   double? get elapsedRealtimeNanos => throw _privateConstructorUsedError;
+  @HiveField(12)
   double? get elapsedRealtimeUncertaintyNanos =>
       throw _privateConstructorUsedError;
+  @HiveField(13)
   int? get satelliteNumber => throw _privateConstructorUsedError;
+  @HiveField(14)
   String? get provider => throw _privateConstructorUsedError;
+  @HiveField(15)
   List<Placemark>? get placemarks => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -46,22 +62,22 @@ abstract class $LocationEntityCopyWith<$Res> {
       _$LocationEntityCopyWithImpl<$Res, LocationEntity>;
   @useResult
   $Res call(
-      {double? latitude,
-      double? longitude,
-      double? accuracy,
-      double? verticalAccuracy,
-      double? altitude,
-      double? speed,
-      double? speedAccuracy,
-      double? heading,
-      double? time,
-      bool? isMock,
-      double? headingAccuracy,
-      double? elapsedRealtimeNanos,
-      double? elapsedRealtimeUncertaintyNanos,
-      int? satelliteNumber,
-      String? provider,
-      List<Placemark>? placemarks});
+      {@HiveField(0) double? latitude,
+      @HiveField(1) double? longitude,
+      @HiveField(2) double? accuracy,
+      @HiveField(3) double? verticalAccuracy,
+      @HiveField(4) double? altitude,
+      @HiveField(5) double? speed,
+      @HiveField(6) double? speedAccuracy,
+      @HiveField(7) double? heading,
+      @HiveField(8) double? time,
+      @HiveField(9) bool? isMock,
+      @HiveField(10) double? headingAccuracy,
+      @HiveField(11) double? elapsedRealtimeNanos,
+      @HiveField(12) double? elapsedRealtimeUncertaintyNanos,
+      @HiveField(13) int? satelliteNumber,
+      @HiveField(14) String? provider,
+      @HiveField(15) List<Placemark>? placemarks});
 }
 
 /// @nodoc
@@ -173,22 +189,22 @@ abstract class _$$LocationEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {double? latitude,
-      double? longitude,
-      double? accuracy,
-      double? verticalAccuracy,
-      double? altitude,
-      double? speed,
-      double? speedAccuracy,
-      double? heading,
-      double? time,
-      bool? isMock,
-      double? headingAccuracy,
-      double? elapsedRealtimeNanos,
-      double? elapsedRealtimeUncertaintyNanos,
-      int? satelliteNumber,
-      String? provider,
-      List<Placemark>? placemarks});
+      {@HiveField(0) double? latitude,
+      @HiveField(1) double? longitude,
+      @HiveField(2) double? accuracy,
+      @HiveField(3) double? verticalAccuracy,
+      @HiveField(4) double? altitude,
+      @HiveField(5) double? speed,
+      @HiveField(6) double? speedAccuracy,
+      @HiveField(7) double? heading,
+      @HiveField(8) double? time,
+      @HiveField(9) bool? isMock,
+      @HiveField(10) double? headingAccuracy,
+      @HiveField(11) double? elapsedRealtimeNanos,
+      @HiveField(12) double? elapsedRealtimeUncertaintyNanos,
+      @HiveField(13) int? satelliteNumber,
+      @HiveField(14) String? provider,
+      @HiveField(15) List<Placemark>? placemarks});
 }
 
 /// @nodoc
@@ -291,58 +307,75 @@ class __$$LocationEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
+@HiveType(typeId: 2, adapterName: 'LocationEntityAdapter')
 class _$LocationEntityImpl implements _LocationEntity {
   const _$LocationEntityImpl(
-      {this.latitude,
-      this.longitude,
-      this.accuracy,
-      this.verticalAccuracy,
-      this.altitude,
-      this.speed,
-      this.speedAccuracy,
-      this.heading,
-      this.time,
-      this.isMock,
-      this.headingAccuracy,
-      this.elapsedRealtimeNanos,
-      this.elapsedRealtimeUncertaintyNanos,
-      this.satelliteNumber,
-      this.provider,
-      final List<Placemark>? placemarks})
+      {@HiveField(0) this.latitude,
+      @HiveField(1) this.longitude,
+      @HiveField(2) this.accuracy,
+      @HiveField(3) this.verticalAccuracy,
+      @HiveField(4) this.altitude,
+      @HiveField(5) this.speed,
+      @HiveField(6) this.speedAccuracy,
+      @HiveField(7) this.heading,
+      @HiveField(8) this.time,
+      @HiveField(9) this.isMock,
+      @HiveField(10) this.headingAccuracy,
+      @HiveField(11) this.elapsedRealtimeNanos,
+      @HiveField(12) this.elapsedRealtimeUncertaintyNanos,
+      @HiveField(13) this.satelliteNumber,
+      @HiveField(14) this.provider,
+      @HiveField(15) final List<Placemark>? placemarks})
       : _placemarks = placemarks;
 
   @override
+  @HiveField(0)
   final double? latitude;
   @override
+  @HiveField(1)
   final double? longitude;
   @override
+  @HiveField(2)
   final double? accuracy;
   @override
+  @HiveField(3)
   final double? verticalAccuracy;
   @override
+  @HiveField(4)
   final double? altitude;
   @override
+  @HiveField(5)
   final double? speed;
   @override
+  @HiveField(6)
   final double? speedAccuracy;
   @override
+  @HiveField(7)
   final double? heading;
   @override
+  @HiveField(8)
   final double? time;
   @override
+  @HiveField(9)
   final bool? isMock;
   @override
+  @HiveField(10)
   final double? headingAccuracy;
   @override
+  @HiveField(11)
   final double? elapsedRealtimeNanos;
   @override
+  @HiveField(12)
   final double? elapsedRealtimeUncertaintyNanos;
   @override
+  @HiveField(13)
   final int? satelliteNumber;
   @override
+  @HiveField(14)
   final String? provider;
   final List<Placemark>? _placemarks;
   @override
+  @HiveField(15)
   List<Placemark>? get placemarks {
     final value = _placemarks;
     if (value == null) return null;
@@ -423,54 +456,70 @@ class _$LocationEntityImpl implements _LocationEntity {
 
 abstract class _LocationEntity implements LocationEntity {
   const factory _LocationEntity(
-      {final double? latitude,
-      final double? longitude,
-      final double? accuracy,
-      final double? verticalAccuracy,
-      final double? altitude,
-      final double? speed,
-      final double? speedAccuracy,
-      final double? heading,
-      final double? time,
-      final bool? isMock,
-      final double? headingAccuracy,
-      final double? elapsedRealtimeNanos,
-      final double? elapsedRealtimeUncertaintyNanos,
-      final int? satelliteNumber,
-      final String? provider,
-      final List<Placemark>? placemarks}) = _$LocationEntityImpl;
+      {@HiveField(0) final double? latitude,
+      @HiveField(1) final double? longitude,
+      @HiveField(2) final double? accuracy,
+      @HiveField(3) final double? verticalAccuracy,
+      @HiveField(4) final double? altitude,
+      @HiveField(5) final double? speed,
+      @HiveField(6) final double? speedAccuracy,
+      @HiveField(7) final double? heading,
+      @HiveField(8) final double? time,
+      @HiveField(9) final bool? isMock,
+      @HiveField(10) final double? headingAccuracy,
+      @HiveField(11) final double? elapsedRealtimeNanos,
+      @HiveField(12) final double? elapsedRealtimeUncertaintyNanos,
+      @HiveField(13) final int? satelliteNumber,
+      @HiveField(14) final String? provider,
+      @HiveField(15) final List<Placemark>? placemarks}) = _$LocationEntityImpl;
 
   @override
+  @HiveField(0)
   double? get latitude;
   @override
+  @HiveField(1)
   double? get longitude;
   @override
+  @HiveField(2)
   double? get accuracy;
   @override
+  @HiveField(3)
   double? get verticalAccuracy;
   @override
+  @HiveField(4)
   double? get altitude;
   @override
+  @HiveField(5)
   double? get speed;
   @override
+  @HiveField(6)
   double? get speedAccuracy;
   @override
+  @HiveField(7)
   double? get heading;
   @override
+  @HiveField(8)
   double? get time;
   @override
+  @HiveField(9)
   bool? get isMock;
   @override
+  @HiveField(10)
   double? get headingAccuracy;
   @override
+  @HiveField(11)
   double? get elapsedRealtimeNanos;
   @override
+  @HiveField(12)
   double? get elapsedRealtimeUncertaintyNanos;
   @override
+  @HiveField(13)
   int? get satelliteNumber;
   @override
+  @HiveField(14)
   String? get provider;
   @override
+  @HiveField(15)
   List<Placemark>? get placemarks;
   @override
   @JsonKey(ignore: true)

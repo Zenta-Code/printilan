@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_domain/entities/store_entity.dart';
-import 'package:sky_printing_domain/usecases/a_usecases.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 abstract class StoreRepository {
   Future<Either<Failure, StoreEntity>> getStoreById(

@@ -16,9 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$BundleEntity {
+  @HiveField(0)
+  String? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get storeId => throw _privateConstructorUsedError;
+  @HiveField(2)
   String? get name => throw _privateConstructorUsedError;
+  @HiveField(3)
   String? get desc => throw _privateConstructorUsedError;
+  @HiveField(4)
   List<dynamic>? get prices => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -33,7 +39,11 @@ abstract class $BundleEntityCopyWith<$Res> {
       _$BundleEntityCopyWithImpl<$Res, BundleEntity>;
   @useResult
   $Res call(
-      {String? storeId, String? name, String? desc, List<dynamic>? prices});
+      {@HiveField(0) String? id,
+      @HiveField(1) String? storeId,
+      @HiveField(2) String? name,
+      @HiveField(3) String? desc,
+      @HiveField(4) List<dynamic>? prices});
 }
 
 /// @nodoc
@@ -49,12 +59,17 @@ class _$BundleEntityCopyWithImpl<$Res, $Val extends BundleEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? storeId = freezed,
     Object? name = freezed,
     Object? desc = freezed,
     Object? prices = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       storeId: freezed == storeId
           ? _value.storeId
           : storeId // ignore: cast_nullable_to_non_nullable
@@ -84,7 +99,11 @@ abstract class _$$BundleEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? storeId, String? name, String? desc, List<dynamic>? prices});
+      {@HiveField(0) String? id,
+      @HiveField(1) String? storeId,
+      @HiveField(2) String? name,
+      @HiveField(3) String? desc,
+      @HiveField(4) List<dynamic>? prices});
 }
 
 /// @nodoc
@@ -98,12 +117,17 @@ class __$$BundleEntityImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? storeId = freezed,
     Object? name = freezed,
     Object? desc = freezed,
     Object? prices = freezed,
   }) {
     return _then(_$BundleEntityImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       storeId: freezed == storeId
           ? _value.storeId
           : storeId // ignore: cast_nullable_to_non_nullable
@@ -126,19 +150,31 @@ class __$$BundleEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
+@HiveType(typeId: 2, adapterName: 'BundleEntityAdapter')
 class _$BundleEntityImpl implements _BundleEntity {
   const _$BundleEntityImpl(
-      {this.storeId, this.name, this.desc, final List<dynamic>? prices})
+      {@HiveField(0) this.id,
+      @HiveField(1) this.storeId,
+      @HiveField(2) this.name,
+      @HiveField(3) this.desc,
+      @HiveField(4) final List<dynamic>? prices})
       : _prices = prices;
 
   @override
+  @HiveField(0)
+  final String? id;
+  @override
+  @HiveField(1)
   final String? storeId;
   @override
+  @HiveField(2)
   final String? name;
   @override
+  @HiveField(3)
   final String? desc;
   final List<dynamic>? _prices;
   @override
+  @HiveField(4)
   List<dynamic>? get prices {
     final value = _prices;
     if (value == null) return null;
@@ -149,7 +185,7 @@ class _$BundleEntityImpl implements _BundleEntity {
 
   @override
   String toString() {
-    return 'BundleEntity(storeId: $storeId, name: $name, desc: $desc, prices: $prices)';
+    return 'BundleEntity(id: $id, storeId: $storeId, name: $name, desc: $desc, prices: $prices)';
   }
 
   @override
@@ -157,6 +193,7 @@ class _$BundleEntityImpl implements _BundleEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BundleEntityImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.storeId, storeId) || other.storeId == storeId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.desc, desc) || other.desc == desc) &&
@@ -164,7 +201,7 @@ class _$BundleEntityImpl implements _BundleEntity {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, storeId, name, desc,
+  int get hashCode => Object.hash(runtimeType, id, storeId, name, desc,
       const DeepCollectionEquality().hash(_prices));
 
   @JsonKey(ignore: true)
@@ -176,18 +213,26 @@ class _$BundleEntityImpl implements _BundleEntity {
 
 abstract class _BundleEntity implements BundleEntity {
   const factory _BundleEntity(
-      {final String? storeId,
-      final String? name,
-      final String? desc,
-      final List<dynamic>? prices}) = _$BundleEntityImpl;
+      {@HiveField(0) final String? id,
+      @HiveField(1) final String? storeId,
+      @HiveField(2) final String? name,
+      @HiveField(3) final String? desc,
+      @HiveField(4) final List<dynamic>? prices}) = _$BundleEntityImpl;
 
   @override
+  @HiveField(0)
+  String? get id;
+  @override
+  @HiveField(1)
   String? get storeId;
   @override
+  @HiveField(2)
   String? get name;
   @override
+  @HiveField(3)
   String? get desc;
   @override
+  @HiveField(4)
   List<dynamic>? get prices;
   @override
   @JsonKey(ignore: true)
