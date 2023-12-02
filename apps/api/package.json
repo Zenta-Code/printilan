@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "concurrently -k -p \"[{name}]\" -n \"TS,NODE\" -c \"yello.bold, cyan.bold\" \"pnpm run tsc:watch\" \"pnpm run start:hot\"",
-    "build": "npm run tsc",
-    "build:watch": "npm run tsc:watch",
+    "build:prod": "pnpm run tsc && pnpm run minify && pnpm run copy-locales",
+    "build:watch": "pnpm run tsc:watch",
     "tsc": "tsc",
     "tsc:watch": "tsc -w --preserveWatchOutput",
-    "start": "node dist/index.js",
-    "start:hot": "nodemon -e js,d.ts,js.map --watch dist/ \"dist/index.js\""
+    "start": "node bundle/index.js",
+    "start:hot": "nodemon -e js,d.ts,js.map --watch dist/ \"dist/index.js\"",
+    "minify": "terser-folder dist -e -x .js -o bundle/",
+    "copy-locales": "cp -r src/locales/ bundle/locales/"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -46,6 +48,8 @@
     "eslint-config-custom-server": "^0.0.1",
     "nodemon": "^2.0.22",
     "supertest": "^6.3.3",
+    "terser": "^5.24.0",
+    "terser-folder": "^2.0.0",
     "tsconfig": "^7.0.0",
     "typescript": "^4.9.5"
   }

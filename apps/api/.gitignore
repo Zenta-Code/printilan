@@ -3,5 +3,5 @@ node_modules
 .env
 # distribution folder
 dist 
-
+bundle
 files

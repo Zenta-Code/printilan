@@ -14,11 +14,11 @@ const server: Express = createExpressServer();
 
 const httpServer: Server = createServer(server);
 
-export const io = createSocketServer(httpServer); 
+export const io = createSocketServer(httpServer);
 
 try {
   mongoose.connect(
-    process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/sky_print"
+    process.env.DEV_DATABASE_URL || "mongodb://127.0.0.1:27017/sky_print"
   );
 } catch (error) {
   console.error("Error connecting to database: \n", error);

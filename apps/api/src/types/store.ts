@@ -1,20 +1,29 @@
 import z from "zod";
 import { AddressTypes } from "./address";
+import { UserTypes } from "./user";
 export const StoreTypes = z.object({
-  name: z
-    .string({
-      required_error: "Name is required",
-    })
-    .min(4, "Name must be at least 4 characters"),
-  address: AddressTypes,
-  phone: z
-    .string({
-      required_error: "Phone is required",
-    })
-    .min(10, "Phone must be at least 10 characters"),
-  ownerId: z
-    .string({
-      required_error: "Owner Id is required",
-    })
-    .min(10, "Owner Id must be at least 10 characters"),
+  user: UserTypes,
+  store: z.object({
+    name: z
+      .string({
+        required_error: "Name is required",
+      })
+      .min(2, "Name must be at least 4 characters"),
+
+    status: z.enum(["open", "close"], {
+      required_error: "Status is required",
+    }),
+    address: AddressTypes,
+    initialPrice: z.array(
+      z.object({
+        name: z.string(),
+        options: z.array(
+          z.object({
+            color :z.boolean(),
+            price: z.number(),
+          })
+        ),
+      })
+    ),
+  }),
 });

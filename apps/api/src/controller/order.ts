@@ -53,6 +53,15 @@ export const OrderController = ({ route }: { route: Router }) => {
 
   route.post("/callback", async function (req, res) {
     try {
+      console.log("======= INCOMING CALLBACK ==========");
+      console.log("Date: ", new Date().toISOString());
+      console.log(
+        "Sender IP :",
+        req.headers["x-real-ip"] || req.connection.remoteAddress
+      );
+      console.log("Body: ", req.body);
+      console.log("====================================");
+
       const body = PaymentCallbackTypes.parse(req.body);
 
       if (!body) {
