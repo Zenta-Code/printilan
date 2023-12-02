@@ -5,5 +5,5 @@ import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 abstract class LoginRepository {
   Future<Either<Failure, LoginEntity>> login(LoginParams loginParams);
-  Future<Either<Failure, UserEntity>> me(String token);
+  Future<Either<Failure, UserEntity>> me(MeParams token);
 }

@@ -68,4 +68,17 @@ class StoreRepositoryImpl implements StoreRepository {
       ),
     );
   }
+
+  @override
+  Future<Either<Failure, StoreEntity>> postStore(
+    StoreRegisterParams params,
+  ) async {
+    final res = await _remoteDataSource.postStore(params);
+    return res.fold(
+      (failure) => Left(failure),
+      (store) => Right(
+        store.toEntity(),
+      ),
+    );
+  }
 }

@@ -4,7 +4,7 @@ class ListAPI {
   static const String baseUrl = "https://manpro.zenta.dev";
   static const String socketPath = "/sky-printing";
 
-  static const String users = "/api/users";
+  static const String user = "/api/user";
 
   static const String signUp = "/api/user/sign-up";
   static const String signIn = "/api/user/sign-in";
@@ -15,5 +15,5 @@ class ListAPI {
   static const String print = "/api/print";
   static const String store = "/api/store";
   static const String document = "/api/document";
-  static const String printer = "/api/print"; 
+  static const String printer = "/api/print";
 }

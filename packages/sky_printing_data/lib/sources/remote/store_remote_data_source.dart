@@ -16,6 +16,9 @@ abstract class StoreRemoteDataSource {
   Future<Either<Failure, List<StoreModel>>> getStoreAll(
     NoParams params,
   );
+  Future<Either<Failure, StoreModel>> postStore(
+    StoreRegisterParams params,
+  );
 }
 
 class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
@@ -89,6 +92,21 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
         final StoreModel store = response['data'].map<StoreModel>((store) {
           return StoreModel.fromJson(store);
         }).toList();
+        return store;
+      },
+    );
+    return response;
+  }
+
+  @override
+  Future<Either<Failure, StoreModel>> postStore(
+    StoreRegisterParams params,
+  ) async {
+    final response = await _client.postRequest(
+      "${ListAPI.store}/sign-up",
+      data: params.toJson(),
+      converter: (response) {
+        final StoreModel store = StoreModel.fromJson(response['store']);
         return store;
       },
     );

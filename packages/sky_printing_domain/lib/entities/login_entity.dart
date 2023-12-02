@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'login_entity.freezed.dart';
 
@@ -6,7 +7,7 @@ part 'login_entity.freezed.dart';
 class LoginEntity with _$LoginEntity {
   const factory LoginEntity({
     String? token,
-    dynamic user,
-    dynamic store,
+    UserEntity? user,
+    StoreEntity? store,
   }) = _LoginEntity;
 }

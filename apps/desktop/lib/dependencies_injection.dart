@@ -104,7 +104,7 @@ void _useCase() {
     () => PostRegister(sl()),
   );
   sl.registerLazySingleton(
-    () => PostMe(sl()),
+    () => GetMe(sl()),
   );
 
   /// Socket
@@ -134,12 +134,18 @@ void _useCase() {
   sl.registerLazySingleton(
     () => GetStoreByIdUsecase(sl()),
   );
+  sl.registerLazySingleton(
+    () => PostStoreUsecase(sl()),
+  );
 }
 
 void _cubit() {
   /// Auth
   sl.registerFactory(
-    () => RegisterCubit(sl()),
+    () => RegisterCubit(
+      sl(),
+      sl(),
+    ),
   );
   sl.registerFactory(
     () => AuthCubit(

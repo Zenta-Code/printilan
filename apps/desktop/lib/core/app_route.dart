@@ -16,6 +16,7 @@ import 'package:sky_printing_admin/ui/printer/cubit/printer_cubit.dart';
 import 'package:sky_printing_admin/ui/printer/printer_page.dart';
 import 'package:sky_printing_admin/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing_admin/ui/register/register_page.dart';
+import 'package:sky_printing_admin/ui/register/store_pricing_page.dart';
 import 'package:sky_printing_admin/ui/settings/settings.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
@@ -33,7 +34,8 @@ enum Routes {
 
   // Auth Page
   login("/auth/login"),
-  register("/auth/register");
+  register("/auth/register"),
+  storePricing("/auth/register/pricing");
 
   const Routes(this.path);
 
@@ -67,6 +69,14 @@ class AppRoute {
           child: const RegisterPage(),
         ),
       ),
+      GoRoute(
+        path: Routes.storePricing.path,
+        name: Routes.storePricing.name,
+        builder: (ctx, GoRouterState state) => BlocProvider(
+          create: (_) => sl<RegisterCubit>(),
+          child: StorePricingPage(data: state.extra as StoreRegisterParams),
+        ),
+      ),
       ShellRoute(
         builder: (_, __, child) => BlocProvider(
           create: (context) => sl<MainCubit>(),
@@ -93,7 +103,7 @@ class AppRoute {
             path: Routes.printer.path,
             name: Routes.printer.name,
             builder: (_, __) => BlocProvider(
-              create: (_) => sl<PrinterCubit>()..fetchPrinters(),
+              create: (_) => sl<PrinterCubit>()..pollingPrinter(),
               child: const PrinterPage(),
             ),
           ),
@@ -117,22 +127,75 @@ FutureOr<String?> validateToken(
   BuildContext context,
   GoRouterState state,
 ) async {
+  ///
+  /// DEBUGGING
+  ///
+  // if (state.matchedLocation == Routes.storePricing.path) {
+  //   return Routes.storePricing.path;
+  // }
+  // return Routes.register.path;
+
+  ///
+  /// DEBUGGING
+  ///
   final bool isLoginPage = state.matchedLocation == Routes.login.path ||
       state.matchedLocation == Routes.register.path;
-  final token = MainBoxMixin().getData(MainBoxKeys.token);
-  if (token == null) {
+  final user = MainBoxMixin().getData<UserEntity?>(MainBoxKeys.user);
+  if (state.matchedLocation == Routes.storePricing.path) {
+    return null;
+  }
+  if (user == null && isLoginPage) {
+    return null;
+  }
+  if (user == null &&
+      !isLoginPage &&
+      state.matchedLocation != Routes.root.path) {
+    return Routes.login.path;
+  }
+  if (user == null &&
+      !isLoginPage &&
+      state.matchedLocation == Routes.root.path) {
+    return Routes.dashboard.path;
+  }
+  if (user == null &&
+      isLoginPage &&
+      state.matchedLocation == Routes.root.path) {
+    return Routes.login.path;
+  }
+  if (user == null &&
+      isLoginPage &&
+      state.matchedLocation != Routes.root.path) {
+    return null;
+  }
+
+  if (user == null) {
+    log.e("user is null");
     return Routes.login.path;
   }
   final res = await context.read<AuthCubit>().me(MeParams(
-        token: token,
+        id: user.id,
       ));
-  if (res.id == null) {
+
+  if (res == null || res is ServerFailure) {
+    log.e("res is null");
+    Future.wait([
+      MainBoxMixin().removeData(MainBoxKeys.user),
+      MainBoxMixin().removeData(MainBoxKeys.store),
+      MainBoxMixin().removeData(MainBoxKeys.token),
+    ]);
+
+    return Routes.login.path;
+  }
+  if (res!.id == null) {
+    log.e("res.id is null");
     return Routes.login.path;
   }
   if (res.id != null && isLoginPage && res.role == "seller") {
+    log.e("res.id is not null");
     return Routes.dashboard.path;
   }
   if (res.id != null && state.matchedLocation == Routes.root.path) {
+    log.e("res.id is not null");
     return Routes.dashboard.path;
   }
   return null;

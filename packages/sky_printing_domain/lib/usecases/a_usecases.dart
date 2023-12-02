@@ -1,9 +1,7 @@
 export 'bundle/bundle.dart';
 export 'get_location.dart';
 export 'order/order.dart';
-export 'post_login.dart';
-export 'post_me.dart';
-export 'post_register.dart';
 export 'printer/printer.dart';
 export 'sockets/socket.dart';
 export 'store/store.dart';
+export 'user/user.dart';

@@ -23,7 +23,8 @@ mixin _$PrinterModel {
   String? get id => throw _privateConstructorUsedError;
   String? get printerName => throw _privateConstructorUsedError;
   String? get storeId => throw _privateConstructorUsedError;
-  bool? get isBusy => throw _privateConstructorUsedError;
+  int? get countJobs => throw _privateConstructorUsedError;
+  bool? get printerOnline => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,12 @@ abstract class $PrinterModelCopyWith<$Res> {
           PrinterModel value, $Res Function(PrinterModel) then) =
       _$PrinterModelCopyWithImpl<$Res, PrinterModel>;
   @useResult
-  $Res call({String? id, String? printerName, String? storeId, bool? isBusy});
+  $Res call(
+      {String? id,
+      String? printerName,
+      String? storeId,
+      int? countJobs,
+      bool? printerOnline});
 }
 
 /// @nodoc
@@ -56,7 +62,8 @@ class _$PrinterModelCopyWithImpl<$Res, $Val extends PrinterModel>
     Object? id = freezed,
     Object? printerName = freezed,
     Object? storeId = freezed,
-    Object? isBusy = freezed,
+    Object? countJobs = freezed,
+    Object? printerOnline = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -71,9 +78,13 @@ class _$PrinterModelCopyWithImpl<$Res, $Val extends PrinterModel>
           ? _value.storeId
           : storeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isBusy: freezed == isBusy
-          ? _value.isBusy
-          : isBusy // ignore: cast_nullable_to_non_nullable
+      countJobs: freezed == countJobs
+          ? _value.countJobs
+          : countJobs // ignore: cast_nullable_to_non_nullable
+              as int?,
+      printerOnline: freezed == printerOnline
+          ? _value.printerOnline
+          : printerOnline // ignore: cast_nullable_to_non_nullable
               as bool?,
     ) as $Val);
   }
@@ -87,7 +98,12 @@ abstract class _$$PrinterModelImplImplCopyWith<$Res>
       __$$PrinterModelImplImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String? printerName, String? storeId, bool? isBusy});
+  $Res call(
+      {String? id,
+      String? printerName,
+      String? storeId,
+      int? countJobs,
+      bool? printerOnline});
 }
 
 /// @nodoc
@@ -104,7 +120,8 @@ class __$$PrinterModelImplImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? printerName = freezed,
     Object? storeId = freezed,
-    Object? isBusy = freezed,
+    Object? countJobs = freezed,
+    Object? printerOnline = freezed,
   }) {
     return _then(_$PrinterModelImplImpl(
       id: freezed == id
@@ -119,9 +136,13 @@ class __$$PrinterModelImplImplCopyWithImpl<$Res>
           ? _value.storeId
           : storeId // ignore: cast_nullable_to_non_nullable
               as String?,
-      isBusy: freezed == isBusy
-          ? _value.isBusy
-          : isBusy // ignore: cast_nullable_to_non_nullable
+      countJobs: freezed == countJobs
+          ? _value.countJobs
+          : countJobs // ignore: cast_nullable_to_non_nullable
+              as int?,
+      printerOnline: freezed == printerOnline
+          ? _value.printerOnline
+          : printerOnline // ignore: cast_nullable_to_non_nullable
               as bool?,
     ));
   }
@@ -131,7 +152,11 @@ class __$$PrinterModelImplImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PrinterModelImplImpl extends _PrinterModelImpl {
   const _$PrinterModelImplImpl(
-      {this.id, this.printerName, this.storeId, this.isBusy})
+      {this.id,
+      this.printerName,
+      this.storeId,
+      this.countJobs,
+      this.printerOnline})
       : super._();
 
   factory _$PrinterModelImplImpl.fromJson(Map<String, dynamic> json) =>
@@ -144,11 +169,13 @@ class _$PrinterModelImplImpl extends _PrinterModelImpl {
   @override
   final String? storeId;
   @override
-  final bool? isBusy;
+  final int? countJobs;
+  @override
+  final bool? printerOnline;
 
   @override
   String toString() {
-    return 'PrinterModel(id: $id, printerName: $printerName, storeId: $storeId, isBusy: $isBusy)';
+    return 'PrinterModel(id: $id, printerName: $printerName, storeId: $storeId, countJobs: $countJobs, printerOnline: $printerOnline)';
   }
 
   @override
@@ -160,13 +187,16 @@ class _$PrinterModelImplImpl extends _PrinterModelImpl {
             (identical(other.printerName, printerName) ||
                 other.printerName == printerName) &&
             (identical(other.storeId, storeId) || other.storeId == storeId) &&
-            (identical(other.isBusy, isBusy) || other.isBusy == isBusy));
+            (identical(other.countJobs, countJobs) ||
+                other.countJobs == countJobs) &&
+            (identical(other.printerOnline, printerOnline) ||
+                other.printerOnline == printerOnline));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, printerName, storeId, isBusy);
+  int get hashCode => Object.hash(
+      runtimeType, id, printerName, storeId, countJobs, printerOnline);
 
   @JsonKey(ignore: true)
   @override
@@ -188,7 +218,8 @@ abstract class _PrinterModelImpl extends PrinterModel {
       {final String? id,
       final String? printerName,
       final String? storeId,
-      final bool? isBusy}) = _$PrinterModelImplImpl;
+      final int? countJobs,
+      final bool? printerOnline}) = _$PrinterModelImplImpl;
   const _PrinterModelImpl._() : super._();
 
   factory _PrinterModelImpl.fromJson(Map<String, dynamic> json) =
@@ -201,7 +232,9 @@ abstract class _PrinterModelImpl extends PrinterModel {
   @override
   String? get storeId;
   @override
-  bool? get isBusy;
+  int? get countJobs;
+  @override
+  bool? get printerOnline;
   @override
   @JsonKey(ignore: true)
   _$$PrinterModelImplImplCopyWith<_$PrinterModelImplImpl> get copyWith =>

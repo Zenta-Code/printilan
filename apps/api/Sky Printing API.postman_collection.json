@@ -9,213 +9,6 @@
 	},
 	"item": [
 		{
-			"name": "User Sign In",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Response status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Response time is less than 500ms\", function () {\r",
-							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Response is an object with success property\", function () {\r",
-							"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('success');\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Response is an object with user property\", function () {\r",
-							"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('user');\r",
-							"});\r",
-							"\r",
-							"pm.test(\"Response is an object with token property\", function () {\r",
-							"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('token');\r",
-							"});var template = `\r",
-							"<style type=\"text/css\">\r",
-							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
-							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
-							"    .tftable tr {background-color:#ffffff;}\r",
-							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
-							"    .tftable tr:hover {background-color:#e0ffff;}\r",
-							"</style>\r",
-							"\r",
-							"<table class=\"tftable\" border=\"1\">\r",
-							"    <tr>\r",
-							"        <th>Field</th>\r",
-							"        <th>Value</th>\r",
-							"    </tr>\r",
-							"    \r",
-							"    <tr>\r",
-							"        <td>Success</td>\r",
-							"        <td>{{response.success}}</td>\r",
-							"    </tr>\r",
-							"    \r",
-							"    <tr>\r",
-							"        <td>Message</td>\r",
-							"        <td>{{response.message}}</td>\r",
-							"    </tr>\r",
-							"    \r",
-							"    <tr>\r",
-							"        <td>User ID</td>\r",
-							"        <td>{{response.user._id}}</td>\r",
-							"    </tr>\r",
-							"    \r",
-							"    <tr>\r",
-							"        <td>Name</td>\r",
-							"        <td>{{response.user.name}}</td>\r",
-							"    </tr>\r",
-							"    \r",
-							"    <tr>\r",
-							"        <td>Email</td>\r",
-							"        <td>{{response.user.email}}</td>\r",
-							"    </tr>\r",
-							"    \r",
-							"    <tr>\r",
-							"        <td>Phone</td>\r",
-							"        <td>{{response.user.phone}}</td>\r",
-							"    </tr>\r",
-							"    \r",
-							"    <tr>\r",
-							"        <td>Role</td>\r",
-							"        <td>{{response.user.role}}</td>\r",
-							"    </tr>\r",
-							"    \r",
-							"    <tr>\r",
-							"        <td>Created At</td>\r",
-							"        <td>{{response.user.createdAt}}</td>\r",
-							"    </tr>\r",
-							"    \r",
-							"    <tr>\r",
-							"        <td>Updated At</td>\r",
-							"        <td>{{response.user.updatedAt}}</td>\r",
-							"    </tr>\r",
-							"    \r",
-							"    <tr>\r",
-							"        <td>Token</td>\r",
-							"        <td>{{response.token}}</td>\r",
-							"    </tr>\r",
-							"</table>\r",
-							"`;\r",
-							"\r",
-							"function constructVisualizerPayload() {\r",
-							"    return { response: pm.response.json() }\r",
-							"}\r",
-							"\r",
-							"pm.visualizer.set(template, constructVisualizerPayload());"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept-Language",
-						"value": "id-ID",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"violia@gmaiil.com\",\r\n    \"password\":\"password\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://manpro.zenta.dev/api/user/sign-in",
-					"protocol": "https",
-					"host": [
-						"manpro",
-						"zenta",
-						"dev"
-					],
-					"path": [
-						"api",
-						"user",
-						"sign-in"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User Sign Up",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Accept-Language",
-						"value": "id-ID",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"name\": \"viol\",\r\n  \"email\": \"violia@gmaiil.com\", \r\n  \"role\": \"customer\",\r\n  \"password\": \"password\",\r\n  \"confirmPassword\": \"password\",\r\n  \"address\": {\r\n    \"street\": \"Jl. Ketintang no 23\",\r\n    \"city\": \"Surabayaa\",\r\n    \"state\": \"Jawa Timur\",\r\n    \"country\": \"Indonesia\",\r\n    \"zipCode\": \"60231\"\r\n  },\r\n  \"phone\": \"085732030855\"\r\n}\r\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://manpro.zenta.dev/api/user/sign-up",
-					"protocol": "https",
-					"host": [
-						"manpro",
-						"zenta",
-						"dev"
-					],
-					"path": [
-						"api",
-						"user",
-						"sign-up"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "User Delete",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjFiZGIwNmY1YzNkMmMzMWY0NDA1MiIsImlhdCI6MTcwMDkxODQwOCwiZXhwIjoxNzAxMDA0ODA4fQ.kEAkz12hAp0vLqqXX2Mbcbphonh2uEmhjF_e4C8QxcI",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "https://manpro.zenta.dev/api/user/delete/6561f6a175b4d02d486ff74c",
-					"protocol": "https",
-					"host": [
-						"manpro",
-						"zenta",
-						"dev"
-					],
-					"path": [
-						"api",
-						"user",
-						"delete",
-						"6561f6a175b4d02d486ff74c"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Ping",
 			"request": {
 				"method": "GET",
@@ -1371,6 +1164,151 @@
 			"response": []
 		},
 		{
+			"name": "Make Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response is successful\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Message is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.message).to.equal(\"\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Data array is present and contains at least one element\", function () {",
+							"  const responseData = pm.response.json();",
+							"",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.data).to.exist.and.to.be.an('array').that.is.not.empty;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"654650bce95fa7bbeead68ec\",\r\n    \"storeId\":\"654650bce95fa7bbeead691a\",\r\n    \"documentId\":\"655735ddb035b99f17437611\",\r\n    \"totalPrice\":10000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/order",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"order"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Callback",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response is successful\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.ok;",
+							"});",
+							"",
+							"",
+							"pm.test(\"Message is empty\", function () {",
+							"  const responseData = pm.response.json();",
+							"  ",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.message).to.equal(\"\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Data array is present and contains at least one element\", function () {",
+							"  const responseData = pm.response.json();",
+							"",
+							"  pm.expect(responseData).to.be.an('object');",
+							"  pm.expect(responseData.data).to.exist.and.to.be.an('array').that.is.not.empty;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\":\"654650bce95fa7bbeead68ec\",\r\n    \"storeId\":\"654650bce95fa7bbeead691a\",\r\n    \"documentId\":\"655735ddb035b99f17437611\",\r\n    \"totalPrice\":8000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/order/callback1",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"order",
+						"callback1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Store by Id",
 			"request": {
 				"method": "GET",
@@ -1403,7 +1341,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://manpro.zenta.dev/api/store?name=Matt's Store",
+					"raw": "https://manpro.zenta.dev/api/store?name=Matt Piere",
 					"protocol": "https",
 					"host": [
 						"manpro",
@@ -1417,7 +1355,7 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "Matt's Store"
+							"value": "Matt Piere"
 						}
 					]
 				}
@@ -1450,6 +1388,320 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Make Store",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Matt Piere\",\r\n            \"address\": {\r\n            \"street\": \"Jl. Ketintang no 23\",\r\n            \"city\": \"Surabayaa\",\r\n            \"state\": \"Jawa Timur\",\r\n            \"country\": \"Indonesia\",\r\n            \"zipCode\": \"60231\"\r\n        },\r\n         \r\n        \"phone\": \"085732030855\",\r\n        \"ownerId\":\"6561f6e59aaaa41d5fe16378\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/store/sign-up",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"store",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dekete Store",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/store/656987a4537e45b0389af409",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"store",
+						"656987a4537e45b0389af409"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/user?id=6561f6e59aaaa41d5fe16378",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"user"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "6561f6e59aaaa41d5fe16378"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User by Email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/user?email=violia@gmaiil.com",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"user"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "violia@gmaiil.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Sign In",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an object with success property\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('success');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an object with user property\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('user');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response is an object with token property\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('token');\r",
+							"});var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>Field</th>\r",
+							"        <th>Value</th>\r",
+							"    </tr>\r",
+							"    \r",
+							"    <tr>\r",
+							"        <td>Success</td>\r",
+							"        <td>{{response.success}}</td>\r",
+							"    </tr>\r",
+							"    \r",
+							"    <tr>\r",
+							"        <td>Message</td>\r",
+							"        <td>{{response.message}}</td>\r",
+							"    </tr>\r",
+							"    \r",
+							"    <tr>\r",
+							"        <td>User ID</td>\r",
+							"        <td>{{response.user._id}}</td>\r",
+							"    </tr>\r",
+							"    \r",
+							"    <tr>\r",
+							"        <td>Name</td>\r",
+							"        <td>{{response.user.name}}</td>\r",
+							"    </tr>\r",
+							"    \r",
+							"    <tr>\r",
+							"        <td>Email</td>\r",
+							"        <td>{{response.user.email}}</td>\r",
+							"    </tr>\r",
+							"    \r",
+							"    <tr>\r",
+							"        <td>Phone</td>\r",
+							"        <td>{{response.user.phone}}</td>\r",
+							"    </tr>\r",
+							"    \r",
+							"    <tr>\r",
+							"        <td>Role</td>\r",
+							"        <td>{{response.user.role}}</td>\r",
+							"    </tr>\r",
+							"    \r",
+							"    <tr>\r",
+							"        <td>Created At</td>\r",
+							"        <td>{{response.user.createdAt}}</td>\r",
+							"    </tr>\r",
+							"    \r",
+							"    <tr>\r",
+							"        <td>Updated At</td>\r",
+							"        <td>{{response.user.updatedAt}}</td>\r",
+							"    </tr>\r",
+							"    \r",
+							"    <tr>\r",
+							"        <td>Token</td>\r",
+							"        <td>{{response.token}}</td>\r",
+							"    </tr>\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return { response: pm.response.json() }\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"violia@gmaiil.com\",\r\n    \"password\":\"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/user/sign-in",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"user",
+						"sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "id-ID",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"viol\",\r\n  \"email\": \"violia@gmaiil.com\", \r\n  \"role\": \"customer\",\r\n  \"password\": \"password\",\r\n  \"confirmPassword\": \"password\",\r\n  \"address\": {\r\n    \"street\": \"Jl. Ketintang no 23\",\r\n    \"city\": \"Surabayaa\",\r\n    \"state\": \"Jawa Timur\",\r\n    \"country\": \"Indonesia\",\r\n    \"zipCode\": \"60231\"\r\n  },\r\n  \"phone\": \"085732030855\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/user/sign-up",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"user",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjFiZGIwNmY1YzNkMmMzMWY0NDA1MiIsImlhdCI6MTcwMDkxODQwOCwiZXhwIjoxNzAxMDA0ODA4fQ.kEAkz12hAp0vLqqXX2Mbcbphonh2uEmhjF_e4C8QxcI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://manpro.zenta.dev/api/user/delete/6561f6a175b4d02d486ff74c",
+					"protocol": "https",
+					"host": [
+						"manpro",
+						"zenta",
+						"dev"
+					],
+					"path": [
+						"api",
+						"user",
+						"delete",
+						"6561f6a175b4d02d486ff74c"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"auth": {
@@ -1457,7 +1709,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjFmNmU1OWFhYWE0MWQ1ZmUxNjM3OCIsImlhdCI6MTcwMTE0MDI5NywiZXhwIjoxNzAxMjI2Njk3fQ.egbQ-5eeJVt4SBQ9nxBpnxxkTZHy-voxMNCtsUSX37k",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjFmNmU1OWFhYWE0MWQ1ZmUxNjM3OCIsImlhdCI6MTcwMTQxMjQ0OSwiZXhwIjoxNzAxNDk4ODQ5fQ.uBiUsRk3eCvvnSiSWQkwbZZAkYz9m2DCcMZqnB5cPus",
 				"type": "string"
 			}
 		]

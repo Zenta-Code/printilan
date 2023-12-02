@@ -69,6 +69,8 @@ class _PrinterPageState extends State<PrinterPage> {
                     itemBuilder: (context, index) {
                       return buildListView(
                         name: printersRemote[index].printerName!,
+                        countJobs: printersRemote[index].countJobs!,
+                        printerOnline: printersRemote[index].printerOnline!,
                         index: index,
                         tag: "Remote",
                       );

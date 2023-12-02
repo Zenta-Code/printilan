@@ -19,23 +19,23 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
     } catch (_) {}
     try {
       if (options.data is FormData) {
-        log.d(
+        log.i(
           // ignore: unnecessary_null_comparison
           "REQUEST ► ︎ ${options.method != null ? options.method.toUpperCase() : 'METHOD'} ${"${options.baseUrl}${options.path}"}\n\n"
           "Headers:\n"
           "$headerMessage\n"
-          "❖ QueryParameters : \n"
+          "❖ QueryParameters : ${options.queryParameters.toString()}\n"
           "Body: ${options.data.toString()}",
         );
       } else {
         const JsonEncoder encoder = JsonEncoder.withIndent('  ');
         final String prettyJson = encoder.convert(options.data);
-        log.d(
+        log.i(
           // ignore: unnecessary_null_comparison
           "REQUEST ► ︎ ${options.method != null ? options.method.toUpperCase() : 'METHOD'} ${"${options.baseUrl}${options.path}"}\n\n"
           "Headers:\n"
           "$headerMessage\n"
-          "❖ QueryParameters : \n"
+          "❖ QueryParameters :  ${options.queryParameters.toString()}\n"
           "Body: $prettyJson",
         );
       }
@@ -64,7 +64,7 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
     response.headers.forEach((k, v) => headerMessage += '► $k: $v\n');
 
     if (response.data is FormData) {
-      log.d(
+      log.i(
         // ignore: unnecessary_null_comparison
         "<-- ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
         "Headers:\n"
@@ -75,7 +75,7 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
     } else {
       const JsonEncoder encoder = JsonEncoder.withIndent('  ');
       final String prettyJson = encoder.convert(response.data);
-      log.d(
+      log.i(
         // ignore: unnecessary_null_comparison
         "◀ ︎RESPONSE ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
         "Headers:\n"

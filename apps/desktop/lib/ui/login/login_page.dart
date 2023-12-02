@@ -1,9 +1,15 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sky_printing_admin/core/app_route.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/core/widgets/window_button.dart';
 import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
+import 'package:sky_printing_core/localization/generated/strings.dart';
+import 'package:sky_printing_core/resources/dimens.dart';
+import 'package:sky_printing_core/utils/ext/ext.dart';
 import 'package:sky_printing_core/utils/helper/constant.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 import 'package:window_manager/window_manager.dart';
@@ -60,7 +66,7 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
           child: Align(
             alignment: AlignmentDirectional.centerStart,
             child: Text(
-              '${Constants.get.appName} - Sign In',
+              '${Constants.get.appName} - ${Strings.of(context)!.login}',
             ),
           ),
         ),
@@ -92,16 +98,22 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset('assets/images/sign-in.svg'),
-                const SizedBox(height: 64),
-                Text(
-                  'Welcome to',
-                  style: theme.typography.subtitle,
+                SvgPicture.asset(
+                  'assets/images/sign-in.svg',
+                  width: 400.w,
+                  height: 400.h,
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: Dimens.space64),
+                Text('Welcome to',
+                    style: theme.typography.subtitle!.copyWith(
+                      fontSize: Dimens.titleLarge,
+                    )),
+                SizedBox(height: Dimens.space8),
                 Text(
                   Constants.get.appName,
-                  style: theme.typography.title,
+                  style: theme.typography.title!.copyWith(
+                    fontSize: Dimens.headlineMedium,
+                  ),
                 ),
               ],
             ),
@@ -109,97 +121,48 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
           SizedBox(
             width: rightPanelWidth,
             child: Card(
-              child: Padding(
-                padding: EdgeInsets.all(height * 0.15),
-                child: AutofillGroup(
-                  child: Form(
-                    key: _keyForm,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: SvgPicture.asset(
-                              'assets/images/sky-printing.svg'),
-                        ),
-                        SizedBox(height: height * 0.03),
-                        Text('Sign In', style: theme.typography.titleLarge),
-                        SizedBox(height: height * 0.02),
-                        Text(
-                          'Please sign in to continue as Seller, or if you don\'t have an account, you can create a new one.',
-                          style: theme.typography.body,
-                        ),
-                        SizedBox(height: height * 0.01),
-                        const Divider(),
-                        SizedBox(height: height * 0.01),
-                        InfoLabel(
-                          label: 'Email',
-                          child: TextFormBox(
-                            controller: _conEmail,
-                            focusNode: _fnEmail,
-                            placeholder: 'Enter your email',
-                            keyboardType: TextInputType.emailAddress,
-                            validator: (v) {
-                              if (v!.isEmpty) {
-                                return 'Email is required';
-                              }
-                              return null;
-                            },
-                            onEditingComplete: () {
-                              _fnEmail.unfocus();
-                              FocusScope.of(context).requestFocus(_fnPassword);
-                            },
-                          ),
-                        ),
-                        SizedBox(height: height * 0.02),
-                        InfoLabel(
-                          label: 'Password',
-                          child: TextFormBox(
-                            controller: _conPassword,
-                            focusNode: _fnPassword,
-                            placeholder: 'Enter your password',
-                            obscureText: true,
-                            validator: (v) {
-                              if (v!.isEmpty) {
-                                return 'Password is required';
-                              }
-                              return null;
-                            },
-                            onEditingComplete: () {
-                              _fnPassword.unfocus();
-                            },
-                          ),
-                        ),
-                        SizedBox(height: height * 0.02),
-                        SizedBox(
-                          width: double.infinity,
-                          child: FilledButton(
+              child: BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  state.whenOrNull(
+                    success: (data) {
+                      context.dismiss();
+                      displayInfoBar(context, builder: (context, close) {
+                        return const InfoBar(
+                          title: Text('Success!'),
+                          content: Text('Successfully logged in.'),
+                          severity: InfoBarSeverity.success,
+                          isLong: true,
+                        );
+                      });
+                      context.goNamed(Routes.dashboard.name);
+                    },
+                    loading: () => context.show(),
+                    failure: (message) {
+                      context.dismiss();
+                      displayInfoBar(context, builder: (context, close) {
+                        return InfoBar(
+                          title: Text('Login Failed!'),
+                          content: Text(
+                              "$message. Please try again, or register if you don't have an account."),
+                          action: Button(
                             onPressed: () {
-                              if (_keyForm.currentState?.validate() ?? false) {
-                                displayInfoBar(context,
-                                    builder: (context, close) {
-                                  return const InfoBar(
-                                    title: Text('Success!'),
-                                    content: Text('Successfully logged in.'),
-                                    severity: InfoBarSeverity.success,
-                                    isLong: true,
-                                  );
-                                });
-                                context.read<AuthCubit>().login(
-                                      LoginParams(
-                                        email: _conEmail.text,
-                                        password: _conPassword.text,
-                                      ),
-                                    );
-                              }
+                              context.goNamed(Routes.register.name);
                             },
-                            child: const Text('Sign In'),
+                            child: Text('Register'),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                          severity: InfoBarSeverity.error,
+                        );
+                      });
+                    },
+                  );
+                },
+                builder: (context, state) {
+                  return buildLayout(
+                    context: context,
+                    height: height,
+                    theme: theme,
+                  );
+                },
               ),
             ),
           ),
@@ -208,6 +171,128 @@ class _LoginPageState extends State<LoginPage> with WindowListener {
     );
   }
 
+  Widget buildLayout({
+    required BuildContext context,
+    required double height,
+    required FluentThemeData theme,
+  }) =>
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: Dimens.space64),
+        child: AutofillGroup(
+          child: Form(
+            key: _keyForm,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                  child: SvgPicture.asset(
+                    'assets/images/sky-printing.svg',
+                    width: 144.w,
+                    height: 144.h,
+                  ),
+                ),
+                SizedBox(height: height * 0.03),
+                Text(
+                  'Sign In',
+                  style: theme.typography.title!.copyWith(
+                    fontSize: Dimens.headlineMedium,
+                  ),
+                ),
+                SizedBox(height: height * 0.02),
+                Text(
+                  'Please sign in to continue as Seller, or if you don\'t have an account, you can create a new one.',
+                  style: theme.typography.body!.copyWith(
+                    fontSize: 14.sp,
+                  ),
+                ),
+                SizedBox(height: height * 0.01),
+                const Divider(),
+                SizedBox(height: height * 0.01),
+                InfoLabel(
+                  label: 'Email',
+                  child: TextFormBox(
+                    controller: _conEmail,
+                    focusNode: _fnEmail,
+                    placeholder: 'Enter your email',
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (v) {
+                      if (v!.isEmpty) {
+                        return 'Email is required';
+                      }
+                      return null;
+                    },
+                    onEditingComplete: () {
+                      _fnEmail.unfocus();
+                      FocusScope.of(context).requestFocus(_fnPassword);
+                    },
+                  ),
+                ),
+                SizedBox(height: height * 0.02),
+                InfoLabel(
+                  label: 'Password',
+                  child: TextFormBox(
+                    controller: _conPassword,
+                    focusNode: _fnPassword,
+                    placeholder: 'Enter your password',
+                    obscureText: true,
+                    validator: (v) {
+                      if (v!.isEmpty) {
+                        return 'Password is required';
+                      }
+                      return null;
+                    },
+                    onEditingComplete: () {
+                      _fnPassword.unfocus();
+                    },
+                  ),
+                ),
+                SizedBox(height: height * 0.02),
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton(
+                    style: ButtonStyle(
+                      backgroundColor: ButtonState.all(Colors.blue),
+                    ),
+                    onPressed: () {
+                      if (_keyForm.currentState?.validate() ?? false) {
+                        context.read<AuthCubit>().login(
+                              LoginParams(
+                                email: _conEmail.text,
+                                password: _conPassword.text,
+                              ),
+                            );
+                      }
+                    },
+                    child: Text(
+                      'Sign In',
+                      style: theme.typography.bodyLarge!.copyWith(
+                        fontSize: Dimens.bodyLarge,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: height * 0.02),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(Strings.of(context)!.ask_register,
+                        style: theme.typography.body!.copyWith(
+                          fontSize: Dimens.bodyMedium,
+                        )),
+                    HyperlinkButton(
+                      onPressed: () {
+                        context.pushNamed(Routes.register.name);
+                      },
+                      child: Text(Strings.of(context)!.register),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
   @override
   void onWindowClose() async {
     bool isPreventClose = await windowManager.isPreventClose();

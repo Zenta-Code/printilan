@@ -16,11 +16,16 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$StoreEntity {
+  @HiveField(0)
   @JsonKey(name: '_id')
   String? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get name => throw _privateConstructorUsedError;
+  @HiveField(2)
   AddressEntity? get address => throw _privateConstructorUsedError;
+  @HiveField(3)
   String? get phone => throw _privateConstructorUsedError;
+  @HiveField(4)
   String? get ownerId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -35,11 +40,11 @@ abstract class $StoreEntityCopyWith<$Res> {
       _$StoreEntityCopyWithImpl<$Res, StoreEntity>;
   @useResult
   $Res call(
-      {@JsonKey(name: '_id') String? id,
-      String? name,
-      AddressEntity? address,
-      String? phone,
-      String? ownerId});
+      {@HiveField(0) @JsonKey(name: '_id') String? id,
+      @HiveField(1) String? name,
+      @HiveField(2) AddressEntity? address,
+      @HiveField(3) String? phone,
+      @HiveField(4) String? ownerId});
 
   $AddressEntityCopyWith<$Res>? get address;
 }
@@ -109,11 +114,11 @@ abstract class _$$StoreEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: '_id') String? id,
-      String? name,
-      AddressEntity? address,
-      String? phone,
-      String? ownerId});
+      {@HiveField(0) @JsonKey(name: '_id') String? id,
+      @HiveField(1) String? name,
+      @HiveField(2) AddressEntity? address,
+      @HiveField(3) String? phone,
+      @HiveField(4) String? ownerId});
 
   @override
   $AddressEntityCopyWith<$Res>? get address;
@@ -163,24 +168,30 @@ class __$$StoreEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
+@HiveType(typeId: 2, adapterName: 'StoreEntityAdapter')
 class _$StoreEntityImpl implements _StoreEntity {
   const _$StoreEntityImpl(
-      {@JsonKey(name: '_id') this.id,
-      this.name,
-      this.address,
-      this.phone,
-      this.ownerId});
+      {@HiveField(0) @JsonKey(name: '_id') this.id,
+      @HiveField(1) this.name,
+      @HiveField(2) this.address,
+      @HiveField(3) this.phone,
+      @HiveField(4) this.ownerId});
 
   @override
+  @HiveField(0)
   @JsonKey(name: '_id')
   final String? id;
   @override
+  @HiveField(1)
   final String? name;
   @override
+  @HiveField(2)
   final AddressEntity? address;
   @override
+  @HiveField(3)
   final String? phone;
   @override
+  @HiveField(4)
   final String? ownerId;
 
   @override
@@ -213,22 +224,27 @@ class _$StoreEntityImpl implements _StoreEntity {
 
 abstract class _StoreEntity implements StoreEntity {
   const factory _StoreEntity(
-      {@JsonKey(name: '_id') final String? id,
-      final String? name,
-      final AddressEntity? address,
-      final String? phone,
-      final String? ownerId}) = _$StoreEntityImpl;
+      {@HiveField(0) @JsonKey(name: '_id') final String? id,
+      @HiveField(1) final String? name,
+      @HiveField(2) final AddressEntity? address,
+      @HiveField(3) final String? phone,
+      @HiveField(4) final String? ownerId}) = _$StoreEntityImpl;
 
   @override
+  @HiveField(0)
   @JsonKey(name: '_id')
   String? get id;
   @override
+  @HiveField(1)
   String? get name;
   @override
+  @HiveField(2)
   AddressEntity? get address;
   @override
+  @HiveField(3)
   String? get phone;
   @override
+  @HiveField(4)
   String? get ownerId;
   @override
   @JsonKey(ignore: true)

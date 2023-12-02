@@ -7,10 +7,13 @@ part 'auth_cubit.freezed.dart';
 part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this._postLogin, this._postMe) : super(const _Loading());
+  AuthCubit(
+    this._postLogin,
+    this._getMe,
+  ) : super(const _Init());
 
   final PostLogin _postLogin;
-  final PostMe _postMe;
+  final GetMe _getMe;
 
   bool? isPasswordHide = true;
 
@@ -26,21 +29,27 @@ class AuthCubit extends Cubit<AuthState> {
 
     data.fold(
       (l) {
-        if (l is ServerFailure) { 
+        if (l is ServerFailure) {
           emit(_Failure(l.message ?? ""));
         }
       },
-      (r) => emit(_Success(r.token)),
+      (r) {
+        if (r.token!.contains("not found")) {
+          emit(_Failure(r.token ?? ""));
+        } else {
+          emit(_Success(r.token));
+        }
+      },
     );
   }
 
-  Future<dynamic> me(MeParams token) async {
+  Future<UserEntity?> me(MeParams token) async {
     emit(const _Loading());
-    final data = await _postMe.call(token);
+    final data = await _getMe.call(token);
     return data.fold(
       (l) {
         if (l is ServerFailure) {
-          return l.message;
+          return null;
         }
       },
       (r) {

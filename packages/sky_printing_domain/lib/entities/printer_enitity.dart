@@ -7,6 +7,7 @@ class PrinterEntity with _$PrinterEntity {
   const factory PrinterEntity({
     String? storeId,
     String? printerName,
-    bool? isBusy,
+    int? countJobs,
+    bool? printerOnline,
   }) = _PrinterEntity;
 }

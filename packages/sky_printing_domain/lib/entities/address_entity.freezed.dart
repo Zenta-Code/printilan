@@ -16,10 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AddressEntity {
+  @HiveField(0)
   String? get street => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get city => throw _privateConstructorUsedError;
+  @HiveField(2)
   String? get state => throw _privateConstructorUsedError;
+  @HiveField(3)
   String? get country => throw _privateConstructorUsedError;
+  @HiveField(4)
   String? get zipcode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -34,11 +39,11 @@ abstract class $AddressEntityCopyWith<$Res> {
       _$AddressEntityCopyWithImpl<$Res, AddressEntity>;
   @useResult
   $Res call(
-      {String? street,
-      String? city,
-      String? state,
-      String? country,
-      String? zipcode});
+      {@HiveField(0) String? street,
+      @HiveField(1) String? city,
+      @HiveField(2) String? state,
+      @HiveField(3) String? country,
+      @HiveField(4) String? zipcode});
 }
 
 /// @nodoc
@@ -94,11 +99,11 @@ abstract class _$$AddressEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? street,
-      String? city,
-      String? state,
-      String? country,
-      String? zipcode});
+      {@HiveField(0) String? street,
+      @HiveField(1) String? city,
+      @HiveField(2) String? state,
+      @HiveField(3) String? country,
+      @HiveField(4) String? zipcode});
 }
 
 /// @nodoc
@@ -145,19 +150,29 @@ class __$$AddressEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
+@HiveType(typeId: 1, adapterName: 'AddressEntityAdapter')
 class _$AddressEntityImpl implements _AddressEntity {
   const _$AddressEntityImpl(
-      {this.street, this.city, this.state, this.country, this.zipcode});
+      {@HiveField(0) this.street,
+      @HiveField(1) this.city,
+      @HiveField(2) this.state,
+      @HiveField(3) this.country,
+      @HiveField(4) this.zipcode});
 
   @override
+  @HiveField(0)
   final String? street;
   @override
+  @HiveField(1)
   final String? city;
   @override
+  @HiveField(2)
   final String? state;
   @override
+  @HiveField(3)
   final String? country;
   @override
+  @HiveField(4)
   final String? zipcode;
 
   @override
@@ -190,21 +205,26 @@ class _$AddressEntityImpl implements _AddressEntity {
 
 abstract class _AddressEntity implements AddressEntity {
   const factory _AddressEntity(
-      {final String? street,
-      final String? city,
-      final String? state,
-      final String? country,
-      final String? zipcode}) = _$AddressEntityImpl;
+      {@HiveField(0) final String? street,
+      @HiveField(1) final String? city,
+      @HiveField(2) final String? state,
+      @HiveField(3) final String? country,
+      @HiveField(4) final String? zipcode}) = _$AddressEntityImpl;
 
   @override
+  @HiveField(0)
   String? get street;
   @override
+  @HiveField(1)
   String? get city;
   @override
+  @HiveField(2)
   String? get state;
   @override
+  @HiveField(3)
   String? get country;
   @override
+  @HiveField(4)
   String? get zipcode;
   @override
   @JsonKey(ignore: true)

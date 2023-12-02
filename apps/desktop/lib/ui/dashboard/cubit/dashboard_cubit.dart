@@ -31,10 +31,10 @@ class DashboardCubit extends Cubit<DashboardState> {
     );
 
     final order = await _getOrderByStoreUsecase.call(
-      GetOrderByStoreParams(storeId: store['_id']),
+      GetOrderByStoreParams(storeId: store.id),
     );
     final bundle = await _getBundleByStoreUsecase.call(
-      GetBundleByStoreParams(storeId: store['_id']),
+      GetBundleByStoreParams(storeId: store.id),
     );
     order.fold(
       (l) => null,

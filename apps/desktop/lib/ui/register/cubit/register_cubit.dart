@@ -8,12 +8,16 @@ part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
   final PostRegister _postRegister;
+  final PostStoreUsecase _postStoreUsecase;
 
   /// Handle state visibility password
   bool? isPasswordHide = true;
   bool? isConfirmPasswordHide = true;
 
-  RegisterCubit(this._postRegister) : super(const _Loading());
+  RegisterCubit(
+    this._postRegister,
+    this._postStoreUsecase,
+  ) : super(const _Loading());
 
   void showHidePassword() {
     safeEmit(
@@ -43,13 +47,13 @@ class RegisterCubit extends Cubit<RegisterState> {
     );
   }
 
-  Future<void> register(RegisterParams params) async {
+  Future<void> register(StoreRegisterParams params) async {
     safeEmit(
       const _Loading(),
       emit: emit,
       isClosed: isClosed,
-    ); 
-    final data = await _postRegister.call(params);
+    );
+    final data = await _postStoreUsecase.call(params);
     data.fold(
       (l) {
         if (l is ServerFailure) {
@@ -61,7 +65,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         }
       },
       (r) => safeEmit(
-        _Success(r),
+        _Success(null),
         emit: emit,
         isClosed: isClosed,
       ),

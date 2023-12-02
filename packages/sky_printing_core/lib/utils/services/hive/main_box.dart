@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 enum ActiveTheme {
   light(ThemeMode.light),
@@ -17,9 +18,15 @@ enum MainBoxKeys {
   fcm,
   language,
   theme,
-  locale, 
+  locale,
   user,
   store,
+}
+
+void entitiesRegister() {
+  Hive.registerAdapter(UserEntityAdapter());
+  Hive.registerAdapter(AddressEntityAdapter());
+  Hive.registerAdapter(StoreEntityAdapter());
 }
 
 mixin class MainBoxMixin {
@@ -29,6 +36,7 @@ mixin class MainBoxMixin {
   static Future<void> initHive(String prefixBox) async {
     // Initialize hive (persistent database)
     await Hive.initFlutter();
+    entitiesRegister();
     mainBox = await Hive.openBox("$prefixBox$_boxName");
   }
 

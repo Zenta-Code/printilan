@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PrinterEntity {
   String? get storeId => throw _privateConstructorUsedError;
   String? get printerName => throw _privateConstructorUsedError;
-  bool? get isBusy => throw _privateConstructorUsedError;
+  int? get countJobs => throw _privateConstructorUsedError;
+  bool? get printerOnline => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PrinterEntityCopyWith<PrinterEntity> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $PrinterEntityCopyWith<$Res> {
           PrinterEntity value, $Res Function(PrinterEntity) then) =
       _$PrinterEntityCopyWithImpl<$Res, PrinterEntity>;
   @useResult
-  $Res call({String? storeId, String? printerName, bool? isBusy});
+  $Res call(
+      {String? storeId,
+      String? printerName,
+      int? countJobs,
+      bool? printerOnline});
 }
 
 /// @nodoc
@@ -49,7 +54,8 @@ class _$PrinterEntityCopyWithImpl<$Res, $Val extends PrinterEntity>
   $Res call({
     Object? storeId = freezed,
     Object? printerName = freezed,
-    Object? isBusy = freezed,
+    Object? countJobs = freezed,
+    Object? printerOnline = freezed,
   }) {
     return _then(_value.copyWith(
       storeId: freezed == storeId
@@ -60,9 +66,13 @@ class _$PrinterEntityCopyWithImpl<$Res, $Val extends PrinterEntity>
           ? _value.printerName
           : printerName // ignore: cast_nullable_to_non_nullable
               as String?,
-      isBusy: freezed == isBusy
-          ? _value.isBusy
-          : isBusy // ignore: cast_nullable_to_non_nullable
+      countJobs: freezed == countJobs
+          ? _value.countJobs
+          : countJobs // ignore: cast_nullable_to_non_nullable
+              as int?,
+      printerOnline: freezed == printerOnline
+          ? _value.printerOnline
+          : printerOnline // ignore: cast_nullable_to_non_nullable
               as bool?,
     ) as $Val);
   }
@@ -76,7 +86,11 @@ abstract class _$$PrinterEntityImplCopyWith<$Res>
       __$$PrinterEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? storeId, String? printerName, bool? isBusy});
+  $Res call(
+      {String? storeId,
+      String? printerName,
+      int? countJobs,
+      bool? printerOnline});
 }
 
 /// @nodoc
@@ -92,7 +106,8 @@ class __$$PrinterEntityImplCopyWithImpl<$Res>
   $Res call({
     Object? storeId = freezed,
     Object? printerName = freezed,
-    Object? isBusy = freezed,
+    Object? countJobs = freezed,
+    Object? printerOnline = freezed,
   }) {
     return _then(_$PrinterEntityImpl(
       storeId: freezed == storeId
@@ -103,9 +118,13 @@ class __$$PrinterEntityImplCopyWithImpl<$Res>
           ? _value.printerName
           : printerName // ignore: cast_nullable_to_non_nullable
               as String?,
-      isBusy: freezed == isBusy
-          ? _value.isBusy
-          : isBusy // ignore: cast_nullable_to_non_nullable
+      countJobs: freezed == countJobs
+          ? _value.countJobs
+          : countJobs // ignore: cast_nullable_to_non_nullable
+              as int?,
+      printerOnline: freezed == printerOnline
+          ? _value.printerOnline
+          : printerOnline // ignore: cast_nullable_to_non_nullable
               as bool?,
     ));
   }
@@ -114,18 +133,21 @@ class __$$PrinterEntityImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PrinterEntityImpl implements _PrinterEntity {
-  const _$PrinterEntityImpl({this.storeId, this.printerName, this.isBusy});
+  const _$PrinterEntityImpl(
+      {this.storeId, this.printerName, this.countJobs, this.printerOnline});
 
   @override
   final String? storeId;
   @override
   final String? printerName;
   @override
-  final bool? isBusy;
+  final int? countJobs;
+  @override
+  final bool? printerOnline;
 
   @override
   String toString() {
-    return 'PrinterEntity(storeId: $storeId, printerName: $printerName, isBusy: $isBusy)';
+    return 'PrinterEntity(storeId: $storeId, printerName: $printerName, countJobs: $countJobs, printerOnline: $printerOnline)';
   }
 
   @override
@@ -136,11 +158,15 @@ class _$PrinterEntityImpl implements _PrinterEntity {
             (identical(other.storeId, storeId) || other.storeId == storeId) &&
             (identical(other.printerName, printerName) ||
                 other.printerName == printerName) &&
-            (identical(other.isBusy, isBusy) || other.isBusy == isBusy));
+            (identical(other.countJobs, countJobs) ||
+                other.countJobs == countJobs) &&
+            (identical(other.printerOnline, printerOnline) ||
+                other.printerOnline == printerOnline));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, storeId, printerName, isBusy);
+  int get hashCode =>
+      Object.hash(runtimeType, storeId, printerName, countJobs, printerOnline);
 
   @JsonKey(ignore: true)
   @override
@@ -153,14 +179,17 @@ abstract class _PrinterEntity implements PrinterEntity {
   const factory _PrinterEntity(
       {final String? storeId,
       final String? printerName,
-      final bool? isBusy}) = _$PrinterEntityImpl;
+      final int? countJobs,
+      final bool? printerOnline}) = _$PrinterEntityImpl;
 
   @override
   String? get storeId;
   @override
   String? get printerName;
   @override
-  bool? get isBusy;
+  int? get countJobs;
+  @override
+  bool? get printerOnline;
   @override
   @JsonKey(ignore: true)
   _$$PrinterEntityImplCopyWith<_$PrinterEntityImpl> get copyWith =>

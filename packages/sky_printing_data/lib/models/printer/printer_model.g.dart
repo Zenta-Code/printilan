@@ -12,7 +12,8 @@ _$PrinterModelImplImpl _$$PrinterModelImplImplFromJson(
       id: json['id'] as String?,
       printerName: json['printerName'] as String?,
       storeId: json['storeId'] as String?,
-      isBusy: json['isBusy'] as bool?,
+      countJobs: json['countJobs'] as int?,
+      printerOnline: json['printerOnline'] as bool?,
     );
 
 Map<String, dynamic> _$$PrinterModelImplImplToJson(
@@ -21,5 +22,6 @@ Map<String, dynamic> _$$PrinterModelImplImplToJson(
       'id': instance.id,
       'printerName': instance.printerName,
       'storeId': instance.storeId,
-      'isBusy': instance.isBusy,
+      'countJobs': instance.countJobs,
+      'printerOnline': instance.printerOnline,
     };

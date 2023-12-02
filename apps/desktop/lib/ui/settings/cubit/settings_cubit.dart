@@ -45,8 +45,8 @@ class SettingsCubit extends Cubit<DataHelper> with MainBoxMixin {
   }
 
   init() async {
-    final storeId = getData(MainBoxKeys.store)['_id'];
-    log.e(storeId);
+    final storeId = getData<StoreEntity>(MainBoxKeys.store).id;
+
     if (storeId == null) return;
     final res = await _getStoreByIdUsecase.call(
       GetStoreByIdParams(
@@ -54,11 +54,7 @@ class SettingsCubit extends Cubit<DataHelper> with MainBoxMixin {
       ),
     );
     res.fold((l) {
-      if (l is ServerFailure) {
-        log.e(l.message.toString());
-      }
-    }, (r) {
-      log.e(r);
-    });
+      if (l is ServerFailure) {}
+    }, (r) {});
   }
 }

@@ -17,12 +17,24 @@ class PrinterCubit extends Cubit<PrinterState> with MainBoxMixin {
 
   final List<Printer> _printers = [];
 
+  Future<void> pollingPrinter() async {
+    await fetchPrinters();
+    await syncPrinter();
+    try {
+      Stream.periodic(const Duration(minutes: 1), (i) => i)
+          .listen((event) async {
+        await fetchPrinters();
+        await syncPrinter();
+      });
+      emit(_Success(_printers));
+    } catch (e) {
+      emit(const _Failure("Error"));
+    }
+  }
+
   Future<void> fetchPrinters() async {
-    emit(const _Loading());
     List<Printer>? printers = await WindowsPrinting().getPrinterList();
-    log.e("====================================");
-    log.e(printers);
-    log.e("====================================");
+
     if (printers != null) {
       _printers.clear();
       _printers.addAll(
@@ -34,23 +46,24 @@ class PrinterCubit extends Cubit<PrinterState> with MainBoxMixin {
   }
 
   Future<void> syncPrinter() async {
-    emit(const _Loading());
     final store = getData(MainBoxKeys.store);
 
     final List<PrinterModel> printers = _printers
         .map((e) => PrinterModel(
               printerName: e.printerName,
-              storeId: store['_id'],
-              isBusy: e.cJobs! > 0 ? true : false,
+              storeId: store.id,
+              countJobs: e.cJobs!,
+              printerOnline: e.printerOnline!,
             ))
         .toList();
     final response = await _dioClient.postRequest(
-      '${ListAPI.print}/register',
+      ListAPI.print,
       data: {
         'printers': printers.map((e) => e.toJson()).toList(),
       },
       converter: (response) {},
     );
+    await fetchPrinters();
     response.fold(
       (l) => emit(_Success(_printers)),
       (r) => emit(_Success(_printers)),

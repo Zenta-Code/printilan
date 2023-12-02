@@ -7,10 +7,10 @@ part 'login_cubit.freezed.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._postLogin, this._postMe) : super(const _Loading());
+  LoginCubit(this._postLogin, this._getMe) : super(const _Loading());
 
   final PostLogin _postLogin;
-  final PostMe _postMe;
+  final GetMe _getMe;
   bool? isPasswordHide = true;
 
   void showHidePassword() {
@@ -39,7 +39,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<bool> me(MeParams params) async {
     emit(const _Loading());
-    final data = await _postMe.call(params);
+    final data = await _getMe.call(params);
 
     return data.fold(
       (l) {

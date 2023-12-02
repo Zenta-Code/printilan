@@ -23,8 +23,8 @@ mixin _$LoginModel {
   int? get id => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
   String? get error => throw _privateConstructorUsedError;
-  dynamic get user => throw _privateConstructorUsedError;
-  dynamic get store => throw _privateConstructorUsedError;
+  UserModel? get user => throw _privateConstructorUsedError;
+  StoreModel? get store => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +39,14 @@ abstract class $LoginModelCopyWith<$Res> {
       _$LoginModelCopyWithImpl<$Res, LoginModel>;
   @useResult
   $Res call(
-      {int? id, String? token, String? error, dynamic user, dynamic store});
+      {int? id,
+      String? token,
+      String? error,
+      UserModel? user,
+      StoreModel? store});
+
+  $UserModelCopyWith<$Res>? get user;
+  $StoreModelCopyWith<$Res>? get store;
 }
 
 /// @nodoc
@@ -77,12 +84,36 @@ class _$LoginModelCopyWithImpl<$Res, $Val extends LoginModel>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as UserModel?,
       store: freezed == store
           ? _value.store
           : store // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as StoreModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserModelCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StoreModelCopyWith<$Res>? get store {
+    if (_value.store == null) {
+      return null;
+    }
+
+    return $StoreModelCopyWith<$Res>(_value.store!, (value) {
+      return _then(_value.copyWith(store: value) as $Val);
+    });
   }
 }
 
@@ -95,7 +126,16 @@ abstract class _$$LoginModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id, String? token, String? error, dynamic user, dynamic store});
+      {int? id,
+      String? token,
+      String? error,
+      UserModel? user,
+      StoreModel? store});
+
+  @override
+  $UserModelCopyWith<$Res>? get user;
+  @override
+  $StoreModelCopyWith<$Res>? get store;
 }
 
 /// @nodoc
@@ -131,11 +171,11 @@ class __$$LoginModelImplCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as UserModel?,
       store: freezed == store
           ? _value.store
           : store // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as StoreModel?,
     ));
   }
 }
@@ -157,9 +197,9 @@ class _$LoginModelImpl extends _LoginModel {
   @override
   final String? error;
   @override
-  final dynamic user;
+  final UserModel? user;
   @override
-  final dynamic store;
+  final StoreModel? store;
 
   @override
   String toString() {
@@ -174,19 +214,13 @@ class _$LoginModelImpl extends _LoginModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.token, token) || other.token == token) &&
             (identical(other.error, error) || other.error == error) &&
-            const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality().equals(other.store, store));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.store, store) || other.store == store));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      token,
-      error,
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(store));
+  int get hashCode => Object.hash(runtimeType, id, token, error, user, store);
 
   @JsonKey(ignore: true)
   @override
@@ -207,8 +241,8 @@ abstract class _LoginModel extends LoginModel {
       {final int? id,
       final String? token,
       final String? error,
-      final dynamic user,
-      final dynamic store}) = _$LoginModelImpl;
+      final UserModel? user,
+      final StoreModel? store}) = _$LoginModelImpl;
   const _LoginModel._() : super._();
 
   factory _LoginModel.fromJson(Map<String, dynamic> json) =
@@ -221,9 +255,9 @@ abstract class _LoginModel extends LoginModel {
   @override
   String? get error;
   @override
-  dynamic get user;
+  UserModel? get user;
   @override
-  dynamic get store;
+  StoreModel? get store;
   @override
   @JsonKey(ignore: true)
   _$$LoginModelImplCopyWith<_$LoginModelImpl> get copyWith =>

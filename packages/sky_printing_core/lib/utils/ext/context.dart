@@ -69,6 +69,8 @@ extension ContextExtensions on BuildContext {
   void dismiss() {
     try {
       Navigator.pop(ctx);
-    } catch (_) {}
+    } catch (_) {
+      debugPrint('Error dismiss dialog');
+    }
   }
 }

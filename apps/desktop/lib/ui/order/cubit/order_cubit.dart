@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -35,7 +34,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     final store = getData(MainBoxKeys.store);
 
     final response = await _getOrderByStoreUsecase
-        .call(GetOrderByStoreParams(storeId: store['_id']));
+        .call(GetOrderByStoreParams(storeId: store.id));
 
     response.fold((l) {
       if (l is ServerFailure) {
@@ -63,16 +62,11 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
         emit: emit,
         isClosed: isClosed,
       );
-      log.i(data);
       final order = OrderModel.fromJson(data["order"]).toEntity();
 
-      const JsonEncoder encoder = JsonEncoder.withIndent('  ');
-      final String prettyJson = encoder.convert(data["document"]);
-      log.i(prettyJson);
       orderData.add(order);
 
       final savePath = await getApplicationDocumentsDirectory();
-      log.i(savePath.path);
 
       // check if sub folder exists
       final path = data["document"]["fileName"].split("/");
@@ -98,7 +92,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
           final jobs = await Printing.directPrintPdf(
               printer: const Printer(url: 'EPSON L3210 Series'),
               onLayout: (format) => xBytes);
-          log.i(jobs);
+
           safeEmit(
             _Success(orderData),
             emit: emit,
@@ -121,7 +115,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     );
     final store = getData(MainBoxKeys.store);
     _dioClient.getRequest(
-      "${ListAPI.order}/clear/${store!['_id']}",
+      "${ListAPI.order}/clear/${store!.id}",
       converter: (response) {
         return response;
       },

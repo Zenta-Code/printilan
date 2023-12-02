@@ -17,12 +17,19 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UserEntity {
   @JsonKey(name: '_id')
+  @HiveField(0)
   String? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get name => throw _privateConstructorUsedError;
+  @HiveField(2)
   String? get email => throw _privateConstructorUsedError;
+  @HiveField(3)
   String? get password => throw _privateConstructorUsedError;
+  @HiveField(4)
   AddressEntity? get address => throw _privateConstructorUsedError;
+  @HiveField(5)
   String? get phone => throw _privateConstructorUsedError;
+  @HiveField(6)
   String? get role => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -37,13 +44,13 @@ abstract class $UserEntityCopyWith<$Res> {
       _$UserEntityCopyWithImpl<$Res, UserEntity>;
   @useResult
   $Res call(
-      {@JsonKey(name: '_id') String? id,
-      String? name,
-      String? email,
-      String? password,
-      AddressEntity? address,
-      String? phone,
-      String? role});
+      {@JsonKey(name: '_id') @HiveField(0) String? id,
+      @HiveField(1) String? name,
+      @HiveField(2) String? email,
+      @HiveField(3) String? password,
+      @HiveField(4) AddressEntity? address,
+      @HiveField(5) String? phone,
+      @HiveField(6) String? role});
 
   $AddressEntityCopyWith<$Res>? get address;
 }
@@ -123,13 +130,13 @@ abstract class _$$UserEntityImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: '_id') String? id,
-      String? name,
-      String? email,
-      String? password,
-      AddressEntity? address,
-      String? phone,
-      String? role});
+      {@JsonKey(name: '_id') @HiveField(0) String? id,
+      @HiveField(1) String? name,
+      @HiveField(2) String? email,
+      @HiveField(3) String? password,
+      @HiveField(4) AddressEntity? address,
+      @HiveField(5) String? phone,
+      @HiveField(6) String? role});
 
   @override
   $AddressEntityCopyWith<$Res>? get address;
@@ -189,30 +196,38 @@ class __$$UserEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
+@HiveType(typeId: 0, adapterName: 'UserEntityAdapter')
 class _$UserEntityImpl implements _UserEntity {
   const _$UserEntityImpl(
-      {@JsonKey(name: '_id') this.id,
-      this.name,
-      this.email,
-      this.password,
-      this.address,
-      this.phone,
-      this.role});
+      {@JsonKey(name: '_id') @HiveField(0) this.id,
+      @HiveField(1) this.name,
+      @HiveField(2) this.email,
+      @HiveField(3) this.password,
+      @HiveField(4) this.address,
+      @HiveField(5) this.phone,
+      @HiveField(6) this.role});
 
   @override
   @JsonKey(name: '_id')
+  @HiveField(0)
   final String? id;
   @override
+  @HiveField(1)
   final String? name;
   @override
+  @HiveField(2)
   final String? email;
   @override
+  @HiveField(3)
   final String? password;
   @override
+  @HiveField(4)
   final AddressEntity? address;
   @override
+  @HiveField(5)
   final String? phone;
   @override
+  @HiveField(6)
   final String? role;
 
   @override
@@ -248,28 +263,35 @@ class _$UserEntityImpl implements _UserEntity {
 
 abstract class _UserEntity implements UserEntity {
   const factory _UserEntity(
-      {@JsonKey(name: '_id') final String? id,
-      final String? name,
-      final String? email,
-      final String? password,
-      final AddressEntity? address,
-      final String? phone,
-      final String? role}) = _$UserEntityImpl;
+      {@JsonKey(name: '_id') @HiveField(0) final String? id,
+      @HiveField(1) final String? name,
+      @HiveField(2) final String? email,
+      @HiveField(3) final String? password,
+      @HiveField(4) final AddressEntity? address,
+      @HiveField(5) final String? phone,
+      @HiveField(6) final String? role}) = _$UserEntityImpl;
 
   @override
   @JsonKey(name: '_id')
+  @HiveField(0)
   String? get id;
   @override
+  @HiveField(1)
   String? get name;
   @override
+  @HiveField(2)
   String? get email;
   @override
+  @HiveField(3)
   String? get password;
   @override
+  @HiveField(4)
   AddressEntity? get address;
   @override
+  @HiveField(5)
   String? get phone;
   @override
+  @HiveField(6)
   String? get role;
   @override
   @JsonKey(ignore: true)

@@ -11,8 +11,12 @@ _$LoginModelImpl _$$LoginModelImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as int?,
       token: json['token'] as String?,
       error: json['error'] as String?,
-      user: json['user'],
-      store: json['store'],
+      user: json['user'] == null
+          ? null
+          : UserModel.fromJson(json['user'] as Map<String, dynamic>),
+      store: json['store'] == null
+          ? null
+          : StoreModel.fromJson(json['store'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$LoginModelImplToJson(_$LoginModelImpl instance) =>

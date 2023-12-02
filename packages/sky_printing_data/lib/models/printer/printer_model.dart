@@ -10,7 +10,8 @@ class PrinterModel with _$PrinterModel {
     String? id,
     String? printerName,
     String? storeId,
-    bool? isBusy,
+    int? countJobs,
+    bool? printerOnline,
   }) = _PrinterModelImpl;
 
   const PrinterModel._();
@@ -20,6 +21,7 @@ class PrinterModel with _$PrinterModel {
   PrinterEntity toEntity() => PrinterEntity(
         printerName: printerName,
         storeId: storeId,
-        isBusy: isBusy,
+        countJobs: countJobs,
+        printerOnline: printerOnline,
       );
 }

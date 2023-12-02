@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:sky_printing_data/sky_printing_data.dart';
 import 'package:sky_printing_domain/entities/login_entity.dart';
 
 part 'login_model.freezed.dart';
@@ -10,8 +11,8 @@ class LoginModel with _$LoginModel {
     int? id,
     String? token,
     String? error,
-    dynamic user,
-    dynamic store,
+    UserModel? user,
+    StoreModel? store,
   }) = _LoginModel;
 
   const LoginModel._();

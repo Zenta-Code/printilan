@@ -102,7 +102,7 @@ void _dataSources() {
 void _useCase() {
   /// Auth
   sl.registerLazySingleton(
-    () => PostMe(sl()),
+    () => GetMe(sl()),
   );
   sl.registerLazySingleton(
     () => PostLogin(sl()),

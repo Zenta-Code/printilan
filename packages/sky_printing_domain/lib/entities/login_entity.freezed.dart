@@ -17,8 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LoginEntity {
   String? get token => throw _privateConstructorUsedError;
-  dynamic get user => throw _privateConstructorUsedError;
-  dynamic get store => throw _privateConstructorUsedError;
+  UserEntity? get user => throw _privateConstructorUsedError;
+  StoreEntity? get store => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LoginEntityCopyWith<LoginEntity> get copyWith =>
@@ -31,7 +31,10 @@ abstract class $LoginEntityCopyWith<$Res> {
           LoginEntity value, $Res Function(LoginEntity) then) =
       _$LoginEntityCopyWithImpl<$Res, LoginEntity>;
   @useResult
-  $Res call({String? token, dynamic user, dynamic store});
+  $Res call({String? token, UserEntity? user, StoreEntity? store});
+
+  $UserEntityCopyWith<$Res>? get user;
+  $StoreEntityCopyWith<$Res>? get store;
 }
 
 /// @nodoc
@@ -59,12 +62,36 @@ class _$LoginEntityCopyWithImpl<$Res, $Val extends LoginEntity>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as UserEntity?,
       store: freezed == store
           ? _value.store
           : store // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as StoreEntity?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserEntityCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserEntityCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StoreEntityCopyWith<$Res>? get store {
+    if (_value.store == null) {
+      return null;
+    }
+
+    return $StoreEntityCopyWith<$Res>(_value.store!, (value) {
+      return _then(_value.copyWith(store: value) as $Val);
+    });
   }
 }
 
@@ -76,7 +103,12 @@ abstract class _$$LoginEntityImplCopyWith<$Res>
       __$$LoginEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? token, dynamic user, dynamic store});
+  $Res call({String? token, UserEntity? user, StoreEntity? store});
+
+  @override
+  $UserEntityCopyWith<$Res>? get user;
+  @override
+  $StoreEntityCopyWith<$Res>? get store;
 }
 
 /// @nodoc
@@ -102,11 +134,11 @@ class __$$LoginEntityImplCopyWithImpl<$Res>
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as UserEntity?,
       store: freezed == store
           ? _value.store
           : store // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as StoreEntity?,
     ));
   }
 }
@@ -119,9 +151,9 @@ class _$LoginEntityImpl implements _LoginEntity {
   @override
   final String? token;
   @override
-  final dynamic user;
+  final UserEntity? user;
   @override
-  final dynamic store;
+  final StoreEntity? store;
 
   @override
   String toString() {
@@ -134,16 +166,12 @@ class _$LoginEntityImpl implements _LoginEntity {
         (other.runtimeType == runtimeType &&
             other is _$LoginEntityImpl &&
             (identical(other.token, token) || other.token == token) &&
-            const DeepCollectionEquality().equals(other.user, user) &&
-            const DeepCollectionEquality().equals(other.store, store));
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.store, store) || other.store == store));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      token,
-      const DeepCollectionEquality().hash(user),
-      const DeepCollectionEquality().hash(store));
+  int get hashCode => Object.hash(runtimeType, token, user, store);
 
   @JsonKey(ignore: true)
   @override
@@ -155,15 +183,15 @@ class _$LoginEntityImpl implements _LoginEntity {
 abstract class _LoginEntity implements LoginEntity {
   const factory _LoginEntity(
       {final String? token,
-      final dynamic user,
-      final dynamic store}) = _$LoginEntityImpl;
+      final UserEntity? user,
+      final StoreEntity? store}) = _$LoginEntityImpl;
 
   @override
   String? get token;
   @override
-  dynamic get user;
+  UserEntity? get user;
   @override
-  dynamic get store;
+  StoreEntity? get store;
   @override
   @JsonKey(ignore: true)
   _$$LoginEntityImplCopyWith<_$LoginEntityImpl> get copyWith =>

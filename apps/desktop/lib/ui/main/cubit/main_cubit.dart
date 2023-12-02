@@ -56,23 +56,32 @@ class MainCubit extends Cubit<MainState> with MainBoxMixin {
   void bootstrap() {
     fetchPrinters();
     joinRoom();
+    pollingPrinter();
   }
- 
 
   void fetchPrinters() async {
     final res = await _getPrinterByStoreUsecase.call(
       GetPrinterByStoreParams(
-        storeId: getData(MainBoxKeys.store)['_id'],
+        storeId: getData<StoreEntity>(MainBoxKeys.store).id,
       ),
     );
     res.fold(
       (l) => printerData = [],
       (r) => printerData = r,
-    ); 
+    );
+  }
+
+  void pollingPrinter() async {
+    try {
+      Stream.periodic(const Duration(minutes: 1), (i) => i)
+          .listen((event) async {
+        fetchPrinters();
+      });
+    } catch (e) {}
   }
 
   void joinRoom() {
     final store = getData(MainBoxKeys.store);
-    _joinSocketUsecase.call(store!['_id']);
+    _joinSocketUsecase.call(store!.id);
   }
 }

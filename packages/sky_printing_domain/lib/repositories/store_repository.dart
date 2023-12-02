@@ -16,4 +16,7 @@ abstract class StoreRepository {
   Future<Either<Failure, List<StoreEntity>>> getStoreAll(
     NoParams params,
   );
+  Future<Either<Failure, StoreEntity>> postStore(
+    StoreRegisterParams params,
+  );
 }
