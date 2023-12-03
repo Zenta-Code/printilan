@@ -7,16 +7,39 @@ part 'bundle_model.g.dart';
 @freezed
 class BundleModel with _$BundleModel {
   const factory BundleModel({
+    @JsonKey(name: '_id') String? id,
     String? storeId,
     String? name,
-    String? desc,
-    List? prices,
+    List<BundleOptionsModel>? options,
   }) = _BundleModel;
 
   const BundleModel._();
 
-  factory BundleModel.fromJson(Map<String, dynamic> json) => _$BundleModelFromJson(json);
+  factory BundleModel.fromJson(Map<String, dynamic> json) =>
+      _$BundleModelFromJson(json);
 
-  BundleEntity toEntity() =>
-      BundleEntity(storeId: storeId, name: name, desc: desc, prices: prices);
+  BundleEntity toEntity() => BundleEntity(
+        id: id,
+        storeId: storeId,
+        name: name,
+        options: options?.map((e) => e.toEntity()).toList(),
+      );
+}
+
+@freezed
+class BundleOptionsModel with _$BundleOptionsModel {
+  const factory BundleOptionsModel({
+    bool? color,
+    int? price,
+  }) = _BundleOptionsModel;
+
+  const BundleOptionsModel._();
+
+  factory BundleOptionsModel.fromJson(Map<String, dynamic> json) =>
+      _$BundleOptionsModelFromJson(json);
+
+  BundleOptionsEntity toEntity() => BundleOptionsEntity(
+        color: color,
+        price: price,
+      );
 }

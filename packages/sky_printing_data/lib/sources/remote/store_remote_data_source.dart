@@ -10,7 +10,8 @@ abstract class StoreRemoteDataSource {
   Future<Either<Failure, StoreModel>> getStoreByName(
     GetStoreByNameParams params,
   );
-  Future<Either<Failure, List<StoreModel>>> getStoreByCity(
+  Future<Either<Failure, Tuple2<List<StoreModel>, List<BundleModel>>>>
+      getStoreByCity(
     GetStoreByCityParams params,
   );
   Future<Either<Failure, List<StoreModel>>> getStoreAll(
@@ -44,7 +45,8 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, List<StoreModel>>> getStoreByCity(
+  Future<Either<Failure, Tuple2<List<StoreModel>, List<BundleModel>>>>
+      getStoreByCity(
     GetStoreByCityParams params,
   ) async {
     final response = await _client.getRequest(
@@ -55,7 +57,12 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
             response['data'].map<StoreModel>((store) {
           return StoreModel.fromJson(store);
         }).toList();
-        return stores;
+        final List<BundleModel> bundles =
+            response['bundle'].map<BundleModel>((bundle) {
+          return BundleModel.fromJson(bundle);
+        }).toList();
+
+        return Tuple2(stores, bundles);
       },
     );
     return response;

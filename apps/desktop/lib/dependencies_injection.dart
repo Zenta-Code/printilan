@@ -163,6 +163,7 @@ void _cubit() {
     () => MainCubit(
       sl(),
       sl(),
+      sl(),
     ),
   );
   sl.registerFactory(

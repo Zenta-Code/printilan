@@ -12,7 +12,7 @@ _$AddressModelImpl _$$AddressModelImplFromJson(Map<String, dynamic> json) =>
       city: json['city'] as String?,
       state: json['state'] as String?,
       country: json['country'] as String?,
-      zipcode: json['zipcode'] as String?,
+      zipCode: json['zipCode'] as String?,
     );
 
 Map<String, dynamic> _$$AddressModelImplToJson(_$AddressModelImpl instance) =>
@@ -21,5 +21,5 @@ Map<String, dynamic> _$$AddressModelImplToJson(_$AddressModelImpl instance) =>
       'city': instance.city,
       'state': instance.state,
       'country': instance.country,
-      'zipcode': instance.zipcode,
+      'zipCode': instance.zipCode,
     };

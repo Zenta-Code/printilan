@@ -330,7 +330,7 @@ RegisterParams _$RegisterParamsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RegisterParams {
-  String? get userName => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
   String? get storeName => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
@@ -352,7 +352,7 @@ abstract class $RegisterParamsCopyWith<$Res> {
       _$RegisterParamsCopyWithImpl<$Res, RegisterParams>;
   @useResult
   $Res call(
-      {String? userName,
+      {String? name,
       String? storeName,
       String? phone,
       String? email,
@@ -377,7 +377,7 @@ class _$RegisterParamsCopyWithImpl<$Res, $Val extends RegisterParams>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userName = freezed,
+    Object? name = freezed,
     Object? storeName = freezed,
     Object? phone = freezed,
     Object? email = freezed,
@@ -387,9 +387,9 @@ class _$RegisterParamsCopyWithImpl<$Res, $Val extends RegisterParams>
     Object? role = null,
   }) {
     return _then(_value.copyWith(
-      userName: freezed == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       storeName: freezed == storeName
           ? _value.storeName
@@ -444,7 +444,7 @@ abstract class _$$RegisterParamsImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? userName,
+      {String? name,
       String? storeName,
       String? phone,
       String? email,
@@ -468,7 +468,7 @@ class __$$RegisterParamsImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? userName = freezed,
+    Object? name = freezed,
     Object? storeName = freezed,
     Object? phone = freezed,
     Object? email = freezed,
@@ -478,9 +478,9 @@ class __$$RegisterParamsImplCopyWithImpl<$Res>
     Object? role = null,
   }) {
     return _then(_$RegisterParamsImpl(
-      userName: freezed == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String?,
       storeName: freezed == storeName
           ? _value.storeName
@@ -518,7 +518,7 @@ class __$$RegisterParamsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RegisterParamsImpl implements _RegisterParams {
   const _$RegisterParamsImpl(
-      {this.userName = null,
+      {this.name = null,
       this.storeName = null,
       this.phone = null,
       this.email = null,
@@ -532,7 +532,7 @@ class _$RegisterParamsImpl implements _RegisterParams {
 
   @override
   @JsonKey()
-  final String? userName;
+  final String? name;
   @override
   @JsonKey()
   final String? storeName;
@@ -557,7 +557,7 @@ class _$RegisterParamsImpl implements _RegisterParams {
 
   @override
   String toString() {
-    return 'RegisterParams(userName: $userName, storeName: $storeName, phone: $phone, email: $email, password: $password, confirmPassword: $confirmPassword, address: $address, role: $role)';
+    return 'RegisterParams(name: $name, storeName: $storeName, phone: $phone, email: $email, password: $password, confirmPassword: $confirmPassword, address: $address, role: $role)';
   }
 
   @override
@@ -565,8 +565,7 @@ class _$RegisterParamsImpl implements _RegisterParams {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RegisterParamsImpl &&
-            (identical(other.userName, userName) ||
-                other.userName == userName) &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.storeName, storeName) ||
                 other.storeName == storeName) &&
             (identical(other.phone, phone) || other.phone == phone) &&
@@ -581,8 +580,8 @@ class _$RegisterParamsImpl implements _RegisterParams {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userName, storeName, phone,
-      email, password, confirmPassword, address, role);
+  int get hashCode => Object.hash(runtimeType, name, storeName, phone, email,
+      password, confirmPassword, address, role);
 
   @JsonKey(ignore: true)
   @override
@@ -601,7 +600,7 @@ class _$RegisterParamsImpl implements _RegisterParams {
 
 abstract class _RegisterParams implements RegisterParams {
   const factory _RegisterParams(
-      {final String? userName,
+      {final String? name,
       final String? storeName,
       final String? phone,
       final String? email,
@@ -614,7 +613,7 @@ abstract class _RegisterParams implements RegisterParams {
       _$RegisterParamsImpl.fromJson;
 
   @override
-  String? get userName;
+  String? get name;
   @override
   String? get storeName;
   @override

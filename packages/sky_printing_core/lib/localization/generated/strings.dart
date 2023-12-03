@@ -93,6 +93,42 @@ abstract class Strings {
     Locale('id')
   ];
 
+  /// No description provided for @black_and_white.
+  ///
+  /// In en, this message translates to:
+  /// **'Black and White'**
+  String get black_and_white;
+
+  /// No description provided for @color.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get color;
+
+  /// No description provided for @please_fill_copies_field.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill copies field'**
+  String get please_fill_copies_field;
+
+  /// No description provided for @no_store_selected.
+  ///
+  /// In en, this message translates to:
+  /// **'No store selected'**
+  String get no_store_selected;
+
+  /// No description provided for @no_file_selected.
+  ///
+  /// In en, this message translates to:
+  /// **'No file selected'**
+  String get no_file_selected;
+
+  /// No description provided for @no_file_option_selected.
+  ///
+  /// In en, this message translates to:
+  /// **'No file option selected'**
+  String get no_file_option_selected;
+
   /// No description provided for @about.
   ///
   /// In en, this message translates to:
@@ -189,6 +225,12 @@ abstract class Strings {
   /// **'Enter'**
   String get enter;
 
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
   /// No description provided for @error_empty_field.
   ///
   /// In en, this message translates to:
@@ -278,6 +320,12 @@ abstract class Strings {
   /// In en, this message translates to:
   /// **'No'**
   String get no;
+
+  /// No description provided for @order.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get order;
 
   /// No description provided for @order_has_picked_up.
   ///
@@ -420,7 +468,7 @@ abstract class Strings {
   /// No description provided for @start_from.
   ///
   /// In en, this message translates to:
-  /// **'Strat from'**
+  /// **'Start from'**
   String get start_from;
 
   /// No description provided for @state.

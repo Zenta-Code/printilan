@@ -27,18 +27,18 @@ class StoreRepositoryImpl implements StoreRepository {
   }
 
   @override
-  Future<Either<Failure, List<StoreEntity>>> getStoreByCity(
+  Future<Either<Failure, Tuple2<List<StoreEntity>, List<BundleEntity>>>>
+      getStoreByCity(
     GetStoreByCityParams params,
   ) async {
     final res = await _remoteDataSource.getStoreByCity(params);
     return res.fold(
       (failure) => Left(failure),
-      (store) => Right(
-        store
-            .map(
-              (e) => e.toEntity(),
-            )
-            .toList(),
+      (success) => Right(
+        Tuple2(
+          success.value1.map((e) => e.toEntity()).toList(),
+          success.value2.map((e) => e.toEntity()).toList(),
+        ),
       ),
     );
   }

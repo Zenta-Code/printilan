@@ -9,7 +9,8 @@ abstract class StoreRepository {
   Future<Either<Failure, StoreEntity>> getStoreByName(
     GetStoreByNameParams params,
   );
-  Future<Either<Failure, List<StoreEntity>>> getStoreByCity(
+  Future<Either<Failure, Tuple2<List<StoreEntity>, List<BundleEntity>>>>
+      getStoreByCity(
     GetStoreByCityParams params,
   );
   Future<Either<Failure, List<StoreEntity>>> getStoreAll(

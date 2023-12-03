@@ -12,6 +12,6 @@ class AddressEntity with _$AddressEntity {
     @HiveField(1) String? city,
     @HiveField(2) String? state,
     @HiveField(3) String? country,
-    @HiveField(4) String? zipcode,
+    @HiveField(4) String? zipCode,
   }) = _AddressEntity;
 }

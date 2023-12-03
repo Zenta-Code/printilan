@@ -7,12 +7,16 @@ part 'login_cubit.freezed.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._postLogin, this._getMe) : super(const _Loading());
+  LoginCubit(
+    this._postLogin,
+    this._getMe,
+    this._getLocation,
+  ) : super(const _Loading());
 
   final PostLogin _postLogin;
   final GetMe _getMe;
   bool? isPasswordHide = true;
-
+  final GetLocation _getLocation;
   void showHidePassword() {
     emit(const _Init());
     isPasswordHide = !(isPasswordHide ?? false);
@@ -30,41 +34,33 @@ class LoginCubit extends Cubit<LoginState> {
           emit(_Failure(l.message ?? ""));
         }
       },
-      (r) {
+      (r) async {
         log.f("Response: $r");
+        await _getLocation.call(const LocationParams());
         emit(_Success(r.token));
       },
     );
   }
 
-  Future<bool> me(MeParams params) async {
+  Future<UserEntity?> me(MeParams token) async {
     emit(const _Loading());
-    final data = await _getMe.call(params);
-
+    final data = await _getMe.call(token);
     return data.fold(
       (l) {
-        return false;
+        if (l is ServerFailure) {
+          return null;
+        }
       },
       (r) {
-        return true;
+        return r;
       },
     );
   }
 
-  Future<bool> logout(context) async {
+  Future<void> logout() async {
     emit(const _Loading());
     isPasswordHide = true;
-    await MainBoxMixin().removeData(MainBoxKeys.token);
-    final isLogin = MainBoxMixin().getData(MainBoxKeys.token);
-    if (isLogin == null || isLogin == false) {
-      emit(const _Success("Logout success"));
-
-      return true;
-    }
-    if (isLogin == true) {
-      emit(const _Failure("Logout failed"));
-      return false;
-    }
-    return false;
+    await MainBoxMixin().logoutBox();
+    emit(const _Success(null));
   }
 }

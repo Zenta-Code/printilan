@@ -29,7 +29,7 @@ class LoginParams with _$LoginParams {
 @freezed
 class RegisterParams with _$RegisterParams {
   const factory RegisterParams({
-    @Default(null) String? userName,
+    @Default(null) String? name,
     @Default(null) String? storeName,
     @Default(null) String? phone,
     @Default(null) String? email,

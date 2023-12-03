@@ -5,6 +5,24 @@ class StringsId extends Strings {
   StringsId([String locale = 'id']) : super(locale);
 
   @override
+  String get black_and_white => 'Hitam Putih';
+
+  @override
+  String get color => 'Warna';
+
+  @override
+  String get please_fill_copies_field => 'Silakan isi jumlah salinan';
+
+  @override
+  String get no_store_selected => 'Tidak ada toko yang dipilih';
+
+  @override
+  String get no_file_selected => 'Tidak ada file yang dipilih';
+
+  @override
+  String get no_file_option_selected => 'Tidak ada opsi file yang dipilih';
+
+  @override
   String get about => 'Tentang';
 
   @override
@@ -53,6 +71,9 @@ class StringsId extends Strings {
   String get enter => 'Masukkan';
 
   @override
+  String get next => 'Selanjutnya';
+
+  @override
   String get error_empty_field => 'Tidak boleh kosong';
 
   @override
@@ -96,6 +117,9 @@ class StringsId extends Strings {
 
   @override
   String get no => 'Tidak';
+
+  @override
+  String get order => 'Pesan';
 
   @override
   String get order_has_picked_up => 'Pesanan telah diambil';

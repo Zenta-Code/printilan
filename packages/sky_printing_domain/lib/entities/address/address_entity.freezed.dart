@@ -25,7 +25,7 @@ mixin _$AddressEntity {
   @HiveField(3)
   String? get country => throw _privateConstructorUsedError;
   @HiveField(4)
-  String? get zipcode => throw _privateConstructorUsedError;
+  String? get zipCode => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AddressEntityCopyWith<AddressEntity> get copyWith =>
@@ -43,7 +43,7 @@ abstract class $AddressEntityCopyWith<$Res> {
       @HiveField(1) String? city,
       @HiveField(2) String? state,
       @HiveField(3) String? country,
-      @HiveField(4) String? zipcode});
+      @HiveField(4) String? zipCode});
 }
 
 /// @nodoc
@@ -63,7 +63,7 @@ class _$AddressEntityCopyWithImpl<$Res, $Val extends AddressEntity>
     Object? city = freezed,
     Object? state = freezed,
     Object? country = freezed,
-    Object? zipcode = freezed,
+    Object? zipCode = freezed,
   }) {
     return _then(_value.copyWith(
       street: freezed == street
@@ -82,9 +82,9 @@ class _$AddressEntityCopyWithImpl<$Res, $Val extends AddressEntity>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String?,
-      zipcode: freezed == zipcode
-          ? _value.zipcode
-          : zipcode // ignore: cast_nullable_to_non_nullable
+      zipCode: freezed == zipCode
+          ? _value.zipCode
+          : zipCode // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -103,7 +103,7 @@ abstract class _$$AddressEntityImplCopyWith<$Res>
       @HiveField(1) String? city,
       @HiveField(2) String? state,
       @HiveField(3) String? country,
-      @HiveField(4) String? zipcode});
+      @HiveField(4) String? zipCode});
 }
 
 /// @nodoc
@@ -121,7 +121,7 @@ class __$$AddressEntityImplCopyWithImpl<$Res>
     Object? city = freezed,
     Object? state = freezed,
     Object? country = freezed,
-    Object? zipcode = freezed,
+    Object? zipCode = freezed,
   }) {
     return _then(_$AddressEntityImpl(
       street: freezed == street
@@ -140,9 +140,9 @@ class __$$AddressEntityImplCopyWithImpl<$Res>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String?,
-      zipcode: freezed == zipcode
-          ? _value.zipcode
-          : zipcode // ignore: cast_nullable_to_non_nullable
+      zipCode: freezed == zipCode
+          ? _value.zipCode
+          : zipCode // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -157,7 +157,7 @@ class _$AddressEntityImpl implements _AddressEntity {
       @HiveField(1) this.city,
       @HiveField(2) this.state,
       @HiveField(3) this.country,
-      @HiveField(4) this.zipcode});
+      @HiveField(4) this.zipCode});
 
   @override
   @HiveField(0)
@@ -173,11 +173,11 @@ class _$AddressEntityImpl implements _AddressEntity {
   final String? country;
   @override
   @HiveField(4)
-  final String? zipcode;
+  final String? zipCode;
 
   @override
   String toString() {
-    return 'AddressEntity(street: $street, city: $city, state: $state, country: $country, zipcode: $zipcode)';
+    return 'AddressEntity(street: $street, city: $city, state: $state, country: $country, zipCode: $zipCode)';
   }
 
   @override
@@ -189,12 +189,12 @@ class _$AddressEntityImpl implements _AddressEntity {
             (identical(other.city, city) || other.city == city) &&
             (identical(other.state, state) || other.state == state) &&
             (identical(other.country, country) || other.country == country) &&
-            (identical(other.zipcode, zipcode) || other.zipcode == zipcode));
+            (identical(other.zipCode, zipCode) || other.zipCode == zipCode));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, street, city, state, country, zipcode);
+      Object.hash(runtimeType, street, city, state, country, zipCode);
 
   @JsonKey(ignore: true)
   @override
@@ -209,7 +209,7 @@ abstract class _AddressEntity implements AddressEntity {
       @HiveField(1) final String? city,
       @HiveField(2) final String? state,
       @HiveField(3) final String? country,
-      @HiveField(4) final String? zipcode}) = _$AddressEntityImpl;
+      @HiveField(4) final String? zipCode}) = _$AddressEntityImpl;
 
   @override
   @HiveField(0)
@@ -225,7 +225,7 @@ abstract class _AddressEntity implements AddressEntity {
   String? get country;
   @override
   @HiveField(4)
-  String? get zipcode;
+  String? get zipCode;
   @override
   @JsonKey(ignore: true)
   _$$AddressEntityImplCopyWith<_$AddressEntityImpl> get copyWith =>

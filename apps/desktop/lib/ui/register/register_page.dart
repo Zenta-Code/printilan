@@ -54,8 +54,8 @@ class _RegisterPageState extends State<RegisterPage> with WindowListener {
     _conUserName.text = "Rahmat Hidayatullah";
     _conStoreName.text = "Rahmat Store";
     _conStreet.text = "Jl. Raya Bogor";
-    _conCity.text = "Jakarta";
-    _conState.text = "DKI Jakarta";
+    _conCity.text = "Mojokerto";
+    _conState.text = "East Java";
     _conCountry.text = "Indonesia";
     _conZipCode.text = "12345";
     _conEmail.text = "rahmat@gmail.com";
@@ -89,6 +89,12 @@ class _RegisterPageState extends State<RegisterPage> with WindowListener {
       child: NavigationView(
         appBar: NavigationAppBar(
           automaticallyImplyLeading: false,
+          leading: IconButton(
+            icon: const Icon(FluentIcons.back),
+            onPressed: () {
+              context.pop();
+            },
+          ),
           title: DragToMoveArea(
             child: Align(
               alignment: AlignmentDirectional.centerStart,
@@ -176,7 +182,7 @@ class _RegisterPageState extends State<RegisterPage> with WindowListener {
                       child: Text("Next"),
                       onPressed: () {
                         if (_keyForm.currentState!.validate()) {
-                          context.goNamed(Routes.storePricing.name,
+                          context.pushNamed(Routes.storePricing.name,
                               extra: StoreRegisterParams(
                                 user: {
                                   "name": _conUserName.text,

@@ -4,13 +4,14 @@ import 'package:sky_printing_core/usecase/usecase.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 class GetStoreByCityUsecase
-    extends UseCase<List<StoreEntity>, GetStoreByCityParams> {
+    extends UseCase<
+    Tuple2<List<StoreEntity>, List<BundleEntity>>, GetStoreByCityParams> {
   final StoreRepository _repo;
 
   GetStoreByCityUsecase(this._repo);
 
   @override
-  Future<Either<Failure, List<StoreEntity>>> call(
+  Future<Either<Failure, Tuple2<List<StoreEntity>, List<BundleEntity>>>> call(
           GetStoreByCityParams params) =>
       _repo.getStoreByCity(params);
 }

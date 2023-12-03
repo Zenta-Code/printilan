@@ -3,13 +3,13 @@ import 'package:sky_printing/ui/home/cubit/home_cubit.dart';
 import 'package:sky_printing/ui/login/cubit/login_cubit.dart';
 import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing/ui/order/cubit/order_cubit.dart';
+import 'package:sky_printing/ui/payment/cubit/payment_cubit.dart';
 import 'package:sky_printing/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing/ui/settings/cubit/settings_cubit.dart';
 import 'package:sky_printing_core/services/local/file/file_client.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_data/sky_printing_data.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
-import 'package:sky_printing_domain/usecases/file/get_file_usecase.dart';
 
 GetIt sl = GetIt.instance;
 
@@ -47,6 +47,7 @@ Future<void> serviceLocator({
   _repositories();
   _useCase();
   _cubit();
+  _bloc();
 }
 
 Future<void> _initHiveBoxes({
@@ -76,6 +77,10 @@ void _repositories() {
   sl.registerLazySingleton<FileRepository>(
     () => FileRepositoryImpl(sl()),
   );
+
+  sl.registerLazySingleton<StoreRepository>(
+    () => StoreRepositoryImpl(sl()),
+  );
 }
 
 /// Register dataSources
@@ -96,6 +101,10 @@ void _dataSources() {
   /// File
   sl.registerLazySingleton<FileLocalDatasource>(
     () => FileLocalDatasourceImpl(sl()),
+  );
+
+  sl.registerLazySingleton<StoreRemoteDataSource>(
+    () => StoreRemoteDataSourceImpl(sl()),
   );
 }
 
@@ -120,9 +129,9 @@ void _useCase() {
   // sl.registerLazySingleton(
   //   () => ConnectSocketUsecase(sl()),
   // );
-  // sl.registerLazySingleton(
-  //   () => JoinSocketUsecase(sl()),
-  // );
+  sl.registerLazySingleton(
+    () => JoinSocketUsecase(sl()),
+  );
 
   // sl.registerLazySingleton(
   //   () => SendSocketUsecase(sl()),
@@ -135,6 +144,10 @@ void _useCase() {
   sl.registerLazySingleton(
     () => GetFileUseCase(sl()),
   );
+
+  sl.registerLazySingleton(
+    () => GetStoreByCityUsecase(sl()),
+  );
 }
 
 void _cubit() {
@@ -143,7 +156,11 @@ void _cubit() {
     () => RegisterCubit(sl()),
   );
   sl.registerFactory(
-    () => LoginCubit(sl(), sl()),
+    () => LoginCubit(
+      sl(),
+      sl(),
+      sl(),
+    ),
   );
 
   sl.registerFactory(
@@ -157,6 +174,7 @@ void _cubit() {
   sl.registerFactory(
     () => HomeCubit(
       sl(),
+      sl(),
     ),
   );
 
@@ -169,4 +187,12 @@ void _cubit() {
       sl(),
     ),
   );
+  sl.registerFactory(
+    () => PaymentCubit(
+      sl(),
+      sl(),
+    ),
+  );
 }
+
+void _bloc() {}

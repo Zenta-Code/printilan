@@ -12,10 +12,11 @@ class WebViewClient with MainBoxMixin {
   WebViewClient({bool isUnitTest = false}) {
     _isUnitTest = isUnitTest;
 
-    try {
-    } catch (_) {}
+    try {} catch (_) {}
 
-    _controller = createBase();
+    _controller = createBase(onExample: () {
+      log.e("INITIALIZE");
+    });
 
     if (!_isUnitTest) _controller;
   }
@@ -24,10 +25,11 @@ class WebViewClient with MainBoxMixin {
     if (_isUnitTest) {
       return _controller;
     } else {
-      try {
-      } catch (_) {}
+      try {} catch (_) {}
 
-      final controller = createBase();
+      final controller = createBase(onExample: () {
+        log.e("ON CALL");
+      });
 
       if (!_isUnitTest) controller;
 
@@ -35,37 +37,44 @@ class WebViewClient with MainBoxMixin {
     }
   }
 
-  WebViewController createBase() => WebViewController()
-    ..setJavaScriptMode(JavaScriptMode.unrestricted)
-    ..setNavigationDelegate(
-      NavigationDelegate(
-        onProgress: (int progress) {
-          log.i(progress);
-        },
-        onPageStarted: (String url) {},
-        onPageFinished: (String url) {},
-        onWebResourceError: (WebResourceError error) {},
-        onNavigationRequest: (NavigationRequest request) {
-          if (request.url.startsWith('https://www.youtube.com/')) {
-            return NavigationDecision.prevent;
-          }
-          return NavigationDecision.navigate;
-        },
-      ),
-    );
+  WebViewController createBase(
+          {required Function onExample, Function? onProgress}) =>
+      WebViewController()
+        ..setJavaScriptMode(JavaScriptMode.unrestricted)
+        ..setNavigationDelegate(
+          NavigationDelegate(
+            onProgress: (int progress) {
+              log.i(progress);
+            },
+            onPageStarted: (String url) {},
+            onPageFinished: (String url) {},
+            onWebResourceError: (WebResourceError error) {},
+            onNavigationRequest: (NavigationRequest request) {
+              if (request.url.startsWith('http://example.com/')) {
+                onExample();
+                return NavigationDecision.prevent;
+              }
+              return NavigationDecision.navigate;
+            },
+          ),
+        );
 
   Future<WebViewController> loadUrl(
-    String url, {
+    String url,
+    Function onExample, {
     LoadRequestMethod method = LoadRequestMethod.get,
     Map<String, String> headers = const <String, String>{},
     Uint8List? body,
   }) async {
-    _controller.loadRequest(
+    final newCon = createBase(
+      onExample: onExample,
+    );
+    newCon.loadRequest(
       Uri.parse(url),
       headers: headers,
       body: body,
       method: method,
     );
-    return _controller;
+    return newCon;
   }
 }

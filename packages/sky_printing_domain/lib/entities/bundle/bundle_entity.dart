@@ -11,7 +11,15 @@ class BundleEntity with _$BundleEntity {
     @HiveField(0) String? id,
     @HiveField(1) String? storeId,
     @HiveField(2) String? name,
-    @HiveField(3) String? desc,
-    @HiveField(4) List? prices,
+    @HiveField(4) List<BundleOptionsEntity>? options,
   }) = _BundleEntity;
+}
+
+@freezed
+class BundleOptionsEntity with _$BundleOptionsEntity {
+  @HiveType(typeId: 3, adapterName: 'BundleOptionsEntityAdapter')
+  const factory BundleOptionsEntity({
+    @HiveField(0) bool? color,
+    @HiveField(1) int? price,
+  }) = _BundleOptionsEntity;
 }

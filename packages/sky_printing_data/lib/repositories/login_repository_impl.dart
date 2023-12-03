@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_data/sky_printing_data.dart'; 
+import 'package:sky_printing_data/sky_printing_data.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
@@ -20,10 +20,12 @@ class LoginRepositoryImpl implements LoginRepository {
           MainBoxKeys.user,
           success.user!.toEntity(),
         );
-        mainBoxMixin.addData<StoreEntity>(
-          MainBoxKeys.store,
-          success.store!.toEntity(),
-        );
+        if (success.store != null) {
+          mainBoxMixin.addData<StoreEntity>(
+            MainBoxKeys.store,
+            success.store!.toEntity(),
+          );
+        }
 
         return Right(
           success.toEntity(),

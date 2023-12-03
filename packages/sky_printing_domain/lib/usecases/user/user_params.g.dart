@@ -32,7 +32,7 @@ Map<String, dynamic> _$$LoginParamsImplToJson(_$LoginParamsImpl instance) =>
 
 _$RegisterParamsImpl _$$RegisterParamsImplFromJson(Map<String, dynamic> json) =>
     _$RegisterParamsImpl(
-      userName: json['userName'] as String? ?? null,
+      name: json['name'] as String? ?? null,
       storeName: json['storeName'] as String? ?? null,
       phone: json['phone'] as String? ?? null,
       email: json['email'] as String? ?? null,
@@ -47,7 +47,7 @@ _$RegisterParamsImpl _$$RegisterParamsImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$RegisterParamsImplToJson(
         _$RegisterParamsImpl instance) =>
     <String, dynamic>{
-      'userName': instance.userName,
+      'name': instance.name,
       'storeName': instance.storeName,
       'phone': instance.phone,
       'email': instance.email,

@@ -91,6 +91,12 @@ class _StorePricingPageState extends State<StorePricingPage>
     return NavigationView(
       appBar: NavigationAppBar(
         automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: const Icon(FluentIcons.back),
+          onPressed: () {
+            context.pop();
+          },
+        ),
         title: DragToMoveArea(
           child: Align(
             alignment: AlignmentDirectional.centerStart,
@@ -205,7 +211,7 @@ class _StorePricingPageState extends State<StorePricingPage>
               child: FilledButton(
                 onPressed: () {
                   if (_keyForm.currentState!.validate()) {
-                    final newData = widget.data!.copyWith(
+                    final newData = widget.data.copyWith(
                       store: {
                         "name": widget.data.store!["name"],
                         "status": "open",

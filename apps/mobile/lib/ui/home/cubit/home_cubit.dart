@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,8 +13,10 @@ part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final GetLocation _getLocation;
+  final GetStoreByCityUsecase _getStoreByCityUsecase;
   HomeCubit(
     this._getLocation,
+    this._getStoreByCityUsecase,
   ) : super(const _Loading());
 
   final Completer<GoogleMapController> controller =
@@ -26,7 +29,7 @@ class HomeCubit extends Cubit<HomeState> {
   IO.Socket? socket;
 
   Future<void> getLocation(LocationParams params) async {
-    emit(const _Loading());
+    safeEmit(const _Loading(), emit: emit, isClosed: isClosed);
     final data = await _getLocation.call(params);
 
     data.fold(
@@ -38,7 +41,10 @@ class HomeCubit extends Cubit<HomeState> {
           emit(_Failure(l.message ?? ""));
         }
       },
-      (r) {
+      (r) async {
+        final store = await getStoreByCity(
+            r.placemarks!.first.subAdministrativeArea!.split(" ")[1]);
+        log.e(store);
         location = r;
         kGooglePlex = CameraPosition(
           target: LatLng(
@@ -55,9 +61,31 @@ class HomeCubit extends Cubit<HomeState> {
           ),
         );
 
-        emit(_Success(r));
+        safeEmit(
+          _Success(r, store.value1, store.value2),
+          emit: emit,
+          isClosed: isClosed,
+        );
       },
     );
+  }
+
+  Future<Tuple2<List<StoreEntity>, List<BundleEntity>>> getStoreByCity(
+      String city) async {
+    safeEmit(const _Loading(), emit: emit, isClosed: isClosed);
+    final data = await _getStoreByCityUsecase.call(
+      GetStoreByCityParams(city: city),
+    );
+    Tuple2<List<StoreEntity>, List<BundleEntity>> store = Tuple2([], []);
+    data.fold(
+      (l) {
+        if (l is ServerFailure) {}
+      },
+      (r) {
+        store = r;
+      },
+    );
+    return store;
   }
 
   void _onMapCreated(GoogleMapController controller) {

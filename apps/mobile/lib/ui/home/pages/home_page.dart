@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sky_printing/ui/home/cubit/home_cubit.dart';
 import 'package:sky_printing/ui/home/widgets/product_container.dart';
+import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
+import 'package:sky_printing/ui/main/widgets/bottom_nav_bar.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
@@ -24,6 +26,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Parent(
+      bottomNavigation: BottomNavBar(
+        dataMenu: context.read<MainCubit>().dataMenus,
+        currentIndex: (int index) {
+          context.read<MainCubit>().updateIndex(
+                index,
+              );
+        },
+      ),
       child: RefreshIndicator(
         onRefresh: () async {
           context.read<HomeCubit>().getLocation(const LocationParams());
@@ -42,7 +52,8 @@ class _HomePageState extends State<HomePage> {
                   errorMessage: message,
                 ),
               ),
-              success: (data) {
+              success: (data, store, bundle) {
+                log.e(bundle);
                 return SingleChildScrollView(
                   child: Center(
                     child: Column(
@@ -209,19 +220,63 @@ class _HomePageState extends State<HomePage> {
                         ),
                         ProductContainer(
                           name: "Regular Printing",
-                          price: "500",
+                          bwPrice: bundle
+                                  .map((e) => e.name)
+                                  .contains("Regular Printing")
+                              ? bundle
+                                  .firstWhere(
+                                      (e) => e.name == "Regular Printing")
+                                  .options!
+                                  .first
+                                  .price
+                              : 0,
+                          colorPrice: bundle
+                                  .map((e) => e.name)
+                                  .contains("Regular Printing")
+                              ? bundle
+                                  .firstWhere(
+                                      (e) => e.name == "Regular Printing")
+                                  .options!
+                                  .last
+                                  .price
+                              : 0,
                           placemarks: data.placemarks,
+                          store: store,
+                          bundle: bundle,
                         ),
                         ProductContainer(
                           name: "Printing and Binding",
-                          price: "700",
+                          bwPrice: bundle
+                                  .map((e) => e.name)
+                                  .contains("Printing & Binding")
+                              ? bundle
+                                  .firstWhere(
+                                      (e) => e.name == "Printing & Binding")
+                                  .options!
+                                  .first
+                                  .price
+                              : 0,
+                          colorPrice: bundle
+                                  .map((e) => e.name)
+                                  .contains("Printing & Binding")
+                              ? bundle
+                                  .firstWhere(
+                                      (e) => e.name == "Printing & Binding")
+                                  .options!
+                                  .last
+                                  .price
+                              : 0,
                           placemarks: data.placemarks,
+                          store: store,
+                          bundle: bundle,
                         ),
-                        ProductContainer(
-                          name: "Photo Print",
-                          price: "5000",
-                          placemarks: data.placemarks,
-                        ),
+                        // ProductContainer(
+                        //   name: "Photo Print",
+                        //   price: "5000",
+                        //   placemarks: data.placemarks,
+                        //   store: store,
+                        //   bundle: bundle,
+                        // ),
                         SizedBox(height: Dimens.space16),
                       ],
                     ),

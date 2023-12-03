@@ -119,6 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
             success: (data) {
               context.dismiss();
               context.pop();
+              "Register Success".toToastSuccess(context);
             },
             failure: (message) {
               context.dismiss();
@@ -437,7 +438,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                           city: _conCity.text,
                                           state: _conState.text,
                                           country: _conCountry.text,
-                                          zipcode: _conZipcode.text,
+                                          zipCode: _conZipcode.text,
                                         ),
                                         role: "customer",
                                         phone: _conPhone.text,

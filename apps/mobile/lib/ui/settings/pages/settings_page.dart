@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:sky_printing/core/app_route.dart';
 import 'package:sky_printing/dependencies_injection.dart';
 import 'package:sky_printing/ui/login/cubit/login_cubit.dart';
+import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
+import 'package:sky_printing/ui/main/widgets/bottom_nav_bar.dart';
 import 'package:sky_printing/ui/settings/cubit/settings_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 
@@ -35,6 +37,14 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
   @override
   Widget build(BuildContext context) {
     return Parent(
+      bottomNavigation: BottomNavBar(
+        dataMenu: context.read<MainCubit>().dataMenus,
+        currentIndex: (int index) {
+          context.read<MainCubit>().updateIndex(
+                index,
+              );
+        },
+      ),
       child: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -97,14 +107,8 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
                 ),
                 TextButton(
                   onPressed: () {
-                    isLogout().then((value) {
-                      if (value) {
-                        Future.delayed(const Duration(seconds: 1), () {
-                          context
-                              .pushReplacementNamed(Routes.splashScreen.name);
-                        });
-                      }
-                    });
+                    context.read<LoginCubit>().logout();
+                    context.goNamed(Routes.splashScreen.name);
                   },
                   child: Text(Strings.of(context)!.logout),
                 ),
@@ -114,10 +118,6 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
         ),
       ),
     );
-  }
-
-  Future<bool> isLogout() async {
-    return await context.read<LoginCubit>().logout(context);
   }
 
   String _getThemeName(ActiveTheme activeTheme, BuildContext context) {

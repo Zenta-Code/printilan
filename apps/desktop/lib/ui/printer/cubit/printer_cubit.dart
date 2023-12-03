@@ -39,9 +39,17 @@ class PrinterCubit extends Cubit<PrinterState> with MainBoxMixin {
       _printers.clear();
       _printers.addAll(
           printers.where((printer) => !printer.printerName!.contains('PDF')));
-      emit(_printers.isEmpty ? const _Empty() : _Success(_printers));
+      safeEmit(
+        _printers.isEmpty ? const _Empty() : _Success(_printers),
+        emit: emit,
+        isClosed: isClosed,
+      );
     } else {
-      emit(const _Empty());
+      safeEmit(
+        const _Empty(),
+        emit: emit,
+        isClosed: isClosed,
+      );
     }
   }
 
@@ -65,8 +73,16 @@ class PrinterCubit extends Cubit<PrinterState> with MainBoxMixin {
     );
     await fetchPrinters();
     response.fold(
-      (l) => emit(_Success(_printers)),
-      (r) => emit(_Success(_printers)),
+      (l) => safeEmit(
+        _Success(_printers),
+        emit: emit,
+        isClosed: isClosed,
+      ),
+      (r) => safeEmit(
+        _Success(_printers),
+        emit: emit,
+        isClosed: isClosed,
+      ),
     );
   }
 }

@@ -90,7 +90,14 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       final result = await isolateParse.parseInBackground();
       return Right(result);
     } on DioException catch (e, stackTrace) {
-      log.e(e.response?.data['error'] ?? e.message);
+      log.e(e);
+      if (e.response!.statusCode == 502) {
+        return Left(
+          ServerFailure(
+            "Server is down",
+          ),
+        );
+      }
       if (!_isUnitTest || Platform.isAndroid) {
         nonFatalError(error: e, stackTrace: stackTrace);
       }
@@ -132,9 +139,15 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
         return Right(result);
       }
     } on DioException catch (e, stackTrace) {
-      log.e(e);
       if (!_isUnitTest) {
         nonFatalError(error: e, stackTrace: stackTrace);
+      }
+      if (e.response!.statusCode == 502) {
+        return Left(
+          ServerFailure(
+            "Server is down",
+          ),
+        );
       }
       return Left(
         ServerFailure(
@@ -178,6 +191,13 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       log.e(e);
       if (!_isUnitTest) {
         nonFatalError(error: e, stackTrace: stackTrace);
+      }
+      if (e.response!.statusCode == 502) {
+        return Left(
+          ServerFailure(
+            "Server is down",
+          ),
+        );
       }
       return Left(
         ServerFailure(

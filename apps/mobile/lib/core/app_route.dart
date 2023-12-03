@@ -14,6 +14,8 @@ import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing/ui/main/pages/main_page.dart';
 import 'package:sky_printing/ui/order/cubit/order_cubit.dart';
 import 'package:sky_printing/ui/order/pages/order_page.dart';
+import 'package:sky_printing/ui/payment/cubit/payment_cubit.dart';
+import 'package:sky_printing/ui/payment/pages/payment_page.dart';
 import 'package:sky_printing/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing/ui/register/pages/register_page.dart';
 import 'package:sky_printing/ui/settings/pages/settings_page.dart';
@@ -34,6 +36,9 @@ enum Routes {
 
   // sub page
   order("order"),
+
+  // payment
+  payment("/payment"),
 
   // Login Page
   login("/login/login"),
@@ -98,14 +103,37 @@ class AppRoute with MainBoxMixin {
                   ),
               routes: [
                 GoRoute(
-                  path: Routes.order.path,
-                  name: Routes.order.name,
-                  builder: (context, state) => BlocProvider(
-                    create: (_) => sl<OrderCubit>()..getStore(),
-                    child: const OrderPage(),
-                  ),
-                ),
+                    path: Routes.order.path,
+                    name: Routes.order.name,
+                    builder: (context, state) {
+                      final extra = state.extra as Map<String, dynamic>;
+                      return BlocProvider(
+                        create: (_) => sl<OrderCubit>()..getStore(),
+                        child: OrderPage(
+                          name: extra['name'],
+                          prices: extra['prices'],
+                          placemarks: extra['placemarks'],
+                          store: extra['store'],
+                          bundle: extra['bundle'],
+                        ),
+                      );
+                    }),
               ]),
+          GoRoute(
+            path: Routes.payment.path,
+            name: Routes.payment.name,
+            builder: (context, state) {
+              final extra = state.extra as Map<String, dynamic>;
+              return BlocProvider(
+                create: (_) => sl<PaymentCubit>(),
+                child: PaymentPage(
+                  redirectUrl: extra['redirectUrl'],
+                  r: extra['r'],
+                  storeId: extra['storeId'],
+                ),
+              );
+            },
+          ),
           GoRoute(
             path: Routes.history.path,
             name: Routes.history.name,
@@ -128,37 +156,7 @@ class AppRoute with MainBoxMixin {
     routerNeglect: true,
     debugLogDiagnostics: kDebugMode,
     refreshListenable: GoRouterRefreshStream(context.read<LoginCubit>().stream),
-    redirect: (_, GoRouterState state) async {
-      final bool isLoginPage = state.matchedLocation == Routes.login.path ||
-          state.matchedLocation == Routes.register.path;
-      // if (token == null) {
-      //   log.e('Token : $token');
-      //   return isLoginPage ? null : Routes.splashScreen.path;
-      // }
-
-      final me =
-          await context.read<LoginCubit>().me(MeParams(token: token ?? ''));
-      log.e('IS AUTH: $me');
-
-      if (!me) {
-        log.i("!me Condition");
-        // return Routes.splashScreen.path;
-        // final isLogout = await logout();
-        // if (!isLogout) {
-        //   log.e('Logout : $isLogout');
-        //   return Routes.splashScreen.path;
-        // }
-      }
-      if (me && isLoginPage) {
-        log.i("me && isLoginPage Condition");
-        return isLoginPage ? null : Routes.home.path;
-      }
-      if (me && state.matchedLocation == Routes.splashScreen.path) {
-        log.i("me Condition");
-        return isLoginPage ? null : Routes.home.path;
-      }
-      return null;
-    },
+    redirect: validateToken,
   );
 }
 
@@ -168,15 +166,54 @@ FutureOr<String?> validateToken(
 ) async {
   final bool isLoginPage = state.matchedLocation == Routes.login.path ||
       state.matchedLocation == Routes.register.path;
-  final token = MainBoxMixin().getData(MainBoxKeys.token);
-  if (token == null) {
+
+  if (state.matchedLocation == Routes.splashScreen.path || isLoginPage) {
+    return null;
+  }
+  final user = MainBoxMixin().getData<UserEntity?>(MainBoxKeys.user);
+  log.i("user: $user");
+
+  if (user == null && !isLoginPage) {
+    log.i("0");
+    return null;
+  }
+
+  if (user == null && isLoginPage) {
+    log.i("1");
     return Routes.login.path;
   }
-  final res = await context.read<LoginCubit>().me(MeParams(
-        token: token,
-      ));
-  if (res) {
-    return isLoginPage ? Routes.splashScreen.path : null;
+
+  if (user == null) {
+    log.i("2");
+    return Routes.splashScreen.path;
   }
-  return isLoginPage ? null : Routes.login.path;
+  final res = await context.read<LoginCubit>().me(MeParams(id: user.id));
+
+  if (res == null || res is ServerFailure) {
+    log.e("res is null");
+    Future.wait([
+      MainBoxMixin().removeData(MainBoxKeys.user),
+      MainBoxMixin().removeData(MainBoxKeys.store),
+      MainBoxMixin().removeData(MainBoxKeys.token),
+    ]);
+
+    return Routes.splashScreen.path;
+  }
+  if (res.id == null) {
+    log.e("res.id is null");
+    return Routes.login.path;
+  }
+
+  if (res.id != null && isLoginPage) {
+    log.e("res.id is not null");
+    return null;
+  }
+
+  if (res.role == "customer" && !isLoginPage) {
+    log.e("res.role is customer");
+    return state.matchedLocation == Routes.root.path ? Routes.home.path : null;
+  }
+
+  log.i('null');
+  return null;
 }

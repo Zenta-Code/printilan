@@ -26,6 +26,11 @@ class SocketClient with MainBoxMixin, FirebaseCrashLogger {
     if (!_isUnitTest) _socket!.connect();
   }
 
+  Socket forceNew() {
+    _socket = _createSocket();
+    return _socket!;
+  }
+
   Socket _createSocket() {
     log.i('SocketClient: $_baseUrl$_socketPath');
     log.i("TOKEN: $_auth");
@@ -47,8 +52,12 @@ class SocketClient with MainBoxMixin, FirebaseCrashLogger {
     return _socket!.connect();
   }
 
-  void join(String room) {
-    _socket!.emit('join', room);
+  void join(SocketParams params) {
+    _socket!.emit('join', params.toJson());
+  }
+
+  void leave(String roomId) {
+    _socket!.emit('leave', roomId);
   }
 
   void message(dynamic Function(dynamic) handler) {

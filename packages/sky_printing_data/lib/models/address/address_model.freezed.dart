@@ -24,7 +24,7 @@ mixin _$AddressModel {
   String? get city => throw _privateConstructorUsedError;
   String? get state => throw _privateConstructorUsedError;
   String? get country => throw _privateConstructorUsedError;
-  String? get zipcode => throw _privateConstructorUsedError;
+  String? get zipCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +43,7 @@ abstract class $AddressModelCopyWith<$Res> {
       String? city,
       String? state,
       String? country,
-      String? zipcode});
+      String? zipCode});
 }
 
 /// @nodoc
@@ -63,7 +63,7 @@ class _$AddressModelCopyWithImpl<$Res, $Val extends AddressModel>
     Object? city = freezed,
     Object? state = freezed,
     Object? country = freezed,
-    Object? zipcode = freezed,
+    Object? zipCode = freezed,
   }) {
     return _then(_value.copyWith(
       street: freezed == street
@@ -82,9 +82,9 @@ class _$AddressModelCopyWithImpl<$Res, $Val extends AddressModel>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String?,
-      zipcode: freezed == zipcode
-          ? _value.zipcode
-          : zipcode // ignore: cast_nullable_to_non_nullable
+      zipCode: freezed == zipCode
+          ? _value.zipCode
+          : zipCode // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -103,7 +103,7 @@ abstract class _$$AddressModelImplCopyWith<$Res>
       String? city,
       String? state,
       String? country,
-      String? zipcode});
+      String? zipCode});
 }
 
 /// @nodoc
@@ -121,7 +121,7 @@ class __$$AddressModelImplCopyWithImpl<$Res>
     Object? city = freezed,
     Object? state = freezed,
     Object? country = freezed,
-    Object? zipcode = freezed,
+    Object? zipCode = freezed,
   }) {
     return _then(_$AddressModelImpl(
       street: freezed == street
@@ -140,9 +140,9 @@ class __$$AddressModelImplCopyWithImpl<$Res>
           ? _value.country
           : country // ignore: cast_nullable_to_non_nullable
               as String?,
-      zipcode: freezed == zipcode
-          ? _value.zipcode
-          : zipcode // ignore: cast_nullable_to_non_nullable
+      zipCode: freezed == zipCode
+          ? _value.zipCode
+          : zipCode // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -152,7 +152,7 @@ class __$$AddressModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AddressModelImpl extends _AddressModel {
   const _$AddressModelImpl(
-      {this.street, this.city, this.state, this.country, this.zipcode})
+      {this.street, this.city, this.state, this.country, this.zipCode})
       : super._();
 
   factory _$AddressModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -167,11 +167,11 @@ class _$AddressModelImpl extends _AddressModel {
   @override
   final String? country;
   @override
-  final String? zipcode;
+  final String? zipCode;
 
   @override
   String toString() {
-    return 'AddressModel(street: $street, city: $city, state: $state, country: $country, zipcode: $zipcode)';
+    return 'AddressModel(street: $street, city: $city, state: $state, country: $country, zipCode: $zipCode)';
   }
 
   @override
@@ -183,13 +183,13 @@ class _$AddressModelImpl extends _AddressModel {
             (identical(other.city, city) || other.city == city) &&
             (identical(other.state, state) || other.state == state) &&
             (identical(other.country, country) || other.country == country) &&
-            (identical(other.zipcode, zipcode) || other.zipcode == zipcode));
+            (identical(other.zipCode, zipCode) || other.zipCode == zipCode));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, street, city, state, country, zipcode);
+      Object.hash(runtimeType, street, city, state, country, zipCode);
 
   @JsonKey(ignore: true)
   @override
@@ -211,7 +211,7 @@ abstract class _AddressModel extends AddressModel {
       final String? city,
       final String? state,
       final String? country,
-      final String? zipcode}) = _$AddressModelImpl;
+      final String? zipCode}) = _$AddressModelImpl;
   const _AddressModel._() : super._();
 
   factory _AddressModel.fromJson(Map<String, dynamic> json) =
@@ -226,7 +226,7 @@ abstract class _AddressModel extends AddressModel {
   @override
   String? get country;
   @override
-  String? get zipcode;
+  String? get zipCode;
   @override
   @JsonKey(ignore: true)
   _$$AddressModelImplCopyWith<_$AddressModelImpl> get copyWith =>

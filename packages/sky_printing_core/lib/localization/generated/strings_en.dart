@@ -5,6 +5,24 @@ class StringsEn extends Strings {
   StringsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get black_and_white => 'Black and White';
+
+  @override
+  String get color => 'Color';
+
+  @override
+  String get please_fill_copies_field => 'Please fill copies field';
+
+  @override
+  String get no_store_selected => 'No store selected';
+
+  @override
+  String get no_file_selected => 'No file selected';
+
+  @override
+  String get no_file_option_selected => 'No file option selected';
+
+  @override
   String get about => 'About';
 
   @override
@@ -53,6 +71,9 @@ class StringsEn extends Strings {
   String get enter => 'Enter';
 
   @override
+  String get next => 'Next';
+
+  @override
   String get error_empty_field => 'Can\'t be empty';
 
   @override
@@ -96,6 +117,9 @@ class StringsEn extends Strings {
 
   @override
   String get no => 'No';
+
+  @override
+  String get order => 'Order';
 
   @override
   String get order_has_picked_up => 'Order has picked up';
@@ -167,7 +191,7 @@ class StringsEn extends Strings {
   String get settings => 'Settings';
 
   @override
-  String get start_from => 'Strat from';
+  String get start_from => 'Start from';
 
   @override
   String get state => 'State';

@@ -79,7 +79,7 @@ class AppRoute {
       ),
       ShellRoute(
         builder: (_, __, child) => BlocProvider(
-          create: (context) => sl<MainCubit>(),
+          create: (_) => sl<MainCubit>()..bootstrap(),
           child: MainPage(child: child),
         ),
         routes: [
@@ -95,7 +95,7 @@ class AppRoute {
             path: Routes.order.path,
             name: Routes.order.name,
             builder: (_, __) => BlocProvider(
-              create: (_) => sl<OrderCubit>()..fetchData(),
+              create: (_) => sl<OrderCubit>()..bootStrap(),
               child: const OrderPage(),
             ),
           ),
@@ -173,7 +173,7 @@ FutureOr<String?> validateToken(
     return Routes.login.path;
   }
   final res = await context.read<AuthCubit>().me(MeParams(
-        id: user.id,
+        id: user!.id,
       ));
 
   if (res == null || res is ServerFailure) {
@@ -186,7 +186,7 @@ FutureOr<String?> validateToken(
 
     return Routes.login.path;
   }
-  if (res!.id == null) {
+  if (res.id == null) {
     log.e("res.id is null");
     return Routes.login.path;
   }

@@ -21,7 +21,7 @@ class AddressEntityAdapter extends TypeAdapter<_$AddressEntityImpl> {
       city: fields[1] as String?,
       state: fields[2] as String?,
       country: fields[3] as String?,
-      zipcode: fields[4] as String?,
+      zipCode: fields[4] as String?,
     );
   }
 
@@ -38,7 +38,7 @@ class AddressEntityAdapter extends TypeAdapter<_$AddressEntityImpl> {
       ..writeByte(3)
       ..write(obj.country)
       ..writeByte(4)
-      ..write(obj.zipcode);
+      ..write(obj.zipCode);
   }
 
   @override

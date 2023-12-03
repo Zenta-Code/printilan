@@ -31,4 +31,4 @@ class GetStoreByNameParams with _$GetStoreByNameParams {
 
   factory GetStoreByNameParams.fromJson(Map<String, dynamic> json) =>
       _$GetStoreByNameParamsFromJson(json);
-}
+} 

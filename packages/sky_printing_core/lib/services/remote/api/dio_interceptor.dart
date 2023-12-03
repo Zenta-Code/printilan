@@ -60,30 +60,30 @@ class DioInterceptor extends Interceptor with FirebaseCrashLogger {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    String headerMessage = "";
-    response.headers.forEach((k, v) => headerMessage += '► $k: $v\n');
+    // String headerMessage = "";
+    // response.headers.forEach((k, v) => headerMessage += '► $k: $v\n');
 
-    if (response.data is FormData) {
-      log.i(
-        // ignore: unnecessary_null_comparison
-        "<-- ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
-        "Headers:\n"
-        "$headerMessage\n"
-        "❖ QueryParameters : \n"
-        "Body: ${response.data.toString()}",
-      );
-    } else {
-      const JsonEncoder encoder = JsonEncoder.withIndent('  ');
-      final String prettyJson = encoder.convert(response.data);
-      log.i(
-        // ignore: unnecessary_null_comparison
-        "◀ ︎RESPONSE ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
-        "Headers:\n"
-        "$headerMessage\n"
-        "❖ Results : \n"
-        "Response: $prettyJson",
-      );
-    }
+    // if (response.data is FormData) {
+    //   log.i(
+    //     // ignore: unnecessary_null_comparison
+    //     "<-- ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
+    //     "Headers:\n"
+    //     "$headerMessage\n"
+    //     "❖ QueryParameters : \n"
+    //     "Body: ${response.data.toString()}",
+    //   );
+    // } else {
+    //   const JsonEncoder encoder = JsonEncoder.withIndent('  ');
+    //   final String prettyJson = encoder.convert(response.data);
+    //   log.i(
+    //     // ignore: unnecessary_null_comparison
+    //     "◀ ︎RESPONSE ${response.statusCode} ${response.requestOptions != null ? (response.requestOptions.baseUrl + response.requestOptions.path) : 'URL'}\n\n"
+    //     "Headers:\n"
+    //     "$headerMessage\n"
+    //     "❖ Results : \n"
+    //     "Response: $prettyJson",
+    //   );
+    // }
     super.onResponse(response, handler);
   }
 }

@@ -11,7 +11,7 @@ class AddressModel with _$AddressModel {
     String? city,
     String? state,
     String? country,
-    String? zipcode,
+    String? zipCode,
   }) = _AddressModel;
 
   const AddressModel._();
@@ -20,9 +20,18 @@ class AddressModel with _$AddressModel {
       _$AddressModelFromJson(json);
 
   AddressEntity toEntity() => AddressEntity(
-      street: street,
-      city: city,
-      state: state,
-      country: country,
-      zipcode: zipcode);
+        street: street,
+        city: city,
+        state: state,
+        country: country,
+        zipCode: zipCode,
+      );
+
+  factory AddressModel.fromEntity(AddressEntity entity) => AddressModel(
+        street: entity.street,
+        city: entity.city,
+        state: entity.state,
+        country: entity.country,
+        zipCode: entity.zipCode,
+      );
 }

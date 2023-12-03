@@ -22,10 +22,8 @@ mixin _$BundleEntity {
   String? get storeId => throw _privateConstructorUsedError;
   @HiveField(2)
   String? get name => throw _privateConstructorUsedError;
-  @HiveField(3)
-  String? get desc => throw _privateConstructorUsedError;
   @HiveField(4)
-  List<dynamic>? get prices => throw _privateConstructorUsedError;
+  List<BundleOptionsEntity>? get options => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BundleEntityCopyWith<BundleEntity> get copyWith =>
@@ -42,8 +40,7 @@ abstract class $BundleEntityCopyWith<$Res> {
       {@HiveField(0) String? id,
       @HiveField(1) String? storeId,
       @HiveField(2) String? name,
-      @HiveField(3) String? desc,
-      @HiveField(4) List<dynamic>? prices});
+      @HiveField(4) List<BundleOptionsEntity>? options});
 }
 
 /// @nodoc
@@ -62,8 +59,7 @@ class _$BundleEntityCopyWithImpl<$Res, $Val extends BundleEntity>
     Object? id = freezed,
     Object? storeId = freezed,
     Object? name = freezed,
-    Object? desc = freezed,
-    Object? prices = freezed,
+    Object? options = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -78,14 +74,10 @@ class _$BundleEntityCopyWithImpl<$Res, $Val extends BundleEntity>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      desc: freezed == desc
-          ? _value.desc
-          : desc // ignore: cast_nullable_to_non_nullable
-              as String?,
-      prices: freezed == prices
-          ? _value.prices
-          : prices // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+      options: freezed == options
+          ? _value.options
+          : options // ignore: cast_nullable_to_non_nullable
+              as List<BundleOptionsEntity>?,
     ) as $Val);
   }
 }
@@ -102,8 +94,7 @@ abstract class _$$BundleEntityImplCopyWith<$Res>
       {@HiveField(0) String? id,
       @HiveField(1) String? storeId,
       @HiveField(2) String? name,
-      @HiveField(3) String? desc,
-      @HiveField(4) List<dynamic>? prices});
+      @HiveField(4) List<BundleOptionsEntity>? options});
 }
 
 /// @nodoc
@@ -120,8 +111,7 @@ class __$$BundleEntityImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? storeId = freezed,
     Object? name = freezed,
-    Object? desc = freezed,
-    Object? prices = freezed,
+    Object? options = freezed,
   }) {
     return _then(_$BundleEntityImpl(
       id: freezed == id
@@ -136,14 +126,10 @@ class __$$BundleEntityImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      desc: freezed == desc
-          ? _value.desc
-          : desc // ignore: cast_nullable_to_non_nullable
-              as String?,
-      prices: freezed == prices
-          ? _value._prices
-          : prices // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+      options: freezed == options
+          ? _value._options
+          : options // ignore: cast_nullable_to_non_nullable
+              as List<BundleOptionsEntity>?,
     ));
   }
 }
@@ -156,9 +142,8 @@ class _$BundleEntityImpl implements _BundleEntity {
       {@HiveField(0) this.id,
       @HiveField(1) this.storeId,
       @HiveField(2) this.name,
-      @HiveField(3) this.desc,
-      @HiveField(4) final List<dynamic>? prices})
-      : _prices = prices;
+      @HiveField(4) final List<BundleOptionsEntity>? options})
+      : _options = options;
 
   @override
   @HiveField(0)
@@ -169,23 +154,20 @@ class _$BundleEntityImpl implements _BundleEntity {
   @override
   @HiveField(2)
   final String? name;
-  @override
-  @HiveField(3)
-  final String? desc;
-  final List<dynamic>? _prices;
+  final List<BundleOptionsEntity>? _options;
   @override
   @HiveField(4)
-  List<dynamic>? get prices {
-    final value = _prices;
+  List<BundleOptionsEntity>? get options {
+    final value = _options;
     if (value == null) return null;
-    if (_prices is EqualUnmodifiableListView) return _prices;
+    if (_options is EqualUnmodifiableListView) return _options;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'BundleEntity(id: $id, storeId: $storeId, name: $name, desc: $desc, prices: $prices)';
+    return 'BundleEntity(id: $id, storeId: $storeId, name: $name, options: $options)';
   }
 
   @override
@@ -196,13 +178,12 @@ class _$BundleEntityImpl implements _BundleEntity {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.storeId, storeId) || other.storeId == storeId) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.desc, desc) || other.desc == desc) &&
-            const DeepCollectionEquality().equals(other._prices, _prices));
+            const DeepCollectionEquality().equals(other._options, _options));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, storeId, name, desc,
-      const DeepCollectionEquality().hash(_prices));
+  int get hashCode => Object.hash(runtimeType, id, storeId, name,
+      const DeepCollectionEquality().hash(_options));
 
   @JsonKey(ignore: true)
   @override
@@ -213,11 +194,11 @@ class _$BundleEntityImpl implements _BundleEntity {
 
 abstract class _BundleEntity implements BundleEntity {
   const factory _BundleEntity(
-      {@HiveField(0) final String? id,
-      @HiveField(1) final String? storeId,
-      @HiveField(2) final String? name,
-      @HiveField(3) final String? desc,
-      @HiveField(4) final List<dynamic>? prices}) = _$BundleEntityImpl;
+          {@HiveField(0) final String? id,
+          @HiveField(1) final String? storeId,
+          @HiveField(2) final String? name,
+          @HiveField(4) final List<BundleOptionsEntity>? options}) =
+      _$BundleEntityImpl;
 
   @override
   @HiveField(0)
@@ -229,13 +210,154 @@ abstract class _BundleEntity implements BundleEntity {
   @HiveField(2)
   String? get name;
   @override
-  @HiveField(3)
-  String? get desc;
-  @override
   @HiveField(4)
-  List<dynamic>? get prices;
+  List<BundleOptionsEntity>? get options;
   @override
   @JsonKey(ignore: true)
   _$$BundleEntityImplCopyWith<_$BundleEntityImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$BundleOptionsEntity {
+  @HiveField(0)
+  bool? get color => throw _privateConstructorUsedError;
+  @HiveField(1)
+  int? get price => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $BundleOptionsEntityCopyWith<BundleOptionsEntity> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BundleOptionsEntityCopyWith<$Res> {
+  factory $BundleOptionsEntityCopyWith(
+          BundleOptionsEntity value, $Res Function(BundleOptionsEntity) then) =
+      _$BundleOptionsEntityCopyWithImpl<$Res, BundleOptionsEntity>;
+  @useResult
+  $Res call({@HiveField(0) bool? color, @HiveField(1) int? price});
+}
+
+/// @nodoc
+class _$BundleOptionsEntityCopyWithImpl<$Res, $Val extends BundleOptionsEntity>
+    implements $BundleOptionsEntityCopyWith<$Res> {
+  _$BundleOptionsEntityCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? color = freezed,
+    Object? price = freezed,
+  }) {
+    return _then(_value.copyWith(
+      color: freezed == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      price: freezed == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BundleOptionsEntityImplCopyWith<$Res>
+    implements $BundleOptionsEntityCopyWith<$Res> {
+  factory _$$BundleOptionsEntityImplCopyWith(_$BundleOptionsEntityImpl value,
+          $Res Function(_$BundleOptionsEntityImpl) then) =
+      __$$BundleOptionsEntityImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({@HiveField(0) bool? color, @HiveField(1) int? price});
+}
+
+/// @nodoc
+class __$$BundleOptionsEntityImplCopyWithImpl<$Res>
+    extends _$BundleOptionsEntityCopyWithImpl<$Res, _$BundleOptionsEntityImpl>
+    implements _$$BundleOptionsEntityImplCopyWith<$Res> {
+  __$$BundleOptionsEntityImplCopyWithImpl(_$BundleOptionsEntityImpl _value,
+      $Res Function(_$BundleOptionsEntityImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? color = freezed,
+    Object? price = freezed,
+  }) {
+    return _then(_$BundleOptionsEntityImpl(
+      color: freezed == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      price: freezed == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+
+@HiveType(typeId: 3, adapterName: 'BundleOptionsEntityAdapter')
+class _$BundleOptionsEntityImpl implements _BundleOptionsEntity {
+  const _$BundleOptionsEntityImpl(
+      {@HiveField(0) this.color, @HiveField(1) this.price});
+
+  @override
+  @HiveField(0)
+  final bool? color;
+  @override
+  @HiveField(1)
+  final int? price;
+
+  @override
+  String toString() {
+    return 'BundleOptionsEntity(color: $color, price: $price)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BundleOptionsEntityImpl &&
+            (identical(other.color, color) || other.color == color) &&
+            (identical(other.price, price) || other.price == price));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, color, price);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BundleOptionsEntityImplCopyWith<_$BundleOptionsEntityImpl> get copyWith =>
+      __$$BundleOptionsEntityImplCopyWithImpl<_$BundleOptionsEntityImpl>(
+          this, _$identity);
+}
+
+abstract class _BundleOptionsEntity implements BundleOptionsEntity {
+  const factory _BundleOptionsEntity(
+      {@HiveField(0) final bool? color,
+      @HiveField(1) final int? price}) = _$BundleOptionsEntityImpl;
+
+  @override
+  @HiveField(0)
+  bool? get color;
+  @override
+  @HiveField(1)
+  int? get price;
+  @override
+  @JsonKey(ignore: true)
+  _$$BundleOptionsEntityImplCopyWith<_$BundleOptionsEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

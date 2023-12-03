@@ -25,6 +25,12 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   final DioClient _dioClient;
   final GetOrderByStoreUsecase _getOrderByStoreUsecase;
   final List<OrderEntity> orderData = [];
+
+  Future<void> bootStrap() async {
+    message();
+    await fetchData();
+  }
+
   Future<void> fetchData() async {
     safeEmit(
       const _Loading(),
@@ -68,8 +74,9 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
 
       final savePath = await getApplicationDocumentsDirectory();
 
-      // check if sub folder exists
-      final path = data["document"]["fileName"].split("/");
+      log.f(data);
+      final path = data["document"]["filePath"].split("/");
+      log.e(path);
       final folder = path[0];
       final userFolder = path[1];
       final fileName = path[2];
@@ -80,27 +87,42 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       }
 
       try {
-        final res = await _dioClient.dio.get(
-          "${ListAPI.document}/download/${data["document"]["fileName"]}",
+        final res = await _dioClient.getRequest(
+          "${ListAPI.document}/download",
+          queryParameters: {
+            "dir": folder,
+            "userId": data["document"]["userId"],
+            "fileName": fileName,
+          },
+          converter: (response) {
+            return response;
+          },
         );
-        if (res.data != null) {
-          final List<dynamic> bytes = res.data['data']['data'];
-          var newBytes = bytes.map((e) => e as int).toList();
-          final Uint8List xBytes = Uint8List.fromList(newBytes);
-          final file = File("${dir.path}/$fileName");
-          file.writeAsBytesSync(newBytes);
-          final jobs = await Printing.directPrintPdf(
+        res.fold((l) {
+          log.e(l);
+        }, (success) async {
+          // log.e(success);
+          if (success != null) {
+            final List<dynamic> bytes = success['data']['data'];
+            var newBytes = bytes.map((e) => e as int).toList();
+            final Uint8List xBytes = Uint8List.fromList(newBytes);
+            final file = File("${dir.path}/$fileName");
+            file.writeAsBytesSync(newBytes);
+            final jobs = await Printing.directPrintPdf(
               printer: const Printer(url: 'EPSON L3210 Series'),
-              onLayout: (format) => xBytes);
+              onLayout: (format) => xBytes,
+              name: fileName,
+            );
 
-          safeEmit(
-            _Success(orderData),
-            emit: emit,
-            isClosed: isClosed,
-          );
-        } else {
-          log.e('Invalid response or empty data.');
-        }
+            safeEmit(
+              _Success(orderData),
+              emit: emit,
+              isClosed: isClosed,
+            );
+          } else {
+            log.e('Invalid response or empty data.');
+          }
+        });
       } catch (e) {
         log.e(e);
       }

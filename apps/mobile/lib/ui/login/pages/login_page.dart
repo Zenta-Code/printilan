@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     // dummy data
-    _conEmail.text = "rahmat@gmail.com";
+    _conEmail.text = "vio@gmail.com";
     _conPassword.text = "password";
     super.initState();
   }
@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
             loading: () => context.show(),
             success: (data) {
               context.dismiss();
-              data.toString().toToastSuccess(context);
+              "Login Success".toToastSuccess(context);
               TextInput.finishAutofillContext();
               context.goNamed(Routes.home.name);
             },

@@ -11,10 +11,12 @@ class MainCubit extends Cubit<MainState> with MainBoxMixin {
   MainCubit(
     this._getPrinterByStoreUsecase,
     this._joinSocketUsecase,
+    this._socketClient,
   ) : super(const _Loading());
 
   final GetPrinterByStoreUsecase _getPrinterByStoreUsecase;
   final JoinSocketUsecase _joinSocketUsecase;
+  final SocketClient _socketClient;
 
   int _currentIndex = 0;
   late List<DataHelper> dataMenus;
@@ -30,7 +32,6 @@ class MainCubit extends Cubit<MainState> with MainBoxMixin {
   }
 
   void initMenu(BuildContext context) {
-    bootstrap();
     dataMenus = [
       DataHelper(
         title: Strings.of(context)!.dashboard,
@@ -53,7 +54,7 @@ class MainCubit extends Cubit<MainState> with MainBoxMixin {
     updateIndex(_currentIndex);
   }
 
-  void bootstrap() {
+  Future<void> bootstrap() async {
     fetchPrinters();
     joinRoom();
     pollingPrinter();
@@ -82,6 +83,8 @@ class MainCubit extends Cubit<MainState> with MainBoxMixin {
 
   void joinRoom() {
     final store = getData(MainBoxKeys.store);
-    _joinSocketUsecase.call(store!.id);
+    _joinSocketUsecase.call(SocketParams(
+      storeId: store.id,
+    ));
   }
 }
