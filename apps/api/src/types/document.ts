@@ -5,9 +5,9 @@ export const DocumentTypes = z.object({
       required_error: "Name is required",
     })
     .min(4, "Name must be at least 4 characters"),
-    filePath: z.string({
-      required_error: "Path is required",
-    }),
+  filePath: z.string({
+    required_error: "Path is required",
+  }),
   type: z
     .string({
       required_error: "Type is required",
@@ -24,12 +24,10 @@ export const DocumentTypes = z.object({
   color: z.boolean({
     required_error: "Color is required",
   }),
-  totalPrice: z
-    .number({
-      required_error: "Prize is required",
-    })
-    .min(3, "Type must be at least 3 characters"),
   copies: z.number({
     required_error: "Copies is required",
+  }),
+  userId: z.string({
+    required_error: "User is required",
   }),
 });

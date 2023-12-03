@@ -15,10 +15,13 @@ export const OrderTypes = z.object({
       required_error: "Document Id is required",
     })
     .min(4, "Desc must be at least 4 characters"),
-  totalPrice: z
-    .number({
-      required_error: "Total Price is required",
+  bundleId: z
+    .string({
+      required_error: "Bundle Id is required",
     })
-    .min(3, "Type must be at least 3 characters"),
+    .min(4, "Desc must be at least 4 characters"),
+    isColor: z.boolean({
+      required_error: "Color is required",
+    }),
   status: z.enum(["pending", "paid", "canceled"]),
 });

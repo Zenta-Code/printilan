@@ -13,15 +13,8 @@ export const DocumentController = ({ route }: { route: Router }) => {
     authenticateJWT,
     async function (req, res) {
       try {
-        // const find = await Document.findOne({
-        //   fileName: req.file?.originalname,
-        //   userId: req.body.userId,
-        // });
-        // if (find) {
-        //   return res.status(400).json({
-        //     error: req.t("Document name already exist"),
-        //   });
-        // }
+        console.log("=== UPLOAD FILE ===", req.file);
+        console.log("=== DOCUMENT BODY ===", req.body);
         const bodyMap = {
           fileName: req.file?.originalname,
           filePath: req.file?.path,
@@ -30,7 +23,6 @@ export const DocumentController = ({ route }: { route: Router }) => {
           copies: parseInt(req.body.copies),
           size: req.body.size,
           color: req.body.color === "true" ? true : false,
-          totalPrice: parseInt(req.body.totalPrice),
           totalPage: parseInt(req.body.totalPage),
         };
         const body = DocumentTypes.parse(bodyMap);
@@ -52,16 +44,23 @@ export const DocumentController = ({ route }: { route: Router }) => {
       }
     }
   );
-  route.get("/download/", authenticateJWT, async function (req, res) {
-    const { dir, userId, fileName } = req.query as any;
-    const filePath = path.join(__dirname, "../..", dir, userId, fileName);
-    console.log("filePath", filePath);
-    const bytes = fs.readFileSync(filePath);
-    res.send({
-      name: fileName,
-      type: "application/pdf",
-      data: bytes,
-    });
+  route.get("/download", authenticateJWT, async function (req, res) {
+    try {
+      const { dir, userId, fileName } = req.query as any;
+      const filePath = path.join(__dirname, "../..", dir, userId, fileName);
+      console.log("filePath", filePath);
+      const bytes = fs.readFileSync(filePath);
+      res.send({
+        name: fileName,
+        type: "application/pdf",
+        data: bytes,
+      });
+    } catch (error) {
+      console.log("error", error);
+      res.status(400).json({
+        error: error,
+      });
+    }
   });
   route.get("/", authenticateJWT, async (req, res) => {
     try {

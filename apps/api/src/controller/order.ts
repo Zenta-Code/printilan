@@ -1,8 +1,8 @@
 import * as crypto from "crypto";
 import { Router } from "express";
 import * as midtransClient from "midtrans-client";
-import { io } from "../index";
 import { authenticateJWT } from "../middleware/auth";
+import { Bundle } from "../model/bundle";
 import { Document } from "../model/document";
 import { Order } from "../model/order";
 import { Store } from "../model/store";
@@ -35,18 +35,18 @@ export const OrderController = ({ route }: { route: Router }) => {
         const document = await Document.findById(order?.documentId);
         const user = await User.findById(order?.userId);
         const store = await Store.findById(order?.storeId);
-        io?.to(store?.id).emit("message", {
-          receiver: store?.id,
-          sender: user?.id,
-          content: {
-            type: "order",
-            content: {
-              documentId: document?.id,
-            },
-          },
-          order,
-          document,
-        });
+        // io?.to(store?.id).emit("message", {
+        //   receiver: store?.id,
+        //   sender: user?.id,
+        //   content: {
+        //     type: "order",
+        //     content: {
+        //       documentId: document?.id,
+        //     },
+        //   },
+        //   order,
+        //   document,
+        // });
       }
     }
   });
@@ -119,7 +119,11 @@ export const OrderController = ({ route }: { route: Router }) => {
   route.post("/", async (req, res) => {
     try {
       req.body.status = "pending";
+      req.body.isColor = req.body.color === "true" ? true : false;
+
       const body = OrderTypes.parse(req.body);
+
+      console.log("body", body);
 
       if (!body) {
         return res.status(400).json({
@@ -127,24 +131,30 @@ export const OrderController = ({ route }: { route: Router }) => {
         });
       }
 
-      const order = await Order.create({
-        ...body,
-      });
+      const order = await Order.create({ ...body });
 
-      const user = await User.findById(order.userId);
-      const store = await Store.findById(order.storeId);
-      const document = await Document.findById(order.documentId);
+      const [user, store, document, bundle] = await Promise.all([
+        User.findById(order.userId),
+        Store.findById(order.storeId),
+        Document.findById(order.documentId),
+        Bundle.findById(order.bundleId),
+      ]);
+
       const userName = user?.name?.split(" ");
+      const isColor = body.isColor;
+      const option = bundle?.options?.find((item) => item.color === isColor);
+
+      const totalPrice =
+        (option?.price || 0) *
+        (document?.totalPage || 0) *
+        (document?.copies || 1);
 
       const payment = await snap.createTransaction({
         transaction_details: {
           order_id: order.id,
-          gross_amount: order.totalPrice,
+          gross_amount: totalPrice,
         },
-        credit_card: {
-          secure: true,
-        },
-
+        credit_card: { secure: true },
         customer_details: {
           first_name: userName?.[0] || "",
           last_name: userName?.[1] || "",
@@ -154,18 +164,17 @@ export const OrderController = ({ route }: { route: Router }) => {
             first_name: userName?.[0] || "",
             last_name: userName?.[1] || "",
             phone: user?.phone || "",
-            adrress: user?.address?.street || "",
+            address: user?.address?.street || "",
             city: user?.address?.city || "",
             postal_code: user?.address?.zipCode || 0,
           },
         },
-
         item_details: [
           {
             id: order.id,
-            price: order.totalPrice,
+            price: totalPrice,
             quantity: document?.copies || 1,
-            name: order.documentId || "",
+            name: document?.fileName || "",
             merchant_name: store?.name || "",
           },
         ],
@@ -178,8 +187,9 @@ export const OrderController = ({ route }: { route: Router }) => {
         payment: payment,
       });
     } catch (error) {
-      return res.status(400).json({
-        error: error,
+      console.error("Error:", error);
+      return res.status(500).json({
+        error: req.t("Internal server error"),
       });
     }
   });

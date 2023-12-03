@@ -5,7 +5,9 @@ const OrderSchema = new Schema(
     userId: Types.ObjectId,
     storeId: Types.ObjectId,
     documentId: Types.ObjectId,
+    bundleId: Types.ObjectId,
     totalPrice: Number,
+    isColor: Boolean,
     status: String,
   },
   {

@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { Router } from "express";
 import { authenticateJWT } from "../middleware/auth";
 import { Bundle } from "../model/bundle";
+import { Print } from "../model/print";
 import { Store } from "../model/store";
 import { User } from "../model/user";
 import { BundleTypes } from "../types/bundle";
@@ -21,32 +22,44 @@ export const StoreController = ({ route }: { route: Router }) => {
           message: req.t("Store data doesn't valid"),
         });
       }
+      const find = await Store.findOne({
+        name: body.store.name,
+      });
+      if (find) {
+        return res.status(400).json({
+          error: req.t("Store name already exist"),
+        });
+      }
+      const password: string = body.user.password || "";
+      const confirmPassword: string = body.user.confirmPassword || "";
+      if (password !== confirmPassword) {
+        return res.status(400).json({
+          error: req.t("Password doesn't match"),
+        });
+      }
+
+      if (password.length < 8) {
+        return res.status(400).json({
+          error: req.t("Password must be at least 8 characters"),
+        });
+      }
+
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      body.user.password = hashedPassword;
       let user = await User.findOne({
         email: body.user.email,
       });
       if (user) {
         user = await User.findByIdAndUpdate(user._id, {
-          ...body.user,
+          name: body.user.name,
+          email: body.user.email,
+          password: hashedPassword,
+          address: body.user.address,
+          phone: body.user.phone,
+          role: body.user.role,
         });
       } else {
-        const password: string = body.user.password || "";
-        const confirmPassword: string = body.user.confirmPassword || "";
-        if (password !== confirmPassword) {
-          return res.status(400).json({
-            error: req.t("Password doesn't match"),
-          });
-        }
-
-        if (password.length < 8) {
-          return res.status(400).json({
-            error: req.t("Password must be at least 8 characters"),
-          });
-        }
-
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        body.user.password = hashedPassword;
-
         user = await User.create({
           name: body.user.name,
           email: body.user.email,
@@ -58,14 +71,6 @@ export const StoreController = ({ route }: { route: Router }) => {
         console.log(user);
       }
 
-      const find = await Store.findOne({
-        name: body.store.name,
-      });
-      if (find) {
-        return res.status(400).json({
-          error: req.t("Store name already exist"),
-        });
-      }
       const store = await Store.create({
         name: body.store.name,
         address: body.store.address,
@@ -107,6 +112,7 @@ export const StoreController = ({ route }: { route: Router }) => {
       const { id, name, city } = req.query;
 
       let find;
+      let bundle: any[] = [];
 
       if (id) {
         find = await Store.find({ _id: id });
@@ -116,10 +122,22 @@ export const StoreController = ({ route }: { route: Router }) => {
         });
       } else if (city) {
         const newCity = (city as string).replace(/%20/g, " ");
+
         find = await Store.find({
+          status: "open",
           "address.city": newCity,
         });
+
+        if (find.length > 0) {
+          await Promise.all(
+            find.map(async (item) => {
+              const findBundle = await Bundle.find({ storeId: item._id });
+              bundle = [...bundle, ...findBundle];
+            })
+          );
+        }
       } else {
+        console.log("NOT FOUND");
         return res.status(400).json({
           error: req.t("Store not found"),
         });
@@ -128,10 +146,12 @@ export const StoreController = ({ route }: { route: Router }) => {
       if (!find || (Array.isArray(find) && find.length === 0)) {
         return res.status(400).json({ error: req.t("Store not found") });
       }
-
-      return res
-        .status(200)
-        .json({ success: true, message: req.t("Store found"), data: find });
+      return res.status(200).json({
+        success: true,
+        message: req.t("Store found"),
+        data: find,
+        bundle: bundle,
+      });
     } catch (error) {
       return res.status(400).json({
         error: error,
@@ -170,18 +190,24 @@ export const StoreController = ({ route }: { route: Router }) => {
   route.delete("/:id", authenticateJWT, async (req, res) => {
     try {
       const id = req.params;
-      const store = await Store.findByIdAndDelete(id.id);
+      const store = await Store.findById(id.id);
       if (!store) {
         return res.status(400).json({
           error: req.t("Store not found"),
         });
       }
-      const bundle = await Bundle.deleteMany({ storeId: id.id });
+      const bundle = await Bundle.deleteMany({ storeId: store.id });
       if (!bundle) {
         return res.status(400).json({
           error: req.t("Bundle not found"),
         });
       }
+
+      await User.findByIdAndDelete(store.ownerId);
+
+      await Store.findByIdAndDelete(store.id);
+
+      await Print.deleteMany({ storeId: store.id });
 
       return res.status(200).json({
         success: true,
