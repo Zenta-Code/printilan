@@ -159,31 +159,6 @@ export const createSocketServer = async (httpServer: HttpServer) => {
         const rooms: Set<string> | undefined =
           io.sockets.adapter.rooms.get(roomId);
 
-        // if (rooms) {
-        //   sellerStore[rooms.values().next().value].forEach(
-        //     async (item: any) => {
-        //       if (item.type == "seller") {
-        //         const store = await Store.findById(item.id);
-        //         console.log("IF STORE", store);
-        //         if (store) {
-        //           await Store.findByIdAndUpdate(store._id, { status: "open" });
-        //         }
-        //       } else {
-        //         const store = await Store.findById(receiver);
-        //         console.log("ELSE STORE", store);
-        //         if (store) {
-        //           await Store.findByIdAndUpdate(store._id, { status: "close" });
-        //         }
-
-        //         delete sellerStore[rooms.values().next().value];
-        //       }
-        //     }
-        //   );
-        // } else {
-        //   console.log("room not found") ;
-        //   socket.emit("error", "room not found");
-        // }
-
         if (message.content.type == "order") {
           const order = await Order.findById(message.content.content._id);
           const document = await Document.findById(
