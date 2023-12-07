@@ -10,8 +10,7 @@ import 'package:sky_printing_core/sky_printing_core.dart';
 void main() {
   runZonedGuarded(
     () async {
-      WidgetsFlutterBinding.ensureInitialized();
-
+      WidgetsFlutterBinding.ensureInitialized(); 
       await serviceLocator();
       await FirebaseServices.init();
       return SystemChrome.setPreferredOrientations(

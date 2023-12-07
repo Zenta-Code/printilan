@@ -16,8 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _textCon = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -118,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Last Activity",
+                                        Strings.of(context)!.last_activity,
                                         style: Theme.of(context)
                                             .textTheme
                                             .headlineSmall!
@@ -208,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                             horizontal: Dimens.space24,
                           ),
                           child: Text(
-                            "Our Services",
+                            Strings.of(context)!.our_services,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineSmall!

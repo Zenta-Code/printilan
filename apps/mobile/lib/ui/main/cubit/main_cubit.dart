@@ -33,10 +33,6 @@ class MainCubit extends Cubit<MainState> {
         icon: Icons.history,
       ),
       DataHelper(
-        title: Strings.of(context)!.wallet,
-        icon: Icons.wallet,
-      ),
-      DataHelper(
         title: Strings.of(context)!.settings,
         icon: Icons.person_2_outlined,
       ),

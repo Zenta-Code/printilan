@@ -19,14 +19,12 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   OrderCubit(
     this._client,
     this._joinSocket,
-    this._socketClient,
-    this._webViewClient,
+    this._socketClient, 
     this._getFile,
   ) : super(const _Loading());
   final DioClient _client;
   final JoinSocketUsecase _joinSocket;
-  final SocketClient _socketClient;
-  final WebViewClient _webViewClient;
+  final SocketClient _socketClient; 
   final GetFileUseCase _getFile;
   WebViewController? controller;
   String store = '';
@@ -174,7 +172,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       (value) => value.fold((l) => log.e(l), (r) {
         result = r.result;
         safeEmit(
-          _Success(
+          const _Success(
             [],
           ),
           emit: emit,

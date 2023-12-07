@@ -41,28 +41,35 @@ class HomeCubit extends Cubit<HomeState> {
           emit(_Failure(l.message ?? ""));
         }
       },
-      (r) async {
+      (success) async {
+        String regency;
+        if (success.placemarks!.first.subAdministrativeArea!.split(" ").length >
+            1) {
+          regency =
+              success.placemarks!.first.subAdministrativeArea!.split(" ")[1];
+        } else {
+          regency = success.placemarks!.first.subAdministrativeArea!;
+        }
         final store = await getStoreByCity(
-            r.placemarks!.first.subAdministrativeArea!.split(" ")[1]);
-        log.e(store);
-        location = r;
+          regency,
+        );
         kGooglePlex = CameraPosition(
           target: LatLng(
-            r.latitude!,
-            r.longitude!,
+            success.latitude!,
+            success.longitude!,
           ),
           zoom: 14.4746,
         );
         marker = Marker(
           markerId: const MarkerId("1"),
           position: LatLng(
-            r.latitude!,
-            r.longitude!,
+            success.latitude!,
+            success.longitude!,
           ),
         );
 
         safeEmit(
-          _Success(r, store.value1, store.value2),
+          _Success(success, store.value1, store.value2),
           emit: emit,
           isClosed: isClosed,
         );
@@ -72,11 +79,15 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<Tuple2<List<StoreEntity>, List<BundleEntity>>> getStoreByCity(
       String city) async {
-    safeEmit(const _Loading(), emit: emit, isClosed: isClosed);
+    safeEmit(
+      const _Loading(),
+      emit: emit,
+      isClosed: isClosed,
+    );
     final data = await _getStoreByCityUsecase.call(
       GetStoreByCityParams(city: city),
     );
-    Tuple2<List<StoreEntity>, List<BundleEntity>> store = Tuple2([], []);
+    Tuple2<List<StoreEntity>, List<BundleEntity>> store = const Tuple2([], []);
     data.fold(
       (l) {
         if (l is ServerFailure) {}

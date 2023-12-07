@@ -31,7 +31,6 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
   final _copiesController = TextEditingController();
   final _fileController = TextEditingController();
-  final _selectStroreController = TextEditingController();
   late TabController _tabController;
   StoreEntity? selectedStore;
   String? selectedOption;
@@ -79,7 +78,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
               });
             },
             controller: _tabController,
-            tabs: [
+            tabs: const [
               Tab(
                 icon: Icon(Icons.upload_file),
               ),
@@ -93,7 +92,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
       bottomNavigation: context.watch<OrderCubit>().result != null &&
               _tabController.index == 1
           ? Container(
-              margin: EdgeInsets.all(16),
+              margin: const EdgeInsets.all(16),
               child: ButtonText(
                 color: Colors.black,
                 title: Strings.of(context)!.order,
@@ -113,7 +112,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
               ),
             )
           : Container(
-              margin: EdgeInsets.all(16),
+              margin: const EdgeInsets.all(16),
               child: ButtonText(
                 key: const Key("btn_login"),
                 title: Strings.of(context)!.next,
@@ -153,7 +152,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
       child: TabBarView(
         controller: _tabController,
         // make tab doesnt swipe
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
           buildUploadTab(),
           buildFileView(),
@@ -234,7 +233,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
               child: DropdownButton<StoreEntity>(
                 underline: Container(),
                 isExpanded: true,
-                hint: Text(
+                hint: const Text(
                   'Choose Store',
                 ),
                 items: widget.store!
@@ -256,19 +255,19 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
             ),
             BlocBuilder<OrderCubit, OrderState>(builder: (context, state) {
               return state.when(
-                  loading: () => Loading(),
+                  loading: () => const Loading(),
                   success: (s) {
                     return InkWell(
                       onTap: () {
                         context.read<OrderCubit>().pickFile();
                       },
                       child: Container(
-                        margin: EdgeInsets.all(16),
-                        padding: EdgeInsets.all(16),
+                        margin: const EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         width: double.infinity,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Color(0xFFCFE7FF),
+                          color: const Color(0xFFCFE7FF),
                         ),
                         child: Column(
                           children: [
@@ -324,14 +323,13 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                                           context.watch<OrderCubit>().result ==
                                                   null
                                               ? ""
-                                              : context
+                                              : "${context
                                                       .watch<OrderCubit>()
                                                       .result!
                                                       .files
                                                       .first
                                                       .name
-                                                      .substring(0, 10) +
-                                                  "...",
+                                                      .substring(0, 10)}...",
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyMedium!
@@ -385,7 +383,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                                       Colors.white,
                                     ),
                                     side: MaterialStateProperty.all(
-                                      BorderSide(
+                                      const BorderSide(
                                         color: Colors.grey,
                                       ),
                                     ),
@@ -420,7 +418,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                   failure: (err) => Empty(
                         errorMessage: err,
                       ),
-                  empty: () => Empty());
+                  empty: () => const Empty());
             }),
             TextF(
               controller: _copiesController,

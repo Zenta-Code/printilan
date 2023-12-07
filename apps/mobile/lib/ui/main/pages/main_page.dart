@@ -31,9 +31,6 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     return Parent(
       scaffoldKey: _scaffoldKey,
-      // appBar: _appBar(),
-      // extendBody: true,
-
       child: widget.child,
     );
   }

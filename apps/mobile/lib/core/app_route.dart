@@ -20,7 +20,6 @@ import 'package:sky_printing/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing/ui/register/pages/register_page.dart';
 import 'package:sky_printing/ui/settings/pages/settings_page.dart';
 import 'package:sky_printing/ui/splashscreen/pages/splash_screen_page.dart';
-import 'package:sky_printing/ui/wallet/pages/wallet_page.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
@@ -140,11 +139,6 @@ class AppRoute with MainBoxMixin {
             builder: (context, state) => const HistoryPage(),
           ),
           GoRoute(
-            path: Routes.wallet.path,
-            name: Routes.wallet.name,
-            builder: (context, state) => const WalletPage(),
-          ),
-          GoRoute(
             path: Routes.settings.path,
             name: Routes.settings.name,
             builder: (_, __) => const SettingsPage(),
@@ -171,49 +165,39 @@ FutureOr<String?> validateToken(
     return null;
   }
   final user = MainBoxMixin().getData<UserEntity?>(MainBoxKeys.user);
-  log.i("user: $user");
 
   if (user == null && !isLoginPage) {
-    log.i("0");
     return null;
   }
 
   if (user == null && isLoginPage) {
-    log.i("1");
     return Routes.login.path;
   }
 
   if (user == null) {
-    log.i("2");
     return Routes.splashScreen.path;
   }
   final res = await context.read<LoginCubit>().me(MeParams(id: user.id));
 
   if (res == null || res is ServerFailure) {
-    log.e("res is null");
     Future.wait([
       MainBoxMixin().removeData(MainBoxKeys.user),
       MainBoxMixin().removeData(MainBoxKeys.store),
       MainBoxMixin().removeData(MainBoxKeys.token),
     ]);
-
     return Routes.splashScreen.path;
   }
   if (res.id == null) {
-    log.e("res.id is null");
     return Routes.login.path;
   }
 
   if (res.id != null && isLoginPage) {
-    log.e("res.id is not null");
     return null;
   }
 
   if (res.role == "customer" && !isLoginPage) {
-    log.e("res.role is customer");
     return state.matchedLocation == Routes.root.path ? Routes.home.path : null;
   }
 
-  log.i('null');
   return null;
 }

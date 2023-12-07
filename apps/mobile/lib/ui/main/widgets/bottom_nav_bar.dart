@@ -21,8 +21,6 @@ class BottomNavBar extends StatelessWidget {
       context.goNamed(Routes.home.name);
     } else if (title == Strings.of(context)!.history) {
       context.goNamed(Routes.history.name);
-    } else if (title == Strings.of(context)!.wallet) {
-      context.goNamed(Routes.wallet.name);
     } else if (title == Strings.of(context)!.settings) {
       context.goNamed(Routes.settings.name);
     }
@@ -46,16 +44,11 @@ class BottomNavBar extends StatelessWidget {
       showSelectedLabels: false,
       currentIndex: context.read<MainCubit>().currentIndex,
       onTap: (index) {
-        log.e("Current Index Bottom Nav Bar: $index");
-
         selectPage(
           dataMenu[index].title!,
           index,
           context,
         );
-        log.f('Selected ${dataMenu[index].title!}');
-        log.e(
-            "New Index Bottom Nav Bar: ${context.read<MainCubit>().currentIndex}");
       },
       items: dataMenu
           .map((e) => BottomNavigationBarItem(

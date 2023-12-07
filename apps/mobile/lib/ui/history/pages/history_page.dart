@@ -23,7 +23,7 @@ class _HistoryPageState extends State<HistoryPage> {
               );
         },
       ),
-      child: Text('HistoryPage'),
+      child: const Text('HistoryPage'),
     );
   }
 }

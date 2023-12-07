@@ -44,7 +44,7 @@ class _PaymentPageState extends State<PaymentPage> {
             },
             loading: () {
               log.e("\nloading\n");
-              return Loading();
+              return const Loading();
             },
             success: (controller) {
               log.e("\nsuccess\n");

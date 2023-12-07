@@ -50,6 +50,7 @@ class LoginCubit extends Cubit<LoginState> {
         if (l is ServerFailure) {
           return null;
         }
+        return null;
       },
       (r) {
         return r;

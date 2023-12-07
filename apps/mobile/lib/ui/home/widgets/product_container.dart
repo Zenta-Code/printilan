@@ -69,24 +69,11 @@ class ProductContainer extends StatelessWidget {
                   "${Strings.of(context)!.black_and_white} :",
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
-                Row(
-                  children: [
-                    Text("Rp. ",
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                              color: Colors.black,
-                            )),
-                    Text(
-                      bwPrice.toString(),
-                      style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                            color: Colors.black,
-                          ),
-                    ),
-                    Text(" / ${Strings.of(context)!.paper.toLowerCase()}",
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                              color: Colors.black,
-                            )),
-                  ],
-                ),
+                Text(
+                    "Rp. $bwPrice / ${Strings.of(context)!.sheet.toLowerCase()}",
+                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                          color: Colors.black,
+                        )),
                 SizedBox(
                   height: Dimens.space4,
                 ),
@@ -94,43 +81,31 @@ class ProductContainer extends StatelessWidget {
                   "${Strings.of(context)!.color} :",
                   style: Theme.of(context).textTheme.bodySmall,
                 ),
-                Row(
-                  children: [
-                    Text("Rp. ",
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                              color: Colors.black,
-                            )),
-                    ShaderMask(
-                      blendMode: BlendMode.srcIn,
-                      shaderCallback: (bounds) => LinearGradient(colors: [
-                        Colors.red,
-                        Colors.pink,
-                        Colors.purple,
-                        Colors.deepPurple,
-                        Colors.deepPurple,
-                        Colors.indigo,
-                        Colors.blue,
-                        Colors.teal,
-                        Colors.green,
-                        Colors.lightGreen,
-                        Colors.amber,
-                        Colors.orange,
-                        Colors.deepOrange,
-                      ]).createShader(
-                        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-                      ),
-                      child: Text(
-                        colorPrice.toString(),
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                              color: Colors.black,
-                            ),
-                      ),
-                    ),
-                    Text(" / ${Strings.of(context)!.paper.toLowerCase()}",
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                              color: Colors.black,
-                            )),
-                  ],
+                ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (bounds) => const LinearGradient(colors: [
+                    Colors.red,
+                    Colors.pink,
+                    Colors.purple,
+                    Colors.deepPurple,
+                    Colors.deepPurple,
+                    Colors.indigo,
+                    Colors.blue,
+                    Colors.teal,
+                    Colors.green,
+                    Colors.lightGreen,
+                    Colors.amber,
+                    Colors.orange,
+                    Colors.deepOrange,
+                  ]).createShader(
+                    Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                  ),
+                  child: Text(
+                    "Rp. $colorPrice / ${Strings.of(context)!.sheet.toLowerCase()}",
+                    style: Theme.of(context).textTheme.labelLarge!.copyWith(
+                          color: Colors.black,
+                        ),
+                  ),
                 ),
               ],
             ),
