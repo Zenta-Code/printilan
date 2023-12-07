@@ -5,6 +5,9 @@ class StringsId extends Strings {
   StringsId([String locale = 'id']) : super(locale);
 
   @override
+  String get sheet => 'Lembar';
+
+  @override
   String get black_and_white => 'Hitam Putih';
 
   @override

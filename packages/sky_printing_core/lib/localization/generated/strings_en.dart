@@ -5,6 +5,9 @@ class StringsEn extends Strings {
   StringsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get sheet => 'Sheet';
+
+  @override
   String get black_and_white => 'Black and White';
 
   @override

@@ -113,12 +113,13 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
               onLayout: (format) => xBytes,
               name: fileName,
             );
-
-            safeEmit(
-              _Success(orderData),
-              emit: emit,
-              isClosed: isClosed,
-            );
+            if (jobs) {
+              safeEmit(
+                _Success(orderData),
+                emit: emit,
+                isClosed: isClosed,
+              );
+            }
           } else {
             log.e('Invalid response or empty data.');
           }

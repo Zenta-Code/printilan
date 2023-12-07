@@ -7,7 +7,6 @@ part 'register_cubit.freezed.dart';
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  final PostRegister _postRegister;
   final PostStoreUsecase _postStoreUsecase;
 
   /// Handle state visibility password
@@ -15,7 +14,6 @@ class RegisterCubit extends Cubit<RegisterState> {
   bool? isConfirmPasswordHide = true;
 
   RegisterCubit(
-    this._postRegister,
     this._postStoreUsecase,
   ) : super(const _Loading());
 

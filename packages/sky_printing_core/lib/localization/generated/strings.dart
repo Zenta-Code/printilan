@@ -93,6 +93,12 @@ abstract class Strings {
     Locale('id')
   ];
 
+  /// No description provided for @sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Sheet'**
+  String get sheet;
+
   /// No description provided for @black_and_white.
   ///
   /// In en, this message translates to:

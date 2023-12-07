@@ -92,7 +92,7 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
     } on DioException catch (e, stackTrace) {
       log.e(e);
       if (e.response!.statusCode == 502) {
-        return Left(
+        return const Left(
           ServerFailure(
             "Server is down",
           ),
@@ -100,6 +100,13 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
       }
       if (!_isUnitTest || Platform.isAndroid) {
         nonFatalError(error: e, stackTrace: stackTrace);
+      }
+      if (e.response?.data is String) {
+        return Left(
+          ServerFailure(
+            e.response?.data,
+          ),
+        );
       }
       return Left(
         ServerFailure(

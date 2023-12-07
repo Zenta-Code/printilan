@@ -169,11 +169,10 @@ FutureOr<String?> validateToken(
   }
 
   if (user == null) {
-    log.e("user is null");
     return Routes.login.path;
   }
   final res = await context.read<AuthCubit>().me(MeParams(
-        id: user!.id,
+        id: user.id,
       ));
 
   if (res == null || res is ServerFailure) {

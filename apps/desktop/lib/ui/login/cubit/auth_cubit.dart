@@ -51,6 +51,7 @@ class AuthCubit extends Cubit<AuthState> {
         if (l is ServerFailure) {
           return null;
         }
+        return null;
       },
       (r) {
         return r;

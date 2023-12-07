@@ -144,7 +144,6 @@ void _cubit() {
   sl.registerFactory(
     () => RegisterCubit(
       sl(),
-      sl(),
     ),
   );
   sl.registerFactory(
@@ -161,7 +160,6 @@ void _cubit() {
   );
   sl.registerFactory(
     () => MainCubit(
-      sl(),
       sl(),
       sl(),
     ),

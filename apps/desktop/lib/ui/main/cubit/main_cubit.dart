@@ -10,13 +10,11 @@ part 'main_state.dart';
 class MainCubit extends Cubit<MainState> with MainBoxMixin {
   MainCubit(
     this._getPrinterByStoreUsecase,
-    this._joinSocketUsecase,
-    this._socketClient,
+    this._joinSocketUsecase, 
   ) : super(const _Loading());
 
   final GetPrinterByStoreUsecase _getPrinterByStoreUsecase;
-  final JoinSocketUsecase _joinSocketUsecase;
-  final SocketClient _socketClient;
+  final JoinSocketUsecase _joinSocketUsecase; 
 
   int _currentIndex = 0;
   late List<DataHelper> dataMenus;
