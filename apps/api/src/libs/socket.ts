@@ -32,26 +32,30 @@ export const createSocketServer = async (httpServer: HttpServer) => {
     const userName = process.env.SOCKET_USERNAME || "";
     const password = process.env.SOCKET_PASSWORD || "";
     io.use((socket, next) => {
-      if (socket.handshake.auth.username) {
-        const isValid =
-          socket.handshake.auth.username === userName &&
-          socket.handshake.auth.password === password;
-        if (isValid) {
-          return next();
+      try {
+        if (socket.handshake.auth.username) {
+          const isValid =
+            socket.handshake.auth.username === userName &&
+            socket.handshake.auth.password === password;
+          if (isValid) {
+            return next();
+          }
         }
-      }
-      const token = socket.handshake.auth.token;
-      console.log("token", token);
-      if (token) {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || "");
-        console.log("decoded", decoded);
-        if (decoded) {
-          return next();
-        } else {
-          return next(new Error("authentication error"));
+        const token = socket.handshake.auth.token;
+        console.log("token", token);
+        if (token) {
+          const decoded = jwt.verify(token, process.env.JWT_SECRET || "");
+          console.log("decoded", decoded);
+          if (decoded) {
+            return next();
+          } else {
+            return next(new Error("authentication error"));
+          }
         }
+        return next(new Error("authentication error"));
+      } catch (error) {
+        console.log("error", error);
       }
-      return next(new Error("authentication error"));
     });
 
     instrument(io, {

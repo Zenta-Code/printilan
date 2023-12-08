@@ -112,7 +112,7 @@ export const StoreController = ({ route }: { route: Router }) => {
       const { id, name, city } = req.query;
 
       let find;
-      let bundle: any[] = [];
+      let bundles: any[] = [];
 
       if (id) {
         find = await Store.find({ _id: id });
@@ -131,13 +131,12 @@ export const StoreController = ({ route }: { route: Router }) => {
         if (find.length > 0) {
           await Promise.all(
             find.map(async (item) => {
-              const findBundle = await Bundle.find({ storeId: item._id });
-              bundle = [...bundle, ...findBundle];
+              const findBundles = await Bundle.find({ storeId: item._id });
+              bundles = [...bundles, ...findBundles];
             })
           );
         }
       } else {
-        console.log("NOT FOUND");
         return res.status(400).json({
           error: req.t("Store not found"),
         });
@@ -150,7 +149,7 @@ export const StoreController = ({ route }: { route: Router }) => {
         success: true,
         message: req.t("Store found"),
         data: find,
-        bundle: bundle,
+        bundle: bundles,
       });
     } catch (error) {
       return res.status(400).json({
