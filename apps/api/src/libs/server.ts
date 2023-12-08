@@ -3,6 +3,7 @@ import cors from "cors";
 import express, { Express } from "express";
 import RouteGroup from "express-route-grouping";
 import morgan from "morgan";
+import { AddressController } from "../controller/address";
 import { BundleController } from "../controller/bundle";
 import { DocumentController } from "../controller/document";
 import { OrderController } from "../controller/order";
@@ -45,6 +46,9 @@ export const createExpressServer: () => Express = () => {
     });
     app.group("/order", (app) => {
       OrderController({ route: app });
+    });
+    app.group("/address", (app) => {
+      AddressController({ route: app });
     });
   });
 
