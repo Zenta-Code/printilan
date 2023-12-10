@@ -28,32 +28,6 @@ export const OrderController = ({ route }: { route: Router }) => {
     clientKey: process.env.MIDTRANS_CLIENT_KEY || "",
   });
 
-  Order.watch().on("change", async (data) => {
-    if (data.operationType === "update") {
-      console.log("UPDATE: ", data);
-      console.log("STATUS: ", data.updateDescription.updatedFields.status);
-      console.log("ID: ", data.documentKey._id);
-      if (data.updateDescription.updatedFields.status === "paid") {
-        const order = await Order.findById(data.documentKey._id);
-        const document = await Document.findById(order?.documentId);
-        const user = await User.findById(order?.userId);
-        const store = await Store.findById(order?.storeId);
-        // io?.to(store?.id).emit("message", {
-        //   receiver: store?.id,
-        //   sender: user?.id,
-        //   content: {
-        //     type: "order",
-        //     content: {
-        //       documentId: document?.id,
-        //     },
-        //   },
-        //   order,
-        //   document,
-        // });
-      }
-    }
-  });
-
   route.post("/callback", async function (req, res) {
     try {
       console.log("======= INCOMING CALLBACK ==========");
@@ -122,7 +96,6 @@ export const OrderController = ({ route }: { route: Router }) => {
   route.post("/", async (req, res) => {
     try {
       req.body.status = "pending";
-      // req.body.isColor = req.body.isColor === "true" ? true : false;
 
       console.log("req.body", req.body);
       const body = OrderTypes.parse(req.body);
@@ -212,7 +185,7 @@ export const OrderController = ({ route }: { route: Router }) => {
   });
   route.get("/", authenticateJWT, async (req, res) => {
     try {
-      const { id, storeId, userId } = req.query;
+      const { id, storeId, userId, limit } = req.query;
 
       let find;
 
@@ -230,6 +203,7 @@ export const OrderController = ({ route }: { route: Router }) => {
           const document = await Document.findById(order[i].documentId);
           const user = await User.findById(order[i].userId);
           const store = await Store.findById(order[i].storeId);
+          const bundle = await Bundle.findById(order[i].bundleId);
           listOfOrder.push({
             userId: order[i].userId,
             storeId: order[i].storeId,
@@ -238,6 +212,39 @@ export const OrderController = ({ route }: { route: Router }) => {
             document,
             user,
             store,
+            bundle,
+          });
+        }
+        find = listOfOrder;
+      } else if (userId && limit) {
+        const n = parseInt(limit as string);
+
+        const user = await User.findById(userId);
+
+        if (!user) {
+          return res.status(400).json({ error: "User not found" });
+        }
+
+        const order = await Order.find({ userId: user._id })
+          .sort({ createdAt: -1 })
+          .limit(n);
+
+        let listOfOrder = [];
+
+        for (let i = 0; i < order.length; i++) {
+          const document = await Document.findById(order[i].documentId);
+          const user = await User.findById(order[i].userId);
+          const store = await Store.findById(order[i].storeId);
+          const bundle = await Bundle.findById(order[i].bundleId);
+          listOfOrder.push({
+            userId: order[i].userId,
+            storeId: order[i].storeId,
+            documentId: order[i].documentId,
+            order: order[i],
+            document,
+            user,
+            store,
+            bundle,
           });
         }
         find = listOfOrder;
@@ -246,7 +253,26 @@ export const OrderController = ({ route }: { route: Router }) => {
         if (!user) {
           return res.status(400).json({ error: "User not found" });
         }
-        find = await Order.find({ userId: user._id });
+        const order = await Order.find({ userId: user._id });
+
+        let listOfOrder = [];
+
+        for (let i = 0; i < order.length; i++) {
+          const document = await Document.findById(order[i].documentId);
+          const store = await Store.findById(order[i].storeId);
+          const bundle = await Bundle.findById(order[i].bundleId);
+          listOfOrder.push({
+            userId: order[i].userId,
+            storeId: order[i].storeId,
+            documentId: order[i].documentId,
+            order: order[i],
+            document,
+            user,
+            store,
+            bundle,
+          });
+        }
+        find = listOfOrder;
       } else {
         return res.status(400).json({ error: req.t("Order not found") });
       }
@@ -254,6 +280,8 @@ export const OrderController = ({ route }: { route: Router }) => {
       if (!find || (Array.isArray(find) && find.length === 0)) {
         return res.status(400).json({ error: req.t("Order not found") });
       }
+
+      console.log("find", find);
 
       return res
         .status(200)

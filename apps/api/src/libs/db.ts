@@ -5,7 +5,7 @@ export const connectMongo = async (
 ) => {
   try {
     mongoose.connect(dbUrl, {
-      // dbName: dbName,
+      dbName: dbName,
     });
     mongoose.connection.on("error", (err) => {
       throw new Error(err);

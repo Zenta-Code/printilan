@@ -5,6 +5,9 @@ import { Server, Socket } from "socket.io";
 import { ApiConfig } from "../config/config";
 import { OrderSocketController } from "../controller/socket/order";
 import { socketAuth } from "../middleware/socket-auth";
+import { Bundle } from "../model/bundle";
+import { Document } from "../model/document";
+import { Order } from "../model/order";
 import { Store } from "../model/store";
 import { User } from "../model/user";
 
@@ -76,7 +79,7 @@ export const createSocketServer = async (httpServer: HttpServer) => {
             return;
           }
           const store = await Store.findByIdAndUpdate(data.roomId, {
-            $addToSet: { customer: user },
+            $push: { customer: user },
           });
           if (store) {
             console.log("store", store);
@@ -91,31 +94,32 @@ export const createSocketServer = async (httpServer: HttpServer) => {
       socket.on("leave", async (data: any) => {
         console.log("leave", data);
 
-        if (data.storeId) {
-          const store = await Store.findByIdAndUpdate(data.storeId, {
-            status: "close",
-            socketId: "",
-          });
-          if (store) {
-            console.log("store", store);
-            socket.leave(store._id.toString());
-          }
-        } else if (data.roomId) {
-          const user = User.findByIdAndUpdate(data.userId, {
-            socketId: "",
-          });
-          if (!user) {
-            return;
-          }
-          const store = await Store.findByIdAndUpdate(data.roomId, {
-            $pull: { customer: user },
-          });
-          if (store) {
-            console.log("store", store);
-            socket.leave(store._id.toString());
-            socket.to(store._id.toString()).emit("leave", user);
-          }
-        }
+        // if (data.storeId) {
+        //   const store = await Store.findByIdAndUpdate(data.storeId, {
+        //     status: "close",
+        //     socketId: "",
+        //   });
+        //   if (store) {
+        //     console.log("store", store);
+        //     socket.leave(store._id.toString());
+        //   }
+        // } else if (data.roomId) {
+        //   const user = User.findById(data.userId);
+        //   if (!user) {
+        //     return;
+        //   }
+        //   const store = await Store.findByIdAndUpdate(data.roomId, {
+        //     $pull: { customer: user },
+        //   });
+        //   if (store) {
+        //     console.log("store", store);
+        //     socket.leave(store._id.toString());
+        //     await User.findByIdAndUpdate(data.userId, {
+        //       socketId: "",
+        //     });
+        //     socket.to(store._id.toString()).emit("leave", user);
+        //   }
+        // }
 
         console.log("All rooms", socket.rooms);
       });
@@ -149,6 +153,36 @@ export const createSocketServer = async (httpServer: HttpServer) => {
 
       socket.on("message", async (message: any) => {
         console.log("message", message);
+        const receiver = message.receiver;
+        const sender = message.sender;
+        const roomId = message.roomId;
+        const content = message.content;
+
+        if (message.content.type == "order") {
+          const order = await Order.findById(message.content.content._id);
+          const document = await Document.findById(
+            message.content.content.documentId
+          );
+          const user = await User.findById(message.content.content.userId);
+          const store = await Store.findById(order?.storeId);
+          const bundle = await Bundle.findById(order?.bundleId);
+          io.to(roomId).emit("message", {
+            receiver,
+            sender,
+            content,
+            order: {
+              userId: order?.userId,
+              storeId: order?.storeId,
+              documentId: order?.documentId,
+              order: order,
+              document: document,
+              user: user,
+              store: store,
+              bundle: bundle,
+            },
+            document,
+          });
+        }
       });
     });
 
