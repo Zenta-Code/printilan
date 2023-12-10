@@ -21,8 +21,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   Future<void> fetchData() async {
     Map<String, dynamic>? data = {
-      "order": [],
-      "bundle": [],
+      "order": <OrderEntityResponse>[],
+      "bundle": <BundleEntity>[],
     };
     safeEmit(
       const _Loading(),

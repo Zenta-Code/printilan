@@ -16,13 +16,16 @@ class PrinterPage extends StatefulWidget {
 class _PrinterPageState extends State<PrinterPage> {
   @override
   Widget build(BuildContext context) {
-    final mainCubit = context.read<MainCubit>();
+    final mainCubit = context.watch<MainCubit>();
 
     return BlocBuilder<PrinterCubit, PrinterState>(
       builder: (context, state) => state.when(
-        loading: () => const Center(
-          child: Loading(),
-        ),
+        loading: () {
+          context.read<MainCubit>().fetchPrinters();
+          return const Center(
+            child: Loading(),
+          );
+        },
         empty: () => const Center(
           child: Empty(),
         ),
@@ -32,6 +35,7 @@ class _PrinterPageState extends State<PrinterPage> {
           ),
         ),
         success: (data) {
+          context.read<MainCubit>().fetchPrinters();
           final List<Printer> printersLocal = data;
           final List<PrinterEntity> printersRemote = mainCubit.printerData;
 
