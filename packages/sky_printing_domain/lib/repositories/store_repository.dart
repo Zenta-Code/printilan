@@ -19,4 +19,8 @@ abstract class StoreRepository {
   Future<Either<Failure, StoreEntity>> postStore(
     StoreRegisterParams params,
   );
+
+  Future<Either<Failure, Tuple2<StoreEntity, UserEntity>>> updateStore(
+    StoreUpdateParams params,
+  );
 }

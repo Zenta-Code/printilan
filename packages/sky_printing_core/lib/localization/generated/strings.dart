@@ -93,6 +93,204 @@ abstract class Strings {
     Locale('id')
   ];
 
+  /// No description provided for @income.
+  ///
+  /// In en, this message translates to:
+  /// **'Income'**
+  String get income;
+
+  /// No description provided for @store_updated.
+  ///
+  /// In en, this message translates to:
+  /// **'Store updated'**
+  String get store_updated;
+
+  /// No description provided for @store_failed_to_update.
+  ///
+  /// In en, this message translates to:
+  /// **'Store failed to update'**
+  String get store_failed_to_update;
+
+  /// No description provided for @phone_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone can\'t be empty'**
+  String get phone_empty;
+
+  /// No description provided for @store_name_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Store name can\'t be empty'**
+  String get store_name_empty;
+
+  /// No description provided for @store_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Store Name'**
+  String get store_name;
+
+  /// No description provided for @password_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Password can\'t be empty'**
+  String get password_empty;
+
+  /// No description provided for @street_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Street can\'t be empty'**
+  String get street_empty;
+
+  /// No description provided for @user_name.
+  ///
+  /// In en, this message translates to:
+  /// **'User Name'**
+  String get user_name;
+
+  /// No description provided for @store_info.
+  ///
+  /// In en, this message translates to:
+  /// **'Store Info'**
+  String get store_info;
+
+  /// No description provided for @total_price.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Price'**
+  String get total_price;
+
+  /// No description provided for @start_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date'**
+  String get start_date;
+
+  /// No description provided for @end_date.
+  ///
+  /// In en, this message translates to:
+  /// **'End Date'**
+  String get end_date;
+
+  /// No description provided for @pick_start_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick Start Date'**
+  String get pick_start_date;
+
+  /// No description provided for @pick_end_date.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick End Date'**
+  String get pick_end_date;
+
+  /// No description provided for @download.
+  ///
+  /// In en, this message translates to:
+  /// **'Download'**
+  String get download;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// No description provided for @city_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'City can\'t be empty'**
+  String get city_empty;
+
+  /// No description provided for @state_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'State can\'t be empty'**
+  String get state_empty;
+
+  /// No description provided for @country_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Country can\'t be empty'**
+  String get country_empty;
+
+  /// No description provided for @zip_code.
+  ///
+  /// In en, this message translates to:
+  /// **'Zip Code'**
+  String get zip_code;
+
+  /// No description provided for @create.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get create;
+
+  /// No description provided for @create_report.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Report'**
+  String get create_report;
+
+  /// No description provided for @zip_code_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Zip Code can\'t be empty'**
+  String get zip_code_empty;
+
+  /// No description provided for @update_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Profile'**
+  String get update_profile;
+
+  /// No description provided for @total_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Orders'**
+  String get total_orders;
+
+  /// No description provided for @order_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Details'**
+  String get order_details;
+
+  /// No description provided for @file_size.
+  ///
+  /// In en, this message translates to:
+  /// **'File Size'**
+  String get file_size;
+
+  /// No description provided for @file_type.
+  ///
+  /// In en, this message translates to:
+  /// **'File Type'**
+  String get file_type;
+
+  /// No description provided for @total_pages.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Pages'**
+  String get total_pages;
+
+  /// No description provided for @document_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Document Details'**
+  String get document_details;
+
+  /// No description provided for @customer_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer Details'**
+  String get customer_details;
+
+  /// No description provided for @customer_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer Name'**
+  String get customer_name;
+
   /// No description provided for @sheet.
   ///
   /// In en, this message translates to:

@@ -18,12 +18,12 @@ class DocumentEntityAdapter extends TypeAdapter<_$DocumentEntityImpl> {
     };
     return _$DocumentEntityImpl(
       id: fields[0] as String?,
-      name: fields[1] as String?,
-      type: fields[2] as String?,
-      count: fields[3] as int?,
-      size: fields[4] as String?,
-      color: fields[5] as bool?,
-      price: fields[6] as int?,
+      fileName: fields[1] as String?,
+      filePath: fields[2] as String?,
+      type: fields[3] as String?,
+      totalPage: fields[4] as int?,
+      size: fields[5] as String?,
+      color: fields[6] as bool?,
       copies: fields[7] as int?,
     );
   }
@@ -35,17 +35,17 @@ class DocumentEntityAdapter extends TypeAdapter<_$DocumentEntityImpl> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name)
+      ..write(obj.fileName)
       ..writeByte(2)
-      ..write(obj.type)
+      ..write(obj.filePath)
       ..writeByte(3)
-      ..write(obj.count)
+      ..write(obj.type)
       ..writeByte(4)
-      ..write(obj.size)
+      ..write(obj.totalPage)
       ..writeByte(5)
-      ..write(obj.color)
+      ..write(obj.size)
       ..writeByte(6)
-      ..write(obj.price)
+      ..write(obj.color)
       ..writeByte(7)
       ..write(obj.copies);
   }

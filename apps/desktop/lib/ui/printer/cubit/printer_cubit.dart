@@ -26,9 +26,17 @@ class PrinterCubit extends Cubit<PrinterState> with MainBoxMixin {
         await fetchPrinters();
         await syncPrinter();
       });
-      emit(_Success(_printers));
+      safeEmit(
+        _Success(_printers),
+        emit: emit,
+        isClosed: isClosed,
+      );
     } catch (e) {
-      emit(const _Failure("Error"));
+      safeEmit(
+        const _Failure("Error"),
+        emit: emit,
+        isClosed: isClosed,
+      );
     }
   }
 
@@ -72,17 +80,18 @@ class PrinterCubit extends Cubit<PrinterState> with MainBoxMixin {
       converter: (response) {},
     );
     await fetchPrinters();
-    response.fold(
-      (l) => safeEmit(
+    response.fold((l) {
+      safeEmit(
         _Success(_printers),
         emit: emit,
         isClosed: isClosed,
-      ),
-      (r) => safeEmit(
+      );
+    }, (r) {
+      safeEmit(
         _Success(_printers),
         emit: emit,
         isClosed: isClosed,
-      ),
-    );
+      );
+    });
   }
 }

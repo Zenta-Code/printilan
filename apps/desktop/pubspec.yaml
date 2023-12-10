@@ -57,7 +57,9 @@ dependencies:
     path: ../../packages/sky_printing_domain
   path_provider: ^2.1.1
   printing: ^5.11.1
-  flutter_screenutil: ^5.9.0
+  flutter_screenutil: ^5.9.0 
+  fl_chart: ^0.65.0
+  syncfusion_flutter_charts: ^23.2.7
 
 dev_dependencies:
   bloc_test: ^9.1.5

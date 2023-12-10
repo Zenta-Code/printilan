@@ -20,13 +20,17 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$OrderModel {
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
   String? get userId => throw _privateConstructorUsedError;
   String? get storeId => throw _privateConstructorUsedError;
   String? get documentId => throw _privateConstructorUsedError;
-  UserModel? get user => throw _privateConstructorUsedError;
-  StoreModel? get store => throw _privateConstructorUsedError;
-  DocumentModel? get document => throw _privateConstructorUsedError;
+  String? get bundleId => throw _privateConstructorUsedError;
+  bool? get isColor => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
   int? get totalPrice => throw _privateConstructorUsedError;
+  String? get createdAt => throw _privateConstructorUsedError;
+  String? get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,17 +45,16 @@ abstract class $OrderModelCopyWith<$Res> {
       _$OrderModelCopyWithImpl<$Res, OrderModel>;
   @useResult
   $Res call(
-      {String? userId,
+      {@JsonKey(name: '_id') String? id,
+      String? userId,
       String? storeId,
       String? documentId,
-      UserModel? user,
-      StoreModel? store,
-      DocumentModel? document,
-      int? totalPrice});
-
-  $UserModelCopyWith<$Res>? get user;
-  $StoreModelCopyWith<$Res>? get store;
-  $DocumentModelCopyWith<$Res>? get document;
+      String? bundleId,
+      bool? isColor,
+      String? status,
+      int? totalPrice,
+      String? createdAt,
+      String? updatedAt});
 }
 
 /// @nodoc
@@ -67,13 +70,342 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? userId = freezed,
     Object? storeId = freezed,
     Object? documentId = freezed,
+    Object? bundleId = freezed,
+    Object? isColor = freezed,
+    Object? status = freezed,
+    Object? totalPrice = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      storeId: freezed == storeId
+          ? _value.storeId
+          : storeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      documentId: freezed == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bundleId: freezed == bundleId
+          ? _value.bundleId
+          : bundleId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isColor: freezed == isColor
+          ? _value.isColor
+          : isColor // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalPrice: freezed == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$OrderModelImplCopyWith<$Res>
+    implements $OrderModelCopyWith<$Res> {
+  factory _$$OrderModelImplCopyWith(
+          _$OrderModelImpl value, $Res Function(_$OrderModelImpl) then) =
+      __$$OrderModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String? id,
+      String? userId,
+      String? storeId,
+      String? documentId,
+      String? bundleId,
+      bool? isColor,
+      String? status,
+      int? totalPrice,
+      String? createdAt,
+      String? updatedAt});
+}
+
+/// @nodoc
+class __$$OrderModelImplCopyWithImpl<$Res>
+    extends _$OrderModelCopyWithImpl<$Res, _$OrderModelImpl>
+    implements _$$OrderModelImplCopyWith<$Res> {
+  __$$OrderModelImplCopyWithImpl(
+      _$OrderModelImpl _value, $Res Function(_$OrderModelImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? userId = freezed,
+    Object? storeId = freezed,
+    Object? documentId = freezed,
+    Object? bundleId = freezed,
+    Object? isColor = freezed,
+    Object? status = freezed,
+    Object? totalPrice = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_$OrderModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      storeId: freezed == storeId
+          ? _value.storeId
+          : storeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      documentId: freezed == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bundleId: freezed == bundleId
+          ? _value.bundleId
+          : bundleId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isColor: freezed == isColor
+          ? _value.isColor
+          : isColor // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalPrice: freezed == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$OrderModelImpl extends _OrderModel {
+  const _$OrderModelImpl(
+      {@JsonKey(name: '_id') this.id,
+      this.userId,
+      this.storeId,
+      this.documentId,
+      this.bundleId,
+      this.isColor,
+      this.status,
+      this.totalPrice,
+      this.createdAt,
+      this.updatedAt})
+      : super._();
+
+  factory _$OrderModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrderModelImplFromJson(json);
+
+  @override
+  @JsonKey(name: '_id')
+  final String? id;
+  @override
+  final String? userId;
+  @override
+  final String? storeId;
+  @override
+  final String? documentId;
+  @override
+  final String? bundleId;
+  @override
+  final bool? isColor;
+  @override
+  final String? status;
+  @override
+  final int? totalPrice;
+  @override
+  final String? createdAt;
+  @override
+  final String? updatedAt;
+
+  @override
+  String toString() {
+    return 'OrderModel(id: $id, userId: $userId, storeId: $storeId, documentId: $documentId, bundleId: $bundleId, isColor: $isColor, status: $status, totalPrice: $totalPrice, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OrderModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.storeId, storeId) || other.storeId == storeId) &&
+            (identical(other.documentId, documentId) ||
+                other.documentId == documentId) &&
+            (identical(other.bundleId, bundleId) ||
+                other.bundleId == bundleId) &&
+            (identical(other.isColor, isColor) || other.isColor == isColor) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, userId, storeId, documentId,
+      bundleId, isColor, status, totalPrice, createdAt, updatedAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OrderModelImplCopyWith<_$OrderModelImpl> get copyWith =>
+      __$$OrderModelImplCopyWithImpl<_$OrderModelImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$OrderModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _OrderModel extends OrderModel {
+  const factory _OrderModel(
+      {@JsonKey(name: '_id') final String? id,
+      final String? userId,
+      final String? storeId,
+      final String? documentId,
+      final String? bundleId,
+      final bool? isColor,
+      final String? status,
+      final int? totalPrice,
+      final String? createdAt,
+      final String? updatedAt}) = _$OrderModelImpl;
+  const _OrderModel._() : super._();
+
+  factory _OrderModel.fromJson(Map<String, dynamic> json) =
+      _$OrderModelImpl.fromJson;
+
+  @override
+  @JsonKey(name: '_id')
+  String? get id;
+  @override
+  String? get userId;
+  @override
+  String? get storeId;
+  @override
+  String? get documentId;
+  @override
+  String? get bundleId;
+  @override
+  bool? get isColor;
+  @override
+  String? get status;
+  @override
+  int? get totalPrice;
+  @override
+  String? get createdAt;
+  @override
+  String? get updatedAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$OrderModelImplCopyWith<_$OrderModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+OrderModelResponse _$OrderModelResponseFromJson(Map<String, dynamic> json) {
+  return _OrderModelResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$OrderModelResponse {
+  String? get userId => throw _privateConstructorUsedError;
+  String? get storeId => throw _privateConstructorUsedError;
+  String? get documentId => throw _privateConstructorUsedError;
+  OrderModel? get order => throw _privateConstructorUsedError;
+  UserModel? get user => throw _privateConstructorUsedError;
+  StoreModel? get store => throw _privateConstructorUsedError;
+  DocumentModel? get document => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $OrderModelResponseCopyWith<OrderModelResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OrderModelResponseCopyWith<$Res> {
+  factory $OrderModelResponseCopyWith(
+          OrderModelResponse value, $Res Function(OrderModelResponse) then) =
+      _$OrderModelResponseCopyWithImpl<$Res, OrderModelResponse>;
+  @useResult
+  $Res call(
+      {String? userId,
+      String? storeId,
+      String? documentId,
+      OrderModel? order,
+      UserModel? user,
+      StoreModel? store,
+      DocumentModel? document});
+
+  $OrderModelCopyWith<$Res>? get order;
+  $UserModelCopyWith<$Res>? get user;
+  $StoreModelCopyWith<$Res>? get store;
+  $DocumentModelCopyWith<$Res>? get document;
+}
+
+/// @nodoc
+class _$OrderModelResponseCopyWithImpl<$Res, $Val extends OrderModelResponse>
+    implements $OrderModelResponseCopyWith<$Res> {
+  _$OrderModelResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = freezed,
+    Object? storeId = freezed,
+    Object? documentId = freezed,
+    Object? order = freezed,
     Object? user = freezed,
     Object? store = freezed,
     Object? document = freezed,
-    Object? totalPrice = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -88,6 +420,10 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
           ? _value.documentId
           : documentId // ignore: cast_nullable_to_non_nullable
               as String?,
+      order: freezed == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as OrderModel?,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -100,11 +436,19 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
               as DocumentModel?,
-      totalPrice: freezed == totalPrice
-          ? _value.totalPrice
-          : totalPrice // ignore: cast_nullable_to_non_nullable
-              as int?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderModelCopyWith<$Res>? get order {
+    if (_value.order == null) {
+      return null;
+    }
+
+    return $OrderModelCopyWith<$Res>(_value.order!, (value) {
+      return _then(_value.copyWith(order: value) as $Val);
+    });
   }
 
   @override
@@ -145,22 +489,24 @@ class _$OrderModelCopyWithImpl<$Res, $Val extends OrderModel>
 }
 
 /// @nodoc
-abstract class _$$OrderModelImplCopyWith<$Res>
-    implements $OrderModelCopyWith<$Res> {
-  factory _$$OrderModelImplCopyWith(
-          _$OrderModelImpl value, $Res Function(_$OrderModelImpl) then) =
-      __$$OrderModelImplCopyWithImpl<$Res>;
+abstract class _$$OrderModelResponseImplCopyWith<$Res>
+    implements $OrderModelResponseCopyWith<$Res> {
+  factory _$$OrderModelResponseImplCopyWith(_$OrderModelResponseImpl value,
+          $Res Function(_$OrderModelResponseImpl) then) =
+      __$$OrderModelResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String? userId,
       String? storeId,
       String? documentId,
+      OrderModel? order,
       UserModel? user,
       StoreModel? store,
-      DocumentModel? document,
-      int? totalPrice});
+      DocumentModel? document});
 
+  @override
+  $OrderModelCopyWith<$Res>? get order;
   @override
   $UserModelCopyWith<$Res>? get user;
   @override
@@ -170,11 +516,11 @@ abstract class _$$OrderModelImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$OrderModelImplCopyWithImpl<$Res>
-    extends _$OrderModelCopyWithImpl<$Res, _$OrderModelImpl>
-    implements _$$OrderModelImplCopyWith<$Res> {
-  __$$OrderModelImplCopyWithImpl(
-      _$OrderModelImpl _value, $Res Function(_$OrderModelImpl) _then)
+class __$$OrderModelResponseImplCopyWithImpl<$Res>
+    extends _$OrderModelResponseCopyWithImpl<$Res, _$OrderModelResponseImpl>
+    implements _$$OrderModelResponseImplCopyWith<$Res> {
+  __$$OrderModelResponseImplCopyWithImpl(_$OrderModelResponseImpl _value,
+      $Res Function(_$OrderModelResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -183,12 +529,12 @@ class __$$OrderModelImplCopyWithImpl<$Res>
     Object? userId = freezed,
     Object? storeId = freezed,
     Object? documentId = freezed,
+    Object? order = freezed,
     Object? user = freezed,
     Object? store = freezed,
     Object? document = freezed,
-    Object? totalPrice = freezed,
   }) {
-    return _then(_$OrderModelImpl(
+    return _then(_$OrderModelResponseImpl(
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -201,6 +547,10 @@ class __$$OrderModelImplCopyWithImpl<$Res>
           ? _value.documentId
           : documentId // ignore: cast_nullable_to_non_nullable
               as String?,
+      order: freezed == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as OrderModel?,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -213,29 +563,25 @@ class __$$OrderModelImplCopyWithImpl<$Res>
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
               as DocumentModel?,
-      totalPrice: freezed == totalPrice
-          ? _value.totalPrice
-          : totalPrice // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$OrderModelImpl extends _OrderModel {
-  const _$OrderModelImpl(
+class _$OrderModelResponseImpl extends _OrderModelResponse {
+  const _$OrderModelResponseImpl(
       {this.userId,
       this.storeId,
       this.documentId,
+      this.order,
       this.user,
       this.store,
-      this.document,
-      this.totalPrice})
+      this.document})
       : super._();
 
-  factory _$OrderModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$OrderModelImplFromJson(json);
+  factory _$OrderModelResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$OrderModelResponseImplFromJson(json);
 
   @override
   final String? userId;
@@ -244,68 +590,68 @@ class _$OrderModelImpl extends _OrderModel {
   @override
   final String? documentId;
   @override
+  final OrderModel? order;
+  @override
   final UserModel? user;
   @override
   final StoreModel? store;
   @override
   final DocumentModel? document;
-  @override
-  final int? totalPrice;
 
   @override
   String toString() {
-    return 'OrderModel(userId: $userId, storeId: $storeId, documentId: $documentId, user: $user, store: $store, document: $document, totalPrice: $totalPrice)';
+    return 'OrderModelResponse(userId: $userId, storeId: $storeId, documentId: $documentId, order: $order, user: $user, store: $store, document: $document)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrderModelImpl &&
+            other is _$OrderModelResponseImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.storeId, storeId) || other.storeId == storeId) &&
             (identical(other.documentId, documentId) ||
                 other.documentId == documentId) &&
+            (identical(other.order, order) || other.order == order) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.store, store) || other.store == store) &&
             (identical(other.document, document) ||
-                other.document == document) &&
-            (identical(other.totalPrice, totalPrice) ||
-                other.totalPrice == totalPrice));
+                other.document == document));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId, storeId, documentId,
-      user, store, document, totalPrice);
+  int get hashCode => Object.hash(
+      runtimeType, userId, storeId, documentId, order, user, store, document);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OrderModelImplCopyWith<_$OrderModelImpl> get copyWith =>
-      __$$OrderModelImplCopyWithImpl<_$OrderModelImpl>(this, _$identity);
+  _$$OrderModelResponseImplCopyWith<_$OrderModelResponseImpl> get copyWith =>
+      __$$OrderModelResponseImplCopyWithImpl<_$OrderModelResponseImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$OrderModelImplToJson(
+    return _$$OrderModelResponseImplToJson(
       this,
     );
   }
 }
 
-abstract class _OrderModel extends OrderModel {
-  const factory _OrderModel(
+abstract class _OrderModelResponse extends OrderModelResponse {
+  const factory _OrderModelResponse(
       {final String? userId,
       final String? storeId,
       final String? documentId,
+      final OrderModel? order,
       final UserModel? user,
       final StoreModel? store,
-      final DocumentModel? document,
-      final int? totalPrice}) = _$OrderModelImpl;
-  const _OrderModel._() : super._();
+      final DocumentModel? document}) = _$OrderModelResponseImpl;
+  const _OrderModelResponse._() : super._();
 
-  factory _OrderModel.fromJson(Map<String, dynamic> json) =
-      _$OrderModelImpl.fromJson;
+  factory _OrderModelResponse.fromJson(Map<String, dynamic> json) =
+      _$OrderModelResponseImpl.fromJson;
 
   @override
   String? get userId;
@@ -314,15 +660,15 @@ abstract class _OrderModel extends OrderModel {
   @override
   String? get documentId;
   @override
+  OrderModel? get order;
+  @override
   UserModel? get user;
   @override
   StoreModel? get store;
   @override
   DocumentModel? get document;
   @override
-  int? get totalPrice;
-  @override
   @JsonKey(ignore: true)
-  _$$OrderModelImplCopyWith<_$OrderModelImpl> get copyWith =>
+  _$$OrderModelResponseImplCopyWith<_$OrderModelResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

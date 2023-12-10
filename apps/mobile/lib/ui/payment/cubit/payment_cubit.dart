@@ -62,6 +62,6 @@ class PaymentCubit extends Cubit<PaymentState> with MainBoxMixin {
   }
 
   void leaveRoom(String storeId) {
-    _socketClient.leave(storeId);
+    _socketClient.leave(SocketParams(roomId: storeId));
   }
 }

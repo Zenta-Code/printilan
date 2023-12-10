@@ -7,13 +7,14 @@ part 'document_model.g.dart';
 @freezed
 class DocumentModel with _$DocumentModel {
   const factory DocumentModel({
-    String? name,
+  @JsonKey(name: '_id') String? id,
+    String? fileName,
+    String? filePath,
     String? type,
-    int? count,
+    int? totalPage,
     String? size,
     bool? color,
-    int? price,
-    int? copies,
+    int? copies, 
   }) = _DocumentModel;
 
   const DocumentModel._();
@@ -22,12 +23,13 @@ class DocumentModel with _$DocumentModel {
       _$DocumentModelFromJson(json);
 
   DocumentEntity toEntity() => DocumentEntity(
-        name: name,
+        id: id,
+        fileName: fileName,
+        filePath: filePath,
         type: type,
-        count: count,
+        totalPage: totalPage,
         size: size,
         color: color,
-        price: price,
         copies: copies,
       );
 }

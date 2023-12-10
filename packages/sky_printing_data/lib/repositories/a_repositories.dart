@@ -6,3 +6,4 @@ export 'order_repository_impl.dart';
 export 'register_repository_impl.dart';
 export 'store_repository_impl.dart';
 export 'printer_repository_impl.dart';
+export 'address_repository_impl.dart';

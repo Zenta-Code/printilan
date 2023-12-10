@@ -23,12 +23,7 @@ class SocketClient with MainBoxMixin, FirebaseCrashLogger {
       _socket = _createSocket();
       connect();
     }
-    if (!_isUnitTest) _socket!.connect();
-  }
-
-  Socket forceNew() {
-    _socket = _createSocket();
-    return _socket!;
+    if (!_isUnitTest) connect();
   }
 
   Socket _createSocket() {
@@ -44,20 +39,32 @@ class SocketClient with MainBoxMixin, FirebaseCrashLogger {
     );
   }
 
-  Socket disconnect() {
-    return _socket!.disconnect();
+  Socket? forceNew() {
+    try {
+      if (_socket != null) _socket = null;
+      _auth = getData(MainBoxKeys.token);
+      if (_auth != null) _socket = _createSocket();
+      connect();
+      return _socket!;
+    } catch (_) {
+      return null;
+    }
   }
 
   Socket connect() {
     return _socket!.connect();
   }
 
+  Socket disconnect() {
+    return _socket!.disconnect();
+  }
+
   void join(SocketParams params) {
     _socket!.emit('join', params.toJson());
   }
 
-  void leave(String roomId) {
-    _socket!.emit('leave', roomId);
+  void leave(SocketParams params) {
+    _socket!.emit('leave', params.toJson());
   }
 
   void message(dynamic Function(dynamic) handler) {

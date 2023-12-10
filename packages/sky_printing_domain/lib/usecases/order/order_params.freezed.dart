@@ -894,3 +894,237 @@ abstract class _PostOrderParams implements PostOrderParams {
   _$$PostOrderParamsImplCopyWith<_$PostOrderParamsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+CreateReportOrderParams _$CreateReportOrderParamsFromJson(
+    Map<String, dynamic> json) {
+  return _CreateReportOrderParams.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CreateReportOrderParams {
+  String? get savePath => throw _privateConstructorUsedError;
+  String? get storeId => throw _privateConstructorUsedError;
+  DateTime? get startDate => throw _privateConstructorUsedError;
+  DateTime? get endDate => throw _privateConstructorUsedError;
+  String get option => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CreateReportOrderParamsCopyWith<CreateReportOrderParams> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CreateReportOrderParamsCopyWith<$Res> {
+  factory $CreateReportOrderParamsCopyWith(CreateReportOrderParams value,
+          $Res Function(CreateReportOrderParams) then) =
+      _$CreateReportOrderParamsCopyWithImpl<$Res, CreateReportOrderParams>;
+  @useResult
+  $Res call(
+      {String? savePath,
+      String? storeId,
+      DateTime? startDate,
+      DateTime? endDate,
+      String option});
+}
+
+/// @nodoc
+class _$CreateReportOrderParamsCopyWithImpl<$Res,
+        $Val extends CreateReportOrderParams>
+    implements $CreateReportOrderParamsCopyWith<$Res> {
+  _$CreateReportOrderParamsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? savePath = freezed,
+    Object? storeId = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
+    Object? option = null,
+  }) {
+    return _then(_value.copyWith(
+      savePath: freezed == savePath
+          ? _value.savePath
+          : savePath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      storeId: freezed == storeId
+          ? _value.storeId
+          : storeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      option: null == option
+          ? _value.option
+          : option // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CreateReportOrderParamsImplCopyWith<$Res>
+    implements $CreateReportOrderParamsCopyWith<$Res> {
+  factory _$$CreateReportOrderParamsImplCopyWith(
+          _$CreateReportOrderParamsImpl value,
+          $Res Function(_$CreateReportOrderParamsImpl) then) =
+      __$$CreateReportOrderParamsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? savePath,
+      String? storeId,
+      DateTime? startDate,
+      DateTime? endDate,
+      String option});
+}
+
+/// @nodoc
+class __$$CreateReportOrderParamsImplCopyWithImpl<$Res>
+    extends _$CreateReportOrderParamsCopyWithImpl<$Res,
+        _$CreateReportOrderParamsImpl>
+    implements _$$CreateReportOrderParamsImplCopyWith<$Res> {
+  __$$CreateReportOrderParamsImplCopyWithImpl(
+      _$CreateReportOrderParamsImpl _value,
+      $Res Function(_$CreateReportOrderParamsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? savePath = freezed,
+    Object? storeId = freezed,
+    Object? startDate = freezed,
+    Object? endDate = freezed,
+    Object? option = null,
+  }) {
+    return _then(_$CreateReportOrderParamsImpl(
+      savePath: freezed == savePath
+          ? _value.savePath
+          : savePath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      storeId: freezed == storeId
+          ? _value.storeId
+          : storeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      startDate: freezed == startDate
+          ? _value.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endDate: freezed == endDate
+          ? _value.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      option: null == option
+          ? _value.option
+          : option // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CreateReportOrderParamsImpl implements _CreateReportOrderParams {
+  const _$CreateReportOrderParamsImpl(
+      {this.savePath = null,
+      this.storeId = null,
+      this.startDate = null,
+      this.endDate = null,
+      this.option = "csv"});
+
+  factory _$CreateReportOrderParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CreateReportOrderParamsImplFromJson(json);
+
+  @override
+  @JsonKey()
+  final String? savePath;
+  @override
+  @JsonKey()
+  final String? storeId;
+  @override
+  @JsonKey()
+  final DateTime? startDate;
+  @override
+  @JsonKey()
+  final DateTime? endDate;
+  @override
+  @JsonKey()
+  final String option;
+
+  @override
+  String toString() {
+    return 'CreateReportOrderParams(savePath: $savePath, storeId: $storeId, startDate: $startDate, endDate: $endDate, option: $option)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CreateReportOrderParamsImpl &&
+            (identical(other.savePath, savePath) ||
+                other.savePath == savePath) &&
+            (identical(other.storeId, storeId) || other.storeId == storeId) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
+            (identical(other.option, option) || other.option == option));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, savePath, storeId, startDate, endDate, option);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CreateReportOrderParamsImplCopyWith<_$CreateReportOrderParamsImpl>
+      get copyWith => __$$CreateReportOrderParamsImplCopyWithImpl<
+          _$CreateReportOrderParamsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CreateReportOrderParamsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CreateReportOrderParams implements CreateReportOrderParams {
+  const factory _CreateReportOrderParams(
+      {final String? savePath,
+      final String? storeId,
+      final DateTime? startDate,
+      final DateTime? endDate,
+      final String option}) = _$CreateReportOrderParamsImpl;
+
+  factory _CreateReportOrderParams.fromJson(Map<String, dynamic> json) =
+      _$CreateReportOrderParamsImpl.fromJson;
+
+  @override
+  String? get savePath;
+  @override
+  String? get storeId;
+  @override
+  DateTime? get startDate;
+  @override
+  DateTime? get endDate;
+  @override
+  String get option;
+  @override
+  @JsonKey(ignore: true)
+  _$$CreateReportOrderParamsImplCopyWith<_$CreateReportOrderParamsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

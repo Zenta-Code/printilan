@@ -60,3 +60,17 @@ class PostOrderParams with _$PostOrderParams {
   factory PostOrderParams.fromJson(Map<String, dynamic> json) =>
       _$PostOrderParamsFromJson(json);
 }
+
+@freezed
+class CreateReportOrderParams with _$CreateReportOrderParams {
+  const factory CreateReportOrderParams({
+    @Default(null) String? savePath,
+    @Default(null) String? storeId,
+    @Default(null) DateTime? startDate,
+    @Default(null) DateTime? endDate,
+    @Default("csv") String option,
+  }) = _CreateReportOrderParams;
+
+  factory CreateReportOrderParams.fromJson(Map<String, dynamic> json) =>
+      _$CreateReportOrderParamsFromJson(json);
+}

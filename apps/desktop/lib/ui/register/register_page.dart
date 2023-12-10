@@ -66,6 +66,34 @@ class _RegisterPageState extends State<RegisterPage> with WindowListener {
   }
 
   @override
+  void dispose() {
+    _conUserName.dispose();
+    _conStoreName.dispose();
+    _conPhone.dispose();
+    _conEmail.dispose();
+    _conPassword.dispose();
+    _conConfirmPassword.dispose();
+    _conStreet.dispose();
+    _conCity.dispose();
+    _conState.dispose();
+    _conCountry.dispose();
+    _conZipCode.dispose();
+
+    _fnUserName.dispose();
+    _fnStoreName.dispose();
+    _fnPhone.dispose();
+    _fnEmail.dispose();
+    _fnPassword.dispose();
+    _fnConfirmPassword.dispose();
+    _fnStreet.dispose();
+    _fnCity.dispose();
+    _fnState.dispose();
+    _fnCountry.dispose();
+    _fnZipCode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final appTheme = context.watch<ThemeBloc>();
     final theme = FluentTheme.of(context);
@@ -227,7 +255,7 @@ class _RegisterPageState extends State<RegisterPage> with WindowListener {
               child: Column(
                 children: [
                   InfoLabel(
-                    label: 'User Name',
+                    label: Strings.of(context)!.user_name,
                     labelStyle: TextStyle(fontSize: 16.sp),
                     child: TextFormBox(
                       style: TextStyle(height: 2, fontSize: 14.sp),
@@ -257,7 +285,7 @@ class _RegisterPageState extends State<RegisterPage> with WindowListener {
                       placeholder: 'Enter your store name',
                       validator: (v) {
                         if (v!.isEmpty) {
-                          return 'Please enter your store name';
+                          return Strings.of(context)!.store_name_empty;
                         }
                         return null;
                       },

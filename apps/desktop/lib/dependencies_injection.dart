@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
-import 'package:sky_printing_admin/ui/dashboard/cubit/dashboard_cubit.dart';
+import 'package:sky_printing_admin/ui/home/cubit/home_cubit.dart';
 import 'package:sky_printing_admin/ui/login/cubit/auth_cubit.dart';
 import 'package:sky_printing_admin/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing_admin/ui/order/cubit/order_cubit.dart';
@@ -58,7 +58,7 @@ void _repositories() {
     () => RegisterRepositoryImpl(sl(), sl()),
   );
   sl.registerLazySingleton<StoreRepository>(
-    () => StoreRepositoryImpl(sl()),
+    () => StoreRepositoryImpl(sl(), sl()),
   );
   sl.registerLazySingleton<OrderRepository>(
     () => OrderRepositoryImpl(sl()),
@@ -137,6 +137,15 @@ void _useCase() {
   sl.registerLazySingleton(
     () => PostStoreUsecase(sl()),
   );
+  sl.registerLazySingleton(
+    () => PutStoreUsecase(sl()),
+  );
+  sl.registerLazySingleton(
+    () => CreateReportOrderUsecase(sl()),
+  );
+  sl.registerLazySingleton(
+    () => ForceNewSocketUsecase(sl()),
+  );
 }
 
 void _cubit() {
@@ -150,11 +159,13 @@ void _cubit() {
     () => AuthCubit(
       sl(),
       sl(),
+      sl(),
     ),
   );
 
   sl.registerFactory(
     () => SettingsCubit(
+      sl(),
       sl(),
     ),
   );
@@ -165,13 +176,14 @@ void _cubit() {
     ),
   );
   sl.registerFactory(
-    () => DashboardCubit(
+    () => HomeCubit(
       sl(),
       sl(),
     ),
   );
   sl.registerFactory(
     () => OrderCubit(
+      sl(),
       sl(),
       sl(),
       sl(),

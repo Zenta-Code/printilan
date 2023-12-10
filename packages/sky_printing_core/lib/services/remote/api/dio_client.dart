@@ -121,10 +121,17 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
     Map<String, dynamic>? data,
     FormData? formData,
     ResponseConverter<T>? converter,
+    Function(int, int)? onSendProgress,
+    Function(int, int)? onReceiveProgress,
     bool isIsolate = true,
   }) async {
     try {
-      final response = await dio.post(url, data: data ?? formData);
+      final response = await dio.post(
+        url,
+        data: data ?? formData,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+      );
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -146,6 +153,66 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
         return Right(result);
       }
     } on DioException catch (e, stackTrace) {
+      if (!_isUnitTest) {
+        nonFatalError(error: e, stackTrace: stackTrace);
+      }
+      if (e.response!.statusCode == 502) {
+        return Left(
+          ServerFailure(
+            "Server is down",
+          ),
+        );
+      }
+      return Left(
+        ServerFailure(
+          e.response == null
+              ? e.message
+              : e.response?.data['error'] as String? ?? "Internal Server Error",
+        ),
+      );
+    }
+  }
+
+  Future<Either<Failure, T>> putRequest<T>(
+    String url,
+    String path, {
+    Map<String, dynamic>? data,
+    FormData? formData,
+    ResponseConverter<T>? converter,
+    Function(int, int)? onSendProgress,
+    Function(int, int)? onReceiveProgress,
+    bool isIsolate = true,
+  }) async {
+    try {
+      final response = await dio.put(
+        "$url/$path",
+        data: data ?? formData,
+        onSendProgress: onSendProgress,
+        onReceiveProgress: onReceiveProgress,
+      );
+      if ((response.statusCode ?? 0) < 200 ||
+          (response.statusCode ?? 0) > 201) {
+        throw DioException(
+          requestOptions: response.requestOptions,
+          response: response,
+        );
+      }
+
+      if (converter == null) {
+        return Right(response.data as T);
+      } else {
+        if (!isIsolate) {
+          return Right(converter(response.data));
+        }
+        final isolateParse = IsolateParser<T>(
+          response.data as Map<String, dynamic>,
+          converter,
+        );
+        final result = await isolateParse.parseInBackground();
+        return Right(result);
+      }
+    } on DioException catch (e, stackTrace) {
+      log.f(e);
       if (!_isUnitTest) {
         nonFatalError(error: e, stackTrace: stackTrace);
       }
@@ -214,13 +281,21 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
     }
   }
 
-  Future<Either<Failure, T>> downloadRequest<T>(
+  Future<Either<Failure, File>> downloadRequest(
     String url,
     String path, {
+    Map<String, dynamic>? queryParameters,
+    ProgressCallback? onReceiveProgress,
     bool isIsolate = true,
   }) async {
     try {
-      final response = await dio.download(url, path);
+      final response = await dio.download(
+        url,
+        path,
+        queryParameters: queryParameters,
+        onReceiveProgress: onReceiveProgress,
+      );
+
       if ((response.statusCode ?? 0) < 200 ||
           (response.statusCode ?? 0) > 201) {
         throw DioException(
@@ -228,27 +303,62 @@ class DioClient with MainBoxMixin, FirebaseCrashLogger {
           response: response,
         );
       }
-      return Right(response.data as T);
+
+      final file = File(path);
+
+      return Right(file);
     } on DioException catch (e, stackTrace) {
       log.e(e);
-      if (!_isUnitTest) {
+
+      if (e.response!.statusCode == 404) {
+        return Left(
+          ServerFailure(
+            "File not found",
+          ),
+        );
+      }
+      if (e.response!.statusCode == 400) {
+        return Left(
+          ServerFailure(
+            "Bad Request",
+          ),
+        );
+      }
+      if (e.response!.statusCode == 502) {
+        return const Left(
+          ServerFailure(
+            "Server is down",
+          ),
+        );
+      }
+      if (!_isUnitTest || Platform.isAndroid) {
         nonFatalError(error: e, stackTrace: stackTrace);
+      }
+      if (e.response?.data is String) {
+        return Left(
+          ServerFailure(
+            e.response?.data,
+          ),
+        );
       }
       return Left(
         ServerFailure(
-          e.response?.data['error'] as String? ?? e.message,
-        ),
-      );
-    } catch (e, stackTrace) {
-      log.e(e);
-      if (!_isUnitTest) {
-        nonFatalError(error: e, stackTrace: stackTrace);
-      }
-      return Left(
-        ServerFailure(
-          e.toString(),
+          e.response?.data['error'],
         ),
       );
     }
+    // on PathAccessException {
+    //   return Left(
+    //     ServerFailure(
+    //       "Close the file before downloading another file",
+    //     ),
+    //   );
+    // } on FileSystemException {
+    //   return Left(
+    //     ServerFailure(
+    //       "Close the file before downloading another file",
+    //     ),
+    //   );
+    // }
   }
 }

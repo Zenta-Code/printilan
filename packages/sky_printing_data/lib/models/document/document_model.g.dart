@@ -8,22 +8,24 @@ part of 'document_model.dart';
 
 _$DocumentModelImpl _$$DocumentModelImplFromJson(Map<String, dynamic> json) =>
     _$DocumentModelImpl(
-      name: json['name'] as String?,
+      id: json['_id'] as String?,
+      fileName: json['fileName'] as String?,
+      filePath: json['filePath'] as String?,
       type: json['type'] as String?,
-      count: json['count'] as int?,
+      totalPage: json['totalPage'] as int?,
       size: json['size'] as String?,
       color: json['color'] as bool?,
-      price: json['price'] as int?,
       copies: json['copies'] as int?,
     );
 
 Map<String, dynamic> _$$DocumentModelImplToJson(_$DocumentModelImpl instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      '_id': instance.id,
+      'fileName': instance.fileName,
+      'filePath': instance.filePath,
       'type': instance.type,
-      'count': instance.count,
+      'totalPage': instance.totalPage,
       'size': instance.size,
       'color': instance.color,
-      'price': instance.price,
       'copies': instance.copies,
     };

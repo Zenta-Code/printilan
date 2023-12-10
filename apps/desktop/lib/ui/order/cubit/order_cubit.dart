@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:printing/printing.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
-import 'package:sky_printing_data/sky_printing_data.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'order_cubit.freezed.dart';
@@ -17,6 +17,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     this._socketClient,
     this._dioClient,
     this._getOrderByStoreUsecase,
+    this._createReportOrderUsecase,
   ) : super(
           const _Loading(),
         );
@@ -24,7 +25,9 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   final SocketClient _socketClient;
   final DioClient _dioClient;
   final GetOrderByStoreUsecase _getOrderByStoreUsecase;
-  final List<OrderEntity> orderData = [];
+  final CreateReportOrderUsecase _createReportOrderUsecase;
+
+  final List<OrderEntityResponse> orderData = [];
 
   Future<void> bootStrap() async {
     message();
@@ -68,15 +71,13 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
         emit: emit,
         isClosed: isClosed,
       );
-      final order = OrderModel.fromJson(data["order"]).toEntity();
+      // final order = OrderModel.fromJson(data["order"]).toEntity();
 
-      orderData.add(order);
+      // orderData.add(order);
 
       final savePath = await getApplicationDocumentsDirectory();
 
-      log.f(data);
       final path = data["document"]["filePath"].split("/");
-      log.e(path);
       final folder = path[0];
       final userFolder = path[1];
       final fileName = path[2];
@@ -149,5 +150,77 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
       emit: emit,
       isClosed: isClosed,
     );
+  }
+
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now();
+
+  void createReport(
+    BuildContext? context,
+  ) async {
+    safeEmit(
+      const _Loading(),
+      emit: emit,
+      isClosed: isClosed,
+    );
+    final savePath = await getApplicationDocumentsDirectory();
+    final dir = Directory("${savePath.path}/Sky Printing/Report");
+    if (!dir.existsSync()) {
+      dir.createSync(recursive: true);
+    }
+
+    final fineStartDate =
+        DateTime(startDate.year, startDate.month, startDate.day);
+    final fineEndDate = DateTime(endDate.year, endDate.month, endDate.day);
+
+    final fileName =
+        "${fineStartDate.toString().split(" ")[0]}-${fineEndDate.toString().split(" ")[0]}.csv";
+
+    final res = await _createReportOrderUsecase.call(
+      CreateReportOrderParams(
+        // savePath: "${dir.path}/test.csv",
+        savePath: "${dir.path}/$fileName",
+        storeId: getData(MainBoxKeys.store)!.id,
+        startDate: fineStartDate,
+        endDate: fineEndDate,
+      ),
+    );
+    res.fold((failure) {
+      log.e(failure);
+      if (failure is ServerFailure) {
+        displayInfoBar(
+          context!,
+          builder: (context, close) {
+            return InfoBar(
+              title: Text("Failed to create report"),
+              content: Text(failure.message.toString()),
+              severity: InfoBarSeverity.error,
+            );
+          },
+        );
+        safeEmit(
+          _Success(orderData),
+          emit: emit,
+          isClosed: isClosed,
+        );
+      }
+    }, (success) async {
+      log.e(success);
+      displayInfoBar(
+        context!,
+        builder: (context, close) {
+          return InfoBar(
+            title: Text("Report created"),
+            content: Text("Path: ${dir.path}/$fileName"),
+            severity: InfoBarSeverity.success,
+          );
+        },
+      );
+      safeEmit(
+        _Success(orderData),
+        emit: emit,
+        isClosed: isClosed,
+      );
+    });
   }
 }

@@ -1,3 +1,4 @@
+export 'address/address.dart';
 export 'bundle/bundle.dart';
 export 'file/file.dart';
 export 'location/location.dart';

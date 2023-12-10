@@ -20,6 +20,9 @@ abstract class StoreRemoteDataSource {
   Future<Either<Failure, StoreModel>> postStore(
     StoreRegisterParams params,
   );
+  Future<Either<Failure, Tuple2<StoreModel, UserModel>>> updateStore(
+    StoreUpdateParams params,
+  );
 }
 
 class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
@@ -53,6 +56,9 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
       ListAPI.store,
       queryParameters: params.toJson(),
       converter: (response) {
+        if (response['data'] == null) {
+          return const Tuple2(<StoreModel>[], <BundleModel>[]);
+        }
         final List<StoreModel> stores =
             response['data'].map<StoreModel>((store) {
           return StoreModel.fromJson(store);
@@ -115,6 +121,22 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
       converter: (response) {
         final StoreModel store = StoreModel.fromJson(response['store']);
         return store;
+      },
+    );
+    return response;
+  }
+
+  @override
+  Future<Either<Failure, Tuple2<StoreModel, UserModel>>> updateStore(
+      StoreUpdateParams params) async {
+    final response = await _client.putRequest(
+      ListAPI.store,
+      params.id!,
+      data: params.toJson(),
+      converter: (response) {
+        final StoreModel store = StoreModel.fromJson(response['store']);
+        final UserModel user = UserModel.fromJson(response['user']);
+        return Tuple2(store, user);
       },
     );
     return response;

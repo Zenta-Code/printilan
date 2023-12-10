@@ -20,12 +20,14 @@ DocumentModel _$DocumentModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DocumentModel {
-  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: '_id')
+  String? get id => throw _privateConstructorUsedError;
+  String? get fileName => throw _privateConstructorUsedError;
+  String? get filePath => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
-  int? get count => throw _privateConstructorUsedError;
+  int? get totalPage => throw _privateConstructorUsedError;
   String? get size => throw _privateConstructorUsedError;
   bool? get color => throw _privateConstructorUsedError;
-  int? get price => throw _privateConstructorUsedError;
   int? get copies => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,12 +43,13 @@ abstract class $DocumentModelCopyWith<$Res> {
       _$DocumentModelCopyWithImpl<$Res, DocumentModel>;
   @useResult
   $Res call(
-      {String? name,
+      {@JsonKey(name: '_id') String? id,
+      String? fileName,
+      String? filePath,
       String? type,
-      int? count,
+      int? totalPage,
       String? size,
       bool? color,
-      int? price,
       int? copies});
 }
 
@@ -63,26 +66,35 @@ class _$DocumentModelCopyWithImpl<$Res, $Val extends DocumentModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
+    Object? id = freezed,
+    Object? fileName = freezed,
+    Object? filePath = freezed,
     Object? type = freezed,
-    Object? count = freezed,
+    Object? totalPage = freezed,
     Object? size = freezed,
     Object? color = freezed,
-    Object? price = freezed,
     Object? copies = freezed,
   }) {
     return _then(_value.copyWith(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fileName: freezed == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      filePath: freezed == filePath
+          ? _value.filePath
+          : filePath // ignore: cast_nullable_to_non_nullable
               as String?,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      count: freezed == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      totalPage: freezed == totalPage
+          ? _value.totalPage
+          : totalPage // ignore: cast_nullable_to_non_nullable
               as int?,
       size: freezed == size
           ? _value.size
@@ -92,10 +104,6 @@ class _$DocumentModelCopyWithImpl<$Res, $Val extends DocumentModel>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as bool?,
-      price: freezed == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int?,
       copies: freezed == copies
           ? _value.copies
           : copies // ignore: cast_nullable_to_non_nullable
@@ -113,12 +121,13 @@ abstract class _$$DocumentModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? name,
+      {@JsonKey(name: '_id') String? id,
+      String? fileName,
+      String? filePath,
       String? type,
-      int? count,
+      int? totalPage,
       String? size,
       bool? color,
-      int? price,
       int? copies});
 }
 
@@ -133,26 +142,35 @@ class __$$DocumentModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
+    Object? id = freezed,
+    Object? fileName = freezed,
+    Object? filePath = freezed,
     Object? type = freezed,
-    Object? count = freezed,
+    Object? totalPage = freezed,
     Object? size = freezed,
     Object? color = freezed,
-    Object? price = freezed,
     Object? copies = freezed,
   }) {
     return _then(_$DocumentModelImpl(
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fileName: freezed == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      filePath: freezed == filePath
+          ? _value.filePath
+          : filePath // ignore: cast_nullable_to_non_nullable
               as String?,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      count: freezed == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      totalPage: freezed == totalPage
+          ? _value.totalPage
+          : totalPage // ignore: cast_nullable_to_non_nullable
               as int?,
       size: freezed == size
           ? _value.size
@@ -162,10 +180,6 @@ class __$$DocumentModelImplCopyWithImpl<$Res>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as bool?,
-      price: freezed == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int?,
       copies: freezed == copies
           ? _value.copies
           : copies // ignore: cast_nullable_to_non_nullable
@@ -178,12 +192,13 @@ class __$$DocumentModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DocumentModelImpl extends _DocumentModel {
   const _$DocumentModelImpl(
-      {this.name,
+      {@JsonKey(name: '_id') this.id,
+      this.fileName,
+      this.filePath,
       this.type,
-      this.count,
+      this.totalPage,
       this.size,
       this.color,
-      this.price,
       this.copies})
       : super._();
 
@@ -191,23 +206,26 @@ class _$DocumentModelImpl extends _DocumentModel {
       _$$DocumentModelImplFromJson(json);
 
   @override
-  final String? name;
+  @JsonKey(name: '_id')
+  final String? id;
+  @override
+  final String? fileName;
+  @override
+  final String? filePath;
   @override
   final String? type;
   @override
-  final int? count;
+  final int? totalPage;
   @override
   final String? size;
   @override
   final bool? color;
   @override
-  final int? price;
-  @override
   final int? copies;
 
   @override
   String toString() {
-    return 'DocumentModel(name: $name, type: $type, count: $count, size: $size, color: $color, price: $price, copies: $copies)';
+    return 'DocumentModel(id: $id, fileName: $fileName, filePath: $filePath, type: $type, totalPage: $totalPage, size: $size, color: $color, copies: $copies)';
   }
 
   @override
@@ -215,19 +233,23 @@ class _$DocumentModelImpl extends _DocumentModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DocumentModelImpl &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.fileName, fileName) ||
+                other.fileName == fileName) &&
+            (identical(other.filePath, filePath) ||
+                other.filePath == filePath) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.count, count) || other.count == count) &&
+            (identical(other.totalPage, totalPage) ||
+                other.totalPage == totalPage) &&
             (identical(other.size, size) || other.size == size) &&
             (identical(other.color, color) || other.color == color) &&
-            (identical(other.price, price) || other.price == price) &&
             (identical(other.copies, copies) || other.copies == copies));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, name, type, count, size, color, price, copies);
+  int get hashCode => Object.hash(runtimeType, id, fileName, filePath, type,
+      totalPage, size, color, copies);
 
   @JsonKey(ignore: true)
   @override
@@ -245,12 +267,13 @@ class _$DocumentModelImpl extends _DocumentModel {
 
 abstract class _DocumentModel extends DocumentModel {
   const factory _DocumentModel(
-      {final String? name,
+      {@JsonKey(name: '_id') final String? id,
+      final String? fileName,
+      final String? filePath,
       final String? type,
-      final int? count,
+      final int? totalPage,
       final String? size,
       final bool? color,
-      final int? price,
       final int? copies}) = _$DocumentModelImpl;
   const _DocumentModel._() : super._();
 
@@ -258,17 +281,20 @@ abstract class _DocumentModel extends DocumentModel {
       _$DocumentModelImpl.fromJson;
 
   @override
-  String? get name;
+  @JsonKey(name: '_id')
+  String? get id;
+  @override
+  String? get fileName;
+  @override
+  String? get filePath;
   @override
   String? get type;
   @override
-  int? get count;
+  int? get totalPage;
   @override
   String? get size;
   @override
   bool? get color;
-  @override
-  int? get price;
   @override
   int? get copies;
   @override

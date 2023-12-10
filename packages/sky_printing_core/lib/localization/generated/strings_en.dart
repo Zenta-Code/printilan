@@ -5,6 +5,105 @@ class StringsEn extends Strings {
   StringsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get income => 'Income';
+
+  @override
+  String get store_updated => 'Store updated';
+
+  @override
+  String get store_failed_to_update => 'Store failed to update';
+
+  @override
+  String get phone_empty => 'Phone can\'t be empty';
+
+  @override
+  String get store_name_empty => 'Store name can\'t be empty';
+
+  @override
+  String get store_name => 'Store Name';
+
+  @override
+  String get password_empty => 'Password can\'t be empty';
+
+  @override
+  String get street_empty => 'Street can\'t be empty';
+
+  @override
+  String get user_name => 'User Name';
+
+  @override
+  String get store_info => 'Store Info';
+
+  @override
+  String get total_price => 'Total Price';
+
+  @override
+  String get start_date => 'Start Date';
+
+  @override
+  String get end_date => 'End Date';
+
+  @override
+  String get pick_start_date => 'Pick Start Date';
+
+  @override
+  String get pick_end_date => 'Pick End Date';
+
+  @override
+  String get download => 'Download';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get city_empty => 'City can\'t be empty';
+
+  @override
+  String get state_empty => 'State can\'t be empty';
+
+  @override
+  String get country_empty => 'Country can\'t be empty';
+
+  @override
+  String get zip_code => 'Zip Code';
+
+  @override
+  String get create => 'Create';
+
+  @override
+  String get create_report => 'Create Report';
+
+  @override
+  String get zip_code_empty => 'Zip Code can\'t be empty';
+
+  @override
+  String get update_profile => 'Update Profile';
+
+  @override
+  String get total_orders => 'Total Orders';
+
+  @override
+  String get order_details => 'Order Details';
+
+  @override
+  String get file_size => 'File Size';
+
+  @override
+  String get file_type => 'File Type';
+
+  @override
+  String get total_pages => 'Total Pages';
+
+  @override
+  String get document_details => 'Document Details';
+
+  @override
+  String get customer_details => 'Customer Details';
+
+  @override
+  String get customer_name => 'Customer Name';
+
+  @override
   String get sheet => 'Sheet';
 
   @override

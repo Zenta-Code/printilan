@@ -81,3 +81,27 @@ Map<String, dynamic> _$$PostOrderParamsImplToJson(
       'fileType': instance.fileType,
       'fileExtension': instance.fileExtension,
     };
+
+_$CreateReportOrderParamsImpl _$$CreateReportOrderParamsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$CreateReportOrderParamsImpl(
+      savePath: json['savePath'] as String? ?? null,
+      storeId: json['storeId'] as String? ?? null,
+      startDate: json['startDate'] == null
+          ? null
+          : DateTime.parse(json['startDate'] as String),
+      endDate: json['endDate'] == null
+          ? null
+          : DateTime.parse(json['endDate'] as String),
+      option: json['option'] as String? ?? "csv",
+    );
+
+Map<String, dynamic> _$$CreateReportOrderParamsImplToJson(
+        _$CreateReportOrderParamsImpl instance) =>
+    <String, dynamic>{
+      'savePath': instance.savePath,
+      'storeId': instance.storeId,
+      'startDate': instance.startDate?.toIso8601String(),
+      'endDate': instance.endDate?.toIso8601String(),
+      'option': instance.option,
+    };

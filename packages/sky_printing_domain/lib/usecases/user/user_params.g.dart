@@ -56,17 +56,3 @@ Map<String, dynamic> _$$RegisterParamsImplToJson(
       'address': instance.address,
       'role': instance.role,
     };
-
-_$StoreRegisterParamsImpl _$$StoreRegisterParamsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$StoreRegisterParamsImpl(
-      user: json['user'] as Map<String, dynamic>? ?? null,
-      store: json['store'] as Map<String, dynamic>? ?? null,
-    );
-
-Map<String, dynamic> _$$StoreRegisterParamsImplToJson(
-        _$StoreRegisterParamsImpl instance) =>
-    <String, dynamic>{
-      'user': instance.user,
-      'store': instance.store,
-    };

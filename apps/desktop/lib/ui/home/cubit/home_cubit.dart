@@ -4,14 +4,14 @@ import 'package:sky_printing_admin/dependencies_injection.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
-part 'dashboard_cubit.freezed.dart';
-part 'dashboard_state.dart';
+part 'home_cubit.freezed.dart';
+part 'home_state.dart';
 
-class DashboardCubit extends Cubit<DashboardState> {
+class HomeCubit extends Cubit<HomeState> {
   final GetOrderByStoreUsecase _getOrderByStoreUsecase;
   final GetBundleByStoreUsecase _getBundleByStoreUsecase;
 
-  DashboardCubit(
+  HomeCubit(
     this._getOrderByStoreUsecase,
     this._getBundleByStoreUsecase,
   ) : super(const _Loading());
@@ -45,9 +45,19 @@ class DashboardCubit extends Cubit<DashboardState> {
       (r) => data['bundle'] = r,
     );
     safeEmit(
-      DashboardState.success(data),
+      HomeState.success(data),
       emit: emit,
       isClosed: isClosed,
     );
+  }
+
+  int sumOrder(
+    List<OrderEntityResponse> data,
+  ) {
+    List<int> sum = [];
+    for (var element in data) {
+      sum.add(element.order!.totalPrice!);
+    }
+    return sum.reduce((value, element) => value + element);
   }
 }

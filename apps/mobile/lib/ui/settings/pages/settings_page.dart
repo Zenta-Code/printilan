@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/core/app_route.dart';
 import 'package:sky_printing/dependencies_injection.dart';
@@ -8,6 +9,7 @@ import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing/ui/main/widgets/bottom_nav_bar.dart';
 import 'package:sky_printing/ui/settings/cubit/settings_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -27,16 +29,39 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
       (getData(MainBoxKeys.locale) ?? "en") == "en"
           ? _listLanguage[0]
           : _listLanguage[1];
-  dynamic user;
+  UserEntity? user;
+  String? district;
   @override
   void initState() {
-    user = getData(MainBoxKeys.user);
+    user = getData<UserEntity>(MainBoxKeys.user);
+    getDistrict();
     super.initState();
+  }
+
+  void getDistrict() async {
+    district = await context
+        .read<SettingsCubit>()
+        .getDistrictByPostalCode(int.parse(user!.address!.zipCode!));
+    if (!mounted) return;
+    log.e("district $district");
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Parent(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(56.0),
+        child: AppBar(
+          title: Text(
+            Strings.of(context)!.settings,
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+          ),
+        ),
+      ),
       bottomNavigation: BottomNavBar(
         dataMenu: context.read<MainCubit>().dataMenus,
         currentIndex: (int index) {
@@ -51,9 +76,7 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
             padding: EdgeInsets.all(Dimens.space16),
             child: Column(
               children: [
-                Text(
-                  user.toString(),
-                ),
+                userContainer(),
                 DropDown<ActiveTheme>(
                   key: const Key("dropdown_theme"),
                   hint: Strings.of(context)!.choose_theme,
@@ -116,6 +139,21 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget userContainer() {
+    return Container(
+      child: Row(
+        children: [
+          Column(
+            children: [
+              Text(user!.name!),
+              Text(district ?? ""),
+            ],
+          ),
+        ],
       ),
     );
   }

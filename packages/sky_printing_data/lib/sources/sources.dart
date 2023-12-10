@@ -6,3 +6,4 @@ export 'remote/register_remote_data_source.dart';
 export 'remote/bundle_remote_data_source.dart';
 export 'remote/store_remote_data_source.dart';
 export 'remote/printer_remote_data_source.dart';
+export 'remote/address_remote_data_source.dart';

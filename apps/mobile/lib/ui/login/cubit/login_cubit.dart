@@ -35,7 +35,6 @@ class LoginCubit extends Cubit<LoginState> {
         }
       },
       (r) async {
-        log.f("Response: $r");
         await _getLocation.call(const LocationParams());
         emit(_Success(r.token));
       },

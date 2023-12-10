@@ -4,17 +4,21 @@ import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'order_model.freezed.dart';
 part 'order_model.g.dart';
+part 'order_model_response.dart';
 
 @freezed
 class OrderModel with _$OrderModel {
   const factory OrderModel({
+    @JsonKey(name: '_id') String? id,
     String? userId,
     String? storeId,
     String? documentId,
-    UserModel? user,
-    StoreModel? store,
-    DocumentModel? document,
+    String? bundleId,
+    bool? isColor,
+    String? status,
     int? totalPrice,
+    String? createdAt,
+    String? updatedAt,
   }) = _OrderModel;
 
   const OrderModel._();
@@ -23,12 +27,15 @@ class OrderModel with _$OrderModel {
       _$OrderModelFromJson(json);
 
   OrderEntity toEntity() => OrderEntity(
+        id: id,
         userId: userId,
         storeId: storeId,
         documentId: documentId,
+        bundleId: bundleId,
+        isColor: isColor,
+        status: status,
         totalPrice: totalPrice,
-        user: user?.toEntity(),
-        store: store?.toEntity(),
-        document: document?.toEntity(),
+        createdAt: createdAt,
+        updatedAt: updatedAt,
       );
 }

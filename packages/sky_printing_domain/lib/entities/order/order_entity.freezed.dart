@@ -26,12 +26,17 @@ mixin _$OrderEntity {
   @HiveField(3)
   String? get documentId => throw _privateConstructorUsedError;
   @HiveField(4)
-  UserEntity? get user => throw _privateConstructorUsedError;
+  String? get bundleId => throw _privateConstructorUsedError;
   @HiveField(5)
-  StoreEntity? get store => throw _privateConstructorUsedError;
+  bool? get isColor => throw _privateConstructorUsedError;
   @HiveField(6)
-  DocumentEntity? get document => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
+  @HiveField(7)
   int? get totalPrice => throw _privateConstructorUsedError;
+  @HiveField(8)
+  String? get createdAt => throw _privateConstructorUsedError;
+  @HiveField(9)
+  String? get updatedAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderEntityCopyWith<OrderEntity> get copyWith =>
@@ -49,14 +54,12 @@ abstract class $OrderEntityCopyWith<$Res> {
       @HiveField(1) String? userId,
       @HiveField(2) String? storeId,
       @HiveField(3) String? documentId,
-      @HiveField(4) UserEntity? user,
-      @HiveField(5) StoreEntity? store,
-      @HiveField(6) DocumentEntity? document,
-      int? totalPrice});
-
-  $UserEntityCopyWith<$Res>? get user;
-  $StoreEntityCopyWith<$Res>? get store;
-  $DocumentEntityCopyWith<$Res>? get document;
+      @HiveField(4) String? bundleId,
+      @HiveField(5) bool? isColor,
+      @HiveField(6) String? status,
+      @HiveField(7) int? totalPrice,
+      @HiveField(8) String? createdAt,
+      @HiveField(9) String? updatedAt});
 }
 
 /// @nodoc
@@ -76,10 +79,12 @@ class _$OrderEntityCopyWithImpl<$Res, $Val extends OrderEntity>
     Object? userId = freezed,
     Object? storeId = freezed,
     Object? documentId = freezed,
-    Object? user = freezed,
-    Object? store = freezed,
-    Object? document = freezed,
+    Object? bundleId = freezed,
+    Object? isColor = freezed,
+    Object? status = freezed,
     Object? totalPrice = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -98,6 +103,343 @@ class _$OrderEntityCopyWithImpl<$Res, $Val extends OrderEntity>
           ? _value.documentId
           : documentId // ignore: cast_nullable_to_non_nullable
               as String?,
+      bundleId: freezed == bundleId
+          ? _value.bundleId
+          : bundleId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isColor: freezed == isColor
+          ? _value.isColor
+          : isColor // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalPrice: freezed == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$OrderEntityImplCopyWith<$Res>
+    implements $OrderEntityCopyWith<$Res> {
+  factory _$$OrderEntityImplCopyWith(
+          _$OrderEntityImpl value, $Res Function(_$OrderEntityImpl) then) =
+      __$$OrderEntityImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@HiveField(0) @JsonKey(name: '_id') String? id,
+      @HiveField(1) String? userId,
+      @HiveField(2) String? storeId,
+      @HiveField(3) String? documentId,
+      @HiveField(4) String? bundleId,
+      @HiveField(5) bool? isColor,
+      @HiveField(6) String? status,
+      @HiveField(7) int? totalPrice,
+      @HiveField(8) String? createdAt,
+      @HiveField(9) String? updatedAt});
+}
+
+/// @nodoc
+class __$$OrderEntityImplCopyWithImpl<$Res>
+    extends _$OrderEntityCopyWithImpl<$Res, _$OrderEntityImpl>
+    implements _$$OrderEntityImplCopyWith<$Res> {
+  __$$OrderEntityImplCopyWithImpl(
+      _$OrderEntityImpl _value, $Res Function(_$OrderEntityImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? userId = freezed,
+    Object? storeId = freezed,
+    Object? documentId = freezed,
+    Object? bundleId = freezed,
+    Object? isColor = freezed,
+    Object? status = freezed,
+    Object? totalPrice = freezed,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
+  }) {
+    return _then(_$OrderEntityImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      storeId: freezed == storeId
+          ? _value.storeId
+          : storeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      documentId: freezed == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bundleId: freezed == bundleId
+          ? _value.bundleId
+          : bundleId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isColor: freezed == isColor
+          ? _value.isColor
+          : isColor // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      totalPrice: freezed == totalPrice
+          ? _value.totalPrice
+          : totalPrice // ignore: cast_nullable_to_non_nullable
+              as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+@HiveType(typeId: 2, adapterName: 'OrderEntityAdapter')
+class _$OrderEntityImpl implements _OrderEntity {
+  const _$OrderEntityImpl(
+      {@HiveField(0) @JsonKey(name: '_id') this.id,
+      @HiveField(1) this.userId,
+      @HiveField(2) this.storeId,
+      @HiveField(3) this.documentId,
+      @HiveField(4) this.bundleId,
+      @HiveField(5) this.isColor,
+      @HiveField(6) this.status,
+      @HiveField(7) this.totalPrice,
+      @HiveField(8) this.createdAt,
+      @HiveField(9) this.updatedAt});
+
+  @override
+  @HiveField(0)
+  @JsonKey(name: '_id')
+  final String? id;
+  @override
+  @HiveField(1)
+  final String? userId;
+  @override
+  @HiveField(2)
+  final String? storeId;
+  @override
+  @HiveField(3)
+  final String? documentId;
+  @override
+  @HiveField(4)
+  final String? bundleId;
+  @override
+  @HiveField(5)
+  final bool? isColor;
+  @override
+  @HiveField(6)
+  final String? status;
+  @override
+  @HiveField(7)
+  final int? totalPrice;
+  @override
+  @HiveField(8)
+  final String? createdAt;
+  @override
+  @HiveField(9)
+  final String? updatedAt;
+
+  @override
+  String toString() {
+    return 'OrderEntity(id: $id, userId: $userId, storeId: $storeId, documentId: $documentId, bundleId: $bundleId, isColor: $isColor, status: $status, totalPrice: $totalPrice, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$OrderEntityImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.storeId, storeId) || other.storeId == storeId) &&
+            (identical(other.documentId, documentId) ||
+                other.documentId == documentId) &&
+            (identical(other.bundleId, bundleId) ||
+                other.bundleId == bundleId) &&
+            (identical(other.isColor, isColor) || other.isColor == isColor) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.totalPrice, totalPrice) ||
+                other.totalPrice == totalPrice) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id, userId, storeId, documentId,
+      bundleId, isColor, status, totalPrice, createdAt, updatedAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$OrderEntityImplCopyWith<_$OrderEntityImpl> get copyWith =>
+      __$$OrderEntityImplCopyWithImpl<_$OrderEntityImpl>(this, _$identity);
+}
+
+abstract class _OrderEntity implements OrderEntity {
+  const factory _OrderEntity(
+      {@HiveField(0) @JsonKey(name: '_id') final String? id,
+      @HiveField(1) final String? userId,
+      @HiveField(2) final String? storeId,
+      @HiveField(3) final String? documentId,
+      @HiveField(4) final String? bundleId,
+      @HiveField(5) final bool? isColor,
+      @HiveField(6) final String? status,
+      @HiveField(7) final int? totalPrice,
+      @HiveField(8) final String? createdAt,
+      @HiveField(9) final String? updatedAt}) = _$OrderEntityImpl;
+
+  @override
+  @HiveField(0)
+  @JsonKey(name: '_id')
+  String? get id;
+  @override
+  @HiveField(1)
+  String? get userId;
+  @override
+  @HiveField(2)
+  String? get storeId;
+  @override
+  @HiveField(3)
+  String? get documentId;
+  @override
+  @HiveField(4)
+  String? get bundleId;
+  @override
+  @HiveField(5)
+  bool? get isColor;
+  @override
+  @HiveField(6)
+  String? get status;
+  @override
+  @HiveField(7)
+  int? get totalPrice;
+  @override
+  @HiveField(8)
+  String? get createdAt;
+  @override
+  @HiveField(9)
+  String? get updatedAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$OrderEntityImplCopyWith<_$OrderEntityImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$OrderEntityResponse {
+  @HiveField(0)
+  String? get userId => throw _privateConstructorUsedError;
+  @HiveField(1)
+  String? get storeId => throw _privateConstructorUsedError;
+  @HiveField(2)
+  String? get documentId => throw _privateConstructorUsedError;
+  @HiveField(3)
+  OrderEntity? get order => throw _privateConstructorUsedError;
+  @HiveField(4)
+  UserEntity? get user => throw _privateConstructorUsedError;
+  @HiveField(5)
+  StoreEntity? get store => throw _privateConstructorUsedError;
+  @HiveField(6)
+  DocumentEntity? get document => throw _privateConstructorUsedError;
+  @HiveField(7)
+  int? get totalPrice => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $OrderEntityResponseCopyWith<OrderEntityResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $OrderEntityResponseCopyWith<$Res> {
+  factory $OrderEntityResponseCopyWith(
+          OrderEntityResponse value, $Res Function(OrderEntityResponse) then) =
+      _$OrderEntityResponseCopyWithImpl<$Res, OrderEntityResponse>;
+  @useResult
+  $Res call(
+      {@HiveField(0) String? userId,
+      @HiveField(1) String? storeId,
+      @HiveField(2) String? documentId,
+      @HiveField(3) OrderEntity? order,
+      @HiveField(4) UserEntity? user,
+      @HiveField(5) StoreEntity? store,
+      @HiveField(6) DocumentEntity? document,
+      @HiveField(7) int? totalPrice});
+
+  $OrderEntityCopyWith<$Res>? get order;
+  $UserEntityCopyWith<$Res>? get user;
+  $StoreEntityCopyWith<$Res>? get store;
+  $DocumentEntityCopyWith<$Res>? get document;
+}
+
+/// @nodoc
+class _$OrderEntityResponseCopyWithImpl<$Res, $Val extends OrderEntityResponse>
+    implements $OrderEntityResponseCopyWith<$Res> {
+  _$OrderEntityResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = freezed,
+    Object? storeId = freezed,
+    Object? documentId = freezed,
+    Object? order = freezed,
+    Object? user = freezed,
+    Object? store = freezed,
+    Object? document = freezed,
+    Object? totalPrice = freezed,
+  }) {
+    return _then(_value.copyWith(
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      storeId: freezed == storeId
+          ? _value.storeId
+          : storeId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      documentId: freezed == documentId
+          ? _value.documentId
+          : documentId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      order: freezed == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as OrderEntity?,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -115,6 +457,18 @@ class _$OrderEntityCopyWithImpl<$Res, $Val extends OrderEntity>
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as int?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OrderEntityCopyWith<$Res>? get order {
+    if (_value.order == null) {
+      return null;
+    }
+
+    return $OrderEntityCopyWith<$Res>(_value.order!, (value) {
+      return _then(_value.copyWith(order: value) as $Val);
+    });
   }
 
   @override
@@ -155,23 +509,25 @@ class _$OrderEntityCopyWithImpl<$Res, $Val extends OrderEntity>
 }
 
 /// @nodoc
-abstract class _$$OrderEntityImplCopyWith<$Res>
-    implements $OrderEntityCopyWith<$Res> {
-  factory _$$OrderEntityImplCopyWith(
-          _$OrderEntityImpl value, $Res Function(_$OrderEntityImpl) then) =
-      __$$OrderEntityImplCopyWithImpl<$Res>;
+abstract class _$$OrderEntityResponseImplCopyWith<$Res>
+    implements $OrderEntityResponseCopyWith<$Res> {
+  factory _$$OrderEntityResponseImplCopyWith(_$OrderEntityResponseImpl value,
+          $Res Function(_$OrderEntityResponseImpl) then) =
+      __$$OrderEntityResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@HiveField(0) @JsonKey(name: '_id') String? id,
-      @HiveField(1) String? userId,
-      @HiveField(2) String? storeId,
-      @HiveField(3) String? documentId,
+      {@HiveField(0) String? userId,
+      @HiveField(1) String? storeId,
+      @HiveField(2) String? documentId,
+      @HiveField(3) OrderEntity? order,
       @HiveField(4) UserEntity? user,
       @HiveField(5) StoreEntity? store,
       @HiveField(6) DocumentEntity? document,
-      int? totalPrice});
+      @HiveField(7) int? totalPrice});
 
+  @override
+  $OrderEntityCopyWith<$Res>? get order;
   @override
   $UserEntityCopyWith<$Res>? get user;
   @override
@@ -181,30 +537,26 @@ abstract class _$$OrderEntityImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$OrderEntityImplCopyWithImpl<$Res>
-    extends _$OrderEntityCopyWithImpl<$Res, _$OrderEntityImpl>
-    implements _$$OrderEntityImplCopyWith<$Res> {
-  __$$OrderEntityImplCopyWithImpl(
-      _$OrderEntityImpl _value, $Res Function(_$OrderEntityImpl) _then)
+class __$$OrderEntityResponseImplCopyWithImpl<$Res>
+    extends _$OrderEntityResponseCopyWithImpl<$Res, _$OrderEntityResponseImpl>
+    implements _$$OrderEntityResponseImplCopyWith<$Res> {
+  __$$OrderEntityResponseImplCopyWithImpl(_$OrderEntityResponseImpl _value,
+      $Res Function(_$OrderEntityResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? userId = freezed,
     Object? storeId = freezed,
     Object? documentId = freezed,
+    Object? order = freezed,
     Object? user = freezed,
     Object? store = freezed,
     Object? document = freezed,
     Object? totalPrice = freezed,
   }) {
-    return _then(_$OrderEntityImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
+    return _then(_$OrderEntityResponseImpl(
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -217,6 +569,10 @@ class __$$OrderEntityImplCopyWithImpl<$Res>
           ? _value.documentId
           : documentId // ignore: cast_nullable_to_non_nullable
               as String?,
+      order: freezed == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as OrderEntity?,
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -239,31 +595,30 @@ class __$$OrderEntityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-@HiveType(typeId: 2, adapterName: 'OrderEntityAdapter')
-class _$OrderEntityImpl implements _OrderEntity {
-  const _$OrderEntityImpl(
-      {@HiveField(0) @JsonKey(name: '_id') this.id,
-      @HiveField(1) this.userId,
-      @HiveField(2) this.storeId,
-      @HiveField(3) this.documentId,
+@HiveType(typeId: 1, adapterName: 'OrderEntityResponseAdapter')
+class _$OrderEntityResponseImpl implements _OrderEntityResponse {
+  const _$OrderEntityResponseImpl(
+      {@HiveField(0) this.userId,
+      @HiveField(1) this.storeId,
+      @HiveField(2) this.documentId,
+      @HiveField(3) this.order,
       @HiveField(4) this.user,
       @HiveField(5) this.store,
       @HiveField(6) this.document,
-      this.totalPrice});
+      @HiveField(7) this.totalPrice});
 
   @override
   @HiveField(0)
-  @JsonKey(name: '_id')
-  final String? id;
-  @override
-  @HiveField(1)
   final String? userId;
   @override
-  @HiveField(2)
+  @HiveField(1)
   final String? storeId;
   @override
-  @HiveField(3)
+  @HiveField(2)
   final String? documentId;
+  @override
+  @HiveField(3)
+  final OrderEntity? order;
   @override
   @HiveField(4)
   final UserEntity? user;
@@ -274,23 +629,24 @@ class _$OrderEntityImpl implements _OrderEntity {
   @HiveField(6)
   final DocumentEntity? document;
   @override
+  @HiveField(7)
   final int? totalPrice;
 
   @override
   String toString() {
-    return 'OrderEntity(id: $id, userId: $userId, storeId: $storeId, documentId: $documentId, user: $user, store: $store, document: $document, totalPrice: $totalPrice)';
+    return 'OrderEntityResponse(userId: $userId, storeId: $storeId, documentId: $documentId, order: $order, user: $user, store: $store, document: $document, totalPrice: $totalPrice)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$OrderEntityImpl &&
-            (identical(other.id, id) || other.id == id) &&
+            other is _$OrderEntityResponseImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.storeId, storeId) || other.storeId == storeId) &&
             (identical(other.documentId, documentId) ||
                 other.documentId == documentId) &&
+            (identical(other.order, order) || other.order == order) &&
             (identical(other.user, user) || other.user == user) &&
             (identical(other.store, store) || other.store == store) &&
             (identical(other.document, document) ||
@@ -300,40 +656,40 @@ class _$OrderEntityImpl implements _OrderEntity {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, storeId, documentId,
-      user, store, document, totalPrice);
+  int get hashCode => Object.hash(runtimeType, userId, storeId, documentId,
+      order, user, store, document, totalPrice);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$OrderEntityImplCopyWith<_$OrderEntityImpl> get copyWith =>
-      __$$OrderEntityImplCopyWithImpl<_$OrderEntityImpl>(this, _$identity);
+  _$$OrderEntityResponseImplCopyWith<_$OrderEntityResponseImpl> get copyWith =>
+      __$$OrderEntityResponseImplCopyWithImpl<_$OrderEntityResponseImpl>(
+          this, _$identity);
 }
 
-abstract class _OrderEntity implements OrderEntity {
-  const factory _OrderEntity(
-      {@HiveField(0) @JsonKey(name: '_id') final String? id,
-      @HiveField(1) final String? userId,
-      @HiveField(2) final String? storeId,
-      @HiveField(3) final String? documentId,
+abstract class _OrderEntityResponse implements OrderEntityResponse {
+  const factory _OrderEntityResponse(
+      {@HiveField(0) final String? userId,
+      @HiveField(1) final String? storeId,
+      @HiveField(2) final String? documentId,
+      @HiveField(3) final OrderEntity? order,
       @HiveField(4) final UserEntity? user,
       @HiveField(5) final StoreEntity? store,
       @HiveField(6) final DocumentEntity? document,
-      final int? totalPrice}) = _$OrderEntityImpl;
+      @HiveField(7) final int? totalPrice}) = _$OrderEntityResponseImpl;
 
   @override
   @HiveField(0)
-  @JsonKey(name: '_id')
-  String? get id;
-  @override
-  @HiveField(1)
   String? get userId;
   @override
-  @HiveField(2)
+  @HiveField(1)
   String? get storeId;
   @override
-  @HiveField(3)
+  @HiveField(2)
   String? get documentId;
+  @override
+  @HiveField(3)
+  OrderEntity? get order;
   @override
   @HiveField(4)
   UserEntity? get user;
@@ -344,9 +700,10 @@ abstract class _OrderEntity implements OrderEntity {
   @HiveField(6)
   DocumentEntity? get document;
   @override
+  @HiveField(7)
   int? get totalPrice;
   @override
   @JsonKey(ignore: true)
-  _$$OrderEntityImplCopyWith<_$OrderEntityImpl> get copyWith =>
+  _$$OrderEntityResponseImplCopyWith<_$OrderEntityResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -42,14 +42,3 @@ class RegisterParams with _$RegisterParams {
   factory RegisterParams.fromJson(Map<String, dynamic> json) =>
       _$RegisterParamsFromJson(json);
 }
-
-@freezed
-class StoreRegisterParams with _$StoreRegisterParams {
-  const factory StoreRegisterParams({
-    @Default(null) Map<String, dynamic>? user,
-    @Default(null) Map<String, dynamic>? store,
-  }) = _StoreRegisterParams;
-
-  factory StoreRegisterParams.fromJson(Map<String, dynamic> json) =>
-      _$StoreRegisterParamsFromJson(json);
-}

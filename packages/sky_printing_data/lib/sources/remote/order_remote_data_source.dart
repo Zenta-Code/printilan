@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_data/models/models.dart';
@@ -7,7 +9,7 @@ abstract class OrderRemoteDataSource {
   Future<Either<Failure, OrderModel>> getOrderById(
     GetOrderByIdParams params,
   );
-  Future<Either<Failure, List<OrderModel>>> getOrderByStore(
+  Future<Either<Failure, List<OrderModelResponse>>> getOrderByStore(
     GetOrderByStoreParams params,
   );
   Future<Either<Failure, List<OrderModel>>> getOrderByUser(
@@ -18,6 +20,10 @@ abstract class OrderRemoteDataSource {
   );
   Future<Either<Failure, OrderModel>> deleteOrderById(
     DeleteOrderByIdParams params,
+  );
+
+  Future<Either<Failure, File>> createReportOrder(
+    CreateReportOrderParams params,
   );
 }
 
@@ -39,15 +45,17 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, List<OrderModel>>> getOrderByStore(
+  Future<Either<Failure, List<OrderModelResponse>>> getOrderByStore(
     GetOrderByStoreParams params,
   ) {
     final response = _client.getRequest(
       ListAPI.order,
       queryParameters: params.toJson(),
       converter: (response) {
-        final List<OrderModel> orders = response['data']
-            .map<OrderModel>((order) => OrderModel.fromJson(order))
+        log.f(response);
+        final List<OrderModelResponse> orders = response['data']
+            .map<OrderModelResponse>(
+                (order) => OrderModelResponse.fromJson(order))
             .toList();
         return orders;
       },
@@ -91,6 +99,18 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     final response = _client.deleteRequest(
       "${ListAPI.order}/${params.orderId}",
       converter: (response) => OrderModel.fromJson(response),
+    );
+    return response;
+  }
+
+  @override
+  Future<Either<Failure, File>> createReportOrder(
+    CreateReportOrderParams params,
+  ) {
+    final response = _client.downloadRequest(
+      ListAPI.order + "/report",
+      params.savePath!,
+      queryParameters: params.toJson(),
     );
     return response;
   }

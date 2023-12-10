@@ -184,11 +184,9 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
               log.e(error);
             },
             onViewCreated: (PDFViewController pdfViewController) {
-              log.i("onViewCreated");
               context.read<OrderCubit>().setController(pdfViewController);
             },
-            onPageChanged: (int? page, int? total) {
-              print('page change: $page/$total');
+            onPageChanged: (int? page, int? total) { 
             },
           );
   }
@@ -323,13 +321,7 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                                           context.watch<OrderCubit>().result ==
                                                   null
                                               ? ""
-                                              : "${context
-                                                      .watch<OrderCubit>()
-                                                      .result!
-                                                      .files
-                                                      .first
-                                                      .name
-                                                      .substring(0, 10)}...",
+                                              : "${context.watch<OrderCubit>().result!.files.first.name.substring(0, 10)}...",
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyMedium!

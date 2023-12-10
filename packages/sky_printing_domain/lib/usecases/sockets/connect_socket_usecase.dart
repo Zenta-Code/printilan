@@ -13,7 +13,7 @@ class ConnectSocketUsecase extends UseCase<Socket, NoParams> {
     if (socket.connected) {
       return Right(socket);
     } else {
-      return Left(ServerFailure('Cannot connect to socket'));
+      return const Left(ServerFailure('Cannot connect to socket'));
     }
   }
 }

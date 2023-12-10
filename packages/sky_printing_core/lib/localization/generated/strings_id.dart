@@ -5,6 +5,105 @@ class StringsId extends Strings {
   StringsId([String locale = 'id']) : super(locale);
 
   @override
+  String get income => 'Pemasukan';
+
+  @override
+  String get store_updated => 'Toko berhasil diperbarui';
+
+  @override
+  String get store_failed_to_update => 'Toko gagal diperbarui';
+
+  @override
+  String get phone_empty => 'Nomor telepon tidak boleh kosong';
+
+  @override
+  String get store_name_empty => 'Nama toko tidak boleh kosong';
+
+  @override
+  String get store_name => 'Nama Toko';
+
+  @override
+  String get password_empty => 'Kata sandi tidak boleh kosong';
+
+  @override
+  String get street_empty => 'Jalan tidak boleh kosong';
+
+  @override
+  String get user_name => 'Nama Pengguna';
+
+  @override
+  String get store_info => 'Informasi Toko';
+
+  @override
+  String get total_price => 'Total Harga';
+
+  @override
+  String get start_date => 'Tanggal Mulai';
+
+  @override
+  String get end_date => 'Tanggal Selesai';
+
+  @override
+  String get pick_start_date => 'Pilih Tanggal Mulai';
+
+  @override
+  String get pick_end_date => 'Pilih Tanggal Selesai';
+
+  @override
+  String get download => 'Unduh';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get city_empty => 'Kota tidak boleh kosong';
+
+  @override
+  String get state_empty => 'Provinsi tidak boleh kosong';
+
+  @override
+  String get country_empty => 'Negara tidak boleh kosong';
+
+  @override
+  String get zip_code => 'Kode pos';
+
+  @override
+  String get create => 'Buat';
+
+  @override
+  String get create_report => 'Buat Laporan';
+
+  @override
+  String get zip_code_empty => 'Kode pos tidak boleh kosong';
+
+  @override
+  String get update_profile => 'Perbarui Profil';
+
+  @override
+  String get total_orders => 'Total Pesanan';
+
+  @override
+  String get order_details => 'Detail Pesanan';
+
+  @override
+  String get file_size => 'Ukuran File';
+
+  @override
+  String get file_type => 'Tipe File';
+
+  @override
+  String get total_pages => 'Total Halaman';
+
+  @override
+  String get document_details => 'Detail Dokumen';
+
+  @override
+  String get customer_details => 'Detail Pelanggan';
+
+  @override
+  String get customer_name => 'Nama Pelanggan';
+
+  @override
   String get sheet => 'Lembar';
 
   @override

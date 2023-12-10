@@ -79,7 +79,10 @@ void _repositories() {
   );
 
   sl.registerLazySingleton<StoreRepository>(
-    () => StoreRepositoryImpl(sl()),
+    () => StoreRepositoryImpl(sl(), sl()),
+  );
+  sl.registerLazySingleton<AddressRepository>(
+    () => AddressRepositoryImpl(sl()),
   );
 }
 
@@ -105,6 +108,9 @@ void _dataSources() {
 
   sl.registerLazySingleton<StoreRemoteDataSource>(
     () => StoreRemoteDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<AddressRemoteDataSource>(
+    () => AddressRemoteDataSourceImpl(sl()),
   );
 }
 
@@ -148,6 +154,9 @@ void _useCase() {
   sl.registerLazySingleton(
     () => GetStoreByCityUsecase(sl()),
   );
+  sl.registerLazySingleton(
+    () => GetDistrictByPostalCodeUsecase(sl()),
+  );
 }
 
 void _cubit() {
@@ -164,7 +173,9 @@ void _cubit() {
   );
 
   sl.registerFactory(
-    () => SettingsCubit(),
+    () => SettingsCubit(
+      sl(),
+    ),
   );
   sl.registerFactory(
     () => MainCubit(),
@@ -183,7 +194,7 @@ void _cubit() {
       sl(),
       sl(),
       sl(),
-      sl(), 
+      sl(),
     ),
   );
   sl.registerFactory(

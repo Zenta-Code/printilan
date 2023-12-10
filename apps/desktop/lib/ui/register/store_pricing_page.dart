@@ -8,7 +8,7 @@ import 'package:sky_printing_admin/core/themes/theme_bloc.dart';
 import 'package:sky_printing_admin/core/widgets/window_button.dart';
 import 'package:sky_printing_admin/ui/register/cubit/register_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart' hide Button;
-import 'package:sky_printing_domain/usecases/user/user_params.dart';
+import 'package:sky_printing_domain/sky_printing_domain.dart'; 
 import 'package:window_manager/window_manager.dart';
 
 class StorePricingPage extends StatefulWidget {

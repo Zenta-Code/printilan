@@ -9,10 +9,12 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit(
     this._postLogin,
+    this._forceNewSocketUsecase,
     this._getMe,
   ) : super(const _Init());
 
   final PostLogin _postLogin;
+  final ForceNewSocketUsecase _forceNewSocketUsecase;
   final GetMe _getMe;
 
   bool? isPasswordHide = true;
@@ -33,11 +35,12 @@ class AuthCubit extends Cubit<AuthState> {
           emit(_Failure(l.message ?? ""));
         }
       },
-      (r) {
+      (r) async {
         if (r.token!.contains("not found")) {
           emit(_Failure(r.token ?? ""));
         } else {
-          emit(_Success(r.token));
+          final socket = await _forceNewSocketUsecase.call(null);
+          socket.fold((left) => null, (right) => emit(_Success(r.token)));
         }
       },
     );

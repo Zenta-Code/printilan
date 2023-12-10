@@ -10,11 +10,11 @@ part 'main_state.dart';
 class MainCubit extends Cubit<MainState> with MainBoxMixin {
   MainCubit(
     this._getPrinterByStoreUsecase,
-    this._joinSocketUsecase, 
+    this._joinSocketUsecase,
   ) : super(const _Loading());
 
   final GetPrinterByStoreUsecase _getPrinterByStoreUsecase;
-  final JoinSocketUsecase _joinSocketUsecase; 
+  final JoinSocketUsecase _joinSocketUsecase;
 
   int _currentIndex = 0;
   late List<DataHelper> dataMenus;
@@ -53,8 +53,8 @@ class MainCubit extends Cubit<MainState> with MainBoxMixin {
   }
 
   Future<void> bootstrap() async {
-    fetchPrinters();
     joinRoom();
+    fetchPrinters();
     pollingPrinter();
   }
 
@@ -80,9 +80,10 @@ class MainCubit extends Cubit<MainState> with MainBoxMixin {
   }
 
   void joinRoom() {
-    final store = getData(MainBoxKeys.store);
-    _joinSocketUsecase.call(SocketParams(
-      storeId: store.id,
-    ));
+    _joinSocketUsecase.call(
+      SocketParams(
+        storeId: getData<StoreEntity>(MainBoxKeys.store).id,
+      ),
+    );
   }
 }

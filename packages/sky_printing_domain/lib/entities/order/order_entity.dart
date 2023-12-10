@@ -4,6 +4,7 @@ import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'order_entity.freezed.dart';
 part 'order_entity.g.dart';
+part 'order_entity_response.dart';
 
 @freezed
 class OrderEntity with _$OrderEntity {
@@ -13,9 +14,11 @@ class OrderEntity with _$OrderEntity {
     @HiveField(1) String? userId,
     @HiveField(2) String? storeId,
     @HiveField(3) String? documentId,
-    @HiveField(4) UserEntity? user,
-    @HiveField(5) StoreEntity? store,
-    @HiveField(6) DocumentEntity? document,
-    int? totalPrice,
+    @HiveField(4) String? bundleId,
+    @HiveField(5) bool? isColor,
+    @HiveField(6) String? status,
+    @HiveField(7) int? totalPrice,
+    @HiveField(8) String? createdAt,
+    @HiveField(9) String? updatedAt,
   }) = _OrderEntity;
 }

@@ -31,4 +31,33 @@ class GetStoreByNameParams with _$GetStoreByNameParams {
 
   factory GetStoreByNameParams.fromJson(Map<String, dynamic> json) =>
       _$GetStoreByNameParamsFromJson(json);
-} 
+}
+
+@freezed
+class StoreRegisterParams with _$StoreRegisterParams {
+  const factory StoreRegisterParams({
+    @Default(null) Map<String, dynamic>? user,
+    @Default(null) Map<String, dynamic>? store,
+  }) = _StoreRegisterParams;
+
+  factory StoreRegisterParams.fromJson(Map<String, dynamic> json) =>
+      _$StoreRegisterParamsFromJson(json);
+}
+
+@freezed
+class StoreUpdateParams with _$StoreUpdateParams {
+  const factory StoreUpdateParams({
+    @Default(null) String? id,
+    @Default(null) String? name,
+    @Default(null) String? phone,
+    @Default(null) String? password,
+    @Default(null) String? street,
+    @Default(null) String? city,
+    @Default(null) String? state,
+    @Default(null) String? country,
+    @Default(null) String? zipCode,
+  }) = _StoreUpdateParams;
+
+  factory StoreUpdateParams.fromJson(Map<String, dynamic> json) =>
+      _$StoreUpdateParamsFromJson(json);
+}

@@ -19,17 +19,17 @@ mixin _$DocumentEntity {
   @HiveField(0)
   String? get id => throw _privateConstructorUsedError;
   @HiveField(1)
-  String? get name => throw _privateConstructorUsedError;
+  String? get fileName => throw _privateConstructorUsedError;
   @HiveField(2)
-  String? get type => throw _privateConstructorUsedError;
+  String? get filePath => throw _privateConstructorUsedError;
   @HiveField(3)
-  int? get count => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
   @HiveField(4)
-  String? get size => throw _privateConstructorUsedError;
+  int? get totalPage => throw _privateConstructorUsedError;
   @HiveField(5)
-  bool? get color => throw _privateConstructorUsedError;
+  String? get size => throw _privateConstructorUsedError;
   @HiveField(6)
-  int? get price => throw _privateConstructorUsedError;
+  bool? get color => throw _privateConstructorUsedError;
   @HiveField(7)
   int? get copies => throw _privateConstructorUsedError;
 
@@ -46,12 +46,12 @@ abstract class $DocumentEntityCopyWith<$Res> {
   @useResult
   $Res call(
       {@HiveField(0) String? id,
-      @HiveField(1) String? name,
-      @HiveField(2) String? type,
-      @HiveField(3) int? count,
-      @HiveField(4) String? size,
-      @HiveField(5) bool? color,
-      @HiveField(6) int? price,
+      @HiveField(1) String? fileName,
+      @HiveField(2) String? filePath,
+      @HiveField(3) String? type,
+      @HiveField(4) int? totalPage,
+      @HiveField(5) String? size,
+      @HiveField(6) bool? color,
       @HiveField(7) int? copies});
 }
 
@@ -69,12 +69,12 @@ class _$DocumentEntityCopyWithImpl<$Res, $Val extends DocumentEntity>
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
+    Object? fileName = freezed,
+    Object? filePath = freezed,
     Object? type = freezed,
-    Object? count = freezed,
+    Object? totalPage = freezed,
     Object? size = freezed,
     Object? color = freezed,
-    Object? price = freezed,
     Object? copies = freezed,
   }) {
     return _then(_value.copyWith(
@@ -82,17 +82,21 @@ class _$DocumentEntityCopyWithImpl<$Res, $Val extends DocumentEntity>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      fileName: freezed == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      filePath: freezed == filePath
+          ? _value.filePath
+          : filePath // ignore: cast_nullable_to_non_nullable
               as String?,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      count: freezed == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      totalPage: freezed == totalPage
+          ? _value.totalPage
+          : totalPage // ignore: cast_nullable_to_non_nullable
               as int?,
       size: freezed == size
           ? _value.size
@@ -102,10 +106,6 @@ class _$DocumentEntityCopyWithImpl<$Res, $Val extends DocumentEntity>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as bool?,
-      price: freezed == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int?,
       copies: freezed == copies
           ? _value.copies
           : copies // ignore: cast_nullable_to_non_nullable
@@ -124,12 +124,12 @@ abstract class _$$DocumentEntityImplCopyWith<$Res>
   @useResult
   $Res call(
       {@HiveField(0) String? id,
-      @HiveField(1) String? name,
-      @HiveField(2) String? type,
-      @HiveField(3) int? count,
-      @HiveField(4) String? size,
-      @HiveField(5) bool? color,
-      @HiveField(6) int? price,
+      @HiveField(1) String? fileName,
+      @HiveField(2) String? filePath,
+      @HiveField(3) String? type,
+      @HiveField(4) int? totalPage,
+      @HiveField(5) String? size,
+      @HiveField(6) bool? color,
       @HiveField(7) int? copies});
 }
 
@@ -145,12 +145,12 @@ class __$$DocumentEntityImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
+    Object? fileName = freezed,
+    Object? filePath = freezed,
     Object? type = freezed,
-    Object? count = freezed,
+    Object? totalPage = freezed,
     Object? size = freezed,
     Object? color = freezed,
-    Object? price = freezed,
     Object? copies = freezed,
   }) {
     return _then(_$DocumentEntityImpl(
@@ -158,17 +158,21 @@ class __$$DocumentEntityImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: freezed == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      fileName: freezed == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      filePath: freezed == filePath
+          ? _value.filePath
+          : filePath // ignore: cast_nullable_to_non_nullable
               as String?,
       type: freezed == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String?,
-      count: freezed == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      totalPage: freezed == totalPage
+          ? _value.totalPage
+          : totalPage // ignore: cast_nullable_to_non_nullable
               as int?,
       size: freezed == size
           ? _value.size
@@ -178,10 +182,6 @@ class __$$DocumentEntityImplCopyWithImpl<$Res>
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
               as bool?,
-      price: freezed == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as int?,
       copies: freezed == copies
           ? _value.copies
           : copies // ignore: cast_nullable_to_non_nullable
@@ -196,12 +196,12 @@ class __$$DocumentEntityImplCopyWithImpl<$Res>
 class _$DocumentEntityImpl implements _DocumentEntity {
   const _$DocumentEntityImpl(
       {@HiveField(0) this.id,
-      @HiveField(1) this.name,
-      @HiveField(2) this.type,
-      @HiveField(3) this.count,
-      @HiveField(4) this.size,
-      @HiveField(5) this.color,
-      @HiveField(6) this.price,
+      @HiveField(1) this.fileName,
+      @HiveField(2) this.filePath,
+      @HiveField(3) this.type,
+      @HiveField(4) this.totalPage,
+      @HiveField(5) this.size,
+      @HiveField(6) this.color,
       @HiveField(7) this.copies});
 
   @override
@@ -209,29 +209,29 @@ class _$DocumentEntityImpl implements _DocumentEntity {
   final String? id;
   @override
   @HiveField(1)
-  final String? name;
+  final String? fileName;
   @override
   @HiveField(2)
-  final String? type;
+  final String? filePath;
   @override
   @HiveField(3)
-  final int? count;
+  final String? type;
   @override
   @HiveField(4)
-  final String? size;
+  final int? totalPage;
   @override
   @HiveField(5)
-  final bool? color;
+  final String? size;
   @override
   @HiveField(6)
-  final int? price;
+  final bool? color;
   @override
   @HiveField(7)
   final int? copies;
 
   @override
   String toString() {
-    return 'DocumentEntity(id: $id, name: $name, type: $type, count: $count, size: $size, color: $color, price: $price, copies: $copies)';
+    return 'DocumentEntity(id: $id, fileName: $fileName, filePath: $filePath, type: $type, totalPage: $totalPage, size: $size, color: $color, copies: $copies)';
   }
 
   @override
@@ -240,18 +240,21 @@ class _$DocumentEntityImpl implements _DocumentEntity {
         (other.runtimeType == runtimeType &&
             other is _$DocumentEntityImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.fileName, fileName) ||
+                other.fileName == fileName) &&
+            (identical(other.filePath, filePath) ||
+                other.filePath == filePath) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.count, count) || other.count == count) &&
+            (identical(other.totalPage, totalPage) ||
+                other.totalPage == totalPage) &&
             (identical(other.size, size) || other.size == size) &&
             (identical(other.color, color) || other.color == color) &&
-            (identical(other.price, price) || other.price == price) &&
             (identical(other.copies, copies) || other.copies == copies));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, type, count, size, color, price, copies);
+  int get hashCode => Object.hash(runtimeType, id, fileName, filePath, type,
+      totalPage, size, color, copies);
 
   @JsonKey(ignore: true)
   @override
@@ -264,12 +267,12 @@ class _$DocumentEntityImpl implements _DocumentEntity {
 abstract class _DocumentEntity implements DocumentEntity {
   const factory _DocumentEntity(
       {@HiveField(0) final String? id,
-      @HiveField(1) final String? name,
-      @HiveField(2) final String? type,
-      @HiveField(3) final int? count,
-      @HiveField(4) final String? size,
-      @HiveField(5) final bool? color,
-      @HiveField(6) final int? price,
+      @HiveField(1) final String? fileName,
+      @HiveField(2) final String? filePath,
+      @HiveField(3) final String? type,
+      @HiveField(4) final int? totalPage,
+      @HiveField(5) final String? size,
+      @HiveField(6) final bool? color,
       @HiveField(7) final int? copies}) = _$DocumentEntityImpl;
 
   @override
@@ -277,22 +280,22 @@ abstract class _DocumentEntity implements DocumentEntity {
   String? get id;
   @override
   @HiveField(1)
-  String? get name;
+  String? get fileName;
   @override
   @HiveField(2)
-  String? get type;
+  String? get filePath;
   @override
   @HiveField(3)
-  int? get count;
+  String? get type;
   @override
   @HiveField(4)
-  String? get size;
+  int? get totalPage;
   @override
   @HiveField(5)
-  bool? get color;
+  String? get size;
   @override
   @HiveField(6)
-  int? get price;
+  bool? get color;
   @override
   @HiveField(7)
   int? get copies;
