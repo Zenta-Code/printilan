@@ -187,6 +187,7 @@ void _cubit() {
       sl(),
       sl(),
       sl(),
+      sl(),
     ),
   );
   sl.registerFactory(

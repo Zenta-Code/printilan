@@ -20,6 +20,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
     this._dioClient,
     this._getOrderByStoreUsecase,
     this._createReportOrderUsecase,
+    this._getPrinterByStoreUsecase,
   ) : super(
           const _Loading(),
         );
@@ -28,12 +29,28 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   final DioClient _dioClient;
   final GetOrderByStoreUsecase _getOrderByStoreUsecase;
   final CreateReportOrderUsecase _createReportOrderUsecase;
+  final GetPrinterByStoreUsecase _getPrinterByStoreUsecase;
 
   final List<OrderEntityResponse> orderData = [];
+  List<PrinterEntity> printerData = [];
 
   Future<void> bootStrap() async {
     message();
     await fetchData();
+    await fetchPrinter();
+  }
+
+  Future<void> fetchPrinter() async {
+    final store = getData(MainBoxKeys.store);
+
+    final response = await _getPrinterByStoreUsecase
+        .call(GetPrinterByStoreParams(storeId: store.id));
+
+    response.fold((l) {
+      if (l is ServerFailure) {}
+    }, (r) {
+      printerData = r;
+    });
   }
 
   Future<void> fetchData() async {
@@ -116,8 +133,9 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
             List<bool> jobs = [];
             for (int i = 0; i < order.document!.copies!; i++) {
               final job = await Printing.directPrintPdf(
-                printer: const Printer(url: 'EPSON L3210 Series'),
-                onLayout: (PdfPageFormat  format) => xBytes,
+                // printer: const Printer(url: 'EPSON L3210 Series'),
+                printer: Printer(url: printerData.last.printerName!),
+                onLayout: (PdfPageFormat format) => xBytes,
                 name: fileName,
               );
               jobs.add(job);

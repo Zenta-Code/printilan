@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sky_printing/dependencies_injection.dart';
+import 'package:sky_printing/ui/history/cubit/history_cubit.dart';
 import 'package:sky_printing/ui/history/pages/history_page.dart';
 import 'package:sky_printing/ui/home/cubit/home_cubit.dart';
 import 'package:sky_printing/ui/home/pages/home_page.dart';
@@ -136,7 +137,12 @@ class AppRoute with MainBoxMixin {
           GoRoute(
             path: Routes.history.path,
             name: Routes.history.name,
-            builder: (context, state) => const HistoryPage(),
+            builder: (context, state) {
+              return BlocProvider(
+                create: (_) => sl<HistoryCubit>()..init(),
+                child: const HistoryPage(),
+              );
+            },
           ),
           GoRoute(
             path: Routes.settings.path,

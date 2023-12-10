@@ -31,7 +31,7 @@ class _OrderPageState extends State<OrderPage> {
               errorMessage: message,
             ),
           ),
-          success: (_) {
+          success: (_  ) {
             final data = context.watch<OrderCubit>().orderData;
 
             return buildScaffold(data, context);

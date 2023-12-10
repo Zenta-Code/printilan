@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:sky_printing/ui/history/cubit/history_cubit.dart';
 import 'package:sky_printing/ui/home/cubit/home_cubit.dart';
 import 'package:sky_printing/ui/login/cubit/login_cubit.dart';
 import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
@@ -200,6 +201,12 @@ void _cubit() {
     () => HomeCubit(
       sl(),
       sl(),
+      sl(),
+    ),
+  );
+
+  sl.registerFactory(
+    () => HistoryCubit(
       sl(),
     ),
   );
