@@ -2,6 +2,7 @@ import { json, urlencoded } from "body-parser";
 import cors from "cors";
 import express, { Express } from "express";
 import RouteGroup from "express-route-grouping";
+import fs from "fs";
 import morgan from "morgan";
 import { AddressController } from "../controller/address";
 import { BundleController } from "../controller/bundle";
@@ -12,12 +13,18 @@ import { StoreController } from "../controller/store";
 import { UserController } from "../controller/user";
 import { createI18n } from "./i18n";
 
+fs.existsSync("./logs") || fs.mkdirSync("./logs");
+const accessLogStream = fs.createWriteStream("./logs/access.log", {
+  flags: "a",
+});
 export const createExpressServer: () => Express = () => {
   const app: Express = express();
   const i18n = createI18n();
+
   app
     .disable("x-powered-by")
     .use(morgan("dev"))
+    .use(morgan("combined", { stream: accessLogStream }))
     .use(urlencoded({ extended: true }))
     .use(json())
     .use(cors())

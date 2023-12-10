@@ -20,7 +20,7 @@ export const KodePosSeeder = async () => {
       kabupaten:
         String(kabupaten).toLowerCase().charAt(0).toUpperCase() +
         String(kabupaten).toLowerCase().slice(1),
-      kodepos,
+      kodepos: Number(kodepos),
     };
   });
   const bulkOps = kodePosArray.map((kodePos) => ({
