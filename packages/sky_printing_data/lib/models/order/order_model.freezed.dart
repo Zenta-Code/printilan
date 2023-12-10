@@ -358,6 +358,7 @@ mixin _$OrderModelResponse {
   UserModel? get user => throw _privateConstructorUsedError;
   StoreModel? get store => throw _privateConstructorUsedError;
   DocumentModel? get document => throw _privateConstructorUsedError;
+  BundleModel? get bundle => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -378,12 +379,14 @@ abstract class $OrderModelResponseCopyWith<$Res> {
       OrderModel? order,
       UserModel? user,
       StoreModel? store,
-      DocumentModel? document});
+      DocumentModel? document,
+      BundleModel? bundle});
 
   $OrderModelCopyWith<$Res>? get order;
   $UserModelCopyWith<$Res>? get user;
   $StoreModelCopyWith<$Res>? get store;
   $DocumentModelCopyWith<$Res>? get document;
+  $BundleModelCopyWith<$Res>? get bundle;
 }
 
 /// @nodoc
@@ -406,6 +409,7 @@ class _$OrderModelResponseCopyWithImpl<$Res, $Val extends OrderModelResponse>
     Object? user = freezed,
     Object? store = freezed,
     Object? document = freezed,
+    Object? bundle = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -436,6 +440,10 @@ class _$OrderModelResponseCopyWithImpl<$Res, $Val extends OrderModelResponse>
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
               as DocumentModel?,
+      bundle: freezed == bundle
+          ? _value.bundle
+          : bundle // ignore: cast_nullable_to_non_nullable
+              as BundleModel?,
     ) as $Val);
   }
 
@@ -486,6 +494,18 @@ class _$OrderModelResponseCopyWithImpl<$Res, $Val extends OrderModelResponse>
       return _then(_value.copyWith(document: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BundleModelCopyWith<$Res>? get bundle {
+    if (_value.bundle == null) {
+      return null;
+    }
+
+    return $BundleModelCopyWith<$Res>(_value.bundle!, (value) {
+      return _then(_value.copyWith(bundle: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -503,7 +523,8 @@ abstract class _$$OrderModelResponseImplCopyWith<$Res>
       OrderModel? order,
       UserModel? user,
       StoreModel? store,
-      DocumentModel? document});
+      DocumentModel? document,
+      BundleModel? bundle});
 
   @override
   $OrderModelCopyWith<$Res>? get order;
@@ -513,6 +534,8 @@ abstract class _$$OrderModelResponseImplCopyWith<$Res>
   $StoreModelCopyWith<$Res>? get store;
   @override
   $DocumentModelCopyWith<$Res>? get document;
+  @override
+  $BundleModelCopyWith<$Res>? get bundle;
 }
 
 /// @nodoc
@@ -533,6 +556,7 @@ class __$$OrderModelResponseImplCopyWithImpl<$Res>
     Object? user = freezed,
     Object? store = freezed,
     Object? document = freezed,
+    Object? bundle = freezed,
   }) {
     return _then(_$OrderModelResponseImpl(
       userId: freezed == userId
@@ -563,6 +587,10 @@ class __$$OrderModelResponseImplCopyWithImpl<$Res>
           ? _value.document
           : document // ignore: cast_nullable_to_non_nullable
               as DocumentModel?,
+      bundle: freezed == bundle
+          ? _value.bundle
+          : bundle // ignore: cast_nullable_to_non_nullable
+              as BundleModel?,
     ));
   }
 }
@@ -577,7 +605,8 @@ class _$OrderModelResponseImpl extends _OrderModelResponse {
       this.order,
       this.user,
       this.store,
-      this.document})
+      this.document,
+      this.bundle})
       : super._();
 
   factory _$OrderModelResponseImpl.fromJson(Map<String, dynamic> json) =>
@@ -597,10 +626,12 @@ class _$OrderModelResponseImpl extends _OrderModelResponse {
   final StoreModel? store;
   @override
   final DocumentModel? document;
+  @override
+  final BundleModel? bundle;
 
   @override
   String toString() {
-    return 'OrderModelResponse(userId: $userId, storeId: $storeId, documentId: $documentId, order: $order, user: $user, store: $store, document: $document)';
+    return 'OrderModelResponse(userId: $userId, storeId: $storeId, documentId: $documentId, order: $order, user: $user, store: $store, document: $document, bundle: $bundle)';
   }
 
   @override
@@ -616,13 +647,14 @@ class _$OrderModelResponseImpl extends _OrderModelResponse {
             (identical(other.user, user) || other.user == user) &&
             (identical(other.store, store) || other.store == store) &&
             (identical(other.document, document) ||
-                other.document == document));
+                other.document == document) &&
+            (identical(other.bundle, bundle) || other.bundle == bundle));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, userId, storeId, documentId, order, user, store, document);
+  int get hashCode => Object.hash(runtimeType, userId, storeId, documentId,
+      order, user, store, document, bundle);
 
   @JsonKey(ignore: true)
   @override
@@ -647,7 +679,8 @@ abstract class _OrderModelResponse extends OrderModelResponse {
       final OrderModel? order,
       final UserModel? user,
       final StoreModel? store,
-      final DocumentModel? document}) = _$OrderModelResponseImpl;
+      final DocumentModel? document,
+      final BundleModel? bundle}) = _$OrderModelResponseImpl;
   const _OrderModelResponse._() : super._();
 
   factory _OrderModelResponse.fromJson(Map<String, dynamic> json) =
@@ -667,6 +700,8 @@ abstract class _OrderModelResponse extends OrderModelResponse {
   StoreModel? get store;
   @override
   DocumentModel? get document;
+  @override
+  BundleModel? get bundle;
   @override
   @JsonKey(ignore: true)
   _$$OrderModelResponseImplCopyWith<_$OrderModelResponseImpl> get copyWith =>

@@ -446,6 +446,7 @@ GetOrderByUserParams _$GetOrderByUserParamsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GetOrderByUserParams {
   String? get userId => throw _privateConstructorUsedError;
+  int? get limit => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -459,7 +460,7 @@ abstract class $GetOrderByUserParamsCopyWith<$Res> {
           $Res Function(GetOrderByUserParams) then) =
       _$GetOrderByUserParamsCopyWithImpl<$Res, GetOrderByUserParams>;
   @useResult
-  $Res call({String? userId});
+  $Res call({String? userId, int? limit});
 }
 
 /// @nodoc
@@ -477,12 +478,17 @@ class _$GetOrderByUserParamsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? userId = freezed,
+    Object? limit = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
+      limit: freezed == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -495,7 +501,7 @@ abstract class _$$GetOrderByUserParamsImplCopyWith<$Res>
       __$$GetOrderByUserParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? userId});
+  $Res call({String? userId, int? limit});
 }
 
 /// @nodoc
@@ -510,12 +516,17 @@ class __$$GetOrderByUserParamsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? userId = freezed,
+    Object? limit = freezed,
   }) {
     return _then(_$GetOrderByUserParamsImpl(
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String?,
+      limit: freezed == limit
+          ? _value.limit
+          : limit // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -523,7 +534,7 @@ class __$$GetOrderByUserParamsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$GetOrderByUserParamsImpl implements _GetOrderByUserParams {
-  const _$GetOrderByUserParamsImpl({this.userId = null});
+  const _$GetOrderByUserParamsImpl({this.userId = null, this.limit = null});
 
   factory _$GetOrderByUserParamsImpl.fromJson(Map<String, dynamic> json) =>
       _$$GetOrderByUserParamsImplFromJson(json);
@@ -531,10 +542,13 @@ class _$GetOrderByUserParamsImpl implements _GetOrderByUserParams {
   @override
   @JsonKey()
   final String? userId;
+  @override
+  @JsonKey()
+  final int? limit;
 
   @override
   String toString() {
-    return 'GetOrderByUserParams(userId: $userId)';
+    return 'GetOrderByUserParams(userId: $userId, limit: $limit)';
   }
 
   @override
@@ -542,12 +556,13 @@ class _$GetOrderByUserParamsImpl implements _GetOrderByUserParams {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetOrderByUserParamsImpl &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.limit, limit) || other.limit == limit));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, userId);
+  int get hashCode => Object.hash(runtimeType, userId, limit);
 
   @JsonKey(ignore: true)
   @override
@@ -566,14 +581,16 @@ class _$GetOrderByUserParamsImpl implements _GetOrderByUserParams {
 }
 
 abstract class _GetOrderByUserParams implements GetOrderByUserParams {
-  const factory _GetOrderByUserParams({final String? userId}) =
-      _$GetOrderByUserParamsImpl;
+  const factory _GetOrderByUserParams(
+      {final String? userId, final int? limit}) = _$GetOrderByUserParamsImpl;
 
   factory _GetOrderByUserParams.fromJson(Map<String, dynamic> json) =
       _$GetOrderByUserParamsImpl.fromJson;
 
   @override
   String? get userId;
+  @override
+  int? get limit;
   @override
   @JsonKey(ignore: true)
   _$$GetOrderByUserParamsImplCopyWith<_$GetOrderByUserParamsImpl>

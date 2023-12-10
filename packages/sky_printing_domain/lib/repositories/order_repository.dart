@@ -8,7 +8,7 @@ abstract class OrderRepository {
   Future<Either<Failure, List<OrderEntityResponse>>> getOrderByStore(
     GetOrderByStoreParams params,
   );
-  Future<Either<Failure, List<OrderEntity>>> getOrderByUser(
+  Future<Either<Failure, List<OrderEntityResponse>>> getOrderByUser(
     GetOrderByUserParams params,
   );
   Future<Either<Failure, OrderEntity>> getOrderById(

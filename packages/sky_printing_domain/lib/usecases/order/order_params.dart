@@ -37,6 +37,7 @@ class GetOrderByStoreParams with _$GetOrderByStoreParams {
 class GetOrderByUserParams with _$GetOrderByUserParams {
   const factory GetOrderByUserParams({
     @Default(null) String? userId,
+    @Default(null) int? limit,
   }) = _GetOrderByUserParams;
 
   factory GetOrderByUserParams.fromJson(Map<String, dynamic> json) =>

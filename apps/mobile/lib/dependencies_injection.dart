@@ -84,6 +84,10 @@ void _repositories() {
   sl.registerLazySingleton<AddressRepository>(
     () => AddressRepositoryImpl(sl()),
   );
+
+  sl.registerLazySingleton<OrderRepository>(
+    () => OrderRepositoryImpl(sl()),
+  );
 }
 
 /// Register dataSources
@@ -109,8 +113,13 @@ void _dataSources() {
   sl.registerLazySingleton<StoreRemoteDataSource>(
     () => StoreRemoteDataSourceImpl(sl()),
   );
+
   sl.registerLazySingleton<AddressRemoteDataSource>(
     () => AddressRemoteDataSourceImpl(sl()),
+  );
+
+  sl.registerLazySingleton<OrderRemoteDataSource>(
+    () => OrderRemoteDataSourceImpl(sl()),
   );
 }
 
@@ -146,7 +155,6 @@ void _useCase() {
   //   () => ReceiveSocketUsecase(sl()),
   // );
 
-  /// File
   sl.registerLazySingleton(
     () => GetFileUseCase(sl()),
   );
@@ -154,6 +162,10 @@ void _useCase() {
   sl.registerLazySingleton(
     () => GetStoreByCityUsecase(sl()),
   );
+  sl.registerLazySingleton(
+    () => GetOrderByUserUsecase(sl()),
+  );
+
   sl.registerLazySingleton(
     () => GetDistrictByPostalCodeUsecase(sl()),
   );
@@ -178,12 +190,15 @@ void _cubit() {
     ),
   );
   sl.registerFactory(
-    () => MainCubit(),
+    () => MainCubit(
+      sl(),
+    ),
   );
 
   /// Location
   sl.registerFactory(
     () => HomeCubit(
+      sl(),
       sl(),
       sl(),
     ),

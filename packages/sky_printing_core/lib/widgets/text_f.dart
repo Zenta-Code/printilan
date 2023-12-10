@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 
-///*********************************************
-/// Created by ukieTux on 22/04/2020 with ♥
-/// (>’_’)> email : hey.mudassir@gmail.com
-/// github : https://www.github.com/Lzyct <(’_’<)
-///*********************************************
-/// © 2020 | All Right Reserved
 class TextF extends StatefulWidget {
   const TextF({
     super.key,

@@ -12,7 +12,7 @@ abstract class OrderRemoteDataSource {
   Future<Either<Failure, List<OrderModelResponse>>> getOrderByStore(
     GetOrderByStoreParams params,
   );
-  Future<Either<Failure, List<OrderModel>>> getOrderByUser(
+  Future<Either<Failure, List<OrderModelResponse>>> getOrderByUser(
     GetOrderByUserParams params,
   );
   Future<Either<Failure, OrderModel>> postOrder(
@@ -52,7 +52,6 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
       ListAPI.order,
       queryParameters: params.toJson(),
       converter: (response) {
-        log.f(response);
         final List<OrderModelResponse> orders = response['data']
             .map<OrderModelResponse>(
                 (order) => OrderModelResponse.fromJson(order))
@@ -64,15 +63,16 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, List<OrderModel>>> getOrderByUser(
+  Future<Either<Failure, List<OrderModelResponse>>> getOrderByUser(
     GetOrderByUserParams params,
   ) {
     final response = _client.getRequest(
       ListAPI.order,
       queryParameters: params.toJson(),
       converter: (response) {
-        final List<OrderModel> orders = response['data']
-            .map<OrderModel>((order) => OrderModel.fromJson(order))
+        final List<OrderModelResponse> orders = response['data']
+            .map<OrderModelResponse>(
+                (order) => OrderModelResponse.fromJson(order))
             .toList();
         return orders;
       },

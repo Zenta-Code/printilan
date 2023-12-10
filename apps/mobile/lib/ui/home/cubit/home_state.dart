@@ -7,6 +7,7 @@ class HomeState with _$HomeState {
     LocationEntity location,
     List<StoreEntity> store,
     List<BundleEntity> bundle,
+    List<OrderEntityResponse> order,
   ) = _Success;
   const factory HomeState.failure(String message) = _Failure;
   const factory HomeState.empty() = _Empty;

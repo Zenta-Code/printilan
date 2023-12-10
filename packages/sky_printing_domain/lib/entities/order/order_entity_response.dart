@@ -12,5 +12,6 @@ class OrderEntityResponse with _$OrderEntityResponse{
     @HiveField(5) StoreEntity? store,
     @HiveField(6) DocumentEntity? document,
     @HiveField(7) int? totalPrice,
+    @HiveField(8) BundleEntity? bundle,
   }) = _OrderEntityResponse;
 }

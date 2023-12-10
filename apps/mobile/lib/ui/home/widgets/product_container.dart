@@ -24,6 +24,10 @@ class ProductContainer extends StatelessWidget {
   final List<BundleEntity>? bundle;
   @override
   Widget build(BuildContext context) {
+    return buildContainer(context);
+  }
+
+  Widget buildContainer(BuildContext context) {
     return InkWell(
       onTap: () => context.pushNamed(
         Routes.order.name,

@@ -87,13 +87,14 @@ class OrderEntityResponseAdapter
       store: fields[5] as StoreEntity?,
       document: fields[6] as DocumentEntity?,
       totalPrice: fields[7] as int?,
+      bundle: fields[8] as BundleEntity?,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$OrderEntityResponseImpl obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.userId)
       ..writeByte(1)
@@ -109,7 +110,9 @@ class OrderEntityResponseAdapter
       ..writeByte(6)
       ..write(obj.document)
       ..writeByte(7)
-      ..write(obj.totalPrice);
+      ..write(obj.totalPrice)
+      ..writeByte(8)
+      ..write(obj.bundle);
   }
 
   @override

@@ -6,17 +6,19 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 part 'home_cubit.freezed.dart';
 part 'home_state.dart';
 
-class HomeCubit extends Cubit<HomeState> {
+class HomeCubit extends Cubit<HomeState> with MainBoxMixin {
   final GetLocation _getLocation;
   final GetStoreByCityUsecase _getStoreByCityUsecase;
+  final GetOrderByUserUsecase _getOrderByUserUsecase;
+
   HomeCubit(
     this._getLocation,
     this._getStoreByCityUsecase,
+    this._getOrderByUserUsecase,
   ) : super(const _Loading());
 
   final Completer<GoogleMapController> controller =
@@ -26,7 +28,6 @@ class HomeCubit extends Cubit<HomeState> {
   );
   Marker? marker;
   LocationEntity? location;
-  IO.Socket? socket;
 
   Future<void> getLocation(LocationParams params) async {
     safeEmit(const _Loading(), emit: emit, isClosed: isClosed);
@@ -42,17 +43,11 @@ class HomeCubit extends Cubit<HomeState> {
         }
       },
       (success) async {
-        String regency;
-        if (success.placemarks!.first.subAdministrativeArea!.split(" ").length >
-            1) {
-          regency =
-              success.placemarks!.first.subAdministrativeArea!.split(" ")[1];
-        } else {
-          regency = success.placemarks!.first.subAdministrativeArea!;
-        }
+        location = success;
         final store = await getStoreByCity(
-          regency,
+          _getRegency(success.placemarks!.first.subAdministrativeArea!),
         );
+        final order = await getLastOrder();
         kGooglePlex = CameraPosition(
           target: LatLng(
             success.latitude!,
@@ -67,14 +62,25 @@ class HomeCubit extends Cubit<HomeState> {
             success.longitude!,
           ),
         );
+        ;
 
         safeEmit(
-          _Success(success, store.value1, store.value2),
+          _Success(success, store.value1, store.value2, order),
           emit: emit,
           isClosed: isClosed,
         );
       },
     );
+  }
+
+  String _getRegency(String subAdministrativeArea) {
+    String regency;
+    if (subAdministrativeArea.split(" ").length > 1) {
+      regency = subAdministrativeArea.split(" ")[1];
+    } else {
+      regency = subAdministrativeArea;
+    }
+    return regency;
   }
 
   Future<Tuple2<List<StoreEntity>, List<BundleEntity>>> getStoreByCity(
@@ -101,5 +107,13 @@ class HomeCubit extends Cubit<HomeState> {
 
   void _onMapCreated(GoogleMapController controller) {
     this.controller.complete(controller);
+  }
+
+  Future<List<OrderEntityResponse>> getLastOrder() async {
+    final res = await _getOrderByUserUsecase.call(GetOrderByUserParams(
+      userId: getData<UserEntity>(MainBoxKeys.user).id,
+      limit: 1,
+    ));
+    return res.fold((l) => [], (r) => r);
   }
 }

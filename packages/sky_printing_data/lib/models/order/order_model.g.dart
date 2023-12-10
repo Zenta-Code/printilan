@@ -52,6 +52,9 @@ _$OrderModelResponseImpl _$$OrderModelResponseImplFromJson(
       document: json['document'] == null
           ? null
           : DocumentModel.fromJson(json['document'] as Map<String, dynamic>),
+      bundle: json['bundle'] == null
+          ? null
+          : BundleModel.fromJson(json['bundle'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$OrderModelResponseImplToJson(
@@ -64,4 +67,5 @@ Map<String, dynamic> _$$OrderModelResponseImplToJson(
       'user': instance.user,
       'store': instance.store,
       'document': instance.document,
+      'bundle': instance.bundle,
     };

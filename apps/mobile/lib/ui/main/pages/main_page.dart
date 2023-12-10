@@ -29,34 +29,31 @@ class _MainPageState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
-    return Parent(
-      scaffoldKey: _scaffoldKey,
-      child: widget.child,
-    );
+    return widget.child;
   }
 
-  PreferredSize _appBar() {
-    return PreferredSize(
-      preferredSize: const Size.fromHeight(kToolbarHeight),
-      child: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: BlocBuilder<MainCubit, MainState>(
-          builder: (_, state) {
-            return Text(
-              state.when(
-                loading: () => "-",
-                success: (data) => data?.title ?? "-",
-              ),
-              style: Theme.of(context).textTheme.titleLarge,
-            );
-          },
-        ),
-        actions: const [
-          /// Notification on Dashboard
-          ButtonNotification(),
-        ],
-      ),
-    );
-  }
+  // PreferredSize _appBar() {
+  //   return PreferredSize(
+  //     preferredSize: const Size.fromHeight(kToolbarHeight),
+  //     child: AppBar(
+  //       automaticallyImplyLeading: false,
+  //       centerTitle: true,
+  //       title: BlocBuilder<MainCubit, MainState>(
+  //         builder: (_, state) {
+  //           return Text(
+  //             state.when(
+  //               loading: () => "-",
+  //               success: (data) => data?.title ?? "-",
+  //             ),
+  //             style: Theme.of(context).textTheme.titleLarge,
+  //           );
+  //         },
+  //       ),
+  //       actions: const [
+  //         /// Notification on Dashboard
+  //         ButtonNotification(),
+  //       ],
+  //     ),
+  //   );
+  // }
 }

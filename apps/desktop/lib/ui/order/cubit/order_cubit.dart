@@ -5,8 +5,10 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
+import 'package:sky_printing_data/sky_printing_data.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
 part 'order_cubit.freezed.dart';
@@ -71,9 +73,11 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
         emit: emit,
         isClosed: isClosed,
       );
-      // final order = OrderModel.fromJson(data["order"]).toEntity();
 
-      // orderData.add(order);
+      log.e(data);
+      final order = OrderModelResponse.fromJson(data["order"]).toEntity();
+
+      orderData.add(order);
 
       final savePath = await getApplicationDocumentsDirectory();
 
@@ -109,12 +113,17 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
             final Uint8List xBytes = Uint8List.fromList(newBytes);
             final file = File("${dir.path}/$fileName");
             file.writeAsBytesSync(newBytes);
-            final jobs = await Printing.directPrintPdf(
-              printer: const Printer(url: 'EPSON L3210 Series'),
-              onLayout: (format) => xBytes,
-              name: fileName,
-            );
-            if (jobs) {
+            List<bool> jobs = [];
+            for (int i = 0; i < order.document!.copies!; i++) {
+              final job = await Printing.directPrintPdf(
+                printer: const Printer(url: 'EPSON L3210 Series'),
+                onLayout: (PdfPageFormat  format) => xBytes,
+                name: fileName,
+              );
+              jobs.add(job);
+            }
+
+            if (jobs.length == order.document!.copies!) {
               safeEmit(
                 _Success(orderData),
                 emit: emit,

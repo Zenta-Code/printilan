@@ -51,7 +51,7 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
   @override
-  Future<Either<Failure, List<OrderEntity>>> getOrderByUser(
+  Future<Either<Failure, List<OrderEntityResponse>>> getOrderByUser(
       GetOrderByUserParams params) async {
     final res = await _remoteDataSource.getOrderByUser(params);
     return res.fold(

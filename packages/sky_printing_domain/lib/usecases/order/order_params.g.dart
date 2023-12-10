@@ -46,12 +46,14 @@ _$GetOrderByUserParamsImpl _$$GetOrderByUserParamsImplFromJson(
         Map<String, dynamic> json) =>
     _$GetOrderByUserParamsImpl(
       userId: json['userId'] as String? ?? null,
+      limit: json['limit'] as int? ?? null,
     );
 
 Map<String, dynamic> _$$GetOrderByUserParamsImplToJson(
         _$GetOrderByUserParamsImpl instance) =>
     <String, dynamic>{
       'userId': instance.userId,
+      'limit': instance.limit,
     };
 
 _$PostOrderParamsImpl _$$PostOrderParamsImplFromJson(

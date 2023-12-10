@@ -10,6 +10,7 @@ class OrderModelResponse with _$OrderModelResponse {
     UserModel? user,
     StoreModel? store,
     DocumentModel? document, 
+    BundleModel? bundle,
   }) = _OrderModelResponse;
 
   const OrderModelResponse._();
@@ -25,5 +26,6 @@ class OrderModelResponse with _$OrderModelResponse {
         user: user?.toEntity(),
         store: store?.toEntity(),
         document: document?.toEntity(), 
+        bundle: bundle?.toEntity(),
       );
 }

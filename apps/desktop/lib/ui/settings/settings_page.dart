@@ -93,11 +93,9 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final appTheme = context.watch<ThemeBloc>();
+  Widget build(BuildContext context) { 
     final theme = FluentTheme.of(context);
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width; 
     if (mounted) {
       setState(() {
         _conStoreName.text = storeRead?.name ?? "";

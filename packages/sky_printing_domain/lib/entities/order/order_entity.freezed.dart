@@ -373,6 +373,8 @@ mixin _$OrderEntityResponse {
   DocumentEntity? get document => throw _privateConstructorUsedError;
   @HiveField(7)
   int? get totalPrice => throw _privateConstructorUsedError;
+  @HiveField(8)
+  BundleEntity? get bundle => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OrderEntityResponseCopyWith<OrderEntityResponse> get copyWith =>
@@ -393,12 +395,14 @@ abstract class $OrderEntityResponseCopyWith<$Res> {
       @HiveField(4) UserEntity? user,
       @HiveField(5) StoreEntity? store,
       @HiveField(6) DocumentEntity? document,
-      @HiveField(7) int? totalPrice});
+      @HiveField(7) int? totalPrice,
+      @HiveField(8) BundleEntity? bundle});
 
   $OrderEntityCopyWith<$Res>? get order;
   $UserEntityCopyWith<$Res>? get user;
   $StoreEntityCopyWith<$Res>? get store;
   $DocumentEntityCopyWith<$Res>? get document;
+  $BundleEntityCopyWith<$Res>? get bundle;
 }
 
 /// @nodoc
@@ -422,6 +426,7 @@ class _$OrderEntityResponseCopyWithImpl<$Res, $Val extends OrderEntityResponse>
     Object? store = freezed,
     Object? document = freezed,
     Object? totalPrice = freezed,
+    Object? bundle = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -456,6 +461,10 @@ class _$OrderEntityResponseCopyWithImpl<$Res, $Val extends OrderEntityResponse>
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as int?,
+      bundle: freezed == bundle
+          ? _value.bundle
+          : bundle // ignore: cast_nullable_to_non_nullable
+              as BundleEntity?,
     ) as $Val);
   }
 
@@ -506,6 +515,18 @@ class _$OrderEntityResponseCopyWithImpl<$Res, $Val extends OrderEntityResponse>
       return _then(_value.copyWith(document: value) as $Val);
     });
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BundleEntityCopyWith<$Res>? get bundle {
+    if (_value.bundle == null) {
+      return null;
+    }
+
+    return $BundleEntityCopyWith<$Res>(_value.bundle!, (value) {
+      return _then(_value.copyWith(bundle: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -524,7 +545,8 @@ abstract class _$$OrderEntityResponseImplCopyWith<$Res>
       @HiveField(4) UserEntity? user,
       @HiveField(5) StoreEntity? store,
       @HiveField(6) DocumentEntity? document,
-      @HiveField(7) int? totalPrice});
+      @HiveField(7) int? totalPrice,
+      @HiveField(8) BundleEntity? bundle});
 
   @override
   $OrderEntityCopyWith<$Res>? get order;
@@ -534,6 +556,8 @@ abstract class _$$OrderEntityResponseImplCopyWith<$Res>
   $StoreEntityCopyWith<$Res>? get store;
   @override
   $DocumentEntityCopyWith<$Res>? get document;
+  @override
+  $BundleEntityCopyWith<$Res>? get bundle;
 }
 
 /// @nodoc
@@ -555,6 +579,7 @@ class __$$OrderEntityResponseImplCopyWithImpl<$Res>
     Object? store = freezed,
     Object? document = freezed,
     Object? totalPrice = freezed,
+    Object? bundle = freezed,
   }) {
     return _then(_$OrderEntityResponseImpl(
       userId: freezed == userId
@@ -589,6 +614,10 @@ class __$$OrderEntityResponseImplCopyWithImpl<$Res>
           ? _value.totalPrice
           : totalPrice // ignore: cast_nullable_to_non_nullable
               as int?,
+      bundle: freezed == bundle
+          ? _value.bundle
+          : bundle // ignore: cast_nullable_to_non_nullable
+              as BundleEntity?,
     ));
   }
 }
@@ -605,7 +634,8 @@ class _$OrderEntityResponseImpl implements _OrderEntityResponse {
       @HiveField(4) this.user,
       @HiveField(5) this.store,
       @HiveField(6) this.document,
-      @HiveField(7) this.totalPrice});
+      @HiveField(7) this.totalPrice,
+      @HiveField(8) this.bundle});
 
   @override
   @HiveField(0)
@@ -631,10 +661,13 @@ class _$OrderEntityResponseImpl implements _OrderEntityResponse {
   @override
   @HiveField(7)
   final int? totalPrice;
+  @override
+  @HiveField(8)
+  final BundleEntity? bundle;
 
   @override
   String toString() {
-    return 'OrderEntityResponse(userId: $userId, storeId: $storeId, documentId: $documentId, order: $order, user: $user, store: $store, document: $document, totalPrice: $totalPrice)';
+    return 'OrderEntityResponse(userId: $userId, storeId: $storeId, documentId: $documentId, order: $order, user: $user, store: $store, document: $document, totalPrice: $totalPrice, bundle: $bundle)';
   }
 
   @override
@@ -652,12 +685,13 @@ class _$OrderEntityResponseImpl implements _OrderEntityResponse {
             (identical(other.document, document) ||
                 other.document == document) &&
             (identical(other.totalPrice, totalPrice) ||
-                other.totalPrice == totalPrice));
+                other.totalPrice == totalPrice) &&
+            (identical(other.bundle, bundle) || other.bundle == bundle));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, userId, storeId, documentId,
-      order, user, store, document, totalPrice);
+      order, user, store, document, totalPrice, bundle);
 
   @JsonKey(ignore: true)
   @override
@@ -676,7 +710,8 @@ abstract class _OrderEntityResponse implements OrderEntityResponse {
       @HiveField(4) final UserEntity? user,
       @HiveField(5) final StoreEntity? store,
       @HiveField(6) final DocumentEntity? document,
-      @HiveField(7) final int? totalPrice}) = _$OrderEntityResponseImpl;
+      @HiveField(7) final int? totalPrice,
+      @HiveField(8) final BundleEntity? bundle}) = _$OrderEntityResponseImpl;
 
   @override
   @HiveField(0)
@@ -702,6 +737,9 @@ abstract class _OrderEntityResponse implements OrderEntityResponse {
   @override
   @HiveField(7)
   int? get totalPrice;
+  @override
+  @HiveField(8)
+  BundleEntity? get bundle;
   @override
   @JsonKey(ignore: true)
   _$$OrderEntityResponseImplCopyWith<_$OrderEntityResponseImpl> get copyWith =>
