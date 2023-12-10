@@ -1,5 +1,8 @@
+import { Parser } from "@json2csv/plainjs";
 import * as crypto from "crypto";
 import { Router } from "express";
+import fs from "fs";
+import xlsx, { ISettings } from "json-as-xlsx";
 import * as midtransClient from "midtrans-client";
 import { authenticateJWT } from "../middleware/auth";
 import { Bundle } from "../model/bundle";
@@ -119,8 +122,9 @@ export const OrderController = ({ route }: { route: Router }) => {
   route.post("/", async (req, res) => {
     try {
       req.body.status = "pending";
-      req.body.isColor = req.body.color === "true" ? true : false;
+      // req.body.isColor = req.body.isColor === "true" ? true : false;
 
+      console.log("req.body", req.body);
       const body = OrderTypes.parse(req.body);
 
       console.log("body", body);
@@ -144,10 +148,17 @@ export const OrderController = ({ route }: { route: Router }) => {
       const isColor = body.isColor;
       const option = bundle?.options?.find((item) => item.color === isColor);
 
+      console.log("Option", option, "\n\n");
+      console.log("Document", document, "\n\n");
+
       const totalPrice =
         (option?.price || 0) *
         (document?.totalPage || 0) *
         (document?.copies || 1);
+
+      const updated = await Order.findByIdAndUpdate(order.id, {
+        totalPrice: totalPrice,
+      });
 
       const payment = await snap.createTransaction({
         transaction_details: {
@@ -174,7 +185,13 @@ export const OrderController = ({ route }: { route: Router }) => {
             id: order.id,
             price: totalPrice,
             quantity: document?.copies || 1,
-            name: document?.fileName || "",
+            name:
+              String(document?.fileName).length > 15
+                ? String(document?.fileName).substring(
+                    String(document?.fileName).length - 15,
+                    String(document?.fileName).length
+                  )
+                : document?.fileName || "",
             merchant_name: store?.name || "",
           },
         ],
@@ -271,6 +288,159 @@ export const OrderController = ({ route }: { route: Router }) => {
         data: updated,
       });
     } catch (error) {
+      return res.status(400).json({
+        error: error,
+      });
+    }
+  });
+  route.get("/report", authenticateJWT, async (req, res) => {
+    try {
+      const { storeId, startDate, endDate, option } = req.query;
+      console.log("==== GET REPORT ====");
+      console.log("storeId", storeId);
+      console.log("startDate", startDate);
+      console.log("endDate", endDate);
+      console.log("====================");
+
+      const store = await Store.findById(storeId);
+
+      if (!store) {
+        return res.status(400).json({ error: "Store not found" });
+      }
+
+      const orders = await Order.find({
+        storeId: store._id,
+        createdAt: {
+          $gte: new Date(startDate as string),
+          $lt: new Date(endDate as string),
+        },
+      });
+
+      if (orders.length === 0) {
+        return res.status(400).json({ error: "No orders found" });
+      }
+
+      let listOfOrder = [];
+
+      for (let i = 0; i < orders.length; i++) {
+        const orderDocument = await Document.findById(orders[i].documentId);
+        const orderUser = await User.findById(orders[i].userId);
+        const orderStore = await Store.findById(orders[i].storeId);
+        listOfOrder.push({
+          userId: orders[i].userId,
+          storeId: orders[i].storeId,
+          documentId: orders[i].documentId,
+          order: orders[i],
+          document: orderDocument,
+          user: orderUser,
+          store: orderStore,
+        });
+      }
+      // create folder if not exist
+      if (!fs.existsSync(`./files/store/${store.name}`)) {
+        fs.mkdirSync(`./files/store/${store.name}`);
+      }
+
+      if (option === "csv") {
+        const json2csv = new Parser({
+          fields: [
+            "Customer Name",
+            "Customer Email",
+            "Customer Phone",
+            "Store Name",
+            "Document Name",
+            "Total Price",
+            "Status",
+            "Date",
+          ],
+        });
+        const mapJson = listOfOrder.map((item) => {
+          return {
+            "Customer Name": item.user?.name || "",
+            "Customer Email": item.user?.email,
+            "Customer Phone": item.user?.phone,
+            "Store Name": item.store?.name,
+            "Document Name": item.document?.fileName,
+            "Total Price": item.order.totalPrice,
+            Status: item.order.status,
+            Date: item.order.updatedAt,
+          };
+        });
+
+        const csv = json2csv.parse(mapJson);
+        const location = `./files/store/${store.name}/${startDate} - ${endDate}.csv`;
+        fs.writeFile(location, csv, function (err) {
+          if (err) throw err;
+          console.log("file saved");
+          return res.download(location, (err) => {
+            if (err) {
+              return res.status(400).json({ error: "File not found" });
+            }
+          });
+        });
+      } else if (option === "xlsx") {
+        const content: any[] = listOfOrder.map((item) => {
+          return {
+            "Customer Name": item.user?.name || "",
+            "Customer Email": item.user?.email,
+            "Customer Phone": item.user?.phone,
+            "Store Name": item.store?.name,
+            "Document Name": item.document?.fileName,
+            "Total Price": item.order.totalPrice,
+            Status: item.order.status,
+            Date: item.order.updatedAt,
+          };
+        });
+
+        console.log("content", content);
+
+        const data = [
+          {
+            sheet: `${startDate}-${endDate}`,
+            columns: [
+              { label: "Customer Name", value: "Customer Name" },
+              { label: "Customer Email", value: "Customer Email" },
+              { label: "Customer Phone", value: "Customer Phone" },
+              { label: "Store Name", value: "Store Name" },
+              { label: "Document Name", value: "Document Name" },
+              {
+                label: "Total Price",
+                value: "Total Price",
+              },
+              { label: "Status", value: "Status" },
+              { label: "Date", value: "Date" },
+            ],
+            content: content,
+          },
+        ];
+
+        const location = `./files/store/${store.name}/${startDate} - ${endDate}.xlsx`;
+        const settings: ISettings = {
+          writeOptions: {
+            type: "buffer",
+            bookType: "xlsx",
+          },
+        };
+        const file: Buffer | undefined = xlsx(data, settings);
+
+        console.log("file", file);
+
+        if (!file) {
+          return res.status(400).json({ error: "File not found" });
+        }
+
+        fs.writeFile(location, file, function (err) {
+          if (err) throw err;
+          console.log("file saved");
+          return res.download(location, (err) => {
+            if (err) {
+              return res.status(400).json({ error: "File not found" });
+            }
+          });
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
       return res.status(400).json({
         error: error,
       });

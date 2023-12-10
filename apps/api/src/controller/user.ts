@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 import { ZodError } from "zod";
+import { ApiConfig } from "../config/config";
 import { authenticateJWT } from "../middleware/auth";
 import { Store } from "../model/store";
 import { User } from "../model/user";
@@ -42,7 +43,8 @@ export const UserController = ({ route }: { route: Router }) => {
           error: req.t("Email already registered"),
         });
       }
-      const salt = await bcrypt.genSalt(10);
+
+      const salt = ApiConfig.salt();
       const hashedPassword = await bcrypt.hash(password, salt);
 
       const user = await User.create({
