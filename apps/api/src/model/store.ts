@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 
 const StoreSchema = new Schema(
   {
-    // _id: Schema.Types.ObjectId,
+    ownerId: mongoose.Types.ObjectId,
     name: String,
     address: {
       street: String,
@@ -13,7 +13,8 @@ const StoreSchema = new Schema(
     },
     phone: String,
     status: String,
-    ownerId: mongoose.Types.ObjectId,
+    socketId: String,
+    customer: Array,
   },
   {
     typeKey: "$type",

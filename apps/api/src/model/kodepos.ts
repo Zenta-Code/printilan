@@ -5,7 +5,7 @@ const KodePosSchema = new Schema(
     kelurahan: String,
     kecamatan: String,
     kabupaten: String,
-    kodepos: String,
+    kodepos: Number,
   },
   {
     timestamps: true,

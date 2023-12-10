@@ -17,6 +17,7 @@ const UserSchema = new Schema(
       type: String,
       enum: ["maintainer", "seller", "customer"],
     },
+    socketId: String,
   },
   {
     timestamps: true,

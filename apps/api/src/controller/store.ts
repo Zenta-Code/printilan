@@ -6,7 +6,7 @@ import { Print } from "../model/print";
 import { Store } from "../model/store";
 import { User } from "../model/user";
 import { BundleTypes } from "../types/bundle";
-import { StoreTypes } from "../types/store";
+import { StoreTypes, StoreUpdateTypes } from "../types/store";
 
 export const StoreController = ({ route }: { route: Router }) => {
   route.post("/sign-up", async (req, res) => {
@@ -160,7 +160,11 @@ export const StoreController = ({ route }: { route: Router }) => {
 
   route.put("/:id", authenticateJWT, async (req, res) => {
     try {
-      const body = StoreTypes.parse(req.body);
+      console.log("+++ Store Update +++");
+      console.log(req.params);
+      console.log(req.body);
+      console.log("+++ Store Update +++");
+      const body = StoreUpdateTypes.parse(req.body);
 
       if (!body) {
         return res.status(400).json({
@@ -168,16 +172,42 @@ export const StoreController = ({ route }: { route: Router }) => {
         });
       }
 
-      const updated = await Store.findByIdAndUpdate(req.params.id, body);
-      if (!updated) {
+      const updatedStore = await Store.findByIdAndUpdate(req.params.id, {
+        name: body.name,
+        phone: body.phone,
+        address: {
+          street: body.street,
+          city: body.city,
+          state: body.state,
+          country: body.country,
+          zipCode: body.zipCode,
+        },
+      });
+      if (!updatedStore) {
         return res.status(400).json({
           error: req.t("Store not found"),
         });
       }
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(body.password, salt);
+      await User.findByIdAndUpdate(updatedStore.ownerId, {
+        phone: body.phone,
+        address: {
+          street: body.street,
+          city: body.city,
+          state: body.state,
+          country: body.country,
+          zipCode: body.zipCode,
+        },
+        password: hashedPassword,
+      });
+      const store = await Store.findById(updatedStore._id);
+      const user = await User.findById(store?.ownerId);
       return res.status(200).json({
         success: true,
         message: req.t("Store successfully updated"),
-        data: updated,
+        store: store,
+        user: user,
       });
     } catch (error) {
       return res.status(400).json({

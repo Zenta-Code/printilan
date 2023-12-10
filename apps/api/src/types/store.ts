@@ -19,11 +19,38 @@ export const StoreTypes = z.object({
         name: z.string(),
         options: z.array(
           z.object({
-            color :z.boolean(),
+            color: z.boolean(),
             price: z.number(),
           })
         ),
       })
     ),
+  }),
+});
+
+export const StoreUpdateTypes = z.object({
+  name: z.string({
+    required_error: "Name is required",
+  }),
+  phone: z.string({
+    required_error: "Phone is required",
+  }),
+  password: z.string({
+    required_error: "Password is required",
+  }),
+  street: z.string({
+    required_error: "Street is required",
+  }),
+  city: z.string({
+    required_error: "City is required",
+  }),
+  state: z.string({
+    required_error: "State is required",
+  }),
+  country: z.string({
+    required_error: "Country is required",
+  }),
+  zipCode: z.string({
+    required_error: "Zip is required",
   }),
 });

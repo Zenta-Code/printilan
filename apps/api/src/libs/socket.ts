@@ -1,18 +1,12 @@
 import { instrument } from "@socket.io/admin-ui";
 import bcrypt from "bcrypt";
 import { Server as HttpServer } from "http";
-import jwt from "jsonwebtoken";
-import { Server } from "socket.io";
-import { Document } from "../model/document";
-import { Order } from "../model/order";
+import { Server, Socket } from "socket.io";
+import { ApiConfig } from "../config/config";
+import { OrderSocketController } from "../controller/socket/order";
+import { socketAuth } from "../middleware/socket-auth";
 import { Store } from "../model/store";
 import { User } from "../model/user";
-
-interface BasicAuthentication {
-  type: "basic";
-  username: string;
-  password: string;
-}
 
 export const createSocketServer = async (httpServer: HttpServer) => {
   const pingInterval = 5000;
@@ -28,173 +22,145 @@ export const createSocketServer = async (httpServer: HttpServer) => {
       path: process.env.SOCKET_PATH || "/socket.io",
     });
 
-    const salt = await bcrypt.genSalt(10);
-    const userName = process.env.SOCKET_USERNAME || "";
-    const password = process.env.SOCKET_PASSWORD || "";
-    io.use((socket, next) => {
-      try {
-        if (socket.handshake.auth.username) {
-          const isValid =
-            socket.handshake.auth.username === userName &&
-            socket.handshake.auth.password === password;
-          if (isValid) {
-            return next();
-          }
-        }
-        const token = socket.handshake.auth.token;
-        console.log("token", token);
-        if (token) {
-          const decoded = jwt.verify(token, process.env.JWT_SECRET || "");
-          console.log("decoded", decoded);
-          if (decoded) {
-            return next();
-          } else {
-            return next(new Error("authentication error"));
-          }
-        }
-        return next(new Error("authentication error"));
-      } catch (error) {
-        console.log("error", error);
-      }
-    });
-
+    io.use(socketAuth);
+    io.of("/admin");
     instrument(io, {
       auth: {
         type: "basic",
-        username: userName,
-        password: await bcrypt.hash(password, salt),
+        username: process.env.SOCKET_USERNAME || "",
+        password: await bcrypt.hash(
+          process.env.SOCKET_PASSWORD || "",
+          ApiConfig.salt()
+        ),
       },
     });
-    io.of("/admin");
-    let sellerStore: any = {};
-    io.on("connection", (socket) => {
+
+    // clear customer on store
+    const sellerStore = await Store.find();
+    const user = await User.find();
+
+    sellerStore.forEach(async (store) => {
+      await Store.findByIdAndUpdate(store._id, {
+        $set: { customer: [], status: "close", socketId: "" },
+      });
+    });
+
+    user.forEach(async (user) => {
+      await User.findByIdAndUpdate(user._id, {
+        $set: { socketId: "" },
+      });
+    });
+
+    io.on("connection", (socket: Socket) => {
       console.log("========= Socket connected =========\n", socket.id);
+
+      OrderSocketController(socket);
+
       socket.on("join", async (data: any) => {
         console.log("join", data);
+
         if (data.storeId) {
-          socket.join(data.storeId);
-          sellerStore[socket.id] = [
-            ...(sellerStore[socket.id] || []),
-            {
-              type: "seller",
-              id: data.storeId,
-              socketId: socket.id,
-            },
-          ];
-          const store = await Store.findById(data.storeId);
+          const store = await Store.findByIdAndUpdate(data.storeId, {
+            status: "open",
+            socketId: socket.id,
+          });
           if (store) {
-            await Store.findByIdAndUpdate(store._id, { status: "open" });
+            console.log("store", store);
+            socket.join(store._id.toString());
           }
         } else if (data.roomId) {
-          const rooms: Set<string> | undefined = io.sockets.adapter.rooms.get(
-            data.roomId
-          );
-          console.log("room", rooms);
-          if (rooms) {
-            socket.join(rooms.values().next().value);
-
-            sellerStore[rooms.values().next().value] = [
-              ...(sellerStore[rooms.values().next().value] || []),
-              {
-                type: "customer",
-                id: data.userId,
-                socketId: socket.id,
-              },
-            ];
-          } else {
-            socket.emit("error", "room not found");
+          const user = await User.findByIdAndUpdate(data.userId, {
+            socketId: socket.id,
+          });
+          if (!user) {
+            return;
+          }
+          const store = await Store.findByIdAndUpdate(data.roomId, {
+            $addToSet: { customer: user },
+          });
+          if (store) {
+            console.log("store", store);
+            socket.join(store._id.toString());
+            socket.to(store._id.toString()).emit("join", user);
           }
         }
+
+        console.log("All rooms", socket.rooms);
       });
-      socket.on("leave", (roomId: any) => {
-        const room = io.sockets.adapter.rooms.get(roomId);
-        if (room) {
-          sellerStore[room.values().next().value].forEach(async (item: any) => {
-            if (item.socketId == socket.id) {
-              socket.leave(item.id);
-            }
+
+      socket.on("leave", async (data: any) => {
+        console.log("leave", data);
+
+        if (data.storeId) {
+          const store = await Store.findByIdAndUpdate(data.storeId, {
+            status: "close",
+            socketId: "",
+          });
+          if (store) {
+            console.log("store", store);
+            socket.leave(store._id.toString());
+          }
+        } else if (data.roomId) {
+          const user = User.findByIdAndUpdate(data.userId, {
+            socketId: "",
+          });
+          if (!user) {
+            return;
+          }
+          const store = await Store.findByIdAndUpdate(data.roomId, {
+            $pull: { customer: user },
+          });
+          if (store) {
+            console.log("store", store);
+            socket.leave(store._id.toString());
+            socket.to(store._id.toString()).emit("leave", user);
+          }
+        }
+
+        console.log("All rooms", socket.rooms);
+      });
+
+      socket.on("disconnect", async (reason) => {
+        console.log("========= Socket disconnect =========\n", reason);
+        console.log("socket", socket.id);
+        const store = await Store.findOne({ socketId: socket.id });
+        if (store) {
+          await Store.findByIdAndUpdate(store._id, {
+            status: "close",
+            socketId: "",
+            customer: [],
           });
         }
-      });
-      socket.on("disconnecting", (reason) => {
-        console.log("========= Socket disconnecting =========\n", reason);
-        console.log("socket", socket.id);
-      });
-      socket.on("disconnect", async (reason) => {
-        try {
-          if (sellerStore[socket.id]) {
-            sellerStore[socket.id].forEach(async (item: any) => {
-              if (item.type == "seller") {
-                const store = await Store.findById(item.id);
-                if (store) {
-                  await Store.findByIdAndUpdate(store._id, {
-                    status: "close",
-                  });
-                }
-              }
-            });
-            delete sellerStore[socket.id];
+        const user = await User.findOne({ socketId: socket.id });
+        if (user) {
+          const store = await Store.findOneAndUpdate(
+            { customer: user },
+            { $pull: { customer: user } }
+          );
+          if (store) {
+            console.log("store", store);
           }
-          if (sellerStore.isArray && sellerStore.length > 0) {
-            const find = sellerStore.filter((item: any) => {
-              return item.socketId == socket.id;
-            });
-            if (find) {
-              sellerStore = sellerStore.filter((item: any) => {
-                return item.socketId != socket.id;
-              });
-            }
-          }
-        } catch (error) {
-          console.log("error", error);
         }
       });
+
       socket.on("error", (error) => {
         console.log("========= Socket error =========\n", error);
       });
 
       socket.on("message", async (message: any) => {
         console.log("message", message);
-        const receiver = message.receiver;
-        const sender = message.sender;
-        const roomId = message.roomId;
-        const content = message.content;
-
-        const rooms: Set<string> | undefined =
-          io.sockets.adapter.rooms.get(roomId);
-
-        if (message.content.type == "order") {
-          const order = await Order.findById(message.content.content._id);
-          const document = await Document.findById(
-            message.content.content.documentId
-          );
-          const user = await User.findById(message.content.content.userId);
-          console.log("document", document);
-          io.to(roomId).emit("message", {
-            receiver,
-            sender,
-            content,
-            order: {
-              userId: order?.userId,
-              storeId: order?.storeId,
-              documentId: order?.documentId,
-              user: user,
-            },
-            document,
-          });
-        }
       });
     });
 
     console.log(`Socket Ready Launched :${process.env.SOCKET_PATH} 🚀`);
 
-    setInterval(() => {
+    setInterval(async () => {
+      const sellerStore = await Store.find({ status: "open" });
       console.log("All seller store", sellerStore);
-    }, 10000);
+    }, 5000);
 
     return io;
   } catch (error) {
-    console.log("Error launching socket server 🚀");
-    console.log(error);
+    console.log("Socket Error", error);
   }
 };
