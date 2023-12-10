@@ -67,12 +67,7 @@ class _HomePageState extends State<HomePage> {
                         Strings.of(context)!.income,
                       ),
                       SizedBox(height: 10.h),
-                      Text(
-                        '+ Rp. ${homeCubit.sumOrder(data['order'])}',
-                        style: theme.typography.title!.copyWith(
-                          fontSize: 24.sp,
-                        ),
-                      ),
+                      buildSumOrder(homeCubit, data['order'], theme),
                       SizedBox(height: 20.h),
                       buildChart(data['order']),
                     ],
@@ -86,20 +81,45 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Widget buildChart(List<OrderEntityResponse> data) {
-    log.f(data);
-    return SfCartesianChart(
-      primaryXAxis: DateTimeAxis(),
-      series: <ChartSeries>[
-        LineSeries<OrderEntityResponse, DateTime>(
-          dataSource: data,
-          xValueMapper: (OrderEntityResponse order, _) =>
-              DateTime.parse(order.order!.createdAt!),
-          yValueMapper: (OrderEntityResponse order, _) =>
-              order.order!.totalPrice,
-        )
-      ],
-    );
+  Widget buildSumOrder(
+    HomeCubit homeCubit,
+    List<OrderEntityResponse> data,
+    FluentThemeData theme,
+  ) {
+    return data.isEmpty
+        ? Text(
+            '+ Rp. 0',
+            style: theme.typography.title!.copyWith(
+              fontSize: 24.sp,
+            ),
+          )
+        : Text(
+            '+ Rp. ${homeCubit.sumOrder(data)}',
+            style: theme.typography.title!.copyWith(
+              fontSize: 24.sp,
+            ),
+          );
+  }
+
+  Widget buildChart(
+    List<OrderEntityResponse> data,
+  ) {
+    return data.isEmpty
+        ? SfCartesianChart(
+            primaryXAxis: DateTimeAxis(),
+          )
+        : SfCartesianChart(
+            primaryXAxis: DateTimeAxis(),
+            series: <ChartSeries>[
+              LineSeries<OrderEntityResponse, DateTime>(
+                dataSource: data,
+                xValueMapper: (OrderEntityResponse order, _) =>
+                    DateTime.parse(order.order!.createdAt!),
+                yValueMapper: (OrderEntityResponse order, _) =>
+                    order.order!.totalPrice,
+              )
+            ],
+          );
   }
 
   Widget dashContainer(

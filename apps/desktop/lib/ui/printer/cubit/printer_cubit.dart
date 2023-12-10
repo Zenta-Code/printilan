@@ -1,3 +1,4 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
@@ -17,7 +18,8 @@ class PrinterCubit extends Cubit<PrinterState> with MainBoxMixin {
 
   final List<Printer> _printers = [];
 
-  Future<void> pollingPrinter() async {
+  Future<void> pollingPrinter( 
+  ) async {
     await fetchPrinters();
     await syncPrinter();
     try {
@@ -62,6 +64,12 @@ class PrinterCubit extends Cubit<PrinterState> with MainBoxMixin {
   }
 
   Future<void> syncPrinter() async {
+    safeEmit(
+      _Loading(),
+      emit: emit,
+      isClosed: isClosed,
+    );
+
     final store = getData(MainBoxKeys.store);
 
     final List<PrinterModel> printers = _printers

@@ -58,7 +58,7 @@ class MainCubit extends Cubit<MainState> with MainBoxMixin {
     pollingPrinter();
   }
 
-  void fetchPrinters() async {
+  Future<List<PrinterEntity>> fetchPrinters() async {
     final res = await _getPrinterByStoreUsecase.call(
       GetPrinterByStoreParams(
         storeId: getData<StoreEntity>(MainBoxKeys.store).id,
@@ -66,8 +66,11 @@ class MainCubit extends Cubit<MainState> with MainBoxMixin {
     );
     res.fold(
       (l) => printerData = [],
-      (r) => printerData = r,
+      (r) {
+        printerData = r;
+      },
     );
+    return printerData;
   }
 
   void pollingPrinter() async {
