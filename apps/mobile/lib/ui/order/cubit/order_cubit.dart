@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:sky_printing/core/app_route.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
@@ -19,21 +23,25 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
   OrderCubit(
     this._client,
     this._joinSocket,
-    this._socketClient, 
+    this._socketClient,
     this._getFile,
   ) : super(const _Loading());
   final DioClient _client;
   final JoinSocketUsecase _joinSocket;
-  final SocketClient _socketClient; 
+  final SocketClient _socketClient;
   final GetFileUseCase _getFile;
   WebViewController? controller;
   String store = '';
 
+  CameraPosition kGooglePlex = const CameraPosition(
+    target: LatLng(-7.4241966, 112.426744),
+  );
   Future<void> getStore() async {
     emit(const _Loading());
     emit(const _Success([]));
   }
 
+ 
   void message() {
     _socketClient.message((p0) {
       log.i(p0);
@@ -109,7 +117,7 @@ class OrderCubit extends Cubit<OrderState> with MainBoxMixin {
                 Routes.payment.name,
                 extra: {
                   "redirectUrl": r["payment"]['redirect_url'],
-                  "r" : r,
+                  "r": r,
                   "storeId": selectedStore.id,
                 },
               );

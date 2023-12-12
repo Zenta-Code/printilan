@@ -77,29 +77,29 @@ class _SettingsPageState extends State<SettingsPage> with MainBoxMixin {
             child: Column(
               children: [
                 userContainer(),
-                DropDown<ActiveTheme>(
-                  key: const Key("dropdown_theme"),
-                  hint: Strings.of(context)!.choose_theme,
-                  value: _selectedTheme,
-                  prefixIcon: const Icon(Icons.light),
-                  items: ActiveTheme.values
-                      .map(
-                        (data) => DropdownMenuItem(
-                          value: data,
-                          child: Text(
-                            _getThemeName(data, context),
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ),
-                      )
-                      .toList(),
-                  onChanged: (value) {
-                    /// Reload theme
-                    context
-                        .read<SettingsCubit>()
-                        .updateTheme(value ?? ActiveTheme.system);
-                  },
-                ),
+                // DropDown<ActiveTheme>(
+                //   key: const Key("dropdown_theme"),
+                //   hint: Strings.of(context)!.choose_theme,
+                //   value: _selectedTheme,
+                //   prefixIcon: const Icon(Icons.light),
+                //   items: ActiveTheme.values
+                //       .map(
+                //         (data) => DropdownMenuItem(
+                //           value: data,
+                //           child: Text(
+                //             _getThemeName(data, context),
+                //             style: Theme.of(context).textTheme.bodyMedium,
+                //           ),
+                //         ),
+                //       )
+                //       .toList(),
+                //   onChanged: (value) {
+                //     /// Reload theme
+                //     context
+                //         .read<SettingsCubit>()
+                //         .updateTheme(value ?? ActiveTheme.system);
+                //   },
+                // ),
 
                 /// Language
                 DropDown<DataHelper>(

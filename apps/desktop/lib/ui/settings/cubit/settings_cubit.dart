@@ -35,28 +35,54 @@ class SettingsCubit extends Cubit<SettingsState> with MainBoxMixin {
 
   StoreEntity? storeLocal;
   StoreEntity? storeRemote;
+  UserEntity? userLocal;
   init() async {
+    safeEmit(
+      const _Loading(),
+      emit: emit,
+      isClosed: isClosed,
+    );
     getStoreLocal();
-    await getStoreRemote();
+    final user = getUserLocal();
+    final storeRemote = await getStoreRemote();
+
+    safeEmit(
+      _Success(
+        storeRemote!,
+        user!,
+      ),
+      emit: emit,
+      isClosed: isClosed,
+    );
   }
 
-  void getStoreLocal() async {
+  StoreEntity? getStoreLocal() {
     storeLocal = getData<StoreEntity>(MainBoxKeys.store);
+    return storeLocal;
   }
 
-  Future<void> getStoreRemote() async {
-    if (storeLocal == null) return;
+  UserEntity? getUserLocal() {
+    userLocal = getData<UserEntity>(MainBoxKeys.user);
+    return userLocal;
+  }
+
+  Future<StoreEntity?> getStoreRemote() async {
+    if (storeLocal == null) return null;
     final res = await _getStoreByIdUsecase.call(
       GetStoreByIdParams(
         id: storeLocal!.id!,
       ),
     );
     res.fold((l) {
-      if (l is ServerFailure) {}
+      if (l is ServerFailure) {
+        return null;
+      }
     }, (r) {
       log.f(r);
       storeRemote = r;
+      return r;
     });
+    return storeRemote;
   }
 
   updateStore({
@@ -105,7 +131,7 @@ class SettingsCubit extends Cubit<SettingsState> with MainBoxMixin {
         );
       }
     }, (r) {
-      getStoreLocal();
+      final store = getStoreLocal();
       getStoreRemote();
       displayInfoBar(
         context,
@@ -117,6 +143,14 @@ class SettingsCubit extends Cubit<SettingsState> with MainBoxMixin {
             severity: InfoBarSeverity.success,
           );
         },
+      );
+      safeEmit(
+        _Success(
+          store!,
+          userLocal!,
+        ),
+        emit: emit,
+        isClosed: isClosed,
       );
     });
   }

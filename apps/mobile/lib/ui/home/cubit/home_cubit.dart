@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
 
@@ -21,13 +20,9 @@ class HomeCubit extends Cubit<HomeState> with MainBoxMixin {
     this._getOrderByUserUsecase,
   ) : super(const _Loading());
 
-  final Completer<GoogleMapController> controller =
-      Completer<GoogleMapController>();
-  CameraPosition kGooglePlex = const CameraPosition(
-    target: LatLng(-7.4241966, 112.426744),
-  );
-  Marker? marker;
   LocationEntity? location;
+
+  searchAndNavigate() async {}
 
   Future<void> getLocation(LocationParams params) async {
     safeEmit(const _Loading(), emit: emit, isClosed: isClosed);
@@ -48,21 +43,6 @@ class HomeCubit extends Cubit<HomeState> with MainBoxMixin {
           _getRegency(success.placemarks!.first.subAdministrativeArea!),
         );
         final order = await getLastOrder();
-        kGooglePlex = CameraPosition(
-          target: LatLng(
-            success.latitude!,
-            success.longitude!,
-          ),
-          zoom: 14.4746,
-        );
-        marker = Marker(
-          markerId: const MarkerId("1"),
-          position: LatLng(
-            success.latitude!,
-            success.longitude!,
-          ),
-        );
-        ;
 
         safeEmit(
           _Success(success, store.value1, store.value2, order),
@@ -103,10 +83,6 @@ class HomeCubit extends Cubit<HomeState> with MainBoxMixin {
       },
     );
     return store;
-  }
-
-  void _onMapCreated(GoogleMapController controller) {
-    this.controller.complete(controller);
   }
 
   Future<List<OrderEntityResponse>> getLastOrder() async {

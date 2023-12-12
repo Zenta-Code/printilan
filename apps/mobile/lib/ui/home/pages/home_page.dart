@@ -7,6 +7,7 @@ import 'package:sky_printing/ui/main/cubit/main_cubit.dart';
 import 'package:sky_printing/ui/main/widgets/bottom_nav_bar.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
+import 'package:geocoding/geocoding.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

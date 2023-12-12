@@ -5,8 +5,6 @@
         android:label="sky_printing"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher" >
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD7d0ubnwsRF6POfO07jNYxqWkpDF9AxY4"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -32,5 +30,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDzpRFZOypTZXFTRE0_ldz8WH94JNyB9aQ"/>
     </application>
 </manifest>

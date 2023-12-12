@@ -31,7 +31,7 @@ class _OrderPageState extends State<OrderPage> {
               errorMessage: message,
             ),
           ),
-          success: (_  ) {
+          success: (_) {
             final data = context.watch<OrderCubit>().orderData;
 
             return buildScaffold(data, context);
@@ -227,6 +227,17 @@ class _OrderPageState extends State<OrderPage> {
               ),
               Text(
                 e.user!.email ?? "No User Email",
+              ),
+            ],
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${Strings.of(context)!.phone}: ",
+              ),
+              Text(
+                e.user!.phone ?? "No User Phone",
               ),
             ],
           ),

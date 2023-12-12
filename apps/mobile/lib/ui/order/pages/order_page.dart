@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sky_printing/ui/order/cubit/order_cubit.dart';
 import 'package:sky_printing_core/sky_printing_core.dart';
 import 'package:sky_printing_domain/sky_printing_domain.dart';
@@ -31,11 +34,13 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
   final _copiesController = TextEditingController();
   final _fileController = TextEditingController();
+  final Completer<GoogleMapController> _googleMapController =
+      Completer<GoogleMapController>();
   late TabController _tabController;
   StoreEntity? selectedStore;
   String? selectedOption;
   int? totalPage;
-
+  Set<Marker> markers = {};
   @override
   void didUpdateWidget(covariant OrderPage oldWidget) {
     log.i("didUpdateWidget");
@@ -186,212 +191,163 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
             onViewCreated: (PDFViewController pdfViewController) {
               context.read<OrderCubit>().setController(pdfViewController);
             },
-            onPageChanged: (int? page, int? total) { 
-            },
+            onPageChanged: (int? page, int? total) {},
           );
+  }
+
+  Widget buildGoogleMaps() {
+    return GoogleMap(
+      mapType: MapType.normal,
+      initialCameraPosition: const CameraPosition(
+        target: LatLng(7.2575, 112.7521),
+        // target: LatLng(-7.4241966, 112.426744),
+        zoom: 14.4746,
+      ),
+      onMapCreated: (controller) {
+        if (!_googleMapController.isCompleted) {
+          _googleMapController.complete(controller);
+        }
+      },
+      markers: markers,
+    );
+  }
+
+  void moveToStore(StoreEntity store) async {
+    log.e(store.address);
+
+    List<Location> locations = await locationFromAddress(
+        "${store.address!.street}, ${store.address!.city}, ${store.address!.state}, ${store.address!.country}, ${store.address!.zipCode}");
+
+    final GoogleMapController controller = await _googleMapController.future;
+    await controller.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+            target: LatLng(locations.first.latitude, locations.first.longitude),
+            zoom: 14.4746)));
+
+    setState(() {
+      markers.clear();
+      markers.add(
+        Marker(
+          markerId: MarkerId(store.id!),
+          position: LatLng(locations.first.latitude, locations.first.longitude),
+          infoWindow: InfoWindow(
+            title: store.name!,
+            snippet: store.address!.street!,
+          ),
+        ),
+      );
+    });
   }
 
   Widget buildUploadTab() {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Pick Store",
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                          fontSize: 20.sp,
-                        ),
-                  ),
-                  Text(
-                    "Available store in ${widget.placemarks!.first.subAdministrativeArea!.split(' ').last}",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontSize: 14.sp,
-                        ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: Dimens.space12,
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: Colors.grey,
-                ),
-              ),
-              child: DropdownButton<StoreEntity>(
-                underline: Container(),
-                isExpanded: true,
-                hint: const Text(
-                  'Choose Store',
-                ),
-                items: widget.store!
-                    .map(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(e.name!),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  context.read<OrderCubit>().joinRoom(value!.id!);
-                  setState(() {
-                    selectedStore = value;
-                  });
-                },
-                value: selectedStore,
-              ),
-            ),
-            BlocBuilder<OrderCubit, OrderState>(builder: (context, state) {
-              return state.when(
-                  loading: () => const Loading(),
-                  success: (s) {
-                    return InkWell(
-                      onTap: () {
-                        context.read<OrderCubit>().pickFile();
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(16),
-                        padding: const EdgeInsets.all(16),
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: const Color(0xFFCFE7FF),
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(
-                                  "assets/images/folder-icon.png",
-                                  width: 24.w,
-                                  height: 24.h,
-                                ),
-                                SizedBox(
-                                  width: Dimens.space8,
-                                ),
-                                Text(
-                                  "Pick File",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              margin: EdgeInsets.all(16.sp),
-                              child: SvgPicture.asset(
-                                "assets/images/PDF_file_icon.svg",
-                                height: 124.h,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Pick Store",
+                      style:
+                          Theme.of(context).textTheme.headlineLarge!.copyWith(
+                                fontSize: 20.sp,
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "File Name",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                        ),
-                                        SizedBox(
-                                          width: Dimens.space8,
-                                        ),
-                                        Text(
-                                          context.watch<OrderCubit>().result ==
-                                                  null
-                                              ? ""
-                                              : "${context.watch<OrderCubit>().result!.files.first.name.substring(0, 10)}...",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: Dimens.space8,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          "File Size",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                        ),
-                                        SizedBox(
-                                          width: Dimens.space8,
-                                        ),
-                                        Text(
-                                          context.watch<OrderCubit>().result ==
-                                                  null
-                                              ? ""
-                                              : "${(context.watch<OrderCubit>().result!.files.first.size / 1048576).toStringAsFixed(2)} MB",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                TextButton(
-                                  style: ButtonStyle(
-                                    padding: MaterialStateProperty.all(
-                                      EdgeInsets.all(
-                                        8.sp,
-                                      ),
-                                    ),
-                                    backgroundColor: MaterialStateProperty.all(
-                                      Colors.white,
-                                    ),
-                                    side: MaterialStateProperty.all(
-                                      const BorderSide(
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    shape: MaterialStateProperty.all(
-                                      RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(
-                                          8.sp,
-                                        ),
-                                      ),
-                                    ),
+                    ),
+                    Text(
+                      "Available store in ${widget.placemarks!.first.subAdministrativeArea!.split(' ').last}",
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontSize: 14.sp,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: Dimens.space12,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.grey,
+                  ),
+                ),
+                child: DropdownButton<StoreEntity>(
+                  underline: Container(),
+                  isExpanded: true,
+                  hint: const Text(
+                    'Choose Store',
+                  ),
+                  items: widget.store!
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(e.name!),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    context.read<OrderCubit>().joinRoom(value!.id!);
+                    moveToStore(value);
+                    setState(() {
+                      selectedStore = value;
+                    });
+                  },
+                  value: selectedStore,
+                ),
+              ),
+              SizedBox(
+                height: Dimens.space16,
+              ),
+              selectedStore == null
+                  ? Container()
+                  : Container(
+                      width: double.infinity,
+                      height: 200.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: Colors.grey,
+                        ),
+                      ),
+                      child: buildGoogleMaps(),
+                    ),
+              BlocBuilder<OrderCubit, OrderState>(builder: (context, state) {
+                return state.when(
+                    loading: () => const Loading(),
+                    success: (s) {
+                      return InkWell(
+                        onTap: () {
+                          context.read<OrderCubit>().pickFile();
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.all(16),
+                          padding: const EdgeInsets.all(16),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: const Color(0xFFCFE7FF),
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    "assets/images/folder-icon.png",
+                                    width: 24.w,
+                                    height: 24.h,
                                   ),
-                                  onPressed: () {
-                                    context.read<OrderCubit>().pickFile();
-                                  },
-                                  child: Text(
-                                    "Open File",
+                                  SizedBox(
+                                    width: Dimens.space8,
+                                  ),
+                                  Text(
+                                    "Pick File",
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium!
@@ -399,71 +355,193 @@ class _OrderPageState extends State<OrderPage> with TickerProviderStateMixin {
                                           fontWeight: FontWeight.w500,
                                         ),
                                   ),
+                                ],
+                              ),
+                              Container(
+                                margin: EdgeInsets.all(16.sp),
+                                child: SvgPicture.asset(
+                                  "assets/images/PDF_file_icon.svg",
+                                  height: 124.h,
                                 ),
-                              ],
-                            )
-                          ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "File Name",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .copyWith(
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          SizedBox(
+                                            width: Dimens.space8,
+                                          ),
+                                          Text(
+                                            context
+                                                        .watch<OrderCubit>()
+                                                        .result ==
+                                                    null
+                                                ? ""
+                                                : "${context.watch<OrderCubit>().result!.files.first.name.substring(0, 10)}...",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .copyWith(
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: Dimens.space8,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            "File Size",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .copyWith(
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                          SizedBox(
+                                            width: Dimens.space8,
+                                          ),
+                                          Text(
+                                            context
+                                                        .watch<OrderCubit>()
+                                                        .result ==
+                                                    null
+                                                ? ""
+                                                : "${(context.watch<OrderCubit>().result!.files.first.size / 1048576).toStringAsFixed(2)} MB",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .copyWith(
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  TextButton(
+                                    style: ButtonStyle(
+                                      padding: MaterialStateProperty.all(
+                                        EdgeInsets.all(
+                                          8.sp,
+                                        ),
+                                      ),
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                        Colors.white,
+                                      ),
+                                      side: MaterialStateProperty.all(
+                                        const BorderSide(
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      shape: MaterialStateProperty.all(
+                                        RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            8.sp,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      context.read<OrderCubit>().pickFile();
+                                    },
+                                    child: Text(
+                                      "Open File",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  failure: (err) => Empty(
-                        errorMessage: err,
-                      ),
-                  empty: () => const Empty());
-            }),
-            TextF(
-              controller: _copiesController,
-              keyboardType: TextInputType.number,
-              prefixIcon: const Icon(Icons.copy),
-              hintText: 'Copies',
-              hint: 'Copies',
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: Colors.grey,
-                ),
-              ),
-              child: DropdownButton<String>(
-                underline: Container(),
-                isExpanded: true,
-                hint: Text(
-                  'Choose Option',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                items: ["Black and White", "Color"]
-                    .map(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Text(
-                          e,
-                          style: Theme.of(context).textTheme.bodyMedium,
+                      );
+                    },
+                    failure: (err) => Empty(
+                          errorMessage: err,
                         ),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    selectedOption = value;
-                  });
-                },
-                value: selectedOption,
+                    empty: () => const Empty());
+              }),
+              TextF(
+                controller: _copiesController,
+                keyboardType: TextInputType.number,
+                prefixIcon: const Icon(Icons.copy),
+                hintText: 'Copies',
+                hint: 'Copies',
               ),
-            ),
-            SizedBox(
-              height: Dimens.space16,
-            ),
-            context.watch<OrderCubit>().controller == null
-                ? Container()
-                : Expanded(
-                    child: WebViewWidget(
-                      controller: context.read<OrderCubit>().controller!,
-                    ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.grey,
                   ),
-          ],
+                ),
+                child: DropdownButton<String>(
+                  underline: Container(),
+                  isExpanded: true,
+                  hint: Text(
+                    'Choose Option',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  items: ["Black and White", "Color"]
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(
+                            e,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      selectedOption = value;
+                    });
+                  },
+                  value: selectedOption,
+                ),
+              ),
+              SizedBox(
+                height: Dimens.space16,
+              ),
+              context.watch<OrderCubit>().controller == null
+                  ? Container()
+                  : Expanded(
+                      child: WebViewWidget(
+                        controller: context.read<OrderCubit>().controller!,
+                      ),
+                    ),
+              SizedBox(
+                height: 100.h,
+              )
+            ],
+          ),
         ),
       ),
     );
