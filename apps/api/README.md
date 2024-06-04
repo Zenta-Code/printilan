@@ -10,6 +10,10 @@ For detailed development API using Express.js, please check their documentation 
 pnpm i
 ``` 
 ```
+// Add env value based on our example 
 cp .env.example .env
 ```
-Add env value based on our example 
+```
+pnpm dev
+```
+
