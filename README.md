@@ -134,7 +134,7 @@ Sky Printing uses a number of open source projects to work properly :
 ## Preview
 
 <details>
-    <summary>## Mobile User Interface 📱</summary>
+    <summary>Mobile User Interface 📱</summary>
 - Landing Screen
 ![Alt text](https://github.com/zenta-dev/sky_printing/blob/main/images/Mobile/Landing%20Space.png?raw=true "Landing Screen") 
 - Login Screen
@@ -148,13 +148,15 @@ Sky Printing uses a number of open source projects to work properly :
 </details>
 
 <details>
-    <summary>## Desktop User Interface 💻</summary>
+    <summary>Desktop User Interface 💻</summary>
 - Dashboard Screen
 ![Alt text](https://github.com/zenta-dev/sky_printing/blob/main/images/Desktop/Home.png?raw=true "Dashboard")
 - Print Queue
 ![Alt text](https://github.com/zenta-dev/sky_printing/blob/main/images/Desktop/Order.png?raw=true "Print Queue")
 </details>
+
 ## Installation 🚀
+
 ```
 git clone https://github.com/zenta-dev/sky_printing.git
 ```
