@@ -177,7 +177,7 @@ Want to contribute? Great!
 
 Sky Printing use Flutter and Express for rapid Development. 
  
-[API](https://github.com/Zenta-Code/sky_printing/blob/main/apps/desktop/README.md)
+[API](https://github.com/zenta-dev/sky_printing/blob/main/apps/api/README.md)
  
 [Desktop](https://github.com/Zenta-Code/sky_printing/blob/main/apps/desktop/README.md)
  
