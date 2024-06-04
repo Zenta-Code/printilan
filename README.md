@@ -207,7 +207,7 @@ To develop all apps and packages, read readme.md in each folder.
 
 ## License
 
-> Zenta-Code (2023)
+> Zenta-Dev (2023)
 
 ```
 
