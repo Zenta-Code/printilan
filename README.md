@@ -1,7 +1,7 @@
 # Sky Printing 🖨️
 ## ✨ _Cloud based printing system_ ✨
 
-> Sky printting is a cloud based printing system, that introduce feature like remote printing. Sky printing is Android, Windows, Linux based apps, that simplifying printing toruble.   
+> Sky printing is a cloud based printing system, that introduce feature like remote printing. Sky printing is Android, Windows, Linux based apps, that simplifying printing toruble.   
 
 
 ## Features
@@ -176,14 +176,11 @@ pnpm install
 Want to contribute? Great!
 
 Sky Printing use Flutter and Express for rapid Development. 
-
-#### API
+ 
 [API](https://github.com/Zenta-Code/sky_printing/blob/main/apps/desktop/README.md)
-
-#### Desktop
+ 
 [Desktop](https://github.com/Zenta-Code/sky_printing/blob/main/apps/desktop/README.md)
-
-#### Mobile
+ 
 [Mobile](https://github.com/Zenta-Code/sky_printing/blob/main/apps/mobile/README.md)
 
 ## License
