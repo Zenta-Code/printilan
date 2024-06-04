@@ -1,9 +1,20 @@
-# Sky Printing
+# Sky Printing 🖨️
+## ✨ _Cloud based printing system_ ✨
 
-> Sky Printing is a cutting-edge mobile app that introduces an automatic printing system with features like printing, binding, and photo printing. This mobile app can simplifying employee tasks and it enhances store efficiency without the need for extra time and effort. Additionally, it provides remote accessibility with ensuring customer convenience in managing their printing needs effortlessly.
+> Sky printting is a cloud based printing system, that introduce feature like remote printing. Sky printing is Android, Windows, Linux based apps, that simplifying printing toruble.   
 
-## Concepts
 
+## Features
+- Mobile and Desktop ready.
+- Realtime : Realtime communication between mobile to printer with PC as middleman.
+- Queued : Queued based to prevent race condition.
+- Printing : Easily print documents both color and non-color (black and white). 
+- Photo Printing : Conveniently print photos with various size.
+- History : Track past printing activities.
+- Profile : Manage personal information.
+- Wallet (Payment) : Handle transactions effortlessly.
+
+## Concept
 This concept we've design early :
 
 ![Alt text](https://raw.githubusercontent.com/Zenta-Code/sky_printing/dc5499dfc3426b2e39b4501d9a05bda69157d479/images/base-concepts.svg "Base Concepts")
@@ -111,15 +122,6 @@ gantt
 
 </details>
 
-## Features
-
-- Printing : Easily print documents both color and non-color (black and white).
-- Binding : Seamlessly bind materials.
-- Photo Printing : Conveniently print photos with various size.
-- History : Track past printing activities.
-- EProfile : Manage personal information.
-- Wallet (Payment) : Handle transactions effortlessly.
-
 ## Tech
 
 Sky Printing uses a number of open source projects to work properly :
@@ -129,86 +131,57 @@ Sky Printing uses a number of open source projects to work properly :
 - [C++](https://code.visualstudio.com/docs/languages/cpp) - C++ is a powerful, high-performance programming language widely used for system/application development, game development, and performance-critical applications.
 - [CMake](https://cmake.org/cmake/help/latest/guide/tutorial/Installing%20and%20Testing.html) - CMake is a cross-platform build system generator, facilitating the management of the build process for software projects across various platforms and environments.
 
-## Requirement
+## Preview
 
-## User Interface
+<details>
+    <summary>## Mobile User Interface 📱</summary>
+- Landing Screen
+![Alt text](https://github.com/zenta-dev/sky_printing/blob/main/images/Mobile/Landing%20Space.png?raw=true "Landing Screen") 
+- Login Screen
+![Alt text](https://github.com/zenta-dev/sky_printing/blob/main/images/Mobile/Login.png?raw=true "Login Screen")
+- Home Screen
+![Alt text](https://github.com/zenta-dev/sky_printing/blob/main/images/Mobile/Home.png?raw=true "Home Screen")
+- Print Screen
+![Alt text](https://github.com/zenta-dev/sky_printing/blob/main/images/Mobile/Upload%20File.png?raw=true "Print screen")
+- Preview Screen
+![Alt text](https://github.com/zenta-dev/sky_printing/blob/main/images/Mobile/View%20File.png?raw=true "Prview Screen")
+</details>
 
-### Splash Screen
-
-![alt text](?raw=true)
-
-### Dashboard
-
-![alt text](?raw=true)
-
-### History
-
-![alt text](?raw=true)
-
-### Wallet
-
-![alt text](?raw=true)
-
-### EProfile
-
-![alt text](?raw=true)
-
-## Installation
-
-To build all apps and packages, run the following command :
-
+<details>
+    <summary>## Desktop User Interface 💻</summary>
+- Dashboard Screen
+![Alt text](https://github.com/zenta-dev/sky_printing/blob/main/images/Desktop/Home.png?raw=true "Dashboard")
+- Print Queue
+![Alt text](https://github.com/zenta-dev/sky_printing/blob/main/images/Desktop/Order.png?raw=true "Print Queue")
+</details>
+## Installation 🚀
 ```
-git clone https://github.com/Zenta-Code/printilan.git
+git clone https://github.com/zenta-dev/sky_printing.git
 ```
-
 ```
-cd my-turborepo
+cd sky-printing
 ```
-
 ```
-pnpm build
+pnpm install
+```
+```
+./install.bat
 ```
 
-```
-cd apps/mobile
-```
+## Development 🛠️
+Want to contribute? Great!
 
-```
-flutter build apk
-```
-
-## Plugins
-
-Sky Printing is currently extended with the following plugins. Instructions on how to use them in your own application are linked below.
-| Plugin | README |
-| ------ | ------ |
-| Dropbox | [plugins/dropbox/README.md][PlDb] |
-| GitHub | [plugins/github/README.md][PlGh] |
-| Google Drive | [plugins/googledrive/README.md][PlGd] |
-| OneDrive | [plugins/onedrive/README.md][PlOd] |
-| Medium | [plugins/medium/README.md][PlMe] |
-| Google Analytics | [plugins/googleanalytics/README.md][PlGa] |
-
-## Development
-
-To develop all apps and packages, read readme.md in each folder.
+Sky Printing use Flutter and Express for rapid Development. 
 
 #### API
-
 [API](https://github.com/Zenta-Code/sky_printing/blob/main/apps/desktop/README.md)
 
 #### Desktop
-
 [Desktop](https://github.com/Zenta-Code/sky_printing/blob/main/apps/desktop/README.md)
 
 #### Mobile
-
 [Mobile](https://github.com/Zenta-Code/sky_printing/blob/main/apps/mobile/README.md)
 
 ## License
 
-> Zenta-Dev (2023)
-
-```
-
-```
+> Zenta-Dev (2023) 
